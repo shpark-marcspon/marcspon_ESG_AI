@@ -1,0 +1,31 @@
+// 감사 기록 model 칸의 공개 표면(밴드 AD2 ①, 실서버 AD5R ①). 순수 함수와 타입만 있다(app/guards/layers.test.ts).
+export {
+  AUDIT_ACTIONS,
+  AUDIT_DATE_MAX,
+  AUDIT_DATE_MIN,
+  AUDIT_NO_FILTER,
+  AUDIT_PERIODS,
+  AUDIT_QUERY_MAX,
+  actorLabel,
+  actorOptions,
+  auditQuery,
+  formatAuditTime,
+  kstToday,
+  periodRange,
+  searchText,
+  targetText,
+  toEntry,
+} from './audit.ts';
+export type {
+  AuditAction,
+  AuditActorOption,
+  AuditActorRow,
+  AuditEntry,
+  AuditEntryWords,
+  AuditEventRow,
+  AuditFilter,
+  AuditLink,
+  AuditPeriod,
+  AuditQuery,
+  AuditTargetPart,
+} from './audit.ts';

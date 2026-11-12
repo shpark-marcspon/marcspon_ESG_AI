@@ -1,0 +1,24 @@
+{
+  "SCAN_CONFIG": {
+    "debug": true,
+    "debug_pages": 2
+  },
+  "chunk_defaults": {
+    "chunk_size": 800,
+    "chunk_overlap": 150,
+    "embedding_model": "text-embedding-3-small",
+    "embedding_batch_size": 50,
+    "separators": [
+      "\n\n",
+      "\n",
+      " "
+    ],
+    "normalize": true
+  },
+  "MODEL_NAME": "gpt-4.1-mini",
+  "TEMPERATURE": 0.0,
+  "MAX_TOKENS": 1300,
+  "PROMPT_VERSION": "2026-01-15-v1",
+  "EMBEDDING_MODEL": "text-embedding-3-small",
+  "_made_by": "esg-lab 2a237d229210cbbc67fdc17f32db1472491f93bc (driver make_golden.py) · cd <esg-lab>/py && PYTHONPATH=. uv run --frozen --group greenwash python <G1a.out>/gw1-driver/make_golden.py consts <출력>"
+}

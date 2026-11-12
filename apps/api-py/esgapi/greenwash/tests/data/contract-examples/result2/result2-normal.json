@@ -1,0 +1,151 @@
+{
+  "schemaVersion": "greenwash.result@2",
+  "source": {
+    "fileName": "made-up-report.pdf",
+    "sha256": "abababababababababababababababababababababababababababababababab",
+    "pageCount": 20
+  },
+  "failures": {
+    "segments": 0,
+    "items": 0
+  },
+  "budgetTrimmed": 0,
+  "segments": [
+    {
+      "key": {
+        "kind": "claims",
+        "span": "bp4-b2-p5-b2",
+        "documentSha256": "abababababababababababababababababababababababababababababababab",
+        "parserVersion": "docparse-0.1.0-l2"
+      },
+      "keySha256": "93c13dc54b3abb5bc93b0c8b5e77bf1a2b6f6a3b1c8842b868221a80c5bba55e",
+      "status": "done",
+      "errorCode": null,
+      "items": [
+        {
+          "key": "i1",
+          "stableKey": "00000000000000000000000000000001",
+          "status": "done",
+          "errorCode": null,
+          "target": {
+            "kind": "sentence",
+            "text": "가상회사는 2030년까지 모든 사업장의 재생에너지 전환을 완료하였습니다.",
+            "page": 4,
+            "blockIds": [
+              "p4-b2"
+            ]
+          },
+          "verdict": {
+            "level": "Mid",
+            "category": null
+          },
+          "reason": "근거 단락은 국내 사업장의 전환율만 적어 「모든 사업장」 주장의 범위를 받치지 못한다.",
+          "evidence": [
+            {
+              "kind": "document",
+              "passageId": "P12",
+              "blockRanges": [
+                [
+                  "p9-b3",
+                  "p9-b4"
+                ],
+                [
+                  "p9-b6",
+                  "p9-b6"
+                ]
+              ],
+              "page": 9
+            },
+            {
+              "kind": "criteria",
+              "lineId": "evidence-boundary"
+            }
+          ],
+          "checks": {
+            "quoteInBlock": "pass",
+            "evidenceInPool": "pass",
+            "categoryInList": "pass",
+            "levelRule": "pass",
+            "truncated": []
+          },
+          "module": {
+            "confirmed": [
+              "국내 사업장 전환율 수치가 있다."
+            ],
+            "missing": [
+              "해외 사업장 범위"
+            ],
+            "criteriaLines": [
+              "evidence-boundary",
+              "mid-1"
+            ],
+            "parts": [
+              "기후/환경 토픽"
+            ]
+          }
+        },
+        {
+          "key": "i2",
+          "stableKey": "00000000000000000000000000000002",
+          "status": "done",
+          "errorCode": null,
+          "target": {
+            "kind": "sentence",
+            "text": "가상회사의 온실가스 배출량은 전년 대비 5% 줄었습니다.",
+            "page": 5,
+            "blockIds": [
+              "p5-b1",
+              "p5-b2"
+            ]
+          },
+          "verdict": {
+            "level": "None",
+            "category": null
+          },
+          "reason": "배출량 표가 같은 감축률을 적고 있어 근거가 주장을 받친다.",
+          "evidence": [
+            {
+              "kind": "document",
+              "passageId": "P20",
+              "blockRanges": [
+                [
+                  "p14-b6",
+                  "p14-b6"
+                ]
+              ],
+              "page": 14,
+              "span": [
+                0,
+                120
+              ]
+            }
+          ],
+          "checks": {
+            "quoteInBlock": "pass",
+            "evidenceInPool": "pass",
+            "categoryInList": "pass",
+            "levelRule": "pass",
+            "truncated": []
+          },
+          "module": {
+            "confirmed": [
+              "배출량 표의 감축률"
+            ],
+            "missing": [],
+            "criteriaLines": [],
+            "parts": [
+              "기후/환경 토픽"
+            ]
+          }
+        }
+      ],
+      "unplaced": [
+        {
+          "text": "원문 블록에 없는 지어낸 문장입니다.",
+          "page": 5,
+          "errorCode": "quote_not_found"
+        }
+      ]
+    }
+  ]
+}

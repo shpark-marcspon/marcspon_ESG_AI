@@ -1,0 +1,18 @@
+/* Pretendard 는 npm 패키지 pretendard@1.3.9(OFL-1.1)의 가변 dynamic-subset CSS 를 싣는다(MARC-ENT-257, 밴드 CW1 ②).
+   글자 범위마다 조각(woff2) 하나라 화면에 쓰인 글자의 조각만 받는다. 이름 'Pretendard Variable', weight 45~920, font-display: swap.
+   main.tsx 가 아니라 여기서 싣는다(진입 청크 규칙 — layers.test.ts 의 「4. 라우터」). @import 는 이 파일 맨 위여야 한다.
+   NanumSquareNeo 는 키트의 next/font/local 선언(packages/common/src/generated/fonts/nanum-font.ts)을 옮긴 것 그대로다. */
+@import 'pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css';
+
+@font-face {
+  font-family: 'NanumSquareNeo';
+  src: url('../../../../../packages/common/public/fonts/nanum/NanumSquareNeoTTF-eHv.woff2')
+    format('woff2');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+:root {
+  --font-pretendard: 'Pretendard Variable', sans-serif;
+  --font-nanum: 'NanumSquareNeo';
+}

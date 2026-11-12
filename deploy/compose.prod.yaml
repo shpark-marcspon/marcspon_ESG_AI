@@ -1,0 +1,77 @@
+# 시연 서버(EC2 한 대)의 덮어쓰기. compose.yaml 위에 얹는다(밴드 DP1, 근거 MARC-ENT-416·418, 절차 docs/deploy-demo.md).
+#   docker compose --env-file /srv/esg-demo/shared/.env -f compose.yaml -f deploy/compose.prod.yaml up -d --build --wait
+#   (서버에서는 deploy/up.sh 가 이 줄을 부른다. 손으로 down -v·COMPOSE_PROJECT_NAME 바꾸기 금지 — 시연 DB 가 지워지거나 새 빈 볼륨이 생긴다)
+#
+#   브라우저 ──443──▶ proxy(Caddy) ──▶ api-py:8000   SITE_DOMAIN (웹 정적 파일과 /api — api-py 가 같은 출처에서 낸다)
+#                        └──────────▶ storage:7070  FILES_DOMAIN (서명한 올리기 주소의 PUT·OPTIONS 만. 받기는 API 가 낸다)
+#
+# 상대 경로는 첫 파일(compose.yaml) 폴더 기준이다 — 이 파일 폴더가 아니다(DP1 실측, compose v5.6.0). 그래서 ./deploy/… 로 적는다.
+# 서비스별 environment 는 키마다 합쳐진다. compose.yaml 의 앵커(*api-py-env)는 파일을 건너지 않으니 api-py·worker-py 둘 다 적는다.
+# 무효 조건: 서비스 이름·포트(api-py 8000, storage 7070)·서명 꼴(호스트가 서명에 듦)·큐 종류가 바뀌면 다시 잰다.
+
+services:
+  proxy:
+    # Caddy 2 공식 이미지(역프록시·자동 TLS — Let's Encrypt, MARC-ENT-418). 태그는 읽는 사람용, 받는 것은 인덱스 다이제스트.
+    # 판 v2.11.7(출시 2026-10-03, https://github.com/caddyserver/caddy/releases). 다이제스트는
+    # docker buildx imagetools inspect caddy:2.11.7 의 맨 위 Digest(확인 2026-10-23 — 허브 이미지는 2026-10-22 에 다시 지어짐).
+    image: caddy:2.11.7@sha256:504a44d7d74bd2bc28a66afc4774912fc21223ca8a67734af1c54ab2f999b489
+    # 256m: /api 본문 버퍼(Caddyfile request_buffers 21MiB, 밴드 PX1)를 메모리에 쥔다. 로컬 리허설 실측 — 쉼 15.7MiB,
+    #   19.9MB 느린 올리기 동시 3건 최고 103.9MiB(128m 판) · 189MiB(256m 판), 6건 227MiB(256m 판), OOM 0(검증 실측).
+    #   쓰는 메모리가 한도를 따라 자라 건당 값으로 셈하지 않는다.
+    #   무효 조건: request_buffers 크기나 동시 올리기 수의 어림이 바뀌면 다시 잰다.
+    mem_limit: 256m
+    restart: unless-stopped
+    # 바깥에 여는 포트는 이 둘뿐이다(보안 그룹도 22·80·443 만). 서버는 빈 값 = 80·443.
+    # 로컬 리허설만 127.0.0.1:<큰 포트> 를 넣는다(deploy/section4-DP1.sh).
+    ports:
+      - "${PROXY_HTTP_PORT:-80}:80"
+      - "${PROXY_HTTPS_PORT:-443}:443"
+    environment:
+      SITE_DOMAIN: ${SITE_DOMAIN:?SITE_DOMAIN 이 없다 — 서버 .env 에 웹 주소의 호스트 이름(deploy/env.prod.example)}
+      FILES_DOMAIN: ${FILES_DOMAIN:?FILES_DOMAIN 이 없다 — 서버 .env 에 저장소 주소의 호스트 이름(deploy/env.prod.example)}
+    volumes:
+      - ./deploy/Caddyfile:/etc/caddy/Caddyfile:ro
+      # 인증서와 ACME 계정. 지우면 다시 발급한다(Let's Encrypt 의 주 한도가 있다 — 지우지 않는다).
+      - caddy-data:/data
+      - caddy-config:/config
+    healthcheck:
+      # 관리 API(컨테이너 안 127.0.0.1:2019)가 답하면 설정을 읽고 떠 있다.
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:2019/config/"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    depends_on:
+      api-py: { condition: service_healthy }
+      storage: { condition: service_healthy }
+
+  api-py:
+    environment:
+      # 서명한 올리기 주소의 호스트. 서명에 호스트(와 포트)가 들어가 브라우저가 닿는 이름이어야 한다(core/resources/storage.py).
+      # 서버는 PROXY_PUBLIC_PORT_SUFFIX 가 빈 값, 로컬 리허설만 :<https 포트>.
+      S3_PUBLIC_ENDPOINT: https://${FILES_DOMAIN:?FILES_DOMAIN 이 없다}${PROXY_PUBLIC_PORT_SUFFIX:-}
+      # 영문번역 실행 하나의 상한(USD). compose.yaml 에는 이 칸이 없어 여기서만 닿는다(MARC-ISSUE-331 2). 비면 멈춘다.
+      TRANSLATION_RUN_MAX_USD: ${TRANSLATION_RUN_MAX_USD:?TRANSLATION_RUN_MAX_USD 가 없다 — 서버 .env 에(deploy/env.prod.example)}
+      # Scope 3 실행 스위치(MARC-ENT-535). compose.yaml 에 칸이 없어 여기서만 닿는다. 비거나 없으면 꺼짐(:- 는 빈 문자열도 false 로 바꾼다).
+      INVENTORY_SCOPE3_RUNS_ENABLED: ${INVENTORY_SCOPE3_RUNS_ENABLED:-false}
+
+  worker-py:
+    # 재부팅 뒤에도 시연이 켜져 있게 다시 띄운다. compose.yaml 이 안 단 까닭(통합 시험이 죽이고 기다림)은 서버에 없다(시험 안 돎).
+    # 무효 조건: 서버에서 통합 시험을 돌리게 되면 뺀다.
+    restart: unless-stopped
+    environment:
+      S3_PUBLIC_ENDPOINT: https://${FILES_DOMAIN:?FILES_DOMAIN 이 없다}${PROXY_PUBLIC_PORT_SUFFIX:-}
+      TRANSLATION_RUN_MAX_USD: ${TRANSLATION_RUN_MAX_USD:?TRANSLATION_RUN_MAX_USD 가 없다}
+      INVENTORY_SCOPE3_RUNS_ENABLED: ${INVENTORY_SCOPE3_RUNS_ENABLED:-false}
+
+  parser:
+    # 같은 까닭(compose.yaml 머리 — 통합 시험이 멈춰 세운 사이를 잰다. 서버엔 시험이 없다).
+    restart: unless-stopped
+
+  postgres:
+    # compose.yaml 이 안 단 까닭은 initdb 실패를 가리는 것(IN1). 서버는 첫 up 뒤 esg_app 역할이 있는지 잰다
+    # (docs/deploy-demo.md 1절 C10). 무효 조건: 그 확인 없이 데이터 폴더를 새로 세우게 되면 뺀다.
+    restart: unless-stopped
+
+volumes:
+  caddy-data:
+  caddy-config:

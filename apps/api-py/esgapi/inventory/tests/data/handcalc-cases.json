@@ -1,0 +1,1080 @@
+{
+  "$comment": "검산 사례. 기대값은 엔진과 따로 사례마다 식을 풀어 계산했고(Python decimal, 유효숫자 80자리, 반올림 없음) working 에 계산 과정을 적었다. 사용량과 조직은 모두 가상이다. synthetic: true 인 사례는 계수도 가상이다(examples/factors.synthetic.json). synthetic: false 인 사례의 계수는 factors.kr-ets-sample.json, GWP 는 gwp-sets.json 의 출처 있는 값이다. 엔진 결과와 문자열까지 같아야 한다. factor 와 gwp 는 읽는 사람을 위해 기준정보 파일의 값을 옮겨 적은 것이고, 테스트가 두 곳의 값이 같은지 확인한다.",
+  "cases": [
+    {
+      "id": "H01",
+      "title": "경유 고정연소 1000 L, 배출권거래법 시행령 GWP",
+      "synthetic": false,
+      "gwpSetId": "kr-ets-decree-annex2",
+      "activity": {
+        "id": "H01",
+        "orgUnit": "synthetic-site",
+        "period": "2025",
+        "sourceType": "stationary_combustion",
+        "fuel": "diesel",
+        "sector": "manufacturing_construction",
+        "parameterTiers": { "calorific": 2, "co2": 2, "nonCo2": 1, "oxidation": 2 },
+        "amount": "1000",
+        "unit": "L"
+      },
+      "factor": {
+        "id": "kr-ets-sample:diesel:stationary:manufacturing:tier2",
+        "calorific": {
+          "value": "35.2",
+          "energyUnit": "MJ",
+          "perUnit": "L",
+          "basis": "net"
+        },
+        "emissionFactors": [
+          {
+            "gas": "CO2",
+            "value": "73200",
+            "massUnit": "kg",
+            "perEnergyUnit": "TJ"
+          },
+          {
+            "gas": "CH4",
+            "value": "3",
+            "massUnit": "kg",
+            "perEnergyUnit": "TJ"
+          },
+          {
+            "gas": "N2O",
+            "value": "0.6",
+            "massUnit": "kg",
+            "perEnergyUnit": "TJ"
+          }
+        ],
+        "oxidationFactor": "0.99"
+      },
+      "gwp": {
+        "CO2": "1",
+        "CH4": "21",
+        "N2O": "310"
+      },
+      "expected": {
+        "factorId": "kr-ets-sample:diesel:stationary:manufacturing:tier2",
+        "energy": {
+          "value": "35200",
+          "unit": "MJ"
+        },
+        "gases": {
+          "CO2": {
+            "mass": "2.5508736",
+            "co2e": "2.5508736"
+          },
+          "CH4": {
+            "mass": "0.0001056",
+            "co2e": "0.0022176"
+          },
+          "N2O": {
+            "mass": "0.00002112",
+            "co2e": "0.0065472"
+          }
+        },
+        "co2e": "2.5596384"
+      },
+      "working": [
+        "에너지량 1000 L × 35.2 MJ/L = 35200 MJ",
+        "35200 MJ × 0.000001 = 0.0352 TJ",
+        "CO2: 0.0352 TJ × 73200 × 산화계수 0.99 = 2550.8736 → × 0.001 = 2.5508736 tCO2; × GWP 1 = 2.5508736 tCO2eq",
+        "CH4: 0.0352 TJ × 3 = 0.1056 → × 0.001 = 0.0001056 tCH4; × GWP 21 = 0.0022176 tCO2eq",
+        "N2O: 0.0352 TJ × 0.6 = 0.02112 → × 0.001 = 0.00002112 tN2O; × GWP 310 = 0.0065472 tCO2eq",
+        "합계 2.5508736 + 0.0022176 + 0.0065472 = 2.5596384 tCO2eq"
+      ]
+    },
+    {
+      "id": "H02",
+      "title": "경유 고정연소 1000 L, AR5 GWP (세트 전환)",
+      "synthetic": false,
+      "gwpSetId": "ipcc-ar5-100y-kr-nid-2025",
+      "activity": {
+        "id": "H02",
+        "orgUnit": "synthetic-site",
+        "period": "2025",
+        "sourceType": "stationary_combustion",
+        "fuel": "diesel",
+        "sector": "manufacturing_construction",
+        "parameterTiers": { "calorific": 2, "co2": 2, "nonCo2": 1, "oxidation": 2 },
+        "amount": "1000",
+        "unit": "L"
+      },
+      "factor": {
+        "id": "kr-ets-sample:diesel:stationary:manufacturing:tier2",
+        "calorific": {
+          "value": "35.2",
+          "energyUnit": "MJ",
+          "perUnit": "L",
+          "basis": "net"
+        },
+        "emissionFactors": [
+          {
+            "gas": "CO2",
+            "value": "73200",
+            "massUnit": "kg",
+            "perEnergyUnit": "TJ"
+          },
+          {
+            "gas": "CH4",
+            "value": "3",
+            "massUnit": "kg",
+            "perEnergyUnit": "TJ"
+          },
+          {
+            "gas": "N2O",
+            "value": "0.6",
+            "massUnit": "kg",
+            "perEnergyUnit": "TJ"
+          }
+        ],
+        "oxidationFactor": "0.99"
+      },
+      "gwp": {
+        "CO2": "1",
+        "CH4": "28",
+        "N2O": "265"
+      },
+      "expected": {
+        "factorId": "kr-ets-sample:diesel:stationary:manufacturing:tier2",
+        "energy": {
+          "value": "35200",
+          "unit": "MJ"
+        },
+        "gases": {
+          "CO2": {
+            "mass": "2.5508736",
+            "co2e": "2.5508736"
+          },
+          "CH4": {
+            "mass": "0.0001056",
+            "co2e": "0.0029568"
+          },
+          "N2O": {
+            "mass": "0.00002112",
+            "co2e": "0.0055968"
+          }
+        },
+        "co2e": "2.5594272"
+      },
+      "working": [
+        "에너지량 1000 L × 35.2 MJ/L = 35200 MJ",
+        "35200 MJ × 0.000001 = 0.0352 TJ",
+        "CO2: 0.0352 TJ × 73200 × 산화계수 0.99 = 2550.8736 → × 0.001 = 2.5508736 tCO2; × GWP 1 = 2.5508736 tCO2eq",
+        "CH4: 0.0352 TJ × 3 = 0.1056 → × 0.001 = 0.0001056 tCH4; × GWP 28 = 0.0029568 tCO2eq",
+        "N2O: 0.0352 TJ × 0.6 = 0.02112 → × 0.001 = 0.00002112 tN2O; × GWP 265 = 0.0055968 tCO2eq",
+        "합계 2.5508736 + 0.0029568 + 0.0055968 = 2.5594272 tCO2eq"
+      ]
+    },
+    {
+      "id": "H03",
+      "title": "경유 고정연소 2.5 kL (kL → L 환산)",
+      "synthetic": false,
+      "gwpSetId": "kr-ets-decree-annex2",
+      "activity": {
+        "id": "H03",
+        "orgUnit": "synthetic-site",
+        "period": "2025",
+        "sourceType": "stationary_combustion",
+        "fuel": "diesel",
+        "sector": "manufacturing_construction",
+        "parameterTiers": { "calorific": 2, "co2": 2, "nonCo2": 1, "oxidation": 2 },
+        "amount": "2.5",
+        "unit": "kL"
+      },
+      "factor": {
+        "id": "kr-ets-sample:diesel:stationary:manufacturing:tier2",
+        "calorific": {
+          "value": "35.2",
+          "energyUnit": "MJ",
+          "perUnit": "L",
+          "basis": "net"
+        },
+        "emissionFactors": [
+          {
+            "gas": "CO2",
+            "value": "73200",
+            "massUnit": "kg",
+            "perEnergyUnit": "TJ"
+          },
+          {
+            "gas": "CH4",
+            "value": "3",
+            "massUnit": "kg",
+            "perEnergyUnit": "TJ"
+          },
+          {
+            "gas": "N2O",
+            "value": "0.6",
+            "massUnit": "kg",
+            "perEnergyUnit": "TJ"
+          }
+        ],
+        "oxidationFactor": "0.99"
+      },
+      "gwp": {
+        "CO2": "1",
+        "CH4": "21",
+        "N2O": "310"
+      },
+      "expected": {
+        "factorId": "kr-ets-sample:diesel:stationary:manufacturing:tier2",
+        "energy": {
+          "value": "88000",
+          "unit": "MJ"
+        },
+        "gases": {
+          "CO2": {
+            "mass": "6.377184",
+            "co2e": "6.377184"
+          },
+          "CH4": {
+            "mass": "0.000264",
+            "co2e": "0.005544"
+          },
+          "N2O": {
+            "mass": "0.0000528",
+            "co2e": "0.016368"
+          }
+        },
+        "co2e": "6.399096"
+      },
+      "working": [
+        "사용량 2.5 kL × 1000 = 2500 L",
+        "에너지량 2500 L × 35.2 MJ/L = 88000 MJ",
+        "88000 MJ × 0.000001 = 0.088 TJ",
+        "CO2: 0.088 TJ × 73200 × 산화계수 0.99 = 6377.184 → × 0.001 = 6.377184 tCO2; × GWP 1 = 6.377184 tCO2eq",
+        "CH4: 0.088 TJ × 3 = 0.264 → × 0.001 = 0.000264 tCH4; × GWP 21 = 0.005544 tCO2eq",
+        "N2O: 0.088 TJ × 0.6 = 0.0528 → × 0.001 = 0.0000528 tN2O; × GWP 310 = 0.016368 tCO2eq",
+        "합계 6.377184 + 0.005544 + 0.016368 = 6.399096 tCO2eq"
+      ]
+    },
+    {
+      "id": "H04",
+      "title": "도시가스(LNG) 고정연소 12345.678 Nm3",
+      "synthetic": false,
+      "gwpSetId": "kr-ets-decree-annex2",
+      "activity": {
+        "id": "H04",
+        "orgUnit": "synthetic-site",
+        "period": "2025",
+        "sourceType": "stationary_combustion",
+        "fuel": "city-gas-lng",
+        "sector": "commercial_public",
+        "parameterTiers": { "calorific": 2, "co2": 2, "nonCo2": 1, "oxidation": 2 },
+        "amount": "12345.678",
+        "unit": "Nm3"
+      },
+      "factor": {
+        "id": "kr-ets-sample:city-gas-lng:stationary:commercial:tier2",
+        "calorific": {
+          "value": "38.9",
+          "energyUnit": "MJ",
+          "perUnit": "Nm3",
+          "basis": "net"
+        },
+        "emissionFactors": [
+          {
+            "gas": "CO2",
+            "value": "56100",
+            "massUnit": "kg",
+            "perEnergyUnit": "TJ"
+          },
+          {
+            "gas": "CH4",
+            "value": "5",
+            "massUnit": "kg",
+            "perEnergyUnit": "TJ"
+          },
+          {
+            "gas": "N2O",
+            "value": "0.1",
+            "massUnit": "kg",
+            "perEnergyUnit": "TJ"
+          }
+        ],
+        "oxidationFactor": "0.995"
+      },
+      "gwp": {
+        "CO2": "1",
+        "CH4": "21",
+        "N2O": "310"
+      },
+      "expected": {
+        "factorId": "kr-ets-sample:city-gas-lng:stationary:commercial:tier2",
+        "energy": {
+          "value": "480246.8742",
+          "unit": "MJ"
+        },
+        "gases": {
+          "CO2": {
+            "mass": "26.8071403944069",
+            "co2e": "26.8071403944069"
+          },
+          "CH4": {
+            "mass": "0.002401234371",
+            "co2e": "0.050425921791"
+          },
+          "N2O": {
+            "mass": "0.00004802468742",
+            "co2e": "0.0148876531002"
+          }
+        },
+        "co2e": "26.8724539692981"
+      },
+      "working": [
+        "에너지량 12345.678 Nm3 × 38.9 MJ/Nm3 = 480246.8742 MJ",
+        "480246.8742 MJ × 0.000001 = 0.4802468742 TJ",
+        "CO2: 0.4802468742 TJ × 56100 × 산화계수 0.995 = 26807.1403944069 → × 0.001 = 26.8071403944069 tCO2; × GWP 1 = 26.8071403944069 tCO2eq",
+        "CH4: 0.4802468742 TJ × 5 = 2.401234371 → × 0.001 = 0.002401234371 tCH4; × GWP 21 = 0.050425921791 tCO2eq",
+        "N2O: 0.4802468742 TJ × 0.1 = 0.04802468742 → × 0.001 = 0.00004802468742 tN2O; × GWP 310 = 0.0148876531002 tCO2eq",
+        "합계 26.8071403944069 + 0.050425921791 + 0.0148876531002 = 26.8724539692981 tCO2eq"
+      ]
+    },
+    {
+      "id": "H05",
+      "title": "도시가스(LNG) 고정연소 12.345678 천Nm3, AR5 GWP",
+      "synthetic": false,
+      "gwpSetId": "ipcc-ar5-100y-kr-nid-2025",
+      "activity": {
+        "id": "H05",
+        "orgUnit": "synthetic-site",
+        "period": "2025",
+        "sourceType": "stationary_combustion",
+        "fuel": "city-gas-lng",
+        "sector": "commercial_public",
+        "parameterTiers": { "calorific": 2, "co2": 2, "nonCo2": 1, "oxidation": 2 },
+        "amount": "12.345678",
+        "unit": "kNm3"
+      },
+      "factor": {
+        "id": "kr-ets-sample:city-gas-lng:stationary:commercial:tier2",
+        "calorific": {
+          "value": "38.9",
+          "energyUnit": "MJ",
+          "perUnit": "Nm3",
+          "basis": "net"
+        },
+        "emissionFactors": [
+          {
+            "gas": "CO2",
+            "value": "56100",
+            "massUnit": "kg",
+            "perEnergyUnit": "TJ"
+          },
+          {
+            "gas": "CH4",
+            "value": "5",
+            "massUnit": "kg",
+            "perEnergyUnit": "TJ"
+          },
+          {
+            "gas": "N2O",
+            "value": "0.1",
+            "massUnit": "kg",
+            "perEnergyUnit": "TJ"
+          }
+        ],
+        "oxidationFactor": "0.995"
+      },
+      "gwp": {
+        "CO2": "1",
+        "CH4": "28",
+        "N2O": "265"
+      },
+      "expected": {
+        "factorId": "kr-ets-sample:city-gas-lng:stationary:commercial:tier2",
+        "energy": {
+          "value": "480246.8742",
+          "unit": "MJ"
+        },
+        "gases": {
+          "CO2": {
+            "mass": "26.8071403944069",
+            "co2e": "26.8071403944069"
+          },
+          "CH4": {
+            "mass": "0.002401234371",
+            "co2e": "0.067234562388"
+          },
+          "N2O": {
+            "mass": "0.00004802468742",
+            "co2e": "0.0127265421663"
+          }
+        },
+        "co2e": "26.8871014989612"
+      },
+      "working": [
+        "사용량 12.345678 kNm3 × 1000 = 12345.678 Nm3",
+        "에너지량 12345.678 Nm3 × 38.9 MJ/Nm3 = 480246.8742 MJ",
+        "480246.8742 MJ × 0.000001 = 0.4802468742 TJ",
+        "CO2: 0.4802468742 TJ × 56100 × 산화계수 0.995 = 26807.1403944069 → × 0.001 = 26.8071403944069 tCO2; × GWP 1 = 26.8071403944069 tCO2eq",
+        "CH4: 0.4802468742 TJ × 5 = 2.401234371 → × 0.001 = 0.002401234371 tCH4; × GWP 28 = 0.067234562388 tCO2eq",
+        "N2O: 0.4802468742 TJ × 0.1 = 0.04802468742 → × 0.001 = 0.00004802468742 tN2O; × GWP 265 = 0.0127265421663 tCO2eq",
+        "합계 26.8071403944069 + 0.067234562388 + 0.0127265421663 = 26.8871014989612 tCO2eq"
+      ]
+    },
+    {
+      "id": "H06",
+      "title": "구매 전력 1234.567 MWh, 배출권거래법 시행령 GWP",
+      "synthetic": false,
+      "gwpSetId": "kr-ets-decree-annex2",
+      "activity": {
+        "id": "H06",
+        "orgUnit": "synthetic-site",
+        "period": "2025",
+        "sourceType": "purchased_electricity",
+        "factorId": "kr-ets-sample:electricity:2014-2016-avg",
+        "amount": "1234.567",
+        "unit": "MWh"
+      },
+      "factor": {
+        "id": "kr-ets-sample:electricity:2014-2016-avg",
+        "emissionFactors": [
+          {
+            "gas": "CO2",
+            "value": "0.4567",
+            "massUnit": "t"
+          },
+          {
+            "gas": "CH4",
+            "value": "0.0036",
+            "massUnit": "kg"
+          },
+          {
+            "gas": "N2O",
+            "value": "0.0085",
+            "massUnit": "kg"
+          }
+        ],
+        "perUnit": "MWh"
+      },
+      "gwp": {
+        "CO2": "1",
+        "CH4": "21",
+        "N2O": "310"
+      },
+      "expected": {
+        "factorId": "kr-ets-sample:electricity:2014-2016-avg",
+        "energy": null,
+        "gases": {
+          "CO2": {
+            "mass": "563.8267489",
+            "co2e": "563.8267489"
+          },
+          "CH4": {
+            "mass": "0.0044444412",
+            "co2e": "0.0933332652"
+          },
+          "N2O": {
+            "mass": "0.0104938195",
+            "co2e": "3.253084045"
+          }
+        },
+        "co2e": "567.1731662102"
+      },
+      "working": [
+        "CO2: 1234.567 MWh × 0.4567 = 563.8267489 → × 1 = 563.8267489 tCO2; × GWP 1 = 563.8267489 tCO2eq",
+        "CH4: 1234.567 MWh × 0.0036 = 4.4444412 → × 0.001 = 0.0044444412 tCH4; × GWP 21 = 0.0933332652 tCO2eq",
+        "N2O: 1234.567 MWh × 0.0085 = 10.4938195 → × 0.001 = 0.0104938195 tN2O; × GWP 310 = 3.253084045 tCO2eq",
+        "합계 563.8267489 + 0.0933332652 + 3.253084045 = 567.1731662102 tCO2eq"
+      ]
+    },
+    {
+      "id": "H07",
+      "title": "구매 전력 500000 kWh (kWh → MWh 환산), AR5 GWP",
+      "synthetic": false,
+      "gwpSetId": "ipcc-ar5-100y-kr-nid-2025",
+      "activity": {
+        "id": "H07",
+        "orgUnit": "synthetic-site",
+        "period": "2025",
+        "sourceType": "purchased_electricity",
+        "factorId": "kr-ets-sample:electricity:2014-2016-avg",
+        "amount": "500000",
+        "unit": "kWh"
+      },
+      "factor": {
+        "id": "kr-ets-sample:electricity:2014-2016-avg",
+        "emissionFactors": [
+          {
+            "gas": "CO2",
+            "value": "0.4567",
+            "massUnit": "t"
+          },
+          {
+            "gas": "CH4",
+            "value": "0.0036",
+            "massUnit": "kg"
+          },
+          {
+            "gas": "N2O",
+            "value": "0.0085",
+            "massUnit": "kg"
+          }
+        ],
+        "perUnit": "MWh"
+      },
+      "gwp": {
+        "CO2": "1",
+        "CH4": "28",
+        "N2O": "265"
+      },
+      "expected": {
+        "factorId": "kr-ets-sample:electricity:2014-2016-avg",
+        "energy": null,
+        "gases": {
+          "CO2": {
+            "mass": "228.35",
+            "co2e": "228.35"
+          },
+          "CH4": {
+            "mass": "0.0018",
+            "co2e": "0.0504"
+          },
+          "N2O": {
+            "mass": "0.00425",
+            "co2e": "1.12625"
+          }
+        },
+        "co2e": "229.52665"
+      },
+      "working": [
+        "사용량 500000 kWh × 0.001 = 500 MWh",
+        "CO2: 500 MWh × 0.4567 = 228.35 → × 1 = 228.35 tCO2; × GWP 1 = 228.35 tCO2eq",
+        "CH4: 500 MWh × 0.0036 = 1.8 → × 0.001 = 0.0018 tCH4; × GWP 28 = 0.0504 tCO2eq",
+        "N2O: 500 MWh × 0.0085 = 4.25 → × 0.001 = 0.00425 tN2O; × GWP 265 = 1.12625 tCO2eq",
+        "합계 228.35 + 0.0504 + 1.12625 = 229.52665 tCO2eq"
+      ]
+    },
+    {
+      "id": "H08",
+      "title": "synthetic 연료 A 이동연소 800 L (산화계수 없음)",
+      "synthetic": true,
+      "gwpSetId": "synthetic-gwp",
+      "activity": {
+        "id": "H08",
+        "orgUnit": "synthetic-site",
+        "period": "2025",
+        "sourceType": "mobile_combustion",
+        "fuel": "synthetic-fuel-a",
+        "amount": "800",
+        "unit": "L"
+      },
+      "factor": {
+        "id": "synthetic:fuel-a:mobile",
+        "calorific": {
+          "value": "31.25",
+          "energyUnit": "MJ",
+          "perUnit": "L",
+          "basis": "net"
+        },
+        "emissionFactors": [
+          {
+            "gas": "CO2",
+            "value": "70000",
+            "massUnit": "kg",
+            "perEnergyUnit": "TJ"
+          },
+          {
+            "gas": "CH4",
+            "value": "25",
+            "massUnit": "kg",
+            "perEnergyUnit": "TJ"
+          },
+          {
+            "gas": "N2O",
+            "value": "8",
+            "massUnit": "kg",
+            "perEnergyUnit": "TJ"
+          }
+        ]
+      },
+      "gwp": {
+        "CO2": "1",
+        "CH4": "20",
+        "N2O": "300"
+      },
+      "expected": {
+        "factorId": "synthetic:fuel-a:mobile",
+        "energy": {
+          "value": "25000",
+          "unit": "MJ"
+        },
+        "gases": {
+          "CO2": {
+            "mass": "1.75",
+            "co2e": "1.75"
+          },
+          "CH4": {
+            "mass": "0.000625",
+            "co2e": "0.0125"
+          },
+          "N2O": {
+            "mass": "0.0002",
+            "co2e": "0.06"
+          }
+        },
+        "co2e": "1.8225"
+      },
+      "working": [
+        "에너지량 800 L × 31.25 MJ/L = 25000 MJ",
+        "25000 MJ × 0.000001 = 0.025 TJ",
+        "CO2: 0.025 TJ × 70000 = 1750 → × 0.001 = 1.75 tCO2; × GWP 1 = 1.75 tCO2eq",
+        "CH4: 0.025 TJ × 25 = 0.625 → × 0.001 = 0.000625 tCH4; × GWP 20 = 0.0125 tCO2eq",
+        "N2O: 0.025 TJ × 8 = 0.2 → × 0.001 = 0.0002 tN2O; × GWP 300 = 0.06 tCO2eq",
+        "합계 1.75 + 0.0125 + 0.06 = 1.8225 tCO2eq"
+      ]
+    },
+    {
+      "id": "H09",
+      "title": "synthetic 연료 A 고정연소 1.2 kL (같은 연료, 다른 연소 유형)",
+      "synthetic": true,
+      "gwpSetId": "synthetic-gwp",
+      "activity": {
+        "id": "H09",
+        "orgUnit": "synthetic-site",
+        "period": "2025",
+        "sourceType": "stationary_combustion",
+        "fuel": "synthetic-fuel-a",
+        "amount": "1.2",
+        "unit": "kL"
+      },
+      "factor": {
+        "id": "synthetic:fuel-a:stationary",
+        "calorific": {
+          "value": "31.25",
+          "energyUnit": "MJ",
+          "perUnit": "L",
+          "basis": "net"
+        },
+        "emissionFactors": [
+          {
+            "gas": "CO2",
+            "value": "70000",
+            "massUnit": "kg",
+            "perEnergyUnit": "TJ"
+          },
+          {
+            "gas": "CH4",
+            "value": "3",
+            "massUnit": "kg",
+            "perEnergyUnit": "TJ"
+          },
+          {
+            "gas": "N2O",
+            "value": "0.6",
+            "massUnit": "kg",
+            "perEnergyUnit": "TJ"
+          }
+        ],
+        "oxidationFactor": "0.98"
+      },
+      "gwp": {
+        "CO2": "1",
+        "CH4": "20",
+        "N2O": "300"
+      },
+      "expected": {
+        "factorId": "synthetic:fuel-a:stationary",
+        "energy": {
+          "value": "37500",
+          "unit": "MJ"
+        },
+        "gases": {
+          "CO2": {
+            "mass": "2.5725",
+            "co2e": "2.5725"
+          },
+          "CH4": {
+            "mass": "0.0001125",
+            "co2e": "0.00225"
+          },
+          "N2O": {
+            "mass": "0.0000225",
+            "co2e": "0.00675"
+          }
+        },
+        "co2e": "2.5815"
+      },
+      "working": [
+        "사용량 1.2 kL × 1000 = 1200 L",
+        "에너지량 1200 L × 31.25 MJ/L = 37500 MJ",
+        "37500 MJ × 0.000001 = 0.0375 TJ",
+        "CO2: 0.0375 TJ × 70000 × 산화계수 0.98 = 2572.5 → × 0.001 = 2.5725 tCO2; × GWP 1 = 2.5725 tCO2eq",
+        "CH4: 0.0375 TJ × 3 = 0.1125 → × 0.001 = 0.0001125 tCH4; × GWP 20 = 0.00225 tCO2eq",
+        "N2O: 0.0375 TJ × 0.6 = 0.0225 → × 0.001 = 0.0000225 tN2O; × GWP 300 = 0.00675 tCO2eq",
+        "합계 2.5725 + 0.00225 + 0.00675 = 2.5815 tCO2eq"
+      ]
+    },
+    {
+      "id": "H10",
+      "title": "synthetic 연료 B 고정연소 3.456 t (기체마다 다른 질량 단위 t, g, kg)",
+      "synthetic": true,
+      "gwpSetId": "kr-ets-decree-annex2",
+      "activity": {
+        "id": "H10",
+        "orgUnit": "synthetic-site",
+        "period": "2025",
+        "sourceType": "stationary_combustion",
+        "fuel": "synthetic-fuel-b",
+        "amount": "3.456",
+        "unit": "t"
+      },
+      "factor": {
+        "id": "synthetic:fuel-b:stationary",
+        "calorific": {
+          "value": "23.7",
+          "energyUnit": "MJ",
+          "perUnit": "kg",
+          "basis": "net"
+        },
+        "emissionFactors": [
+          {
+            "gas": "CO2",
+            "value": "94.567",
+            "massUnit": "t",
+            "perEnergyUnit": "TJ"
+          },
+          {
+            "gas": "CH4",
+            "value": "1250",
+            "massUnit": "g",
+            "perEnergyUnit": "TJ"
+          },
+          {
+            "gas": "N2O",
+            "value": "1.5",
+            "massUnit": "kg",
+            "perEnergyUnit": "TJ"
+          }
+        ],
+        "oxidationFactor": "0.975"
+      },
+      "gwp": {
+        "CO2": "1",
+        "CH4": "21",
+        "N2O": "310"
+      },
+      "expected": {
+        "factorId": "synthetic:fuel-b:stationary",
+        "energy": {
+          "value": "81907.2",
+          "unit": "MJ"
+        },
+        "gases": {
+          "CO2": {
+            "mass": "7.55207522784",
+            "co2e": "7.55207522784"
+          },
+          "CH4": {
+            "mass": "0.000102384",
+            "co2e": "0.002150064"
+          },
+          "N2O": {
+            "mass": "0.0001228608",
+            "co2e": "0.038086848"
+          }
+        },
+        "co2e": "7.59231213984"
+      },
+      "working": [
+        "사용량 3.456 t × 1000 = 3456 kg",
+        "에너지량 3456 kg × 23.7 MJ/kg = 81907.2 MJ",
+        "81907.2 MJ × 0.000001 = 0.0819072 TJ",
+        "CO2: 0.0819072 TJ × 94.567 × 산화계수 0.975 = 7.55207522784 → × 1 = 7.55207522784 tCO2; × GWP 1 = 7.55207522784 tCO2eq",
+        "CH4: 0.0819072 TJ × 1250 = 102.384 → × 0.000001 = 0.000102384 tCH4; × GWP 21 = 0.002150064 tCO2eq",
+        "N2O: 0.0819072 TJ × 1.5 = 0.1228608 → × 0.001 = 0.0001228608 tN2O; × GWP 310 = 0.038086848 tCO2eq",
+        "합계 7.55207522784 + 0.002150064 + 0.038086848 = 7.59231213984 tCO2eq"
+      ]
+    },
+    {
+      "id": "H11",
+      "title": "synthetic 구매 열 15.5 GJ, 이미 환산된 CO2e 계수 (GWP 미적용)",
+      "synthetic": true,
+      "gwpSetId": "synthetic-gwp",
+      "activity": {
+        "id": "H11",
+        "orgUnit": "synthetic-site",
+        "period": "2025",
+        "sourceType": "purchased_heat",
+        "amount": "15.5",
+        "unit": "GJ"
+      },
+      "factor": {
+        "id": "synthetic:heat",
+        "emissionFactors": [
+          {
+            "gas": "CO2e",
+            "value": "56789.5",
+            "massUnit": "kg"
+          }
+        ],
+        "perUnit": "TJ"
+      },
+      "gwp": {
+        "CO2": "1",
+        "CH4": "20",
+        "N2O": "300"
+      },
+      "expected": {
+        "factorId": "synthetic:heat",
+        "energy": null,
+        "gases": {
+          "CO2e": {
+            "mass": "0.88023725",
+            "co2e": "0.88023725"
+          }
+        },
+        "co2e": "0.88023725"
+      },
+      "working": [
+        "사용량 15.5 GJ × 0.001 = 0.0155 TJ",
+        "CO2e: 0.0155 TJ × 56789.5 = 880.23725 kgCO2eq → × 0.001 = 0.88023725 tCO2eq (GWP 를 곱하지 않는다)",
+        "합계 0.88023725 tCO2eq"
+      ]
+    },
+    {
+      "id": "H12",
+      "title": "경유를 열량으로 계량 35.2 GJ (발열량 미적용, H01 과 같은 값)",
+      "synthetic": false,
+      "gwpSetId": "kr-ets-decree-annex2",
+      "activity": {
+        "id": "H12",
+        "orgUnit": "synthetic-site",
+        "period": "2025",
+        "sourceType": "stationary_combustion",
+        "fuel": "diesel",
+        "sector": "manufacturing_construction",
+        "parameterTiers": { "calorific": 2, "co2": 2, "nonCo2": 1, "oxidation": 2 },
+        "amount": "35.2",
+        "unit": "GJ"
+      },
+      "factor": {
+        "id": "kr-ets-sample:diesel:stationary:manufacturing:tier2",
+        "calorific": {
+          "value": "35.2",
+          "energyUnit": "MJ",
+          "perUnit": "L",
+          "basis": "net"
+        },
+        "emissionFactors": [
+          {
+            "gas": "CO2",
+            "value": "73200",
+            "massUnit": "kg",
+            "perEnergyUnit": "TJ"
+          },
+          {
+            "gas": "CH4",
+            "value": "3",
+            "massUnit": "kg",
+            "perEnergyUnit": "TJ"
+          },
+          {
+            "gas": "N2O",
+            "value": "0.6",
+            "massUnit": "kg",
+            "perEnergyUnit": "TJ"
+          }
+        ],
+        "oxidationFactor": "0.99"
+      },
+      "gwp": {
+        "CO2": "1",
+        "CH4": "21",
+        "N2O": "310"
+      },
+      "expected": {
+        "factorId": "kr-ets-sample:diesel:stationary:manufacturing:tier2",
+        "energy": {
+          "value": "35200",
+          "unit": "MJ"
+        },
+        "gases": {
+          "CO2": {
+            "mass": "2.5508736",
+            "co2e": "2.5508736"
+          },
+          "CH4": {
+            "mass": "0.0001056",
+            "co2e": "0.0022176"
+          },
+          "N2O": {
+            "mass": "0.00002112",
+            "co2e": "0.0065472"
+          }
+        },
+        "co2e": "2.5596384"
+      },
+      "working": [
+        "사용량이 에너지 단위: 35.2 GJ = 35200 MJ (발열량을 곱하지 않음)",
+        "35200 MJ × 0.000001 = 0.0352 TJ",
+        "CO2: 0.0352 TJ × 73200 × 산화계수 0.99 = 2550.8736 → × 0.001 = 2.5508736 tCO2; × GWP 1 = 2.5508736 tCO2eq",
+        "CH4: 0.0352 TJ × 3 = 0.1056 → × 0.001 = 0.0001056 tCH4; × GWP 21 = 0.0022176 tCO2eq",
+        "N2O: 0.0352 TJ × 0.6 = 0.02112 → × 0.001 = 0.00002112 tN2O; × GWP 310 = 0.0065472 tCO2eq",
+        "합계 2.5508736 + 0.0022176 + 0.0065472 = 2.5596384 tCO2eq"
+      ]
+    },
+    {
+      "id": "H13",
+      "title": "경유 고정연소 0 L (사용량 0)",
+      "synthetic": false,
+      "gwpSetId": "kr-ets-decree-annex2",
+      "activity": {
+        "id": "H13",
+        "orgUnit": "synthetic-site",
+        "period": "2025",
+        "sourceType": "stationary_combustion",
+        "fuel": "diesel",
+        "sector": "manufacturing_construction",
+        "parameterTiers": { "calorific": 2, "co2": 2, "nonCo2": 1, "oxidation": 2 },
+        "amount": "0",
+        "unit": "L"
+      },
+      "factor": {
+        "id": "kr-ets-sample:diesel:stationary:manufacturing:tier2",
+        "calorific": {
+          "value": "35.2",
+          "energyUnit": "MJ",
+          "perUnit": "L",
+          "basis": "net"
+        },
+        "emissionFactors": [
+          {
+            "gas": "CO2",
+            "value": "73200",
+            "massUnit": "kg",
+            "perEnergyUnit": "TJ"
+          },
+          {
+            "gas": "CH4",
+            "value": "3",
+            "massUnit": "kg",
+            "perEnergyUnit": "TJ"
+          },
+          {
+            "gas": "N2O",
+            "value": "0.6",
+            "massUnit": "kg",
+            "perEnergyUnit": "TJ"
+          }
+        ],
+        "oxidationFactor": "0.99"
+      },
+      "gwp": {
+        "CO2": "1",
+        "CH4": "21",
+        "N2O": "310"
+      },
+      "expected": {
+        "factorId": "kr-ets-sample:diesel:stationary:manufacturing:tier2",
+        "energy": {
+          "value": "0",
+          "unit": "MJ"
+        },
+        "gases": {
+          "CO2": {
+            "mass": "0",
+            "co2e": "0"
+          },
+          "CH4": {
+            "mass": "0",
+            "co2e": "0"
+          },
+          "N2O": {
+            "mass": "0",
+            "co2e": "0"
+          }
+        },
+        "co2e": "0"
+      },
+      "working": [
+        "에너지량 0 L × 35.2 MJ/L = 0 MJ",
+        "0 MJ × 0.000001 = 0 TJ",
+        "CO2: 0 TJ × 73200 × 산화계수 0.99 = 0 → × 0.001 = 0 tCO2; × GWP 1 = 0 tCO2eq",
+        "CH4: 0 TJ × 3 = 0 → × 0.001 = 0 tCH4; × GWP 21 = 0 tCO2eq",
+        "N2O: 0 TJ × 0.6 = 0 → × 0.001 = 0 tN2O; × GWP 310 = 0 tCO2eq",
+        "합계 0 + 0 + 0 = 0 tCO2eq"
+      ]
+    },
+    {
+      "id": "H14",
+      "title": "synthetic 연료 A 이동연소 0.001 L (아주 작은 값, 자릿수 보존)",
+      "synthetic": true,
+      "gwpSetId": "synthetic-gwp",
+      "activity": {
+        "id": "H14",
+        "orgUnit": "synthetic-site",
+        "period": "2025",
+        "sourceType": "mobile_combustion",
+        "fuel": "synthetic-fuel-a",
+        "amount": "0.001",
+        "unit": "L"
+      },
+      "factor": {
+        "id": "synthetic:fuel-a:mobile",
+        "calorific": {
+          "value": "31.25",
+          "energyUnit": "MJ",
+          "perUnit": "L",
+          "basis": "net"
+        },
+        "emissionFactors": [
+          {
+            "gas": "CO2",
+            "value": "70000",
+            "massUnit": "kg",
+            "perEnergyUnit": "TJ"
+          },
+          {
+            "gas": "CH4",
+            "value": "25",
+            "massUnit": "kg",
+            "perEnergyUnit": "TJ"
+          },
+          {
+            "gas": "N2O",
+            "value": "8",
+            "massUnit": "kg",
+            "perEnergyUnit": "TJ"
+          }
+        ]
+      },
+      "gwp": {
+        "CO2": "1",
+        "CH4": "20",
+        "N2O": "300"
+      },
+      "expected": {
+        "factorId": "synthetic:fuel-a:mobile",
+        "energy": {
+          "value": "0.03125",
+          "unit": "MJ"
+        },
+        "gases": {
+          "CO2": {
+            "mass": "0.0000021875",
+            "co2e": "0.0000021875"
+          },
+          "CH4": {
+            "mass": "0.00000000078125",
+            "co2e": "0.000000015625"
+          },
+          "N2O": {
+            "mass": "0.00000000025",
+            "co2e": "0.000000075"
+          }
+        },
+        "co2e": "0.000002278125"
+      },
+      "working": [
+        "에너지량 0.001 L × 31.25 MJ/L = 0.03125 MJ",
+        "0.03125 MJ × 0.000001 = 0.00000003125 TJ",
+        "CO2: 0.00000003125 TJ × 70000 = 0.0021875 → × 0.001 = 0.0000021875 tCO2; × GWP 1 = 0.0000021875 tCO2eq",
+        "CH4: 0.00000003125 TJ × 25 = 0.00000078125 → × 0.001 = 0.00000000078125 tCH4; × GWP 20 = 0.000000015625 tCO2eq",
+        "N2O: 0.00000003125 TJ × 8 = 0.00000025 → × 0.001 = 0.00000000025 tN2O; × GWP 300 = 0.000000075 tCO2eq",
+        "합계 0.0000021875 + 0.000000015625 + 0.000000075 = 0.000002278125 tCO2eq"
+      ]
+    }
+  ]
+}

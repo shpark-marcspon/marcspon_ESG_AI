@@ -1,0 +1,22 @@
+# 첫 벌(esg-demo, proxy 를 띄우는 벌)이 둘째 벌(esg-demo2, 데모 고정판 — 밴드 DM1)의 이름 둘도 받게 하는 덧붙임.
+#   deploy/up.sh 가 첫 벌 .env 에 DEMO2_SITE_DOMAIN·DEMO2_FILES_DOMAIN 이 있을 때만 -f 로 얹는다. 없으면 이 파일은 안 읽히고
+#   proxy 의 설정·네트워크·묶음이 BASE 와 같다(DM1 실측 — adapt JSON·네트워크 목록 대조).
+#   proxy → 공유 네트워크(EDGE_NETWORK, 기본 esg-edge — up.sh 가 없으면 만든다) → 둘째 벌 relay(별칭 demo2-edge)
+# 상대 경로는 첫 파일(compose.yaml) 폴더 기준이다(compose.prod.yaml 머리와 같음).
+# 무효 조건: 둘째 벌의 relay 별칭(demo2-edge)·포트(8000·7070)가 바뀌면 deploy/Caddyfile.demo2 와 같이 고친다.
+
+services:
+  proxy:
+    environment:
+      DEMO2_SITE_DOMAIN: ${DEMO2_SITE_DOMAIN:?DEMO2_SITE_DOMAIN 이 없다 — 첫 벌 .env 에 둘째 벌 웹 주소의 호스트 이름}
+      DEMO2_FILES_DOMAIN: ${DEMO2_FILES_DOMAIN:?DEMO2_FILES_DOMAIN 이 없다 — 첫 벌 .env 에 둘째 벌 저장소 주소의 호스트 이름}
+    volumes:
+      - ./deploy/Caddyfile.demo2:/etc/caddy/sites.d/demo2.caddy:ro
+    networks:
+      - default
+      - edge
+
+networks:
+  edge:
+    external: true
+    name: ${EDGE_NETWORK:-esg-edge}

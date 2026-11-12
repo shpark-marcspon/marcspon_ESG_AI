@@ -1,0 +1,2949 @@
+[
+ {
+  "rowId": "g01",
+  "itemName": "합성 강판",
+  "unit": "kg",
+  "gold": {
+   "category": 1,
+   "factorIds": [
+    "syn:steel-kg"
+   ],
+   "note": "가상 정답 (synthetic)"
+  },
+  "status": "recommended",
+  "source": "llm",
+  "predictedCategory": 1,
+  "keywords": [],
+  "picks": [
+   "syn:steel-kg",
+   "syn-d:pp-kg",
+   "syn:paper-kg"
+  ],
+  "basis": {
+   "used": "activity",
+   "fellBack": false,
+   "fallbackReason": null
+  },
+  "failure": null,
+  "shortlists": [
+   {
+    "basis": "physical",
+    "method": "lexical-v1",
+    "total": 12,
+    "shownIds": [
+     "syn:steel-kg",
+     "syn-d:pp-kg",
+     "syn:paper-kg",
+     "syn:ab",
+     "syn:a_b",
+     "syn:pe-kg",
+     "syn-d:cement-kg",
+     "syn:credit-kg",
+     "syn:kichi-kg",
+     "syn:steel-t",
+     "syn:glass-kg",
+     "syn:battery-kg"
+    ],
+    "evidence": [
+     {
+      "id": "syn:steel-kg",
+      "lexical": {
+       "rank": 1,
+       "score": 8,
+       "matchedTerms": [
+        "합성",
+        "강판",
+        "#합성",
+        "#강판"
+       ]
+      },
+      "rank": 1
+     },
+     {
+      "id": "syn-d:pp-kg",
+      "lexical": {
+       "rank": 2,
+       "score": 4,
+       "matchedTerms": [
+        "합성",
+        "#합성"
+       ]
+      },
+      "rank": 2
+     },
+     {
+      "id": "syn:paper-kg",
+      "lexical": {
+       "rank": 3,
+       "score": 4,
+       "matchedTerms": [
+        "합성",
+        "#합성"
+       ]
+      },
+      "rank": 3
+     },
+     {
+      "id": "syn:ab",
+      "lexical": {
+       "rank": 4,
+       "score": 4,
+       "matchedTerms": [
+        "합성",
+        "#합성"
+       ]
+      },
+      "rank": 4
+     },
+     {
+      "id": "syn:a_b",
+      "lexical": {
+       "rank": 5,
+       "score": 4,
+       "matchedTerms": [
+        "합성",
+        "#합성"
+       ]
+      },
+      "rank": 5
+     },
+     {
+      "id": "syn:pe-kg",
+      "lexical": {
+       "rank": 6,
+       "score": 4,
+       "matchedTerms": [
+        "합성",
+        "#합성"
+       ]
+      },
+      "rank": 6
+     },
+     {
+      "id": "syn-d:cement-kg",
+      "lexical": {
+       "rank": 7,
+       "score": 4,
+       "matchedTerms": [
+        "합성",
+        "#합성"
+       ]
+      },
+      "rank": 7
+     },
+     {
+      "id": "syn:credit-kg",
+      "lexical": {
+       "rank": 8,
+       "score": 4,
+       "matchedTerms": [
+        "합성",
+        "#합성"
+       ]
+      },
+      "rank": 8
+     },
+     {
+      "id": "syn:kichi-kg",
+      "lexical": {
+       "rank": 9,
+       "score": 4,
+       "matchedTerms": [
+        "합성",
+        "#합성"
+       ]
+      },
+      "rank": 9
+     },
+     {
+      "id": "syn:steel-t",
+      "rank": 10
+     },
+     {
+      "id": "syn:glass-kg",
+      "rank": 11
+     },
+     {
+      "id": "syn:battery-kg",
+      "rank": 12
+     }
+    ],
+    "failure": null
+   }
+  ],
+  "calcStatus": "computed"
+ },
+ {
+  "rowId": "g02",
+  "itemName": "합성강판",
+  "unit": "KG",
+  "gold": {
+   "category": 1,
+   "factorIds": [
+    "syn:steel-kg"
+   ],
+   "note": "가상 정답 (synthetic)"
+  },
+  "status": "recommended",
+  "source": "llm",
+  "predictedCategory": 1,
+  "keywords": [],
+  "picks": [
+   "syn:steel-kg",
+   "syn-d:pp-kg",
+   "syn:paper-kg"
+  ],
+  "basis": {
+   "used": "activity",
+   "fellBack": false,
+   "fallbackReason": null
+  },
+  "failure": null,
+  "shortlists": [
+   {
+    "basis": "physical",
+    "method": "lexical-v1",
+    "total": 12,
+    "shownIds": [
+     "syn:steel-kg",
+     "syn-d:pp-kg",
+     "syn:paper-kg",
+     "syn:ab",
+     "syn:a_b",
+     "syn:pe-kg",
+     "syn-d:cement-kg",
+     "syn:credit-kg",
+     "syn:kichi-kg",
+     "syn:steel-t",
+     "syn:glass-kg",
+     "syn:battery-kg"
+    ],
+    "evidence": [
+     {
+      "id": "syn:steel-kg",
+      "lexical": {
+       "rank": 1,
+       "score": 8,
+       "matchedTerms": [
+        "합성",
+        "강판",
+        "#합성",
+        "#강판"
+       ]
+      },
+      "rank": 1
+     },
+     {
+      "id": "syn-d:pp-kg",
+      "lexical": {
+       "rank": 2,
+       "score": 4,
+       "matchedTerms": [
+        "합성",
+        "#합성"
+       ]
+      },
+      "rank": 2
+     },
+     {
+      "id": "syn:paper-kg",
+      "lexical": {
+       "rank": 3,
+       "score": 4,
+       "matchedTerms": [
+        "합성",
+        "#합성"
+       ]
+      },
+      "rank": 3
+     },
+     {
+      "id": "syn:ab",
+      "lexical": {
+       "rank": 4,
+       "score": 4,
+       "matchedTerms": [
+        "합성",
+        "#합성"
+       ]
+      },
+      "rank": 4
+     },
+     {
+      "id": "syn:a_b",
+      "lexical": {
+       "rank": 5,
+       "score": 4,
+       "matchedTerms": [
+        "합성",
+        "#합성"
+       ]
+      },
+      "rank": 5
+     },
+     {
+      "id": "syn:pe-kg",
+      "lexical": {
+       "rank": 6,
+       "score": 4,
+       "matchedTerms": [
+        "합성",
+        "#합성"
+       ]
+      },
+      "rank": 6
+     },
+     {
+      "id": "syn-d:cement-kg",
+      "lexical": {
+       "rank": 7,
+       "score": 4,
+       "matchedTerms": [
+        "합성",
+        "#합성"
+       ]
+      },
+      "rank": 7
+     },
+     {
+      "id": "syn:credit-kg",
+      "lexical": {
+       "rank": 8,
+       "score": 4,
+       "matchedTerms": [
+        "합성",
+        "#합성"
+       ]
+      },
+      "rank": 8
+     },
+     {
+      "id": "syn:kichi-kg",
+      "lexical": {
+       "rank": 9,
+       "score": 4,
+       "matchedTerms": [
+        "합성",
+        "#합성"
+       ]
+      },
+      "rank": 9
+     },
+     {
+      "id": "syn:steel-t",
+      "rank": 10
+     },
+     {
+      "id": "syn:glass-kg",
+      "rank": 11
+     },
+     {
+      "id": "syn:battery-kg",
+      "rank": 12
+     }
+    ],
+    "failure": null
+   }
+  ],
+  "calcStatus": "computed"
+ },
+ {
+  "rowId": "g03",
+  "itemName": "합성 강판",
+  "unit": "t",
+  "gold": {
+   "category": 1,
+   "factorIds": [
+    "syn:steel-t",
+    "syn:steel-kg"
+   ],
+   "note": "가상 정답 (synthetic)"
+  },
+  "status": "recommended",
+  "source": "llm",
+  "predictedCategory": 1,
+  "keywords": [],
+  "picks": [
+   "syn:steel-kg",
+   "syn-d:pp-kg",
+   "syn:paper-kg"
+  ],
+  "basis": {
+   "used": "activity",
+   "fellBack": false,
+   "fallbackReason": null
+  },
+  "failure": null,
+  "shortlists": [
+   {
+    "basis": "physical",
+    "method": "lexical-v1",
+    "total": 12,
+    "shownIds": [
+     "syn:steel-kg",
+     "syn-d:pp-kg",
+     "syn:paper-kg",
+     "syn:ab",
+     "syn:a_b",
+     "syn:pe-kg",
+     "syn-d:cement-kg",
+     "syn:credit-kg",
+     "syn:kichi-kg",
+     "syn:steel-t",
+     "syn:glass-kg",
+     "syn:battery-kg"
+    ],
+    "evidence": [
+     {
+      "id": "syn:steel-kg",
+      "lexical": {
+       "rank": 1,
+       "score": 8,
+       "matchedTerms": [
+        "합성",
+        "강판",
+        "#합성",
+        "#강판"
+       ]
+      },
+      "rank": 1
+     },
+     {
+      "id": "syn-d:pp-kg",
+      "lexical": {
+       "rank": 2,
+       "score": 4,
+       "matchedTerms": [
+        "합성",
+        "#합성"
+       ]
+      },
+      "rank": 2
+     },
+     {
+      "id": "syn:paper-kg",
+      "lexical": {
+       "rank": 3,
+       "score": 4,
+       "matchedTerms": [
+        "합성",
+        "#합성"
+       ]
+      },
+      "rank": 3
+     },
+     {
+      "id": "syn:ab",
+      "lexical": {
+       "rank": 4,
+       "score": 4,
+       "matchedTerms": [
+        "합성",
+        "#합성"
+       ]
+      },
+      "rank": 4
+     },
+     {
+      "id": "syn:a_b",
+      "lexical": {
+       "rank": 5,
+       "score": 4,
+       "matchedTerms": [
+        "합성",
+        "#합성"
+       ]
+      },
+      "rank": 5
+     },
+     {
+      "id": "syn:pe-kg",
+      "lexical": {
+       "rank": 6,
+       "score": 4,
+       "matchedTerms": [
+        "합성",
+        "#합성"
+       ]
+      },
+      "rank": 6
+     },
+     {
+      "id": "syn-d:cement-kg",
+      "lexical": {
+       "rank": 7,
+       "score": 4,
+       "matchedTerms": [
+        "합성",
+        "#합성"
+       ]
+      },
+      "rank": 7
+     },
+     {
+      "id": "syn:credit-kg",
+      "lexical": {
+       "rank": 8,
+       "score": 4,
+       "matchedTerms": [
+        "합성",
+        "#합성"
+       ]
+      },
+      "rank": 8
+     },
+     {
+      "id": "syn:kichi-kg",
+      "lexical": {
+       "rank": 9,
+       "score": 4,
+       "matchedTerms": [
+        "합성",
+        "#합성"
+       ]
+      },
+      "rank": 9
+     },
+     {
+      "id": "syn:steel-t",
+      "rank": 10
+     },
+     {
+      "id": "syn:glass-kg",
+      "rank": 11
+     },
+     {
+      "id": "syn:battery-kg",
+      "rank": 12
+     }
+    ],
+    "failure": null
+   }
+  ],
+  "calcStatus": "computed"
+ },
+ {
+  "rowId": "g04",
+  "itemName": "폴리프로필렌 수지",
+  "unit": "kg",
+  "gold": {
+   "category": 1,
+   "factorIds": [
+    "syn-d:pp-kg"
+   ],
+   "note": "가상 정답 (synthetic)"
+  },
+  "status": "recommended",
+  "source": "memory",
+  "predictedCategory": 1,
+  "keywords": null,
+  "picks": [
+   "syn-d:pp-kg"
+  ],
+  "basis": {
+   "used": "activity",
+   "fellBack": false,
+   "fallbackReason": null
+  },
+  "failure": null,
+  "shortlists": [],
+  "calcStatus": "computed"
+ },
+ {
+  "rowId": "g05",
+  "itemName": "복사용지 A4 80g",
+  "unit": "kg",
+  "gold": {
+   "category": 1,
+   "factorIds": [
+    "syn:paper-kg"
+   ],
+   "note": "가상 정답 (synthetic)"
+  },
+  "status": "recommended",
+  "source": "llm",
+  "predictedCategory": 1,
+  "keywords": [],
+  "picks": [
+   "syn:paper-kg",
+   "syn:steel-kg",
+   "syn-d:pp-kg"
+  ],
+  "basis": {
+   "used": "activity",
+   "fellBack": false,
+   "fallbackReason": null
+  },
+  "failure": null,
+  "shortlists": [
+   {
+    "basis": "physical",
+    "method": "lexical-v1",
+    "total": 12,
+    "shownIds": [
+     "syn:paper-kg",
+     "syn:steel-kg",
+     "syn-d:pp-kg",
+     "syn:ab",
+     "syn:a_b",
+     "syn:steel-t",
+     "syn:pe-kg",
+     "syn:glass-kg",
+     "syn:battery-kg",
+     "syn-d:cement-kg",
+     "syn:credit-kg",
+     "syn:kichi-kg"
+    ],
+    "evidence": [
+     {
+      "id": "syn:paper-kg",
+      "lexical": {
+       "rank": 1,
+       "score": 6,
+       "matchedTerms": [
+        "복사용지",
+        "#복사",
+        "#사용",
+        "#용지"
+       ]
+      },
+      "rank": 1
+     },
+     {
+      "id": "syn:steel-kg",
+      "rank": 2
+     },
+     {
+      "id": "syn-d:pp-kg",
+      "rank": 3
+     },
+     {
+      "id": "syn:ab",
+      "rank": 4
+     },
+     {
+      "id": "syn:a_b",
+      "rank": 5
+     },
+     {
+      "id": "syn:steel-t",
+      "rank": 6
+     },
+     {
+      "id": "syn:pe-kg",
+      "rank": 7
+     },
+     {
+      "id": "syn:glass-kg",
+      "rank": 8
+     },
+     {
+      "id": "syn:battery-kg",
+      "rank": 9
+     },
+     {
+      "id": "syn-d:cement-kg",
+      "rank": 10
+     },
+     {
+      "id": "syn:credit-kg",
+      "rank": 11
+     },
+     {
+      "id": "syn:kichi-kg",
+      "rank": 12
+     }
+    ],
+    "failure": null
+   }
+  ],
+  "calcStatus": "computed"
+ },
+ {
+  "rowId": "g06",
+  "itemName": "포장재",
+  "unit": "kg",
+  "gold": {
+   "category": 1,
+   "factorIds": [
+    "syn:a_b",
+    "syn:ab"
+   ],
+   "note": "가상 정답 (synthetic)"
+  },
+  "status": "recommended",
+  "source": "llm",
+  "predictedCategory": 1,
+  "keywords": [],
+  "picks": [
+   "syn:ab",
+   "syn:a_b",
+   "syn:steel-kg"
+  ],
+  "basis": {
+   "used": "activity",
+   "fellBack": false,
+   "fallbackReason": null
+  },
+  "failure": null,
+  "shortlists": [
+   {
+    "basis": "physical",
+    "method": "lexical-v1",
+    "total": 12,
+    "shownIds": [
+     "syn:ab",
+     "syn:a_b",
+     "syn:steel-kg",
+     "syn-d:pp-kg",
+     "syn:paper-kg",
+     "syn:steel-t",
+     "syn:pe-kg",
+     "syn:glass-kg",
+     "syn:battery-kg",
+     "syn-d:cement-kg",
+     "syn:credit-kg",
+     "syn:kichi-kg"
+    ],
+    "evidence": [
+     {
+      "id": "syn:ab",
+      "lexical": {
+       "rank": 1,
+       "score": 5,
+       "matchedTerms": [
+        "포장재",
+        "#포장",
+        "#장재"
+       ]
+      },
+      "rank": 1
+     },
+     {
+      "id": "syn:a_b",
+      "lexical": {
+       "rank": 2,
+       "score": 5,
+       "matchedTerms": [
+        "포장재",
+        "#포장",
+        "#장재"
+       ]
+      },
+      "rank": 2
+     },
+     {
+      "id": "syn:steel-kg",
+      "rank": 3
+     },
+     {
+      "id": "syn-d:pp-kg",
+      "rank": 4
+     },
+     {
+      "id": "syn:paper-kg",
+      "rank": 5
+     },
+     {
+      "id": "syn:steel-t",
+      "rank": 6
+     },
+     {
+      "id": "syn:pe-kg",
+      "rank": 7
+     },
+     {
+      "id": "syn:glass-kg",
+      "rank": 8
+     },
+     {
+      "id": "syn:battery-kg",
+      "rank": 9
+     },
+     {
+      "id": "syn-d:cement-kg",
+      "rank": 10
+     },
+     {
+      "id": "syn:credit-kg",
+      "rank": 11
+     },
+     {
+      "id": "syn:kichi-kg",
+      "rank": 12
+     }
+    ],
+    "failure": null
+   }
+  ],
+  "calcStatus": "computed"
+ },
+ {
+  "rowId": "g07",
+  "itemName": "폴리에틸렌 필름 0.05T",
+  "unit": "kg",
+  "gold": {
+   "category": 1,
+   "factorIds": [
+    "syn:pe-kg"
+   ],
+   "note": "가상 정답 (synthetic)"
+  },
+  "status": "recommended",
+  "source": "llm",
+  "predictedCategory": 1,
+  "keywords": [],
+  "picks": [
+   "syn:pe-kg",
+   "syn-d:pp-kg",
+   "syn:steel-kg"
+  ],
+  "basis": {
+   "used": "activity",
+   "fellBack": false,
+   "fallbackReason": null
+  },
+  "failure": null,
+  "shortlists": [
+   {
+    "basis": "physical",
+    "method": "lexical-v1",
+    "total": 12,
+    "shownIds": [
+     "syn:pe-kg",
+     "syn-d:pp-kg",
+     "syn:steel-kg",
+     "syn:paper-kg",
+     "syn:ab",
+     "syn:a_b",
+     "syn:steel-t",
+     "syn:glass-kg",
+     "syn:battery-kg",
+     "syn-d:cement-kg",
+     "syn:credit-kg",
+     "syn:kichi-kg"
+    ],
+    "evidence": [
+     {
+      "id": "syn:pe-kg",
+      "lexical": {
+       "rank": 1,
+       "score": 11,
+       "matchedTerms": [
+        "폴리에틸렌",
+        "필름",
+        "#폴리",
+        "#리에",
+        "#에틸",
+        "#틸렌",
+        "#필름"
+       ]
+      },
+      "rank": 1
+     },
+     {
+      "id": "syn-d:pp-kg",
+      "lexical": {
+       "rank": 2,
+       "score": 1,
+       "matchedTerms": [
+        "#폴리"
+       ]
+      },
+      "rank": 2
+     },
+     {
+      "id": "syn:steel-kg",
+      "rank": 3
+     },
+     {
+      "id": "syn:paper-kg",
+      "rank": 4
+     },
+     {
+      "id": "syn:ab",
+      "rank": 5
+     },
+     {
+      "id": "syn:a_b",
+      "rank": 6
+     },
+     {
+      "id": "syn:steel-t",
+      "rank": 7
+     },
+     {
+      "id": "syn:glass-kg",
+      "rank": 8
+     },
+     {
+      "id": "syn:battery-kg",
+      "rank": 9
+     },
+     {
+      "id": "syn-d:cement-kg",
+      "rank": 10
+     },
+     {
+      "id": "syn:credit-kg",
+      "rank": 11
+     },
+     {
+      "id": "syn:kichi-kg",
+      "rank": 12
+     }
+    ],
+    "failure": null
+   }
+  ],
+  "calcStatus": "computed"
+ },
+ {
+  "rowId": "g08",
+  "itemName": "유리병 500ml",
+  "unit": "개",
+  "gold": {
+   "category": 1,
+   "factorIds": [
+    "syn:glass-kg"
+   ],
+   "note": "가상 정답 (synthetic)"
+  },
+  "status": "recommended",
+  "source": "llm",
+  "predictedCategory": 1,
+  "keywords": [],
+  "picks": [
+   "syn:spend-computer",
+   "syn:spend-storage",
+   "syn:spend-legal"
+  ],
+  "basis": {
+   "used": "spend",
+   "fellBack": true,
+   "fallbackReason": "unit_mismatch"
+  },
+  "failure": null,
+  "shortlists": [
+   {
+    "basis": "spend",
+    "method": "lexical-v1",
+    "total": 7,
+    "shownIds": [
+     "syn:spend-computer",
+     "syn:spend-storage",
+     "syn:spend-legal",
+     "syn:spend-machinery",
+     "syn:spend-paper",
+     "syn:spend-plastics",
+     "syn:spend-software"
+    ],
+    "evidence": [
+     {
+      "id": "syn:spend-computer",
+      "rank": 1
+     },
+     {
+      "id": "syn:spend-storage",
+      "rank": 2
+     },
+     {
+      "id": "syn:spend-legal",
+      "rank": 3
+     },
+     {
+      "id": "syn:spend-machinery",
+      "rank": 4
+     },
+     {
+      "id": "syn:spend-paper",
+      "rank": 5
+     },
+     {
+      "id": "syn:spend-plastics",
+      "rank": 6
+     },
+     {
+      "id": "syn:spend-software",
+      "rank": 7
+     }
+    ],
+    "failure": null
+   }
+  ],
+  "calcStatus": "needs_currency_adjustment"
+ },
+ {
+  "rowId": "g09",
+  "itemName": "노트북 구매",
+  "unit": "대",
+  "gold": {
+   "category": 2,
+   "factorIds": [
+    "syn:spend-computer"
+   ],
+   "note": "가상 정답 (synthetic)"
+  },
+  "status": "recommended",
+  "source": "llm",
+  "predictedCategory": 2,
+  "keywords": [],
+  "picks": [
+   "syn:spend-computer",
+   "syn:spend-storage",
+   "syn:spend-legal"
+  ],
+  "basis": {
+   "used": "spend",
+   "fellBack": true,
+   "fallbackReason": "unit_mismatch"
+  },
+  "failure": null,
+  "shortlists": [
+   {
+    "basis": "spend",
+    "method": "lexical-v1",
+    "total": 7,
+    "shownIds": [
+     "syn:spend-computer",
+     "syn:spend-storage",
+     "syn:spend-legal",
+     "syn:spend-machinery",
+     "syn:spend-paper",
+     "syn:spend-plastics",
+     "syn:spend-software"
+    ],
+    "evidence": [
+     {
+      "id": "syn:spend-computer",
+      "rank": 1
+     },
+     {
+      "id": "syn:spend-storage",
+      "rank": 2
+     },
+     {
+      "id": "syn:spend-legal",
+      "rank": 3
+     },
+     {
+      "id": "syn:spend-machinery",
+      "rank": 4
+     },
+     {
+      "id": "syn:spend-paper",
+      "rank": 5
+     },
+     {
+      "id": "syn:spend-plastics",
+      "rank": 6
+     },
+     {
+      "id": "syn:spend-software",
+      "rank": 7
+     }
+    ],
+    "failure": null
+   }
+  ],
+  "calcStatus": "needs_currency_adjustment"
+ },
+ {
+  "rowId": "g10",
+  "itemName": "서버 장비",
+  "unit": "ea",
+  "gold": {
+   "category": 2,
+   "factorIds": [
+    "syn:server-ea"
+   ],
+   "note": "가상 정답 (synthetic)"
+  },
+  "status": "recommended",
+  "source": "llm",
+  "predictedCategory": 2,
+  "keywords": [],
+  "picks": [
+   "syn:server-ea"
+  ],
+  "basis": {
+   "used": "activity",
+   "fellBack": false,
+   "fallbackReason": null
+  },
+  "failure": null,
+  "shortlists": [
+   {
+    "basis": "physical",
+    "method": "lexical-v1",
+    "total": 1,
+    "shownIds": [
+     "syn:server-ea"
+    ],
+    "evidence": [
+     {
+      "id": "syn:server-ea",
+      "lexical": {
+       "rank": 1,
+       "score": 8,
+       "matchedTerms": [
+        "서버",
+        "장비",
+        "#서버",
+        "#장비"
+       ]
+      },
+      "rank": 1
+     }
+    ],
+    "failure": null
+   }
+  ],
+  "calcStatus": "computed"
+ },
+ {
+  "rowId": "g11",
+  "itemName": "법률 자문 용역",
+  "unit": "식",
+  "gold": {
+   "category": 1,
+   "factorIds": [
+    "syn:spend-legal"
+   ],
+   "note": "가상 정답 (synthetic)"
+  },
+  "status": "recommended",
+  "source": "llm",
+  "predictedCategory": 1,
+  "keywords": [],
+  "picks": [
+   "syn:spend-computer",
+   "syn:spend-storage",
+   "syn:spend-legal"
+  ],
+  "basis": {
+   "used": "spend",
+   "fellBack": true,
+   "fallbackReason": "unit_mismatch"
+  },
+  "failure": null,
+  "shortlists": [
+   {
+    "basis": "spend",
+    "method": "lexical-v1",
+    "total": 7,
+    "shownIds": [
+     "syn:spend-computer",
+     "syn:spend-storage",
+     "syn:spend-legal",
+     "syn:spend-machinery",
+     "syn:spend-paper",
+     "syn:spend-plastics",
+     "syn:spend-software"
+    ],
+    "evidence": [
+     {
+      "id": "syn:spend-computer",
+      "rank": 1
+     },
+     {
+      "id": "syn:spend-storage",
+      "rank": 2
+     },
+     {
+      "id": "syn:spend-legal",
+      "rank": 3
+     },
+     {
+      "id": "syn:spend-machinery",
+      "rank": 4
+     },
+     {
+      "id": "syn:spend-paper",
+      "rank": 5
+     },
+     {
+      "id": "syn:spend-plastics",
+      "rank": 6
+     },
+     {
+      "id": "syn:spend-software",
+      "rank": 7
+     }
+    ],
+    "failure": null
+   }
+  ],
+  "calcStatus": "needs_currency_adjustment"
+ },
+ {
+  "rowId": "g12",
+  "itemName": "Synthetic Legal Services retainer",
+  "unit": null,
+  "gold": {
+   "category": 1,
+   "factorIds": [
+    "syn:spend-legal"
+   ],
+   "note": "가상 정답 (synthetic)"
+  },
+  "status": "recommended",
+  "source": "llm",
+  "predictedCategory": 1,
+  "keywords": [],
+  "picks": [
+   "syn:spend-legal",
+   "syn:spend-computer",
+   "syn:spend-storage"
+  ],
+  "basis": {
+   "used": "spend",
+   "fellBack": true,
+   "fallbackReason": "unit_mismatch"
+  },
+  "failure": null,
+  "shortlists": [
+   {
+    "basis": "spend",
+    "method": "lexical-v1",
+    "total": 7,
+    "shownIds": [
+     "syn:spend-legal",
+     "syn:spend-computer",
+     "syn:spend-storage",
+     "syn:spend-machinery",
+     "syn:spend-paper",
+     "syn:spend-plastics",
+     "syn:spend-software"
+    ],
+    "evidence": [
+     {
+      "id": "syn:spend-legal",
+      "lexical": {
+       "rank": 1,
+       "score": 9,
+       "matchedTerms": [
+        "synthetic",
+        "legal",
+        "services"
+       ]
+      },
+      "rank": 1
+     },
+     {
+      "id": "syn:spend-computer",
+      "lexical": {
+       "rank": 2,
+       "score": 3,
+       "matchedTerms": [
+        "synthetic"
+       ]
+      },
+      "rank": 2
+     },
+     {
+      "id": "syn:spend-storage",
+      "lexical": {
+       "rank": 3,
+       "score": 3,
+       "matchedTerms": [
+        "synthetic"
+       ]
+      },
+      "rank": 3
+     },
+     {
+      "id": "syn:spend-machinery",
+      "lexical": {
+       "rank": 4,
+       "score": 3,
+       "matchedTerms": [
+        "synthetic"
+       ]
+      },
+      "rank": 4
+     },
+     {
+      "id": "syn:spend-paper",
+      "lexical": {
+       "rank": 5,
+       "score": 3,
+       "matchedTerms": [
+        "synthetic"
+       ]
+      },
+      "rank": 5
+     },
+     {
+      "id": "syn:spend-plastics",
+      "lexical": {
+       "rank": 6,
+       "score": 3,
+       "matchedTerms": [
+        "synthetic"
+       ]
+      },
+      "rank": 6
+     },
+     {
+      "id": "syn:spend-software",
+      "lexical": {
+       "rank": 7,
+       "score": 3,
+       "matchedTerms": [
+        "synthetic"
+       ]
+      },
+      "rank": 7
+     }
+    ],
+    "failure": null
+   }
+  ],
+  "calcStatus": "needs_currency_adjustment"
+ },
+ {
+  "rowId": "g13",
+  "itemName": "원자재 운송 트럭",
+  "unit": null,
+  "gold": {
+   "category": 4,
+   "factorIds": [
+    "syn:hgv",
+    "syn:truck"
+   ],
+   "note": "가상 정답 (synthetic)"
+  },
+  "status": "recommended",
+  "source": "llm",
+  "predictedCategory": 4,
+  "keywords": [],
+  "picks": [
+   "syn:hgv",
+   "syn-d:truck-5t",
+   "syn:ship"
+  ],
+  "basis": {
+   "used": "distance",
+   "fellBack": false,
+   "fallbackReason": null
+  },
+  "failure": null,
+  "shortlists": [
+   {
+    "basis": "physical",
+    "method": "lexical-v1",
+    "total": 6,
+    "shownIds": [
+     "syn:hgv",
+     "syn-d:truck-5t",
+     "syn:ship",
+     "syn:truck",
+     "syn:rail-freight",
+     "syn:air-freight"
+    ],
+    "evidence": [
+     {
+      "id": "syn:hgv",
+      "lexical": {
+       "rank": 1,
+       "score": 8,
+       "matchedTerms": [
+        "운송",
+        "트럭",
+        "#운송",
+        "#트럭"
+       ]
+      },
+      "rank": 1
+     },
+     {
+      "id": "syn-d:truck-5t",
+      "lexical": {
+       "rank": 2,
+       "score": 8,
+       "matchedTerms": [
+        "운송",
+        "트럭",
+        "#운송",
+        "#트럭"
+       ]
+      },
+      "rank": 2
+     },
+     {
+      "id": "syn:ship",
+      "lexical": {
+       "rank": 3,
+       "score": 4,
+       "matchedTerms": [
+        "운송",
+        "#운송"
+       ]
+      },
+      "rank": 3
+     },
+     {
+      "id": "syn:truck",
+      "rank": 4
+     },
+     {
+      "id": "syn:rail-freight",
+      "rank": 5
+     },
+     {
+      "id": "syn:air-freight",
+      "rank": 6
+     }
+    ],
+    "failure": null
+   }
+  ],
+  "calcStatus": "computed"
+ },
+ {
+  "rowId": "g14",
+  "itemName": "원자재 운송 트럭",
+  "unit": null,
+  "gold": {
+   "category": 4,
+   "factorIds": [
+    "syn:hgv",
+    "syn:truck"
+   ],
+   "note": "가상 정답 (synthetic)"
+  },
+  "status": "recommended",
+  "source": "llm",
+  "predictedCategory": 4,
+  "keywords": [],
+  "picks": [
+   "syn:hgv",
+   "syn-d:truck-5t",
+   "syn:ship"
+  ],
+  "basis": {
+   "used": "distance",
+   "fellBack": false,
+   "fallbackReason": null
+  },
+  "failure": null,
+  "shortlists": [
+   {
+    "basis": "physical",
+    "method": "lexical-v1",
+    "total": 6,
+    "shownIds": [
+     "syn:hgv",
+     "syn-d:truck-5t",
+     "syn:ship",
+     "syn:truck",
+     "syn:rail-freight",
+     "syn:air-freight"
+    ],
+    "evidence": [
+     {
+      "id": "syn:hgv",
+      "lexical": {
+       "rank": 1,
+       "score": 8,
+       "matchedTerms": [
+        "운송",
+        "트럭",
+        "#운송",
+        "#트럭"
+       ]
+      },
+      "rank": 1
+     },
+     {
+      "id": "syn-d:truck-5t",
+      "lexical": {
+       "rank": 2,
+       "score": 8,
+       "matchedTerms": [
+        "운송",
+        "트럭",
+        "#운송",
+        "#트럭"
+       ]
+      },
+      "rank": 2
+     },
+     {
+      "id": "syn:ship",
+      "lexical": {
+       "rank": 3,
+       "score": 4,
+       "matchedTerms": [
+        "운송",
+        "#운송"
+       ]
+      },
+      "rank": 3
+     },
+     {
+      "id": "syn:truck",
+      "rank": 4
+     },
+     {
+      "id": "syn:rail-freight",
+      "rank": 5
+     },
+     {
+      "id": "syn:air-freight",
+      "rank": 6
+     }
+    ],
+    "failure": null
+   }
+  ],
+  "calcStatus": "needs_distance"
+ },
+ {
+  "rowId": "g15",
+  "itemName": "Synthetic rail freight 운송",
+  "unit": null,
+  "gold": {
+   "category": 4,
+   "factorIds": [
+    "syn:rail-freight"
+   ],
+   "note": "가상 정답 (synthetic)"
+  },
+  "status": "recommended",
+  "source": "llm",
+  "predictedCategory": 4,
+  "keywords": [],
+  "picks": [
+   "syn:rail-freight",
+   "syn:hgv",
+   "syn:ship"
+  ],
+  "basis": {
+   "used": "distance",
+   "fellBack": false,
+   "fallbackReason": null
+  },
+  "failure": null,
+  "shortlists": [
+   {
+    "basis": "physical",
+    "method": "lexical-v1",
+    "total": 6,
+    "shownIds": [
+     "syn:rail-freight",
+     "syn:hgv",
+     "syn:ship",
+     "syn-d:truck-5t",
+     "syn:truck",
+     "syn:air-freight"
+    ],
+    "evidence": [
+     {
+      "id": "syn:rail-freight",
+      "lexical": {
+       "rank": 1,
+       "score": 9,
+       "matchedTerms": [
+        "synthetic",
+        "rail",
+        "freight"
+       ]
+      },
+      "rank": 1
+     },
+     {
+      "id": "syn:hgv",
+      "lexical": {
+       "rank": 2,
+       "score": 7,
+       "matchedTerms": [
+        "synthetic",
+        "운송",
+        "#운송"
+       ]
+      },
+      "rank": 2
+     },
+     {
+      "id": "syn:ship",
+      "lexical": {
+       "rank": 3,
+       "score": 7,
+       "matchedTerms": [
+        "synthetic",
+        "운송",
+        "#운송"
+       ]
+      },
+      "rank": 3
+     },
+     {
+      "id": "syn-d:truck-5t",
+      "lexical": {
+       "rank": 4,
+       "score": 7,
+       "matchedTerms": [
+        "synthetic",
+        "운송",
+        "#운송"
+       ]
+      },
+      "rank": 4
+     },
+     {
+      "id": "syn:truck",
+      "lexical": {
+       "rank": 5,
+       "score": 6,
+       "matchedTerms": [
+        "synthetic",
+        "freight"
+       ]
+      },
+      "rank": 5
+     },
+     {
+      "id": "syn:air-freight",
+      "lexical": {
+       "rank": 6,
+       "score": 6,
+       "matchedTerms": [
+        "synthetic",
+        "freight"
+       ]
+      },
+      "rank": 6
+     }
+    ],
+    "failure": null
+   }
+  ],
+  "calcStatus": "computed"
+ },
+ {
+  "rowId": "g16",
+  "itemName": "컨테이너선 해상 운송",
+  "unit": "km",
+  "gold": {
+   "category": 4,
+   "factorIds": [
+    "syn:ship"
+   ],
+   "note": "가상 정답 (synthetic)"
+  },
+  "status": "recommended",
+  "source": "llm",
+  "predictedCategory": 4,
+  "keywords": [],
+  "picks": [
+   "syn:van-km"
+  ],
+  "basis": {
+   "used": "distance",
+   "fellBack": false,
+   "fallbackReason": null
+  },
+  "failure": null,
+  "shortlists": [
+   {
+    "basis": "physical",
+    "method": "lexical-v1",
+    "total": 1,
+    "shownIds": [
+     "syn:van-km"
+    ],
+    "evidence": [
+     {
+      "id": "syn:van-km",
+      "rank": 1
+     }
+    ],
+    "failure": null
+   }
+  ],
+  "calcStatus": "computed"
+ },
+ {
+  "rowId": "g17",
+  "itemName": "출장 항공권 flights 김포-제주",
+  "unit": "인km",
+  "gold": {
+   "category": 6,
+   "factorIds": [
+    "syn:flight"
+   ],
+   "note": "가상 정답 (synthetic)"
+  },
+  "status": "recommended",
+  "source": "llm",
+  "predictedCategory": 6,
+  "keywords": [],
+  "picks": [
+   "syn:flight",
+   "syn:rail",
+   "syn:taxi"
+  ],
+  "basis": {
+   "used": "distance",
+   "fellBack": false,
+   "fallbackReason": null
+  },
+  "failure": null,
+  "shortlists": [
+   {
+    "basis": "physical",
+    "method": "lexical-v1",
+    "total": 3,
+    "shownIds": [
+     "syn:flight",
+     "syn:rail",
+     "syn:taxi"
+    ],
+    "evidence": [
+     {
+      "id": "syn:flight",
+      "lexical": {
+       "rank": 1,
+       "score": 3,
+       "matchedTerms": [
+        "flights"
+       ]
+      },
+      "rank": 1
+     },
+     {
+      "id": "syn:rail",
+      "rank": 2
+     },
+     {
+      "id": "syn:taxi",
+      "rank": 3
+     }
+    ],
+    "failure": null
+   }
+  ],
+  "calcStatus": "computed"
+ },
+ {
+  "rowId": "g18",
+  "itemName": "출장 호텔 숙박 hotel",
+  "unit": "박",
+  "gold": {
+   "category": 6,
+   "factorIds": [
+    "syn:hotel"
+   ],
+   "note": "가상 정답 (synthetic)"
+  },
+  "status": "recommended",
+  "source": "llm",
+  "predictedCategory": 6,
+  "keywords": [],
+  "picks": [
+   "syn:hotel"
+  ],
+  "basis": {
+   "used": "activity",
+   "fellBack": false,
+   "fallbackReason": null
+  },
+  "failure": null,
+  "shortlists": [
+   {
+    "basis": "physical",
+    "method": "lexical-v1",
+    "total": 1,
+    "shownIds": [
+     "syn:hotel"
+    ],
+    "evidence": [
+     {
+      "id": "syn:hotel",
+      "lexical": {
+       "rank": 1,
+       "score": 3,
+       "matchedTerms": [
+        "hotel"
+       ]
+      },
+      "rank": 1
+     }
+    ],
+    "failure": null
+   }
+  ],
+  "calcStatus": "computed"
+ },
+ {
+  "rowId": "g19",
+  "itemName": "출장 KTX",
+  "unit": "km",
+  "gold": {
+   "category": 6,
+   "factorIds": [],
+   "note": "가상 정답 (synthetic)"
+  },
+  "status": "recommended",
+  "source": "llm",
+  "predictedCategory": 6,
+  "keywords": [],
+  "picks": [
+   "syn:car-km"
+  ],
+  "basis": {
+   "used": "distance",
+   "fellBack": false,
+   "fallbackReason": null
+  },
+  "failure": null,
+  "shortlists": [
+   {
+    "basis": "physical",
+    "method": "lexical-v1",
+    "total": 1,
+    "shownIds": [
+     "syn:car-km"
+    ],
+    "evidence": [
+     {
+      "id": "syn:car-km",
+      "rank": 1
+     }
+    ],
+    "failure": null
+   }
+  ],
+  "calcStatus": "computed"
+ },
+ {
+  "rowId": "g20",
+  "itemName": "통근 셔틀버스 commuter bus",
+  "unit": "인km",
+  "gold": {
+   "category": 7,
+   "factorIds": [
+    "syn:bus"
+   ],
+   "note": "가상 정답 (synthetic)"
+  },
+  "status": "recommended",
+  "source": "llm",
+  "predictedCategory": 7,
+  "keywords": [],
+  "picks": [
+   "syn:bus",
+   "syn:rail"
+  ],
+  "basis": {
+   "used": "distance",
+   "fellBack": false,
+   "fallbackReason": null
+  },
+  "failure": null,
+  "shortlists": [
+   {
+    "basis": "physical",
+    "method": "lexical-v1",
+    "total": 2,
+    "shownIds": [
+     "syn:bus",
+     "syn:rail"
+    ],
+    "evidence": [
+     {
+      "id": "syn:bus",
+      "lexical": {
+       "rank": 1,
+       "score": 6,
+       "matchedTerms": [
+        "commuter",
+        "bus"
+       ]
+      },
+      "rank": 1
+     },
+     {
+      "id": "syn:rail",
+      "rank": 2
+     }
+    ],
+    "failure": null
+   }
+  ],
+  "calcStatus": "computed"
+ },
+ {
+  "rowId": "g21",
+  "itemName": "재택 근무 homeworking",
+  "unit": "FTE시간",
+  "gold": {
+   "category": 7,
+   "factorIds": [
+    "syn:wfh"
+   ],
+   "note": "가상 정답 (synthetic)"
+  },
+  "status": "recommended",
+  "source": "llm",
+  "predictedCategory": 7,
+  "keywords": [],
+  "picks": [
+   "syn:wfh"
+  ],
+  "basis": {
+   "used": "activity",
+   "fellBack": false,
+   "fallbackReason": null
+  },
+  "failure": null,
+  "shortlists": [
+   {
+    "basis": "physical",
+    "method": "lexical-v1",
+    "total": 1,
+    "shownIds": [
+     "syn:wfh"
+    ],
+    "evidence": [
+     {
+      "id": "syn:wfh",
+      "lexical": {
+       "rank": 1,
+       "score": 3,
+       "matchedTerms": [
+        "homeworking"
+       ]
+      },
+      "rank": 1
+     }
+    ],
+    "failure": null
+   }
+  ],
+  "calcStatus": "computed"
+ },
+ {
+  "rowId": "g22",
+  "itemName": "통근 자가용 car",
+  "unit": "km",
+  "gold": {
+   "category": 7,
+   "factorIds": [
+    "syn:car-km"
+   ],
+   "note": "가상 정답 (synthetic)"
+  },
+  "status": "recommended",
+  "source": "llm",
+  "predictedCategory": 7,
+  "keywords": [],
+  "picks": [
+   "syn:car-km"
+  ],
+  "basis": {
+   "used": "distance",
+   "fellBack": false,
+   "fallbackReason": null
+  },
+  "failure": null,
+  "shortlists": [
+   {
+    "basis": "physical",
+    "method": "lexical-v1",
+    "total": 1,
+    "shownIds": [
+     "syn:car-km"
+    ],
+    "evidence": [
+     {
+      "id": "syn:car-km",
+      "lexical": {
+       "rank": 1,
+       "score": 3,
+       "matchedTerms": [
+        "car"
+       ]
+      },
+      "rank": 1
+     }
+    ],
+    "failure": null
+   }
+  ],
+  "calcStatus": "computed"
+ },
+ {
+  "rowId": "g23",
+  "itemName": "출장 렌터카",
+  "unit": "대",
+  "gold": {
+   "category": 6,
+   "factorIds": [],
+   "note": "가상 정답 (synthetic)"
+  },
+  "status": "no_candidates",
+  "source": "llm",
+  "predictedCategory": 6,
+  "keywords": [],
+  "picks": [],
+  "basis": null,
+  "failure": null,
+  "shortlists": [],
+  "calcStatus": "not_calculated"
+ },
+ {
+  "rowId": "g24",
+  "itemName": "통근 수당",
+  "unit": null,
+  "gold": {
+   "category": 7,
+   "factorIds": [],
+   "note": "가상 정답 (synthetic)"
+  },
+  "status": "no_candidates",
+  "source": "llm",
+  "predictedCategory": 7,
+  "keywords": [],
+  "picks": [],
+  "basis": null,
+  "failure": null,
+  "shortlists": [],
+  "calcStatus": "not_calculated"
+ },
+ {
+  "rowId": "g25",
+  "itemName": "---",
+  "unit": "kg",
+  "gold": {
+   "category": null,
+   "factorIds": [],
+   "note": "가상 정답 (synthetic)"
+  },
+  "status": "recommended",
+  "source": "llm",
+  "predictedCategory": 1,
+  "keywords": [],
+  "picks": [
+   "syn:steel-kg",
+   "syn-d:pp-kg",
+   "syn:paper-kg"
+  ],
+  "basis": {
+   "used": "activity",
+   "fellBack": false,
+   "fallbackReason": null
+  },
+  "failure": null,
+  "shortlists": [
+   {
+    "basis": "physical",
+    "method": "lexical-v1",
+    "total": 12,
+    "shownIds": [
+     "syn:steel-kg",
+     "syn-d:pp-kg",
+     "syn:paper-kg",
+     "syn:ab",
+     "syn:a_b",
+     "syn:steel-t",
+     "syn:pe-kg",
+     "syn:glass-kg",
+     "syn:battery-kg",
+     "syn-d:cement-kg",
+     "syn:credit-kg",
+     "syn:kichi-kg"
+    ],
+    "evidence": [
+     {
+      "id": "syn:steel-kg",
+      "rank": 1
+     },
+     {
+      "id": "syn-d:pp-kg",
+      "rank": 2
+     },
+     {
+      "id": "syn:paper-kg",
+      "rank": 3
+     },
+     {
+      "id": "syn:ab",
+      "rank": 4
+     },
+     {
+      "id": "syn:a_b",
+      "rank": 5
+     },
+     {
+      "id": "syn:steel-t",
+      "rank": 6
+     },
+     {
+      "id": "syn:pe-kg",
+      "rank": 7
+     },
+     {
+      "id": "syn:glass-kg",
+      "rank": 8
+     },
+     {
+      "id": "syn:battery-kg",
+      "rank": 9
+     },
+     {
+      "id": "syn-d:cement-kg",
+      "rank": 10
+     },
+     {
+      "id": "syn:credit-kg",
+      "rank": 11
+     },
+     {
+      "id": "syn:kichi-kg",
+      "rank": 12
+     }
+    ],
+    "failure": null
+   }
+  ],
+  "calcStatus": "computed"
+ },
+ {
+  "rowId": "g26",
+  "itemName": "소프트웨어 라이선스 Software",
+  "unit": "copy",
+  "gold": {
+   "category": 1,
+   "factorIds": [
+    "syn:spend-software"
+   ],
+   "note": "가상 정답 (synthetic)"
+  },
+  "status": "recommended",
+  "source": "llm",
+  "predictedCategory": 1,
+  "keywords": [],
+  "picks": [
+   "syn:spend-software",
+   "syn:spend-computer",
+   "syn:spend-storage"
+  ],
+  "basis": {
+   "used": "spend",
+   "fellBack": true,
+   "fallbackReason": "unit_mismatch"
+  },
+  "failure": null,
+  "shortlists": [
+   {
+    "basis": "spend",
+    "method": "lexical-v1",
+    "total": 7,
+    "shownIds": [
+     "syn:spend-software",
+     "syn:spend-computer",
+     "syn:spend-storage",
+     "syn:spend-legal",
+     "syn:spend-machinery",
+     "syn:spend-paper",
+     "syn:spend-plastics"
+    ],
+    "evidence": [
+     {
+      "id": "syn:spend-software",
+      "lexical": {
+       "rank": 1,
+       "score": 3,
+       "matchedTerms": [
+        "software"
+       ]
+      },
+      "rank": 1
+     },
+     {
+      "id": "syn:spend-computer",
+      "rank": 2
+     },
+     {
+      "id": "syn:spend-storage",
+      "rank": 3
+     },
+     {
+      "id": "syn:spend-legal",
+      "rank": 4
+     },
+     {
+      "id": "syn:spend-machinery",
+      "rank": 5
+     },
+     {
+      "id": "syn:spend-paper",
+      "rank": 6
+     },
+     {
+      "id": "syn:spend-plastics",
+      "rank": 7
+     }
+    ],
+    "failure": null
+   }
+  ],
+  "calcStatus": "needs_currency_adjustment"
+ },
+ {
+  "rowId": "g27",
+  "itemName": "배터리 batteries 18650",
+  "unit": "kg",
+  "gold": {
+   "category": 1,
+   "factorIds": [
+    "syn:battery-kg"
+   ],
+   "note": "가상 정답 (synthetic)"
+  },
+  "status": "recommended",
+  "source": "llm",
+  "predictedCategory": 1,
+  "keywords": [],
+  "picks": [
+   "syn:battery-kg",
+   "syn:steel-kg",
+   "syn-d:pp-kg"
+  ],
+  "basis": {
+   "used": "activity",
+   "fellBack": false,
+   "fallbackReason": null
+  },
+  "failure": null,
+  "shortlists": [
+   {
+    "basis": "physical",
+    "method": "lexical-v1",
+    "total": 12,
+    "shownIds": [
+     "syn:battery-kg",
+     "syn:steel-kg",
+     "syn-d:pp-kg",
+     "syn:paper-kg",
+     "syn:ab",
+     "syn:a_b",
+     "syn:steel-t",
+     "syn:pe-kg",
+     "syn:glass-kg",
+     "syn-d:cement-kg",
+     "syn:credit-kg",
+     "syn:kichi-kg"
+    ],
+    "evidence": [
+     {
+      "id": "syn:battery-kg",
+      "lexical": {
+       "rank": 1,
+       "score": 3,
+       "matchedTerms": [
+        "batteries"
+       ]
+      },
+      "rank": 1
+     },
+     {
+      "id": "syn:steel-kg",
+      "rank": 2
+     },
+     {
+      "id": "syn-d:pp-kg",
+      "rank": 3
+     },
+     {
+      "id": "syn:paper-kg",
+      "rank": 4
+     },
+     {
+      "id": "syn:ab",
+      "rank": 5
+     },
+     {
+      "id": "syn:a_b",
+      "rank": 6
+     },
+     {
+      "id": "syn:steel-t",
+      "rank": 7
+     },
+     {
+      "id": "syn:pe-kg",
+      "rank": 8
+     },
+     {
+      "id": "syn:glass-kg",
+      "rank": 9
+     },
+     {
+      "id": "syn-d:cement-kg",
+      "rank": 10
+     },
+     {
+      "id": "syn:credit-kg",
+      "rank": 11
+     },
+     {
+      "id": "syn:kichi-kg",
+      "rank": 12
+     }
+    ],
+    "failure": null
+   }
+  ],
+  "calcStatus": "computed"
+ },
+ {
+  "rowId": "g28",
+  "itemName": "유리 glass bottles",
+  "unit": "kg",
+  "gold": {
+   "category": 1,
+   "factorIds": [
+    "syn:glass-kg"
+   ],
+   "note": "가상 정답 (synthetic)"
+  },
+  "status": "recommended",
+  "source": "llm",
+  "predictedCategory": 1,
+  "keywords": [],
+  "picks": [
+   "syn:glass-kg",
+   "syn:steel-kg",
+   "syn-d:pp-kg"
+  ],
+  "basis": {
+   "used": "activity",
+   "fellBack": false,
+   "fallbackReason": null
+  },
+  "failure": null,
+  "shortlists": [
+   {
+    "basis": "physical",
+    "method": "lexical-v1",
+    "total": 12,
+    "shownIds": [
+     "syn:glass-kg",
+     "syn:steel-kg",
+     "syn-d:pp-kg",
+     "syn:paper-kg",
+     "syn:ab",
+     "syn:a_b",
+     "syn:steel-t",
+     "syn:pe-kg",
+     "syn:battery-kg",
+     "syn-d:cement-kg",
+     "syn:credit-kg",
+     "syn:kichi-kg"
+    ],
+    "evidence": [
+     {
+      "id": "syn:glass-kg",
+      "lexical": {
+       "rank": 1,
+       "score": 6,
+       "matchedTerms": [
+        "glass",
+        "bottles"
+       ]
+      },
+      "rank": 1
+     },
+     {
+      "id": "syn:steel-kg",
+      "rank": 2
+     },
+     {
+      "id": "syn-d:pp-kg",
+      "rank": 3
+     },
+     {
+      "id": "syn:paper-kg",
+      "rank": 4
+     },
+     {
+      "id": "syn:ab",
+      "rank": 5
+     },
+     {
+      "id": "syn:a_b",
+      "rank": 6
+     },
+     {
+      "id": "syn:steel-t",
+      "rank": 7
+     },
+     {
+      "id": "syn:pe-kg",
+      "rank": 8
+     },
+     {
+      "id": "syn:battery-kg",
+      "rank": 9
+     },
+     {
+      "id": "syn-d:cement-kg",
+      "rank": 10
+     },
+     {
+      "id": "syn:credit-kg",
+      "rank": 11
+     },
+     {
+      "id": "syn:kichi-kg",
+      "rank": 12
+     }
+    ],
+    "failure": null
+   }
+  ],
+  "calcStatus": "computed"
+ },
+ {
+  "rowId": "g29",
+  "itemName": "기계 설비 공사",
+  "unit": "식",
+  "gold": {
+   "category": 2,
+   "factorIds": [
+    "syn:spend-machinery"
+   ],
+   "note": "가상 정답 (synthetic)"
+  },
+  "status": "recommended",
+  "source": "llm",
+  "predictedCategory": 2,
+  "keywords": [],
+  "picks": [
+   "syn:spend-computer",
+   "syn:spend-storage",
+   "syn:spend-legal"
+  ],
+  "basis": {
+   "used": "spend",
+   "fellBack": true,
+   "fallbackReason": "unit_mismatch"
+  },
+  "failure": null,
+  "shortlists": [
+   {
+    "basis": "spend",
+    "method": "lexical-v1",
+    "total": 7,
+    "shownIds": [
+     "syn:spend-computer",
+     "syn:spend-storage",
+     "syn:spend-legal",
+     "syn:spend-machinery",
+     "syn:spend-paper",
+     "syn:spend-plastics",
+     "syn:spend-software"
+    ],
+    "evidence": [
+     {
+      "id": "syn:spend-computer",
+      "rank": 1
+     },
+     {
+      "id": "syn:spend-storage",
+      "rank": 2
+     },
+     {
+      "id": "syn:spend-legal",
+      "rank": 3
+     },
+     {
+      "id": "syn:spend-machinery",
+      "rank": 4
+     },
+     {
+      "id": "syn:spend-paper",
+      "rank": 5
+     },
+     {
+      "id": "syn:spend-plastics",
+      "rank": 6
+     },
+     {
+      "id": "syn:spend-software",
+      "rank": 7
+     }
+    ],
+    "failure": null
+   }
+  ],
+  "calcStatus": "needs_currency_adjustment"
+ },
+ {
+  "rowId": "g30",
+  "itemName": "스테인리스 강판 STS304",
+  "unit": "톤",
+  "gold": {
+   "category": 1,
+   "factorIds": [
+    "syn:steel-t"
+   ],
+   "note": "가상 정답 (synthetic)"
+  },
+  "status": "memory_factor_missing",
+  "source": "memory",
+  "predictedCategory": 1,
+  "keywords": null,
+  "picks": [],
+  "basis": null,
+  "failure": null,
+  "shortlists": [],
+  "calcStatus": "not_calculated"
+ },
+ {
+  "rowId": "g31",
+  "itemName": "시멘트",
+  "unit": "kg",
+  "gold": {
+   "category": 1,
+   "factorIds": [
+    "syn-d:cement-kg"
+   ],
+   "note": "가상 정답 (synthetic)"
+  },
+  "status": "memory_category_mismatch",
+  "source": "memory",
+  "predictedCategory": 4,
+  "keywords": null,
+  "picks": [],
+  "basis": null,
+  "failure": null,
+  "shortlists": [],
+  "calcStatus": "not_calculated"
+ },
+ {
+  "rowId": "g32",
+  "itemName": "Ｓｙｎｔｈｅｔｉｃ ｓｔｅｅｌ 𝒮heet ㎏",
+  "unit": "ＫＧ",
+  "gold": {
+   "category": 1,
+   "factorIds": [
+    "syn:steel-kg"
+   ],
+   "note": "가상 정답 (synthetic)"
+  },
+  "status": "recommended",
+  "source": "llm",
+  "predictedCategory": 1,
+  "keywords": [],
+  "picks": [
+   "syn:steel-t",
+   "syn:steel-kg",
+   "syn-d:pp-kg"
+  ],
+  "basis": {
+   "used": "activity",
+   "fellBack": false,
+   "fallbackReason": null
+  },
+  "failure": null,
+  "shortlists": [
+   {
+    "basis": "physical",
+    "method": "lexical-v1",
+    "total": 12,
+    "shownIds": [
+     "syn:steel-t",
+     "syn:steel-kg",
+     "syn-d:pp-kg",
+     "syn:paper-kg",
+     "syn:ab",
+     "syn:a_b",
+     "syn:pe-kg",
+     "syn:glass-kg",
+     "syn:battery-kg",
+     "syn-d:cement-kg",
+     "syn:credit-kg",
+     "syn:kichi-kg"
+    ],
+    "evidence": [
+     {
+      "id": "syn:steel-t",
+      "lexical": {
+       "rank": 1,
+       "score": 9,
+       "matchedTerms": [
+        "synthetic",
+        "steel",
+        "sheet"
+       ]
+      },
+      "rank": 1
+     },
+     {
+      "id": "syn:steel-kg",
+      "lexical": {
+       "rank": 2,
+       "score": 3,
+       "matchedTerms": [
+        "synthetic"
+       ]
+      },
+      "rank": 2
+     },
+     {
+      "id": "syn-d:pp-kg",
+      "lexical": {
+       "rank": 3,
+       "score": 3,
+       "matchedTerms": [
+        "synthetic"
+       ]
+      },
+      "rank": 3
+     },
+     {
+      "id": "syn:paper-kg",
+      "lexical": {
+       "rank": 4,
+       "score": 3,
+       "matchedTerms": [
+        "synthetic"
+       ]
+      },
+      "rank": 4
+     },
+     {
+      "id": "syn:ab",
+      "lexical": {
+       "rank": 5,
+       "score": 3,
+       "matchedTerms": [
+        "synthetic"
+       ]
+      },
+      "rank": 5
+     },
+     {
+      "id": "syn:a_b",
+      "lexical": {
+       "rank": 6,
+       "score": 3,
+       "matchedTerms": [
+        "synthetic"
+       ]
+      },
+      "rank": 6
+     },
+     {
+      "id": "syn:pe-kg",
+      "lexical": {
+       "rank": 7,
+       "score": 3,
+       "matchedTerms": [
+        "synthetic"
+       ]
+      },
+      "rank": 7
+     },
+     {
+      "id": "syn:glass-kg",
+      "lexical": {
+       "rank": 8,
+       "score": 3,
+       "matchedTerms": [
+        "synthetic"
+       ]
+      },
+      "rank": 8
+     },
+     {
+      "id": "syn:battery-kg",
+      "lexical": {
+       "rank": 9,
+       "score": 3,
+       "matchedTerms": [
+        "synthetic"
+       ]
+      },
+      "rank": 9
+     },
+     {
+      "id": "syn-d:cement-kg",
+      "lexical": {
+       "rank": 10,
+       "score": 3,
+       "matchedTerms": [
+        "synthetic"
+       ]
+      },
+      "rank": 10
+     },
+     {
+      "id": "syn:credit-kg",
+      "lexical": {
+       "rank": 11,
+       "score": 3,
+       "matchedTerms": [
+        "synthetic"
+       ]
+      },
+      "rank": 11
+     },
+     {
+      "id": "syn:kichi-kg",
+      "lexical": {
+       "rank": 12,
+       "score": 3,
+       "matchedTerms": [
+        "synthetic"
+       ]
+      },
+      "rank": 12
+     }
+    ],
+    "failure": null
+   }
+  ],
+  "calcStatus": "computed"
+ },
+ {
+  "rowId": "g33",
+  "itemName": "𠮷 강재 İstanbul ①②",
+  "unit": "킬로그램",
+  "gold": {
+   "category": 1,
+   "factorIds": [
+    "syn:kichi-kg"
+   ],
+   "note": "가상 정답 (synthetic)"
+  },
+  "status": "recommended",
+  "source": "llm",
+  "predictedCategory": 1,
+  "keywords": [],
+  "picks": [
+   "syn:kichi-kg",
+   "syn:steel-kg",
+   "syn-d:pp-kg"
+  ],
+  "basis": {
+   "used": "activity",
+   "fellBack": false,
+   "fallbackReason": null
+  },
+  "failure": null,
+  "shortlists": [
+   {
+    "basis": "physical",
+    "method": "lexical-v1",
+    "total": 12,
+    "shownIds": [
+     "syn:kichi-kg",
+     "syn:steel-kg",
+     "syn-d:pp-kg",
+     "syn:paper-kg",
+     "syn:ab",
+     "syn:a_b",
+     "syn:steel-t",
+     "syn:pe-kg",
+     "syn:glass-kg",
+     "syn:battery-kg",
+     "syn-d:cement-kg",
+     "syn:credit-kg"
+    ],
+    "evidence": [
+     {
+      "id": "syn:kichi-kg",
+      "lexical": {
+       "rank": 1,
+       "score": 7,
+       "matchedTerms": [
+        "𠮷",
+        "강재",
+        "#강재"
+       ]
+      },
+      "rank": 1
+     },
+     {
+      "id": "syn:steel-kg",
+      "rank": 2
+     },
+     {
+      "id": "syn-d:pp-kg",
+      "rank": 3
+     },
+     {
+      "id": "syn:paper-kg",
+      "rank": 4
+     },
+     {
+      "id": "syn:ab",
+      "rank": 5
+     },
+     {
+      "id": "syn:a_b",
+      "rank": 6
+     },
+     {
+      "id": "syn:steel-t",
+      "rank": 7
+     },
+     {
+      "id": "syn:pe-kg",
+      "rank": 8
+     },
+     {
+      "id": "syn:glass-kg",
+      "rank": 9
+     },
+     {
+      "id": "syn:battery-kg",
+      "rank": 10
+     },
+     {
+      "id": "syn-d:cement-kg",
+      "rank": 11
+     },
+     {
+      "id": "syn:credit-kg",
+      "rank": 12
+     }
+    ],
+    "failure": null
+   }
+  ],
+  "calcStatus": "computed"
+ },
+ {
+  "rowId": "g34",
+  "itemName": "Synthetic Legal Services retainer",
+  "unit": null,
+  "gold": {
+   "category": 1,
+   "factorIds": [
+    "syn:spend-legal"
+   ],
+   "note": "가상 정답 (synthetic)"
+  },
+  "status": "recommended",
+  "source": "llm",
+  "predictedCategory": 1,
+  "keywords": [],
+  "picks": [
+   "syn:spend-legal",
+   "syn:spend-computer",
+   "syn:spend-storage"
+  ],
+  "basis": {
+   "used": "spend",
+   "fellBack": true,
+   "fallbackReason": "unit_mismatch"
+  },
+  "failure": null,
+  "shortlists": [
+   {
+    "basis": "spend",
+    "method": "lexical-v1",
+    "total": 7,
+    "shownIds": [
+     "syn:spend-legal",
+     "syn:spend-computer",
+     "syn:spend-storage",
+     "syn:spend-machinery",
+     "syn:spend-paper",
+     "syn:spend-plastics",
+     "syn:spend-software"
+    ],
+    "evidence": [
+     {
+      "id": "syn:spend-legal",
+      "lexical": {
+       "rank": 1,
+       "score": 9,
+       "matchedTerms": [
+        "synthetic",
+        "legal",
+        "services"
+       ]
+      },
+      "rank": 1
+     },
+     {
+      "id": "syn:spend-computer",
+      "lexical": {
+       "rank": 2,
+       "score": 3,
+       "matchedTerms": [
+        "synthetic"
+       ]
+      },
+      "rank": 2
+     },
+     {
+      "id": "syn:spend-storage",
+      "lexical": {
+       "rank": 3,
+       "score": 3,
+       "matchedTerms": [
+        "synthetic"
+       ]
+      },
+      "rank": 3
+     },
+     {
+      "id": "syn:spend-machinery",
+      "lexical": {
+       "rank": 4,
+       "score": 3,
+       "matchedTerms": [
+        "synthetic"
+       ]
+      },
+      "rank": 4
+     },
+     {
+      "id": "syn:spend-paper",
+      "lexical": {
+       "rank": 5,
+       "score": 3,
+       "matchedTerms": [
+        "synthetic"
+       ]
+      },
+      "rank": 5
+     },
+     {
+      "id": "syn:spend-plastics",
+      "lexical": {
+       "rank": 6,
+       "score": 3,
+       "matchedTerms": [
+        "synthetic"
+       ]
+      },
+      "rank": 6
+     },
+     {
+      "id": "syn:spend-software",
+      "lexical": {
+       "rank": 7,
+       "score": 3,
+       "matchedTerms": [
+        "synthetic"
+       ]
+      },
+      "rank": 7
+     }
+    ],
+    "failure": null
+   }
+  ],
+  "calcStatus": "needs_currency_adjustment"
+ }
+]

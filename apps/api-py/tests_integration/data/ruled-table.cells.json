@@ -1,0 +1,16 @@
+{
+  "$comment": "통합 테스트(test_parser_flow.py)의 고정물 ruled-table.pdf 의 내용. 한 쪽에 4×4 표 하나다: 세로선 없이 칸마다 가로 토막만 있고 0열의 둘째·셋째 행이 세로로 합쳐져 있다(services/parser/tests/conftest.py 의 synthetic_ruled_page 와 같은 꼴). 숫자와 이름은 전부 지어낸 것이다(실제 보고서의 값이 아니다). PDF 는 이 파일에서 짓는다: apps/api-py/scripts/section4-PY8c.sh --build-fixture. 테스트의 기대값도 이 파일에서 온다.",
+  "page": { "width": 400, "height": 300 },
+  "columnEdges": [40, 120, 160, 230, 300],
+  "top": 50,
+  "rowHeight": 14,
+  "baselineOffset": 10,
+  "rows": [
+    ["Item", "Unit", "2023", "2024"],
+    ["Alpha", "t", "3,410", "3,526"],
+    ["", "kg", "48", "-"],
+    ["Beta", "t", "12.5", "9.75"]
+  ],
+  "numericColumns": [2, 3],
+  "mergedDown": [[1, 0]]
+}

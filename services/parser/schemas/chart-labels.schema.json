@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "chart-labels.schema.json",
+  "title": "도표 라벨 산출 (py/docparse charts)",
+  "description": "문서 모델(document.schema.json)과 같은 PDF 에서 따로 낸 산출. 도표의 자리와, 도표 속 숫자 낱말마다 갈래(값·눈금·범주 축의 글자)와 붙인 글(범주, 계열, 제목)을 싣는다. 숫자의 값은 싣지 않는다: text 는 원문 글자이고 bbox·start·end 는 자리다.",
+  "type": "object",
+  "required": ["schema_version", "source", "llm_used", "ocr_used", "charts", "words", "unlinked", "place_count"],
+  "properties": {
+    "schema_version": { "const": "0.1" },
+    "source": { "type": "object", "required": ["file_name", "sha256", "page_count"] },
+    "llm_used": { "const": false },
+    "ocr_used": { "const": false },
+    "place_count": { "type": "integer", "description": "좌표에 이은 낱말의 수 (문서 전체)" },
+    "unlinked": { "type": "array", "items": { "type": "object", "required": ["container", "reason"], "properties": { "container": { "type": "string" }, "reason": { "enum": ["table_failed", "cell_not_linked", "block_not_linked"] } } } },
+    "charts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "page", "bbox", "plot", "form", "orientation", "title", "multi_series", "legend", "categories"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^p\\d+-c\\d+$" },
+          "page": { "type": "integer" },
+          "bbox": { "$ref": "#/$defs/box" },
+          "plot": { "$ref": "#/$defs/box" },
+          "form": { "enum": ["bar", "line", "bar+line", "scatter"] },
+          "orientation": { "enum": ["vertical", "horizontal"] },
+          "title": { "type": ["string", "null"] },
+          "multi_series": { "type": "boolean" },
+          "legend": { "type": "array", "items": { "type": "array", "items": { "type": "string" }, "minItems": 2, "maxItems": 2 } },
+          "categories": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    },
+    "words": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["container", "start", "end", "text", "bbox", "chart", "role"],
+        "properties": {
+          "container": { "type": "string", "description": "블록 ID 또는 표ID:r행c열" },
+          "start": { "type": "integer", "description": "그릇의 글자에서의 시작 (UTF-16 자리)" },
+          "end": { "type": "integer" },
+          "text": { "type": "string" },
+          "bbox": { "$ref": "#/$defs/box" },
+          "chart": { "type": "string" },
+          "role": { "enum": ["value", "tick", "category"] },
+          "coord": { "$ref": "#/$defs/category" },
+          "elem": { "allOf": [{ "$ref": "#/$defs/category" }, { "$ref": "#/$defs/series" }] },
+          "label": { "allOf": [{ "$ref": "#/$defs/category" }, { "$ref": "#/$defs/series" }, { "type": "object", "required": ["title"], "properties": { "title": { "type": ["string", "null"] } } }] }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "box": { "type": "array", "items": { "type": "number" }, "minItems": 4, "maxItems": 4, "description": "[x0, y0, x1, y1] pt" },
+    "category": { "type": "object", "required": ["category", "status"], "properties": { "category": { "type": ["string", "null"] }, "status": { "type": "string" } } },
+    "series": { "type": "object", "required": ["series", "series_status"], "properties": { "series": { "type": ["string", "null"] }, "series_status": { "type": "string" } } }
+  }
+}

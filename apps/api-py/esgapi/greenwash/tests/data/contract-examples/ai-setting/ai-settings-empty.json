@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "greenwash.ai-settings@2",
+  "companyId": 1,
+  "applied": {
+    "kind": "default"
+  },
+  "default": {
+    "name": "colab-2026-01-15-v1",
+    "title": "기본 설정",
+    "evalPromptSha256": "1eb626446da6942b93aca4991f4057de2e15a5b66adf167ea226c8399ab49b0f"
+  },
+  "items": [],
+  "total": 0
+}

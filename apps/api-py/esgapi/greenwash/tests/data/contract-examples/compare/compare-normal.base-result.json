@@ -1,0 +1,314 @@
+{
+  "schemaVersion": "greenwash.result@1",
+  "source": {
+    "fileName": "example-report-v1.pdf",
+    "sha256": "31df0eed4b7e9573754f81ab0110f955939bd97b3cff2543fe7e70ed1bdc5a56",
+    "pageCount": 8
+  },
+  "config": {
+    "checker": {
+      "maxCandidatesPerPage": 3,
+      "maxCharsPageText": 2500,
+      "evidenceK": 2,
+      "maxCharsPerChunk": 450,
+      "useEvidenceFailopen": false,
+      "maxCharsEvidenceTotal": 1600,
+      "reportLevels": [
+        "High",
+        "Mid",
+        "Low"
+      ],
+      "debug": true,
+      "debugPages": 2,
+      "batchEval": false,
+      "promptVersion": "2026-01-15-v1"
+    },
+    "chunking": {
+      "chunkSize": 800,
+      "chunkOverlap": 150,
+      "separators": [
+        "\n\n",
+        "\n",
+        " "
+      ],
+      "normalize": true,
+      "embeddingBatchSize": 50
+    },
+    "chat": {
+      "temperature": 0.0,
+      "maxTokens": 1300
+    }
+  },
+  "models": {
+    "chat": "gpt-4.1-mini",
+    "embedding": "text-embedding-3-small"
+  },
+  "promptVersion": "2026-01-15-v1",
+  "parts": [
+    {
+      "name": "CEO 메시지",
+      "pages": [
+        2
+      ]
+    },
+    {
+      "name": "회사소개",
+      "pages": [
+        3
+      ]
+    },
+    {
+      "name": "기후/환경 토픽",
+      "pages": [
+        5,
+        6,
+        7
+      ]
+    }
+  ],
+  "pages": [
+    2,
+    3,
+    5,
+    6,
+    7
+  ],
+  "extraTerms": [],
+  "items": [
+    {
+      "page": 2,
+      "parts": [
+        "CEO 메시지"
+      ],
+      "sentence": "가상전자는 2030년까지 모든 사업장에서 탄소중립을 반드시 달성하겠습니다.",
+      "level": "High",
+      "riskTags": [
+        "미래 약속",
+        "목표 근거 부족"
+      ],
+      "confirmedInEvidence": [],
+      "missingFields": [
+        "기준연도",
+        "감축 경로",
+        "제3자 검증"
+      ],
+      "reasonBullets": [
+        "달성 시점은 있으나 기준연도와 감축 경로가 없다.",
+        "근거 조각에 이행 계획이 보이지 않는다."
+      ],
+      "fixParagraph": "탄소중립 목표에는 기준연도 배출량과 연도별 감축 목표, 이행 수단을 함께 적고, 감축 실적에 대한 제3자 검증 여부를 밝혀 주장을 확인할 수 있도록 보완이 필요합니다.",
+      "evidencePages": [
+        5,
+        6
+      ],
+      "evidenceInternal": "목표 연도만 있고 기준·경로가 근거에 없다.",
+      "position": null,
+      "exampleSentence": null
+    },
+    {
+      "page": 2,
+      "parts": [
+        "CEO 메시지"
+      ],
+      "sentence": "우리는 지구를 생각하는 가장 친환경적인 기업입니다.",
+      "level": "High",
+      "riskTags": [
+        "모호한 표현"
+      ],
+      "confirmedInEvidence": [],
+      "missingFields": [
+        "비교 대상",
+        "측정 지표"
+      ],
+      "reasonBullets": [
+        "「가장 친환경적」의 비교 대상과 지표가 없다."
+      ],
+      "fixParagraph": "「가장 친환경적」이라는 최상급 표현은 비교 대상과 지표(예: 제품 단위 배출량)를 함께 밝히거나, 확인할 수 있는 구체적인 실적 수치로 바꾸어 쓰는 보완이 필요합니다.",
+      "evidencePages": [],
+      "evidenceInternal": "근거 없음으로 판정했다.",
+      "position": null,
+      "exampleSentence": null
+    },
+    {
+      "page": 3,
+      "parts": [
+        "회사소개"
+      ],
+      "sentence": "가상전자는 모든 제품을 100% 재활용 소재로 만듭니다.",
+      "level": "Mid",
+      "riskTags": [
+        "과장된 표현",
+        "근거 부족"
+      ],
+      "confirmedInEvidence": [],
+      "missingFields": [
+        "재활용 소재 비율",
+        "대상 제품 범위"
+      ],
+      "reasonBullets": [
+        "재활용 소재 비율의 근거가 없다.",
+        "「모든 제품」은 범위가 지나치게 넓다."
+      ],
+      "fixParagraph": "이 문장은 근거 자료와 견주어 확인할 수 있는 수치나 범위가 없다. 대상 범위와 기준 연도, 측정 방법을 밝히고 제3자 검증 여부를 함께 적는 방향으로 고친다.",
+      "evidencePages": [
+        3
+      ],
+      "evidenceInternal": "쪽 3 의 소개 글에만 나온다.",
+      "position": null,
+      "exampleSentence": null
+    },
+    {
+      "page": 3,
+      "parts": [
+        "회사소개"
+      ],
+      "sentence": "가상전자의 물류 차량은 모두 친환경 차량입니다.",
+      "level": "Mid",
+      "riskTags": [
+        "모호한 표현"
+      ],
+      "confirmedInEvidence": [],
+      "missingFields": [
+        "친환경 차량의 기준",
+        "전환 대수"
+      ],
+      "reasonBullets": [
+        "친환경 차량의 기준이 밝혀져 있지 않다.",
+        "근거 조각을 찾지 못했다."
+      ],
+      "fixParagraph": "이 문장은 근거 자료와 견주어 확인할 수 있는 수치나 범위가 없다. 대상 범위와 기준 연도, 측정 방법을 밝히고 제3자 검증 여부를 함께 적는 방향으로 고친다.",
+      "evidencePages": [],
+      "evidenceInternal": "근거 없음.",
+      "position": null,
+      "exampleSentence": null
+    },
+    {
+      "page": 5,
+      "parts": [
+        "기후/환경 토픽"
+      ],
+      "sentence": "가상전자는 업계 최초로 탄소 배출을 완전히 없앴습니다.",
+      "level": "High",
+      "riskTags": [
+        "과장된 표현",
+        "비교 근거 부족"
+      ],
+      "confirmedInEvidence": [
+        "감축 목표를 세운 사실"
+      ],
+      "missingFields": [
+        "감축률",
+        "비교 대상"
+      ],
+      "reasonBullets": [
+        "「완전히 없앴다」는 근거의 감축률과 맞지 않는다.",
+        "「업계 최초」의 비교 근거가 없다."
+      ],
+      "fixParagraph": "이 문장은 근거 자료와 견주어 확인할 수 있는 수치나 범위가 없다. 대상 범위와 기준 연도, 측정 방법을 밝히고 제3자 검증 여부를 함께 적는 방향으로 고친다.",
+      "evidencePages": [
+        5,
+        6
+      ],
+      "evidenceInternal": "쪽 6 의 표와 어긋난다.",
+      "position": null,
+      "exampleSentence": null
+    },
+    {
+      "page": 7,
+      "parts": [
+        "기후/환경 토픽"
+      ],
+      "sentence": "가상전자는 지속가능한 미래를 위해 끊임없이 노력하겠습니다.",
+      "level": "Low",
+      "riskTags": [
+        "선언적 문장"
+      ],
+      "confirmedInEvidence": [],
+      "missingFields": [],
+      "reasonBullets": [
+        "수치나 검증 없이 다짐만 하는 선언적 문장이다."
+      ],
+      "fixParagraph": "다짐 대신 지금까지 한 일과 다음 목표를 수치로 적는 방향으로 고친다.",
+      "evidencePages": [
+        7
+      ],
+      "evidenceInternal": "",
+      "position": null,
+      "exampleSentence": null
+    }
+  ],
+  "candidateStats": {
+    "raw": 11,
+    "hardDropped": 2,
+    "nonEnvDropped": 1,
+    "promoDropped": 0,
+    "tableDropped": 1,
+    "kept": 6,
+    "failedPages": []
+  },
+  "counts": {
+    "total": 6,
+    "byLevel": {
+      "High": 3,
+      "Mid": 2,
+      "Low": 1
+    },
+    "byPart": {
+      "CEO 메시지": {
+        "High": 2,
+        "Mid": 0,
+        "Low": 0
+      },
+      "회사소개": {
+        "High": 0,
+        "Mid": 2,
+        "Low": 0
+      },
+      "기후/환경 토픽": {
+        "High": 1,
+        "Mid": 0,
+        "Low": 1
+      }
+    }
+  },
+  "wordCounts": {
+    "total": [
+      {
+        "term": "친환경",
+        "count": 2
+      },
+      {
+        "term": "탄소",
+        "count": 1
+      }
+    ],
+    "pages": [
+      {
+        "page": 2,
+        "counts": [
+          {
+            "term": "친환경",
+            "count": 1
+          },
+          {
+            "term": "탄소",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "page": 3,
+        "counts": [
+          {
+            "term": "친환경",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  "dryRun": null,
+  "report": {
+    "file": "greenwash-report.xlsx"
+  }
+}

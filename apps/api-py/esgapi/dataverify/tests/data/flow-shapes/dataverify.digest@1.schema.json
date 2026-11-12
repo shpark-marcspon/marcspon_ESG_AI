@@ -1,0 +1,131 @@
+{
+  "$defs": {
+    "DataverifyCheckCounts": {
+      "additionalProperties": false,
+      "description": "계산 검토의 검사 기록 셈(review.checks — 실패한 검토도 그때까지의 기록). 엑셀 「검증 결과」 시트와 갈래별로\n맞는다: ok + fail + notComputed = 판정이 OK·FAIL·「계산 불가」인 줄 수, naValues = 「값 없음(N/A)」 줄 수,\ntoolErrors = 판정 「오류」 줄 수. 값이 있는 조회·검색 줄은 셈 밖이다.",
+      "properties": {
+        "ok": {
+          "description": "합계·부분합·비율 검사의 해 가운데 계산했고(note null) OK 인 수.",
+          "minimum": 0,
+          "title": "Ok",
+          "type": "integer"
+        },
+        "fail": {
+          "description": "그 가운데 계산했고(note null) FAIL 인 수.",
+          "minimum": 0,
+          "title": "Fail",
+          "type": "integer"
+        },
+        "notComputed": {
+          "description": "계산하지 못한 해(note 있음 — 수가 아님·0 으로 나눔)의 수.",
+          "minimum": 0,
+          "title": "Notcomputed",
+          "type": "integer"
+        },
+        "naValues": {
+          "description": "값 조회 가운데 도구가 「N/A」를 돌려준 수(na true).",
+          "minimum": 0,
+          "title": "Navalues",
+          "type": "integer"
+        },
+        "toolErrors": {
+          "description": "도구가 오류를 돌려준 호출 수(kind error).",
+          "minimum": 0,
+          "title": "Toolerrors",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "ok",
+        "fail",
+        "notComputed",
+        "naValues",
+        "toolErrors"
+      ],
+      "title": "DataverifyCheckCounts",
+      "type": "object"
+    },
+    "DataverifyDigest": {
+      "additionalProperties": false,
+      "description": "dataverify.digest@1 — 데이터 검증 실행 하나의 요약.",
+      "properties": {
+        "schemaVersion": {
+          "const": "dataverify.digest@1",
+          "title": "Schemaversion",
+          "type": "string"
+        },
+        "stages": {
+          "$ref": "#/$defs/DataverifyStageHeads"
+        },
+        "checks": {
+          "$ref": "#/$defs/DataverifyCheckCounts"
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "stages",
+        "checks"
+      ],
+      "title": "DataverifyDigest",
+      "type": "object"
+    },
+    "DataverifyStageHead": {
+      "additionalProperties": false,
+      "description": "단계 하나의 머리(결과의 그 단계 status·partial 그대로).",
+      "properties": {
+        "status": {
+          "enum": [
+            "done",
+            "failed",
+            "not_run"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "partial": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "done 이면 true(최대 횟수에 닿아 마지막 답을 씀)·false, failed·not_run 이면 null.",
+          "title": "Partial"
+        }
+      },
+      "required": [
+        "status",
+        "partial"
+      ],
+      "title": "DataverifyStageHead",
+      "type": "object"
+    },
+    "DataverifyStageHeads": {
+      "additionalProperties": false,
+      "description": "단계 셋의 머리(계산 Plan·계산 검토·인사이트).",
+      "properties": {
+        "plan": {
+          "$ref": "#/$defs/DataverifyStageHead"
+        },
+        "review": {
+          "$ref": "#/$defs/DataverifyStageHead"
+        },
+        "insight": {
+          "$ref": "#/$defs/DataverifyStageHead"
+        }
+      },
+      "required": [
+        "plan",
+        "review",
+        "insight"
+      ],
+      "title": "DataverifyStageHeads",
+      "type": "object"
+    }
+  },
+  "$ref": "#/$defs/DataverifyDigest",
+  "description": "데이터 검증 한 건의 요약.",
+  "title": "dataverify.digest@1"
+}

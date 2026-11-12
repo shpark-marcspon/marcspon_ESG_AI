@@ -1,0 +1,117 @@
+#!/usr/bin/env bash
+# 커밋 순간의 좁은 게이트: 스테이징한 파이썬 파일만 본다. 파이썬 파일이 없으면 아무것도 돌리지 않고 0 으로 끝난다
+# (apps/web 만 고친 커밋에는 얹히는 것이 없다). core.hooksPath=scripts/git-hooks 로 배선돼 있다.
+#
+#   apps/api-py/**/*.py      그 파일들에 ruff check + ruff format --check
+#                            esgapi/ 아래가 있으면 lint-imports(의존 방향의 계약)
+#                            건드린 모듈의 순수 층만:  esgapi/<모듈>/ → pytest -m "not django_db and not security" esgapi/<모듈>
+#                              (직렬. 모듈 하나에는 xdist 의 기동 값이 더 클 수 있다 — 밴드 T1a 가 잰 표는
+#                               band-reports/T1a-test-speed.md: inventory 는 -n 4 가 빠르고 accounts 는 직렬이 빠르다)
+#                            core/·config/·esgapi 바로 아래·apps/api-py/conftest.py 를 건드렸으면 순수 층 전부(-n 4)
+#                            esgapi/*/tests/ 아래가 있으면 테스트 자리 규칙(scripts/check_test_layout.py)
+#   services/parser/**/*.py  그 파일들에 ruff check + ruff format --check (예외는 services/parser/pyproject.toml)
+#
+# 걸리는 시간(밴드 PY8a·T1a 가 잰 값은 band-reports/PY8a-finish-code.md·T1a-test-speed.md): 순수 층 전부를 도는
+# 때가 가장 길다(-n 4 로 5초쯤).
+#
+# 이 훅이 못 보는 것:
+#   - 작업 트리의 파일을 본다. 파일의 일부만 스테이징했으면(git add -p) 재는 내용과 커밋되는 내용이 어긋난다.
+#   - pyright, 업무 층(django_db), 보안 층, 통합, TypeScript 는 돌리지 않는다. 그것은 scripts/verify.sh [--fast] 의 일이다.
+#   - `git merge` 가 스스로 만드는 병합 커밋에는 git 이 pre-commit 을 부르지 않는다
+#     (충돌을 손으로 풀고 `git commit` 할 때만 돈다). 병합 뒤의 확인은 scripts/verify.sh 다.
+#   - 지운 파일은 보지 않는다(--diff-filter=ACMR).
+#   - 테스트 자리 규칙은 스테이징한 파일만이 아니라 작업 트리의 대상 전부(추적 + 새 파일)를 본다. 스테이징하지
+#     않은 새 테스트 파일이 자리를 어겨도 커밋이 막힌다.
+#   - 「건드린 파일의 테스트만」 고르지 않는다(비춘 자리의 테스트가 아직 없다). 모듈 단위로 고른다.
+# 막히면 고친다. `--no-verify` 로 넘기지 않는다(운행 규칙).
+#
+# ★ 이 파일이나 scripts/verify.sh 를 고친 밴드는 자기 §4 에 scripts/check-gates.sh 를 넣는다.
+set -u
+root="$(git rev-parse --show-toplevel)" || exit 1
+cd "$root" || exit 1
+
+api=()      # apps/api-py 기준의 경로
+parser=()   # services/parser 기준의 경로
+while IFS= read -r path; do
+  case "$path" in
+    apps/api-py/*.py) api+=("${path#apps/api-py/}") ;;
+    services/parser/*.py) parser+=("${path#services/parser/}") ;;
+  esac
+done < <(git diff --cached --name-only --diff-filter=ACMR)
+
+[ "${#api[@]}" -eq 0 ] && [ "${#parser[@]}" -eq 0 ] && exit 0
+
+if ! command -v uv >/dev/null 2>&1; then
+  echo "pre-commit: 파이썬 파일이 스테이징돼 있는데 uv 가 없다(PATH 를 본다). 린트·테스트를 못 돌려 커밋을 막는다." >&2
+  exit 1
+fi
+
+failed=0
+run() { # <이름> <명령…>
+  local name="$1"
+  shift
+  local out
+  if out="$("$@" 2>&1)"; then
+    echo "pre-commit: $name … 통과"
+  else
+    echo "pre-commit: $name … ★ 실패"
+    printf '%s\n' "$out" | tail -40
+    failed=1
+  fi
+}
+
+# pytest 의 종료 코드 5 는 「고른 테스트가 없다」다(순수 층 테스트가 없는 모듈). 실패로 치지 않는다.
+pure_tests() {
+  uv run --frozen pytest -q -m "not django_db and not security" "$@"
+  local code=$?
+  [ "$code" -eq 5 ] && return 0
+  return "$code"
+}
+
+if [ "${#api[@]}" -gt 0 ]; then
+  cd "$root/apps/api-py" || exit 1
+  run "api-py ruff check (${#api[@]} 파일)" uv run --frozen ruff check --force-exclude "${api[@]}"
+  run "api-py ruff format --check (${#api[@]} 파일)" uv run --frozen ruff format --check --force-exclude "${api[@]}"
+
+  in_esgapi=0
+  all_pure=0
+  in_tests=0
+  modules=""
+  for path in "${api[@]}"; do
+    case "$path" in
+      esgapi/*/tests/*.py) in_tests=1 ;;
+    esac
+    case "$path" in
+      conftest.py) all_pure=1 ;;
+      esgapi/core/* | esgapi/config/*) in_esgapi=1; all_pure=1 ;;
+      esgapi/*/*) in_esgapi=1; module="${path#esgapi/}"; modules="$modules ${module%%/*}" ;;
+      esgapi/*) in_esgapi=1; all_pure=1 ;;
+    esac
+  done
+  if [ "$in_esgapi" -eq 1 ]; then
+    run "api-py lint-imports" uv run --frozen lint-imports
+  fi
+  if [ "$in_tests" -eq 1 ]; then
+    # git 은 저장소 뿌리에 못 박아 부른다(워크트리의 커밋에는 GIT_DIR 이 와 있다 — check_test_layout.py 의 머리 주석).
+    run "api-py 테스트 자리" uv run --frozen python scripts/check_test_layout.py
+  fi
+  if [ "$all_pure" -eq 1 ]; then
+    run "api-py 순수 층 전부" pure_tests -n 4
+  else
+    for module in $(printf '%s\n' $modules | sort -u); do
+      run "api-py 순수 층 esgapi/$module" pure_tests "esgapi/$module"
+    done
+  fi
+fi
+
+if [ "${#parser[@]}" -gt 0 ]; then
+  cd "$root/services/parser" || exit 1
+  run "parser ruff check (${#parser[@]} 파일)" uv run --frozen ruff check --force-exclude "${parser[@]}"
+  run "parser ruff format --check (${#parser[@]} 파일)" uv run --frozen ruff format --check --force-exclude "${parser[@]}"
+fi
+
+if [ "$failed" -ne 0 ]; then
+  echo "pre-commit: 위 실패를 고친 뒤 다시 커밋한다(--no-verify 로 넘기지 않는다)." >&2
+  exit 1
+fi
+exit 0

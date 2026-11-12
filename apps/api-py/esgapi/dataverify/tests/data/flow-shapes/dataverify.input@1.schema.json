@@ -1,0 +1,287 @@
+{
+  "$defs": {
+    "Company": {
+      "additionalProperties": false,
+      "description": "기업 정보(코랩 셀 10·18 USER 의 「기업 정보」 네 줄).",
+      "properties": {
+        "name": {
+          "description": "기업명.",
+          "title": "Name",
+          "type": "string"
+        },
+        "sasbIndustry": {
+          "description": "SASB 산업분류.",
+          "title": "Sasbindustry",
+          "type": "string"
+        },
+        "materialTopics": {
+          "description": "주요 중대토픽. 프롬프트에는 「, 」로 이어 한 줄로 싣는다(코랩대로).",
+          "items": {
+            "type": "string"
+          },
+          "title": "Materialtopics",
+          "type": "array"
+        },
+        "reportingYear": {
+          "description": "보고연도(YYYY).",
+          "pattern": "^[0-9]{4}$",
+          "title": "Reportingyear",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "sasbIndustry",
+        "materialTopics",
+        "reportingYear"
+      ],
+      "title": "Company",
+      "type": "object"
+    },
+    "DataverifyInput": {
+      "additionalProperties": false,
+      "description": "dataverify.input@1 — 데이터 검증 한 건의 입력. schemaVersion 이 첫 키다.",
+      "properties": {
+        "schemaVersion": {
+          "const": "dataverify.input@1",
+          "title": "Schemaversion",
+          "type": "string"
+        },
+        "company": {
+          "$ref": "#/$defs/Company"
+        },
+        "data": {
+          "additionalProperties": {
+            "items": {
+              "$ref": "#/$defs/EdkItem"
+            },
+            "type": "array"
+          },
+          "description": "테마 이름 → 항목 목록(코랩 셀 2 의 data 그대로). 검증 대상은 테마 「환경」뿐이다(코랩 셀 3).",
+          "title": "Data",
+          "type": "object"
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "company",
+        "data"
+      ],
+      "title": "DataverifyInput",
+      "type": "object"
+    },
+    "EdkItem": {
+      "additionalProperties": true,
+      "properties": {
+        "ID": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Id"
+        },
+        "테마": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "테마"
+        },
+        "항목": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "항목"
+        },
+        "대분류": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "대분류"
+        },
+        "중분류": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "중분류"
+        },
+        "소분류": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "소분류"
+        },
+        "입력 방식": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "입력 방식"
+        },
+        "단위": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "단위"
+        },
+        "values": {
+          "additionalProperties": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "integer"
+              },
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "title": "Values",
+          "type": "object"
+        },
+        "핵심데이터": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "핵심데이터"
+        },
+        "메모": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "메모"
+        }
+      },
+      "required": [
+        "ID",
+        "테마",
+        "항목",
+        "대분류",
+        "중분류",
+        "소분류",
+        "입력 방식",
+        "단위",
+        "values",
+        "핵심데이터",
+        "메모"
+      ],
+      "title": "EdkItem",
+      "type": "object"
+    }
+  },
+  "$ref": "#/$defs/DataverifyInput",
+  "description": "데이터 검증 한 건의 입력.",
+  "title": "dataverify.input@1"
+}

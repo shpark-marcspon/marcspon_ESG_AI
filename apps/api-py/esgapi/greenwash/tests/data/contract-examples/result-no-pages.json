@@ -1,0 +1,121 @@
+{
+  "schemaVersion": "greenwash.result@1",
+  "source": {
+    "fileName": "example-report.pdf",
+    "sha256": "fd6e0e2cc160874470890cc98ede97c0190fc86d0d6376cacee1f2c8c4836c1f",
+    "pageCount": 8
+  },
+  "config": {
+    "checker": {
+      "maxCandidatesPerPage": 3,
+      "maxCharsPageText": 2500,
+      "evidenceK": 2,
+      "maxCharsPerChunk": 450,
+      "useEvidenceFailopen": false,
+      "maxCharsEvidenceTotal": 1600,
+      "reportLevels": [
+        "High",
+        "Mid",
+        "Low"
+      ],
+      "debug": true,
+      "debugPages": 2,
+      "batchEval": false,
+      "promptVersion": "2026-01-15-v1"
+    },
+    "chunking": {
+      "chunkSize": 800,
+      "chunkOverlap": 150,
+      "separators": [
+        "\n\n",
+        "\n",
+        " "
+      ],
+      "normalize": true,
+      "embeddingBatchSize": 50
+    },
+    "chat": {
+      "temperature": 0.0,
+      "maxTokens": 1300
+    }
+  },
+  "models": {
+    "chat": "gpt-4.1-mini",
+    "embedding": "text-embedding-3-small"
+  },
+  "promptVersion": "2026-01-15-v1",
+  "parts": [
+    {
+      "name": "CEO 메시지",
+      "pages": []
+    },
+    {
+      "name": "회사소개",
+      "pages": []
+    },
+    {
+      "name": "기후/환경 토픽",
+      "pages": []
+    }
+  ],
+  "pages": [],
+  "extraTerms": [],
+  "items": [],
+  "candidateStats": {
+    "raw": 0,
+    "hardDropped": 0,
+    "nonEnvDropped": 0,
+    "promoDropped": 0,
+    "tableDropped": 0,
+    "kept": 0,
+    "failedPages": []
+  },
+  "counts": {
+    "total": 0,
+    "byLevel": {
+      "High": 0,
+      "Mid": 0,
+      "Low": 0
+    },
+    "byPart": {
+      "CEO 메시지": {
+        "High": 0,
+        "Mid": 0,
+        "Low": 0
+      },
+      "회사소개": {
+        "High": 0,
+        "Mid": 0,
+        "Low": 0
+      },
+      "기후/환경 토픽": {
+        "High": 0,
+        "Mid": 0,
+        "Low": 0
+      }
+    }
+  },
+  "wordCounts": {
+    "total": [
+      {
+        "term": "친환경",
+        "count": 1
+      }
+    ],
+    "pages": [
+      {
+        "page": 7,
+        "counts": [
+          {
+            "term": "친환경",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  "dryRun": null,
+  "report": {
+    "file": "greenwash-report.xlsx"
+  }
+}

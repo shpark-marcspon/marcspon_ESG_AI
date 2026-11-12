@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "synthetic": true,
+  "note": "G1 골든용 가상 확정 매핑. 실제 사람이 확정한 것이 아니다.",
+  "entries": [
+    {
+      "key": "폴리프로필렌수지|kg|",
+      "category": 1,
+      "factorId": "syn-d:pp-kg",
+      "confirmedBy": "synthetic-reviewer",
+      "confirmedAt": "2026-09-30T09:00:00+09:00",
+      "label": "폴리프로필렌 수지"
+    },
+    {
+      "key": "스테인리스강판sts304|tonne|",
+      "category": 1,
+      "factorId": "syn:gone",
+      "confirmedBy": "synthetic-reviewer",
+      "confirmedAt": "2026-09-30T09:00:00+09:00",
+      "label": "스테인리스 강판 STS304"
+    },
+    {
+      "key": "시멘트|kg|",
+      "category": 4,
+      "factorId": "syn-d:cement-kg",
+      "confirmedBy": "synthetic-reviewer",
+      "confirmedAt": "2026-09-30T09:00:00+09:00"
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+; core/llm 의 순수성: 호출 층은 틀도 DB 도 모른다.   확인: uv run lint-imports --config esgapi/core/llm/purity.importlinter
+;
+; 저장소 계약(.importlinter)의 「다」와 같은 꼴의 forbidden 계약이다. 그 파일은 여러 밴드가 같이 쓰는 파일이라 이 밴드가
+; 고치지 않았다. 병합 때 감독이 아래 source_modules 를 계약 「다」의 목록에 옮기면 이 파일은 지워도 된다.
+;
+; 모듈을 하나씩 적는다(와일드카드는 「setup 만 빼고」를 적지 못한다). Django 를 아는 파일은 둘뿐이고 여기에 없다:
+;   esgapi.core.llm.setup                       설정(Config)을 읽어 LlmClient 를 세운다
+;   esgapi.core.management.commands.llm_call    관리 명령
+; 패키지 자신(esgapi.core.llm 의 __init__.py)도 여기에 없다: forbidden 계약은 적힌 모듈을 그 아래 전부와 함께 보므로
+; (as_packages 기본값) 적으면 setup 까지 걸린다. __init__.py 는 아무것도 import 하지 않게 두고 테스트가 그것을 잰다.
+; providers·sinks 는 폴더째 적었다(그 아래에 생기는 모듈은 저절로 걸린다).
+; ★ core/llm 바로 아래에 모듈을 더하면 이 목록에도 더한다. 빠뜨리면 그 모듈은 지켜지지 않는다
+;   (esgapi/core/tests/test_llm_layers.py 가 폴더의 모듈과 이 목록을 견줘 빠진 것을 잡는다).
+[importlinter]
+root_package = esgapi
+include_external_packages = True
+
+[importlinter:contract:llm-pure]
+name = core/llm(setup 제외)·resources.ports.llm·resources.llm 은 django·ninja·psycopg 를 import 하지 않는다
+type = forbidden
+source_modules =
+    esgapi.core.llm.budget
+    esgapi.core.llm.client
+    esgapi.core.llm.config
+    esgapi.core.llm.cost
+    esgapi.core.llm.embedding
+    esgapi.core.llm.embedding_types
+    esgapi.core.llm.errors
+    esgapi.core.llm.log
+    esgapi.core.llm.prompts
+    esgapi.core.llm.retry
+    esgapi.core.llm.schema
+    esgapi.core.llm.throttle
+    esgapi.core.llm.types
+    esgapi.core.llm.providers
+    esgapi.core.llm.sinks
+    esgapi.core.resources.ports.llm
+    esgapi.core.resources.llm
+forbidden_modules =
+    django
+    ninja
+    psycopg

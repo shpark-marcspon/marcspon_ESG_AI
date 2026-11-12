@@ -1,0 +1,227 @@
+{
+  "$defs": {
+    "GreenwashCompareCounts": {
+      "additionalProperties": false,
+      "description": "분류별 짝의 수. 일곱 키가 늘 있다(0 포함). pairs 를 다시 센 값이다.",
+      "properties": {
+        "resolved_deleted": {
+          "minimum": 0,
+          "title": "Resolved Deleted",
+          "type": "integer"
+        },
+        "resolved_not_flagged": {
+          "minimum": 0,
+          "title": "Resolved Not Flagged",
+          "type": "integer"
+        },
+        "resolved_undetermined": {
+          "minimum": 0,
+          "title": "Resolved Undetermined",
+          "type": "integer"
+        },
+        "remaining": {
+          "minimum": 0,
+          "title": "Remaining",
+          "type": "integer"
+        },
+        "level_changed": {
+          "minimum": 0,
+          "title": "Level Changed",
+          "type": "integer"
+        },
+        "new": {
+          "minimum": 0,
+          "title": "New",
+          "type": "integer"
+        },
+        "out_of_scope": {
+          "minimum": 0,
+          "title": "Out Of Scope",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "resolved_deleted",
+        "resolved_not_flagged",
+        "resolved_undetermined",
+        "remaining",
+        "level_changed",
+        "new",
+        "out_of_scope"
+      ],
+      "title": "GreenwashCompareCounts",
+      "type": "object"
+    },
+    "GreenwashComparePair": {
+      "additionalProperties": false,
+      "description": "짝 하나. 분류마다 base·target 의 있음은 머리말의 표대로다(꼴은 둘 다 null 을 받지만 그런 짝은 없다).",
+      "properties": {
+        "outcome": {
+          "description": "분류.",
+          "enum": [
+            "resolved_deleted",
+            "resolved_not_flagged",
+            "resolved_undetermined",
+            "remaining",
+            "level_changed",
+            "new",
+            "out_of_scope"
+          ],
+          "title": "Outcome",
+          "type": "string"
+        },
+        "base": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/GreenwashItemRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "base 판의 문장. 없으면 null."
+        },
+        "target": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/GreenwashItemRef"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "target 판의 문장. 없으면 null."
+        }
+      },
+      "required": [
+        "outcome",
+        "base",
+        "target"
+      ],
+      "title": "GreenwashComparePair",
+      "type": "object"
+    },
+    "GreenwashCompareSide": {
+      "additionalProperties": false,
+      "description": "견준 한 판(문서)과 그 대표 실행.",
+      "properties": {
+        "documentId": {
+          "description": "판(올린 문서)의 id.",
+          "title": "Documentid",
+          "type": "integer"
+        },
+        "runId": {
+          "description": "이 판의 대표 실행 id. 확정본이 있으면 그것, 없으면 마지막 실행.",
+          "title": "Runid",
+          "type": "integer"
+        },
+        "versionLabel": {
+          "description": "화면에 보일 판 이름(예: 「v2」). 서버가 짓는다(문서의 reportYear·판 차례에서). 짓는 법은 열린 물음이다.",
+          "title": "Versionlabel",
+          "type": "string"
+        },
+        "unconfirmed": {
+          "description": "대표 실행이 확정본이 아니면 true(마지막 실행을 대신 썼다). 미확정이면 모든 문장을 견준다.",
+          "title": "Unconfirmed",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "documentId",
+        "runId",
+        "versionLabel",
+        "unconfirmed"
+      ],
+      "title": "GreenwashCompareSide",
+      "type": "object"
+    },
+    "GreenwashItemRef": {
+      "additionalProperties": false,
+      "description": "한 판의 결과(greenwash.result@1)의 문장 하나를 가리킨다. 열쇠는 (그 판의 runId, itemIndex).\n\n`position`(쪽 위 자리)은 싣지 않는다: 화면은 하이라이트를 그릴 때 그 실행의 결과를 따로 받아 itemIndex 로 찾는다.\nsentence·level·parts·page 는 그 결과 항목의 값을 그대로 옮긴 것이다(목록과 엑셀을 결과 없이 그리기 위해).",
+      "properties": {
+        "itemIndex": {
+          "description": "그 실행의 결과 items 의 차례(0부터).",
+          "minimum": 0,
+          "title": "Itemindex",
+          "type": "integer"
+        },
+        "sentence": {
+          "description": "그 항목의 sentence.",
+          "title": "Sentence",
+          "type": "string"
+        },
+        "level": {
+          "description": "그 항목의 level.",
+          "enum": [
+            "High",
+            "Mid",
+            "Low"
+          ],
+          "title": "Level",
+          "type": "string"
+        },
+        "parts": {
+          "description": "그 항목의 parts.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Parts",
+          "type": "array"
+        },
+        "page": {
+          "description": "그 항목의 page(1부터).",
+          "minimum": 1,
+          "title": "Page",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "itemIndex",
+        "sentence",
+        "level",
+        "parts",
+        "page"
+      ],
+      "title": "GreenwashItemRef",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "greenwash.compare@1 — 두 판의 비교. schemaVersion 이 첫 키다.",
+  "properties": {
+    "schemaVersion": {
+      "const": "greenwash.compare@1",
+      "title": "Schemaversion",
+      "type": "string"
+    },
+    "base": {
+      "$ref": "#/$defs/GreenwashCompareSide",
+      "description": "앞 판."
+    },
+    "target": {
+      "$ref": "#/$defs/GreenwashCompareSide",
+      "description": "이번 판."
+    },
+    "pairs": {
+      "description": "짝 목록. 차례는 수정본 밴드가 정한다(엑셀 시트의 줄 차례와 같다).",
+      "items": {
+        "$ref": "#/$defs/GreenwashComparePair"
+      },
+      "title": "Pairs",
+      "type": "array"
+    },
+    "counts": {
+      "$ref": "#/$defs/GreenwashCompareCounts",
+      "description": "분류별 수."
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "base",
+    "target",
+    "pairs",
+    "counts"
+  ],
+  "title": "GreenwashCompareResult",
+  "type": "object"
+}

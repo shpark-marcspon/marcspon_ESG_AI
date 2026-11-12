@@ -1,0 +1,524 @@
+{
+  "schemaVersion": "materiality.result@2",
+  "company": {
+    "name": "가상물류"
+  },
+  "scope": {
+    "topicCount": 3,
+    "sector": "non_financial",
+    "whitelist": "cell73",
+    "dateRange": "2025-01-01~오늘까지",
+    "geoScope": "가상 범위(대한민국/EU 우선)",
+    "userLocation": "KR",
+    "mainLanguage": "한국어",
+    "latestEventMode": false
+  },
+  "settings": {
+    "model": "gpt-4o",
+    "temperature": "0.1",
+    "searchContextSize": "low",
+    "promptIds": {
+      "regulation": null,
+      "keywords": null,
+      "controversy": null
+    },
+    "part2": {
+      "model": "gpt-4.1",
+      "maxOutputTokens": 32768,
+      "latestEventMode": false,
+      "promptIds": {
+        "impact": "materiality/impact@1",
+        "financial": "materiality/financial@1",
+        "pathway": "materiality/pathway@1"
+      }
+    }
+  },
+  "part1": {
+    "keywords": {
+      "status": "done",
+      "byTopic": [
+        {
+          "topic": "가상토픽 하나",
+          "keywords": [
+            "가상 키워드 1",
+            "가상 키워드 2"
+          ]
+        },
+        {
+          "topic": "가상토픽 셋",
+          "keywords": [
+            "가상 키워드 3"
+          ]
+        }
+      ],
+      "raw": "{\"topics\": [{\"topic\": \"가상토픽 하나\", \"keywords\": [\"가상 키워드 1\", \"가상 키워드 2\"]}, {\"topic\": \"가상토픽 셋\", \"keywords\": [\"가상 키워드 3\"]}]}"
+    },
+    "topics": [
+      {
+        "topic": "가상토픽 하나",
+        "description": "가상토픽 하나의 설명 — 가상의 배출 관리",
+        "keywordStr": "가상 키워드 1, 가상 키워드 2",
+        "regulation": {
+          "status": "done",
+          "parsed": {
+            "topic_name": "가상토픽 하나",
+            "results": {
+              "KR": [
+                {
+                  "title": "가상 규정 가",
+                  "summary": "가상 규정 가의 요약.",
+                  "jurisdiction": "대한민국",
+                  "authority": "가상부",
+                  "event_date": "2025-03-01",
+                  "publish_date": "2025-03-02",
+                  "why_dates_differ": "가상 사유.",
+                  "status": "시행 중",
+                  "primary_url": "https://example.go.kr/virtual/a"
+                }
+              ],
+              "EU": [
+                {
+                  "title": "가상 지침 나",
+                  "summary": "가상 지침 나의 요약.",
+                  "jurisdiction": "EU",
+                  "authority": "Virtual Commission",
+                  "event_date": null,
+                  "publish_date": "2025-05-10",
+                  "why_dates_differ": "원문 기준 명확한 날짜 표기 없음",
+                  "status": "채택",
+                  "primary_url": "https://example.europa.eu/virtual/b"
+                }
+              ],
+              "US": []
+            },
+            "self_check": {
+              "banned_domain_used": false,
+              "notes": "가상 점검 메모."
+            }
+          },
+          "items": [
+            {
+              "title": "가상 규정 가",
+              "summary": "가상 규정 가의 요약.",
+              "jurisdiction": "대한민국",
+              "authority": "가상부",
+              "event_date": "2025-03-01",
+              "publish_date": "2025-03-02",
+              "status": "시행 중",
+              "primary_url": "https://example.go.kr/virtual/a",
+              "region": "KR"
+            },
+            {
+              "title": "가상 지침 나",
+              "summary": "가상 지침 나의 요약.",
+              "jurisdiction": "EU",
+              "authority": "Virtual Commission",
+              "event_date": null,
+              "publish_date": "2025-05-10",
+              "status": "채택",
+              "primary_url": "https://example.europa.eu/virtual/b",
+              "region": "EU"
+            }
+          ],
+          "selfCheck": {
+            "banned_domain_used": false,
+            "notes": "가상 점검 메모."
+          },
+          "topicNameMismatch": false
+        },
+        "controversy": {
+          "status": "done",
+          "parsed": {
+            "topic_name": "가상 토픽1",
+            "results": {
+              "items": [
+                {
+                  "title": "가상 사건 다",
+                  "date": "2025-07-01",
+                  "summary": "가상 사건 다의 요약.",
+                  "severity": "중간",
+                  "status": "조사중",
+                  "url": "https://example.com/virtual/c"
+                }
+              ],
+              "found_count": 1,
+              "reason": "가상 사유 — 가상 사건이 적다."
+            },
+            "self_check": {
+              "korea_included": true,
+              "notes": "가상 컨트로버시 메모."
+            },
+            "topic_name_expected": "가상토픽 하나"
+          },
+          "items": [
+            {
+              "title": "가상 사건 다",
+              "date": "2025-07-01",
+              "summary": "가상 사건 다의 요약.",
+              "severity": "중간",
+              "status": "조사중",
+              "url": "https://example.com/virtual/c",
+              "region": null
+            }
+          ],
+          "selfCheck": {
+            "korea_included": true,
+            "notes": "가상 컨트로버시 메모."
+          },
+          "topicNameMismatch": true
+        }
+      },
+      {
+        "topic": "가상토픽 둘",
+        "description": "가상토픽 둘의 설명 — 가상의 안전 관리",
+        "keywordStr": "(키워드 없음)",
+        "regulation": {
+          "status": "failed",
+          "raw": "가상 답 — 객체가 없다",
+          "parseError": "No JSON object start '{' found",
+          "failure": {
+            "kind": "unparsable",
+            "message": "모델의 답에서 JSON 객체를 읽지 못했다."
+          }
+        },
+        "controversy": {
+          "status": "failed",
+          "raw": "",
+          "parseError": "no_result",
+          "failure": {
+            "kind": "provider_error",
+            "message": "provider_error"
+          }
+        }
+      },
+      {
+        "topic": "가상토픽 셋",
+        "description": "가상토픽 셋의 설명 — 가상의 이사회 운영",
+        "keywordStr": null,
+        "regulation": {
+          "status": "not_run",
+          "message": "앞 단계에서 멈춰 돌리지 않았다."
+        },
+        "controversy": {
+          "status": "not_run",
+          "message": "앞 단계에서 멈춰 돌리지 않았다."
+        }
+      }
+    ]
+  },
+  "part2": {
+    "status": "done",
+    "input": {
+      "source": "result"
+    },
+    "topics": [
+      {
+        "topic": "가상토픽 하나",
+        "description": "가상토픽 하나의 설명 — 가상의 배출 관리",
+        "subtopics": [
+          {
+            "name": "가상 서브토픽 가",
+            "description": "가상 서브토픽 가의 설명",
+            "autofilled": false,
+            "impact": {
+              "status": "done",
+              "parsed": {
+                "topic": "가상토픽 하나",
+                "subtopic": "가상 서브토픽 가",
+                "impacts": [
+                  {
+                    "impact_definition": "가상 시설 운영으로 전력 사용이 늘어 가상 배출 증가",
+                    "impact_type": "부정",
+                    "value_chain_activities": [
+                      "가상 활동"
+                    ],
+                    "context": {
+                      "regulations": [
+                        {
+                          "title": "가상 규정 가",
+                          "summary": "가상 규정 가의 요약",
+                          "url": "https://example.com/reg/가"
+                        }
+                      ],
+                      "controversies": [
+                        {
+                          "title": "가상 사건 가",
+                          "summary": "가상 사건 가의 요약",
+                          "url": "https://example.com/con/가"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              "rows": [
+                {
+                  "impactDefinition": "가상 시설 운영으로 전력 사용이 늘어 가상 배출 증가",
+                  "impactType": "부정",
+                  "valueChainActivities": [
+                    "가상 활동"
+                  ],
+                  "context": {
+                    "regulations": [
+                      {
+                        "title": "가상 규정 가",
+                        "summary": "가상 규정 가의 요약",
+                        "url": "https://example.com/reg/가"
+                      }
+                    ],
+                    "controversies": [
+                      {
+                        "title": "가상 사건 가",
+                        "summary": "가상 사건 가의 요약",
+                        "url": "https://example.com/con/가"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            "financial": {
+              "status": "done",
+              "parsed": {
+                "topic": "가상토픽 하나",
+                "subtopic": "가상 서브토픽 가",
+                "impacts": [
+                  {
+                    "impact_definition": "가상 배출권 단가 상승으로 구매 비용이 늘어 비용 증가",
+                    "impact_type": "리스크",
+                    "risk_type": "리스크-규제 및 법률",
+                    "value_chain_activities": [
+                      "가상 활동"
+                    ],
+                    "context": {
+                      "regulations": [
+                        {
+                          "title": "가상 규정 나",
+                          "summary": "가상 규정 나의 요약",
+                          "url": "https://example.com/reg/나"
+                        }
+                      ],
+                      "controversies": [
+                        {
+                          "title": "가상 사건 나",
+                          "summary": "가상 사건 나의 요약",
+                          "url": "https://example.com/con/나"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "impact_definition": "가상 저탄소 서비스 수요가 늘어 매출 증가 기회",
+                    "impact_type": "기회",
+                    "risk_type": null,
+                    "value_chain_activities": [],
+                    "context": {
+                      "controversies": [],
+                      "regulations": []
+                    }
+                  }
+                ]
+              },
+              "rows": [
+                {
+                  "impactDefinition": "가상 배출권 단가 상승으로 구매 비용이 늘어 비용 증가",
+                  "impactType": "리스크",
+                  "riskType": "리스크-규제 및 법률",
+                  "valueChainActivities": [
+                    "가상 활동"
+                  ],
+                  "context": {
+                    "regulations": [
+                      {
+                        "title": "가상 규정 나",
+                        "summary": "가상 규정 나의 요약",
+                        "url": "https://example.com/reg/나"
+                      }
+                    ],
+                    "controversies": [
+                      {
+                        "title": "가상 사건 나",
+                        "summary": "가상 사건 나의 요약",
+                        "url": "https://example.com/con/나"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "impactDefinition": "가상 저탄소 서비스 수요가 늘어 매출 증가 기회",
+                  "impactType": "기회",
+                  "riskType": null,
+                  "valueChainActivities": [],
+                  "context": {
+                    "regulations": [],
+                    "controversies": []
+                  }
+                }
+              ]
+            },
+            "pathway": {
+              "status": "done",
+              "parsed": {
+                "pathways": [
+                  {
+                    "i": 1,
+                    "impact_definition": "가상 배출권 단가 상승으로 구매 비용이 늘어 비용 증가",
+                    "impact_driver": "가상 배출권 규제 강화",
+                    "business_impact": "가상 조달 계획 조정 압력 증가",
+                    "financial_impact": "비용: 가상 배출권 구매 비용 증가"
+                  },
+                  {
+                    "i": 2,
+                    "impact_definition": "가상 저탄소 서비스 수요가 늘어 매출 증가 기회",
+                    "impact_driver": "가상 저탄소 수요 증가",
+                    "business_impact": "가상 서비스 포트폴리오 확대",
+                    "financial_impact": "수익: 가상 서비스 매출 확대"
+                  }
+                ]
+              },
+              "rows": [
+                {
+                  "i": 1,
+                  "impactDefinition": "가상 배출권 단가 상승으로 구매 비용이 늘어 비용 증가",
+                  "impactDriver": "가상 배출권 규제 강화",
+                  "businessImpact": "가상 조달 계획 조정 압력 증가",
+                  "financialImpact": "비용: 가상 배출권 구매 비용 증가",
+                  "impactType": "리스크",
+                  "riskType": "리스크-규제 및 법률",
+                  "context": {
+                    "regulations": [
+                      {
+                        "title": "가상 규정 나",
+                        "summary": "가상 규정 나의 요약",
+                        "url": "https://example.com/reg/나"
+                      }
+                    ],
+                    "controversies": [
+                      {
+                        "title": "가상 사건 나",
+                        "summary": "가상 사건 나의 요약",
+                        "url": "https://example.com/con/나"
+                      }
+                    ]
+                  }
+                },
+                {
+                  "i": 2,
+                  "impactDefinition": "가상 저탄소 서비스 수요가 늘어 매출 증가 기회",
+                  "impactDriver": "가상 저탄소 수요 증가",
+                  "businessImpact": "가상 서비스 포트폴리오 확대",
+                  "financialImpact": "수익: 가상 서비스 매출 확대",
+                  "impactType": "기회",
+                  "riskType": null,
+                  "context": {
+                    "regulations": [],
+                    "controversies": []
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "topic": "가상토픽 둘",
+        "description": "가상토픽 둘의 설명 — 가상의 안전 관리",
+        "subtopics": [
+          {
+            "name": "가상토픽 둘",
+            "description": "가상토픽 둘의 설명 — 가상의 안전 관리",
+            "autofilled": true,
+            "impact": {
+              "status": "failed",
+              "raw": "가상 표 꼴의 답(JSON 아님)",
+              "parseError": "JSONDecodeError: Expecting value: line 1 column 1 (char 0)",
+              "failure": {
+                "kind": "unparsable",
+                "message": "모델의 답에서 JSON 객체를 읽지 못했다."
+              }
+            },
+            "financial": {
+              "status": "failed",
+              "raw": null,
+              "parseError": null,
+              "failure": {
+                "kind": "timeout",
+                "message": "timeout"
+              }
+            },
+            "pathway": {
+              "status": "not_run",
+              "message": "재무 영향이 실패했거나 rows 가 0 이라 부르지 않았다(코랩 셀 55 의 [MISSING fin_impact])."
+            }
+          }
+        ]
+      },
+      {
+        "topic": "가상토픽 셋",
+        "description": "가상토픽 셋의 설명 — 가상의 이사회 운영",
+        "subtopics": [
+          {
+            "name": "가상토픽 셋",
+            "description": "가상토픽 셋의 설명 — 가상의 이사회 운영",
+            "autofilled": true,
+            "impact": {
+              "status": "done",
+              "parsed": {
+                "impacts": []
+              },
+              "rows": []
+            },
+            "financial": {
+              "status": "done",
+              "parsed": {
+                "impacts": []
+              },
+              "rows": []
+            },
+            "pathway": {
+              "status": "not_run",
+              "message": "재무 영향이 실패했거나 rows 가 0 이라 부르지 않았다(코랩 셀 55 의 [MISSING fin_impact])."
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "warnings": [
+    {
+      "code": "topic_name_mismatch",
+      "message": "컨트로버시 답의 topic_name 이 입력 토픽명과 다르다.",
+      "topic": "가상토픽 하나",
+      "phase": null,
+      "subtopic": null
+    },
+    {
+      "code": "keywords_missing_for_topic",
+      "message": "키워드가 없어 「(키워드 없음)」으로 조사했다.",
+      "topic": "가상토픽 둘",
+      "phase": null,
+      "subtopic": null
+    },
+    {
+      "code": "subtopic_autofilled",
+      "message": "서브토픽이 없어 토픽 설명으로 하나 지어 넣었다(코랩 셀 46).",
+      "topic": "가상토픽 둘",
+      "phase": null,
+      "subtopic": null
+    },
+    {
+      "code": "subtopic_autofilled",
+      "message": "서브토픽이 없어 토픽 설명으로 하나 지어 넣었다(코랩 셀 46).",
+      "topic": "가상토픽 셋",
+      "phase": null,
+      "subtopic": null
+    },
+    {
+      "code": "answer_truncated",
+      "message": "답이 출력 상한에서 잘렸다(읽혔으면 그 부분으로 done, 못 읽었으면 failed·truncated).",
+      "topic": "가상토픽 셋",
+      "phase": "impact",
+      "subtopic": "가상토픽 셋"
+    }
+  ]
+}

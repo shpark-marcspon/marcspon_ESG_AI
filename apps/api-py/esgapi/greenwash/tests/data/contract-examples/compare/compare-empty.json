@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "greenwash.compare@1",
+  "base": {
+    "documentId": 13,
+    "runId": 111,
+    "versionLabel": "v1",
+    "unconfirmed": false
+  },
+  "target": {
+    "documentId": 14,
+    "runId": 121,
+    "versionLabel": "v2",
+    "unconfirmed": false
+  },
+  "pairs": [],
+  "counts": {
+    "resolved_deleted": 0,
+    "resolved_not_flagged": 0,
+    "resolved_undetermined": 0,
+    "remaining": 0,
+    "level_changed": 0,
+    "new": 0,
+    "out_of_scope": 0
+  }
+}

@@ -1,0 +1,32 @@
+// 계정 model 칸의 공개 표면(밴드 AD1 ②). 순수 함수와 타입만 있다(app/guards/layers.test.ts).
+export {
+  ACCESS_TTL_MINUTES,
+  ACCOUNT_QUERY_MAX,
+  ACCOUNT_STATUSES,
+  NO_FILTER,
+  STATUS_FILTERS,
+  accountQuery,
+  isFiltered,
+  searchText,
+  NAME_MAX,
+  PASSWORD_GROUPS,
+  TEMPORARY_PASSWORD_LENGTH,
+  USERNAME_PATTERN,
+  formatCreatedDate,
+  formatLastLogin,
+  makeTemporaryPassword,
+  nameLength,
+  nameToSend,
+  statusOf,
+  uniformIndex,
+  usernameProblem,
+} from './account.ts';
+export type {
+  Account,
+  AccountFilter,
+  AccountPage,
+  AccountQuery,
+  AccountStatus,
+  RandomFill,
+  StatusFilter,
+} from './account.ts';

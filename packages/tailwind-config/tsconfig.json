@@ -1,0 +1,11 @@
+{
+  "extends": "@marcspon/typescript-config/react-library.json",
+  "compilerOptions": {
+    "rootDir": "./",
+    "outDir": "dist",
+    "moduleResolution": "Bundler",
+    "module": "ESNext"
+  },
+  "include": ["src", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules", "dist"]
+}

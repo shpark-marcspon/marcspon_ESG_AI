@@ -1,0 +1,194 @@
+/**
+ * `.twp` 래퍼 하위에만 적용되는 스코프드 preflight.
+ *
+ * 전역 preflight는 기존 Chakra 화면(resetCSS)과 충돌하므로 비활성화되어 있고
+ * (tailwind.config.ts corePlugins.preflight=false), Tailwind/shadcn으로 전환된
+ * 페이지는 루트 요소에 `twp` 클래스를 붙여 이 리셋을 옵트인한다.
+ *
+ * 중요: 요소 선택자는 반드시 :where()로 감싼다. `.twp input`(0-1-1)은
+ * 유틸리티 클래스(0-1-0)를 이겨버려 pl-7, text-lg 등이 무시된다.
+ * `.twp :where(input)`(0-1-0)은 유틸리티와 동률이고, 이 파일이
+ * @tailwind utilities보다 먼저 로드되므로 유틸리티가 항상 이긴다 —
+ * 원본 Tailwind preflight와 동일한 우선순위 계약.
+ *
+ * 내용은 Tailwind v3 preflight에서 shadcn 컴포넌트 동작에 필요한 핵심 규칙만
+ * 발췌한 것이다 (box-sizing, 기본 border 스타일, 폼 요소 상속, 미디어 블록화).
+ */
+.twp,
+.twp :where(*),
+.twp :where(*)::before,
+.twp :where(*)::after {
+  box-sizing: border-box;
+  border-width: 0;
+  border-style: solid;
+  /*
+   * Chakra 테마 전역 스타일(`*, *::before, *::after { borderColor: gray.200 }`)의 기본 테두리색
+   * #e2e8f0. Tailwind 기본값(gray-200 #e5e7eb)과 3단계 차이라 색 지정 없이 테두리만 그리는 요소가
+   * Chakra 화면과 다르게 보이지 않도록 같은 값으로 맞춘다.
+   */
+  border-color: #e2e8f0;
+  /*
+   * Chakra CSSReset은 `:where(*, *::before, *::after) { word-wrap: break-word }`로
+   * 모든 요소에 긴 단어 줄바꿈을 허용했다. Tailwind preflight에는 없어서 Chakra 화면과
+   * 달리 긴 URL·영단어가 칸 밖으로 넘치므로 같은 규칙을 둔다(에디터 분할 측정기도 break-word 전제).
+   */
+  word-wrap: break-word;
+}
+
+/*
+ * 타이포그래피 기본값은 최상위 `.twp`(다른 `.twp` 안에 있지 않은 것)에만 준다.
+ * `:where()`로 감싸 특이도는 `.twp` 한 개(0,1,0)로 유지한다. 그래야 같은 요소에 붙은
+ * 단일 클래스 텍스트 스타일(text-style-*)이 이 기본값을 정상적으로 덮어쓴다.
+ * 프리미티브(Flex/Box/Text 등)는 모두 `twp` 클래스를 달고 중첩되므로, 여기서
+ * font-weight/line-height/color를 매 요소에 직접 지정하면 부모(예: 모달 헤더의
+ * pre-heading-02, 굵기 700)에서 내려오는 값을 끊어 Chakra와 다르게 보인다.
+ * 중첩된 `.twp`는 Chakra Box처럼 조상 값을 그대로 상속한다.
+ */
+.twp:where(:not(.twp *)) {
+  line-height: 1.5;
+  color: var(--marcspon-token-text-primary, #1c1e21);
+  font-family: var(--font-pretendard), sans-serif;
+  font-weight: 400;
+  -webkit-text-size-adjust: 100%;
+  tab-size: 4;
+  /* Chakra CSSReset이 body에 주던 값(`font-feature-settings: "kern"`)을 그대로 옮긴다. */
+  font-feature-settings: "kern";
+  font-variation-settings: normal;
+  -webkit-tap-highlight-color: transparent;
+  /*
+   * Chakra CSSReset(@chakra-ui/css-reset)이 html에 주입하던 폰트 렌더링 힌트를
+   * 그대로 옮긴다. 이 속성들은 상속되므로 Chakra 화면은 antialiased(grayscale)로
+   * 렌더됐지만, CSSReset이 없는 Tailwind 화면은 기본 subpixel 렌더로 떨어져
+   * 텍스트 두께·색이 미묘하게 달라 보였다. 두 시스템의 렌더링을 일치시킨다.
+   */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+.twp :where(h1, h2, h3, h4, h5, h6) {
+  font-size: inherit;
+  font-weight: inherit;
+  margin: 0;
+}
+
+.twp :where(p, blockquote, dl, dd, figure, pre, hr) {
+  margin: 0;
+}
+
+.twp :where(hr) {
+  height: 0;
+  color: inherit;
+  border-top-width: 1px;
+}
+
+.twp :where(a) {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+/*
+ * chakra CSSReset·globals.css와 같이 700 고정. Tailwind 기본 preflight의 `bolder`는
+ * 부모가 300(에디터 기본 본문)일 때 400밖에 되지 않아 부분 굵게가 보이지 않는다.
+ */
+.twp :where(b, strong) {
+  font-weight: 700;
+}
+
+.twp :where(small) {
+  font-size: 80%;
+}
+
+.twp :where(table) {
+  text-indent: 0;
+  border-color: inherit;
+  border-collapse: collapse;
+}
+
+.twp :where(button, input, optgroup, select, textarea) {
+  font-family: inherit;
+  font-feature-settings: inherit;
+  font-variation-settings: inherit;
+  font-size: 100%;
+  font-weight: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  color: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+.twp :where(button, select) {
+  text-transform: none;
+}
+
+.twp
+  :where(
+    button,
+    input[type="button"],
+    input[type="reset"],
+    input[type="submit"]
+  ) {
+  -webkit-appearance: button;
+  background-color: transparent;
+  background-image: none;
+}
+
+.twp :where(input, textarea)::placeholder {
+  opacity: 1;
+  color: theme("colors.grey.400", #b0b7bf);
+}
+
+.twp :where(button, [role="button"]) {
+  cursor: pointer;
+}
+
+.twp :where(:disabled) {
+  cursor: default;
+}
+
+.twp :where(img, svg, video, canvas, audio, iframe, embed, object) {
+  display: block;
+  vertical-align: middle;
+}
+
+.twp :where(img, video) {
+  max-width: 100%;
+  height: auto;
+}
+
+/*
+ * Chakra CSSReset(normalize 유래)의 `img { border-style: none }`.
+ * Tailwind preflight에는 없어서, border-width만 지정된 이미지(예: 에디터 .node-imageBlock img의
+ * 투명 2px 테두리)가 Chakra 화면에서는 0으로 접히던 것이 Tailwind 화면에서는 박스를 키웠다.
+ */
+.twp :where(img) {
+  border-style: none;
+}
+
+.twp :where([hidden]) {
+  display: none;
+}
+
+.twp :where(ol, ul, menu) {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.twp :where(fieldset) {
+  margin: 0;
+  padding: 0;
+}
+
+.twp :where(legend) {
+  padding: 0;
+}
+
+.twp :where(textarea) {
+  resize: vertical;
+}
+
+.twp :where(summary) {
+  display: list-item;
+}

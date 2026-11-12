@@ -1,0 +1,33 @@
+/* 서버 호출을 띄워 보는 화면. 디자인이 아니다: 구획을 가르고 실패를 눈에 띄게 하는 것뿐이다. */
+.ad {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 16px;
+  font:
+    14px/1.5 system-ui,
+    sans-serif;
+}
+.ad h1 {
+  font-size: 18px;
+}
+.ad section {
+  border-top: 1px solid #d4d4d8;
+  padding: 12px 0;
+}
+.ad h2 {
+  font-size: 14px;
+  margin: 0 0 6px;
+}
+.ad code {
+  font-family: ui-monospace, monospace;
+}
+.ad input {
+  margin-right: 6px;
+  padding: 2px 6px;
+}
+.ad [role='alert'] {
+  color: #b91c1c;
+}
+.ad .ad-note {
+  color: #52525b;
+}

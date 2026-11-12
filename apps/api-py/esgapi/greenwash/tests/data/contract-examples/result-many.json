@@ -1,0 +1,1181 @@
+{
+  "schemaVersion": "greenwash.result@1",
+  "source": {
+    "fileName": "example-long-report.pdf",
+    "sha256": "ba9c88b7bd71c494a9cf652d6b0d489832166d5aca86c972c2c3978e8469e01a",
+    "pageCount": 14
+  },
+  "config": {
+    "checker": {
+      "maxCandidatesPerPage": 3,
+      "maxCharsPageText": 2500,
+      "evidenceK": 2,
+      "maxCharsPerChunk": 450,
+      "useEvidenceFailopen": false,
+      "maxCharsEvidenceTotal": 1600,
+      "reportLevels": [
+        "High",
+        "Mid",
+        "Low"
+      ],
+      "debug": true,
+      "debugPages": 2,
+      "batchEval": false,
+      "promptVersion": "2026-01-15-v1"
+    },
+    "chunking": {
+      "chunkSize": 800,
+      "chunkOverlap": 150,
+      "separators": [
+        "\n\n",
+        "\n",
+        " "
+      ],
+      "normalize": true,
+      "embeddingBatchSize": 50
+    },
+    "chat": {
+      "temperature": 0.0,
+      "maxTokens": 1300
+    }
+  },
+  "models": {
+    "chat": "gpt-4.1-mini",
+    "embedding": "text-embedding-3-small"
+  },
+  "promptVersion": "2026-01-15-v1",
+  "parts": [
+    {
+      "name": "CEO 메시지",
+      "pages": [
+        2,
+        3
+      ]
+    },
+    {
+      "name": "회사소개",
+      "pages": [
+        4,
+        5,
+        6,
+        7
+      ]
+    },
+    {
+      "name": "기후/환경 토픽",
+      "pages": [
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ]
+    }
+  ],
+  "pages": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12
+  ],
+  "extraTerms": [],
+  "items": [
+    {
+      "page": 2,
+      "parts": [
+        "CEO 메시지"
+      ],
+      "sentence": "[예시 1] 물류 차량을(를) 100% 친환경으로 전환하겠습니다.",
+      "level": "High",
+      "riskTags": [
+        "미래 약속"
+      ],
+      "confirmedInEvidence": [],
+      "missingFields": [
+        "이행 계획",
+        "기준연도"
+      ],
+      "reasonBullets": [
+        "지어낸 사유 1: 근거 조각과 문장을 견준 결과다."
+      ],
+      "fixParagraph": "물류 차량에 관한 주장에는 기준연도와 수치, 달성 기한, 측정 방법을 함께 밝혀 읽는 사람이 주장을 확인할 수 있도록 보완이 필요합니다.",
+      "evidencePages": [
+        2
+      ],
+      "evidenceInternal": "지어낸 판단 근거 1",
+      "position": null,
+      "exampleSentence": null
+    },
+    {
+      "page": 2,
+      "parts": [
+        "CEO 메시지"
+      ],
+      "sentence": "[예시 2] 포장재의 탄소 배출을 획기적으로 줄였습니다.",
+      "level": "Mid",
+      "riskTags": [
+        "모호한 표현"
+      ],
+      "confirmedInEvidence": [],
+      "missingFields": [
+        "감축량 수치"
+      ],
+      "reasonBullets": [
+        "지어낸 사유 2: 근거 조각과 문장을 견준 결과다."
+      ],
+      "fixParagraph": "포장재에 관한 주장에는 기준연도와 수치, 달성 기한, 측정 방법을 함께 밝혀 읽는 사람이 주장을 확인할 수 있도록 보완이 필요합니다.",
+      "evidencePages": [
+        2
+      ],
+      "evidenceInternal": "지어낸 판단 근거 2",
+      "position": null,
+      "exampleSentence": null
+    },
+    {
+      "page": 2,
+      "parts": [
+        "CEO 메시지"
+      ],
+      "sentence": "[예시 3] 본사 건물의 탄소 배출을 획기적으로 줄였습니다.",
+      "level": "Mid",
+      "riskTags": [
+        "모호한 표현"
+      ],
+      "confirmedInEvidence": [],
+      "missingFields": [
+        "감축량 수치"
+      ],
+      "reasonBullets": [
+        "지어낸 사유 3: 근거 조각과 문장을 견준 결과다."
+      ],
+      "fixParagraph": "본사 건물에 관한 주장에는 기준연도와 수치, 달성 기한, 측정 방법을 함께 밝혀 읽는 사람이 주장을 확인할 수 있도록 보완이 필요합니다.",
+      "evidencePages": [
+        2
+      ],
+      "evidenceInternal": "지어낸 판단 근거 3",
+      "position": null,
+      "exampleSentence": null
+    },
+    {
+      "page": 2,
+      "parts": [
+        "CEO 메시지"
+      ],
+      "sentence": "[예시 4] 데이터센터에서도 환경을 생각하는 경영을 계속 실천하겠습니다.",
+      "level": "Low",
+      "riskTags": [
+        "선언적 문장"
+      ],
+      "confirmedInEvidence": [],
+      "missingFields": [],
+      "reasonBullets": [
+        "지어낸 사유 4: 근거 조각과 문장을 견준 결과다."
+      ],
+      "fixParagraph": "데이터센터에 관한 주장에는 기준연도와 수치, 달성 기한, 측정 방법을 함께 밝혀 읽는 사람이 주장을 확인할 수 있도록 보완이 필요합니다.",
+      "evidencePages": [
+        2
+      ],
+      "evidenceInternal": "",
+      "position": null,
+      "exampleSentence": null
+    },
+    {
+      "page": 3,
+      "parts": [
+        "CEO 메시지"
+      ],
+      "sentence": "[예시 5] 협력사 공장을(를) 100% 친환경으로 전환하겠습니다.",
+      "level": "High",
+      "riskTags": [
+        "미래 약속"
+      ],
+      "confirmedInEvidence": [],
+      "missingFields": [
+        "이행 계획",
+        "기준연도"
+      ],
+      "reasonBullets": [
+        "지어낸 사유 5: 근거 조각과 문장을 견준 결과다."
+      ],
+      "fixParagraph": "협력사 공장에 관한 주장에는 기준연도와 수치, 달성 기한, 측정 방법을 함께 밝혀 읽는 사람이 주장을 확인할 수 있도록 보완이 필요합니다.",
+      "evidencePages": [
+        3
+      ],
+      "evidenceInternal": "지어낸 판단 근거 5",
+      "position": null,
+      "exampleSentence": null
+    },
+    {
+      "page": 3,
+      "parts": [
+        "CEO 메시지"
+      ],
+      "sentence": "[예시 6] 제품 라인의 탄소 배출을 획기적으로 줄였습니다.",
+      "level": "Mid",
+      "riskTags": [
+        "모호한 표현"
+      ],
+      "confirmedInEvidence": [],
+      "missingFields": [
+        "감축량 수치"
+      ],
+      "reasonBullets": [
+        "지어낸 사유 6: 근거 조각과 문장을 견준 결과다."
+      ],
+      "fixParagraph": "제품 라인에 관한 주장에는 기준연도와 수치, 달성 기한, 측정 방법을 함께 밝혀 읽는 사람이 주장을 확인할 수 있도록 보완이 필요합니다.",
+      "evidencePages": [
+        3
+      ],
+      "evidenceInternal": "지어낸 판단 근거 6",
+      "position": null,
+      "exampleSentence": null
+    },
+    {
+      "page": 3,
+      "parts": [
+        "CEO 메시지"
+      ],
+      "sentence": "[예시 7] 물류 차량의 탄소 배출을 획기적으로 줄였습니다.",
+      "level": "Mid",
+      "riskTags": [
+        "모호한 표현"
+      ],
+      "confirmedInEvidence": [],
+      "missingFields": [
+        "감축량 수치"
+      ],
+      "reasonBullets": [
+        "지어낸 사유 7: 근거 조각과 문장을 견준 결과다."
+      ],
+      "fixParagraph": "물류 차량에 관한 주장에는 기준연도와 수치, 달성 기한, 측정 방법을 함께 밝혀 읽는 사람이 주장을 확인할 수 있도록 보완이 필요합니다.",
+      "evidencePages": [],
+      "evidenceInternal": "지어낸 판단 근거 7",
+      "position": null,
+      "exampleSentence": null
+    },
+    {
+      "page": 3,
+      "parts": [
+        "CEO 메시지"
+      ],
+      "sentence": "[예시 8] 포장재에서도 환경을 생각하는 경영을 계속 실천하겠습니다.",
+      "level": "Low",
+      "riskTags": [
+        "선언적 문장"
+      ],
+      "confirmedInEvidence": [],
+      "missingFields": [],
+      "reasonBullets": [
+        "지어낸 사유 8: 근거 조각과 문장을 견준 결과다."
+      ],
+      "fixParagraph": "포장재에 관한 주장에는 기준연도와 수치, 달성 기한, 측정 방법을 함께 밝혀 읽는 사람이 주장을 확인할 수 있도록 보완이 필요합니다.",
+      "evidencePages": [
+        3
+      ],
+      "evidenceInternal": "",
+      "position": null,
+      "exampleSentence": null
+    },
+    {
+      "page": 4,
+      "parts": [
+        "회사소개"
+      ],
+      "sentence": "[예시 9] 본사 건물을(를) 100% 친환경으로 전환하겠습니다.",
+      "level": "High",
+      "riskTags": [
+        "미래 약속"
+      ],
+      "confirmedInEvidence": [],
+      "missingFields": [
+        "이행 계획",
+        "기준연도"
+      ],
+      "reasonBullets": [
+        "지어낸 사유 9: 근거 조각과 문장을 견준 결과다."
+      ],
+      "fixParagraph": "본사 건물에 관한 주장에는 기준연도와 수치, 달성 기한, 측정 방법을 함께 밝혀 읽는 사람이 주장을 확인할 수 있도록 보완이 필요합니다.",
+      "evidencePages": [
+        4
+      ],
+      "evidenceInternal": "지어낸 판단 근거 9",
+      "position": null,
+      "exampleSentence": null
+    },
+    {
+      "page": 4,
+      "parts": [
+        "회사소개"
+      ],
+      "sentence": "[예시 10] 데이터센터의 탄소 배출을 획기적으로 줄였습니다.",
+      "level": "Mid",
+      "riskTags": [
+        "모호한 표현"
+      ],
+      "confirmedInEvidence": [],
+      "missingFields": [
+        "감축량 수치"
+      ],
+      "reasonBullets": [
+        "지어낸 사유 10: 근거 조각과 문장을 견준 결과다."
+      ],
+      "fixParagraph": "데이터센터에 관한 주장에는 기준연도와 수치, 달성 기한, 측정 방법을 함께 밝혀 읽는 사람이 주장을 확인할 수 있도록 보완이 필요합니다.",
+      "evidencePages": [
+        4
+      ],
+      "evidenceInternal": "지어낸 판단 근거 10",
+      "position": null,
+      "exampleSentence": null
+    },
+    {
+      "page": 4,
+      "parts": [
+        "회사소개"
+      ],
+      "sentence": "[예시 11] 협력사 공장의 탄소 배출을 획기적으로 줄였습니다.",
+      "level": "Mid",
+      "riskTags": [
+        "모호한 표현"
+      ],
+      "confirmedInEvidence": [],
+      "missingFields": [
+        "감축량 수치"
+      ],
+      "reasonBullets": [
+        "지어낸 사유 11: 근거 조각과 문장을 견준 결과다."
+      ],
+      "fixParagraph": "협력사 공장에 관한 주장에는 기준연도와 수치, 달성 기한, 측정 방법을 함께 밝혀 읽는 사람이 주장을 확인할 수 있도록 보완이 필요합니다.",
+      "evidencePages": [
+        4
+      ],
+      "evidenceInternal": "지어낸 판단 근거 11",
+      "position": null,
+      "exampleSentence": null
+    },
+    {
+      "page": 4,
+      "parts": [
+        "회사소개"
+      ],
+      "sentence": "[예시 12] 제품 라인에서도 환경을 생각하는 경영을 계속 실천하겠습니다.",
+      "level": "Low",
+      "riskTags": [
+        "선언적 문장"
+      ],
+      "confirmedInEvidence": [],
+      "missingFields": [],
+      "reasonBullets": [
+        "지어낸 사유 12: 근거 조각과 문장을 견준 결과다."
+      ],
+      "fixParagraph": "제품 라인에 관한 주장에는 기준연도와 수치, 달성 기한, 측정 방법을 함께 밝혀 읽는 사람이 주장을 확인할 수 있도록 보완이 필요합니다.",
+      "evidencePages": [
+        4
+      ],
+      "evidenceInternal": "",
+      "position": null,
+      "exampleSentence": null
+    },
+    {
+      "page": 5,
+      "parts": [
+        "회사소개"
+      ],
+      "sentence": "[예시 13] 물류 차량을(를) 100% 친환경으로 전환하겠습니다.",
+      "level": "High",
+      "riskTags": [
+        "미래 약속"
+      ],
+      "confirmedInEvidence": [],
+      "missingFields": [
+        "이행 계획",
+        "기준연도"
+      ],
+      "reasonBullets": [
+        "지어낸 사유 13: 근거 조각과 문장을 견준 결과다."
+      ],
+      "fixParagraph": "물류 차량에 관한 주장에는 기준연도와 수치, 달성 기한, 측정 방법을 함께 밝혀 읽는 사람이 주장을 확인할 수 있도록 보완이 필요합니다.",
+      "evidencePages": [
+        5
+      ],
+      "evidenceInternal": "지어낸 판단 근거 13",
+      "position": null,
+      "exampleSentence": null
+    },
+    {
+      "page": 5,
+      "parts": [
+        "회사소개"
+      ],
+      "sentence": "[예시 14] 포장재의 탄소 배출을 획기적으로 줄였습니다.",
+      "level": "Mid",
+      "riskTags": [
+        "모호한 표현"
+      ],
+      "confirmedInEvidence": [],
+      "missingFields": [
+        "감축량 수치"
+      ],
+      "reasonBullets": [
+        "지어낸 사유 14: 근거 조각과 문장을 견준 결과다."
+      ],
+      "fixParagraph": "포장재에 관한 주장에는 기준연도와 수치, 달성 기한, 측정 방법을 함께 밝혀 읽는 사람이 주장을 확인할 수 있도록 보완이 필요합니다.",
+      "evidencePages": [],
+      "evidenceInternal": "지어낸 판단 근거 14",
+      "position": null,
+      "exampleSentence": null
+    },
+    {
+      "page": 5,
+      "parts": [
+        "회사소개"
+      ],
+      "sentence": "[예시 15] 본사 건물에서도 환경을 생각하는 경영을 계속 실천하겠습니다.",
+      "level": "Low",
+      "riskTags": [
+        "선언적 문장"
+      ],
+      "confirmedInEvidence": [],
+      "missingFields": [],
+      "reasonBullets": [
+        "지어낸 사유 15: 근거 조각과 문장을 견준 결과다."
+      ],
+      "fixParagraph": "본사 건물에 관한 주장에는 기준연도와 수치, 달성 기한, 측정 방법을 함께 밝혀 읽는 사람이 주장을 확인할 수 있도록 보완이 필요합니다.",
+      "evidencePages": [
+        5
+      ],
+      "evidenceInternal": "",
+      "position": null,
+      "exampleSentence": null
+    },
+    {
+      "page": 6,
+      "parts": [
+        "회사소개"
+      ],
+      "sentence": "[예시 16] 데이터센터을(를) 100% 친환경으로 전환하겠습니다.",
+      "level": "High",
+      "riskTags": [
+        "미래 약속"
+      ],
+      "confirmedInEvidence": [],
+      "missingFields": [
+        "이행 계획",
+        "기준연도"
+      ],
+      "reasonBullets": [
+        "지어낸 사유 16: 근거 조각과 문장을 견준 결과다."
+      ],
+      "fixParagraph": "데이터센터에 관한 주장에는 기준연도와 수치, 달성 기한, 측정 방법을 함께 밝혀 읽는 사람이 주장을 확인할 수 있도록 보완이 필요합니다.",
+      "evidencePages": [
+        6
+      ],
+      "evidenceInternal": "지어낸 판단 근거 16",
+      "position": null,
+      "exampleSentence": null
+    },
+    {
+      "page": 6,
+      "parts": [
+        "회사소개"
+      ],
+      "sentence": "[예시 17] 협력사 공장의 탄소 배출을 획기적으로 줄였습니다.",
+      "level": "Mid",
+      "riskTags": [
+        "모호한 표현"
+      ],
+      "confirmedInEvidence": [],
+      "missingFields": [
+        "감축량 수치"
+      ],
+      "reasonBullets": [
+        "지어낸 사유 17: 근거 조각과 문장을 견준 결과다."
+      ],
+      "fixParagraph": "협력사 공장에 관한 주장에는 기준연도와 수치, 달성 기한, 측정 방법을 함께 밝혀 읽는 사람이 주장을 확인할 수 있도록 보완이 필요합니다.",
+      "evidencePages": [
+        6
+      ],
+      "evidenceInternal": "지어낸 판단 근거 17",
+      "position": null,
+      "exampleSentence": null
+    },
+    {
+      "page": 6,
+      "parts": [
+        "회사소개"
+      ],
+      "sentence": "[예시 18] 제품 라인에서도 환경을 생각하는 경영을 계속 실천하겠습니다.",
+      "level": "Low",
+      "riskTags": [
+        "선언적 문장"
+      ],
+      "confirmedInEvidence": [],
+      "missingFields": [],
+      "reasonBullets": [
+        "지어낸 사유 18: 근거 조각과 문장을 견준 결과다."
+      ],
+      "fixParagraph": "제품 라인에 관한 주장에는 기준연도와 수치, 달성 기한, 측정 방법을 함께 밝혀 읽는 사람이 주장을 확인할 수 있도록 보완이 필요합니다.",
+      "evidencePages": [
+        6
+      ],
+      "evidenceInternal": "",
+      "position": null,
+      "exampleSentence": null
+    },
+    {
+      "page": 7,
+      "parts": [
+        "회사소개",
+        "기후/환경 토픽"
+      ],
+      "sentence": "[예시 19] 물류 차량을(를) 100% 친환경으로 전환하겠습니다.",
+      "level": "High",
+      "riskTags": [
+        "미래 약속"
+      ],
+      "confirmedInEvidence": [],
+      "missingFields": [
+        "이행 계획",
+        "기준연도"
+      ],
+      "reasonBullets": [
+        "지어낸 사유 19: 근거 조각과 문장을 견준 결과다."
+      ],
+      "fixParagraph": "물류 차량에 관한 주장에는 기준연도와 수치, 달성 기한, 측정 방법을 함께 밝혀 읽는 사람이 주장을 확인할 수 있도록 보완이 필요합니다.",
+      "evidencePages": [
+        7
+      ],
+      "evidenceInternal": "지어낸 판단 근거 19",
+      "position": null,
+      "exampleSentence": null
+    },
+    {
+      "page": 7,
+      "parts": [
+        "회사소개",
+        "기후/환경 토픽"
+      ],
+      "sentence": "[예시 20] 포장재의 탄소 배출을 획기적으로 줄였습니다.",
+      "level": "Mid",
+      "riskTags": [
+        "모호한 표현"
+      ],
+      "confirmedInEvidence": [],
+      "missingFields": [
+        "감축량 수치"
+      ],
+      "reasonBullets": [
+        "지어낸 사유 20: 근거 조각과 문장을 견준 결과다."
+      ],
+      "fixParagraph": "포장재에 관한 주장에는 기준연도와 수치, 달성 기한, 측정 방법을 함께 밝혀 읽는 사람이 주장을 확인할 수 있도록 보완이 필요합니다.",
+      "evidencePages": [
+        7
+      ],
+      "evidenceInternal": "지어낸 판단 근거 20",
+      "position": null,
+      "exampleSentence": null
+    },
+    {
+      "page": 7,
+      "parts": [
+        "회사소개",
+        "기후/환경 토픽"
+      ],
+      "sentence": "[예시 21] 본사 건물에서도 환경을 생각하는 경영을 계속 실천하겠습니다.",
+      "level": "Low",
+      "riskTags": [
+        "선언적 문장"
+      ],
+      "confirmedInEvidence": [],
+      "missingFields": [],
+      "reasonBullets": [
+        "지어낸 사유 21: 근거 조각과 문장을 견준 결과다."
+      ],
+      "fixParagraph": "본사 건물에 관한 주장에는 기준연도와 수치, 달성 기한, 측정 방법을 함께 밝혀 읽는 사람이 주장을 확인할 수 있도록 보완이 필요합니다.",
+      "evidencePages": [],
+      "evidenceInternal": "",
+      "position": null,
+      "exampleSentence": null
+    },
+    {
+      "page": 8,
+      "parts": [
+        "기후/환경 토픽"
+      ],
+      "sentence": "[예시 22] 데이터센터을(를) 100% 친환경으로 전환하겠습니다.",
+      "level": "High",
+      "riskTags": [
+        "미래 약속"
+      ],
+      "confirmedInEvidence": [],
+      "missingFields": [
+        "이행 계획",
+        "기준연도"
+      ],
+      "reasonBullets": [
+        "지어낸 사유 22: 근거 조각과 문장을 견준 결과다."
+      ],
+      "fixParagraph": "데이터센터에 관한 주장에는 기준연도와 수치, 달성 기한, 측정 방법을 함께 밝혀 읽는 사람이 주장을 확인할 수 있도록 보완이 필요합니다.",
+      "evidencePages": [
+        8
+      ],
+      "evidenceInternal": "지어낸 판단 근거 22",
+      "position": null,
+      "exampleSentence": null
+    },
+    {
+      "page": 8,
+      "parts": [
+        "기후/환경 토픽"
+      ],
+      "sentence": "[예시 23] 협력사 공장의 탄소 배출을 획기적으로 줄였습니다.",
+      "level": "Mid",
+      "riskTags": [
+        "모호한 표현"
+      ],
+      "confirmedInEvidence": [],
+      "missingFields": [
+        "감축량 수치"
+      ],
+      "reasonBullets": [
+        "지어낸 사유 23: 근거 조각과 문장을 견준 결과다."
+      ],
+      "fixParagraph": "협력사 공장에 관한 주장에는 기준연도와 수치, 달성 기한, 측정 방법을 함께 밝혀 읽는 사람이 주장을 확인할 수 있도록 보완이 필요합니다.",
+      "evidencePages": [
+        8
+      ],
+      "evidenceInternal": "지어낸 판단 근거 23",
+      "position": null,
+      "exampleSentence": null
+    },
+    {
+      "page": 8,
+      "parts": [
+        "기후/환경 토픽"
+      ],
+      "sentence": "[예시 24] 제품 라인에서도 환경을 생각하는 경영을 계속 실천하겠습니다.",
+      "level": "Low",
+      "riskTags": [
+        "선언적 문장"
+      ],
+      "confirmedInEvidence": [],
+      "missingFields": [],
+      "reasonBullets": [
+        "지어낸 사유 24: 근거 조각과 문장을 견준 결과다."
+      ],
+      "fixParagraph": "제품 라인에 관한 주장에는 기준연도와 수치, 달성 기한, 측정 방법을 함께 밝혀 읽는 사람이 주장을 확인할 수 있도록 보완이 필요합니다.",
+      "evidencePages": [
+        8
+      ],
+      "evidenceInternal": "",
+      "position": null,
+      "exampleSentence": null
+    },
+    {
+      "page": 9,
+      "parts": [
+        "기후/환경 토픽"
+      ],
+      "sentence": "[예시 25] 물류 차량을(를) 100% 친환경으로 전환하겠습니다.",
+      "level": "High",
+      "riskTags": [
+        "미래 약속"
+      ],
+      "confirmedInEvidence": [],
+      "missingFields": [
+        "이행 계획",
+        "기준연도"
+      ],
+      "reasonBullets": [
+        "지어낸 사유 25: 근거 조각과 문장을 견준 결과다."
+      ],
+      "fixParagraph": "물류 차량에 관한 주장에는 기준연도와 수치, 달성 기한, 측정 방법을 함께 밝혀 읽는 사람이 주장을 확인할 수 있도록 보완이 필요합니다.",
+      "evidencePages": [
+        9
+      ],
+      "evidenceInternal": "지어낸 판단 근거 25",
+      "position": null,
+      "exampleSentence": null
+    },
+    {
+      "page": 9,
+      "parts": [
+        "기후/환경 토픽"
+      ],
+      "sentence": "[예시 26] 포장재의 탄소 배출을 획기적으로 줄였습니다.",
+      "level": "Mid",
+      "riskTags": [
+        "모호한 표현"
+      ],
+      "confirmedInEvidence": [],
+      "missingFields": [
+        "감축량 수치"
+      ],
+      "reasonBullets": [
+        "지어낸 사유 26: 근거 조각과 문장을 견준 결과다."
+      ],
+      "fixParagraph": "포장재에 관한 주장에는 기준연도와 수치, 달성 기한, 측정 방법을 함께 밝혀 읽는 사람이 주장을 확인할 수 있도록 보완이 필요합니다.",
+      "evidencePages": [
+        9
+      ],
+      "evidenceInternal": "지어낸 판단 근거 26",
+      "position": null,
+      "exampleSentence": null
+    },
+    {
+      "page": 9,
+      "parts": [
+        "기후/환경 토픽"
+      ],
+      "sentence": "[예시 27] 본사 건물에서도 환경을 생각하는 경영을 계속 실천하겠습니다.",
+      "level": "Low",
+      "riskTags": [
+        "선언적 문장"
+      ],
+      "confirmedInEvidence": [],
+      "missingFields": [],
+      "reasonBullets": [
+        "지어낸 사유 27: 근거 조각과 문장을 견준 결과다."
+      ],
+      "fixParagraph": "본사 건물에 관한 주장에는 기준연도와 수치, 달성 기한, 측정 방법을 함께 밝혀 읽는 사람이 주장을 확인할 수 있도록 보완이 필요합니다.",
+      "evidencePages": [
+        9
+      ],
+      "evidenceInternal": "",
+      "position": null,
+      "exampleSentence": null
+    },
+    {
+      "page": 10,
+      "parts": [
+        "기후/환경 토픽"
+      ],
+      "sentence": "[예시 28] 데이터센터을(를) 100% 친환경으로 전환하겠습니다.",
+      "level": "High",
+      "riskTags": [
+        "미래 약속"
+      ],
+      "confirmedInEvidence": [],
+      "missingFields": [
+        "이행 계획",
+        "기준연도"
+      ],
+      "reasonBullets": [
+        "지어낸 사유 28: 근거 조각과 문장을 견준 결과다."
+      ],
+      "fixParagraph": "데이터센터에 관한 주장에는 기준연도와 수치, 달성 기한, 측정 방법을 함께 밝혀 읽는 사람이 주장을 확인할 수 있도록 보완이 필요합니다.",
+      "evidencePages": [],
+      "evidenceInternal": "지어낸 판단 근거 28",
+      "position": null,
+      "exampleSentence": null
+    },
+    {
+      "page": 10,
+      "parts": [
+        "기후/환경 토픽"
+      ],
+      "sentence": "[예시 29] 협력사 공장의 탄소 배출을 획기적으로 줄였습니다.",
+      "level": "Mid",
+      "riskTags": [
+        "모호한 표현"
+      ],
+      "confirmedInEvidence": [],
+      "missingFields": [
+        "감축량 수치"
+      ],
+      "reasonBullets": [
+        "지어낸 사유 29: 근거 조각과 문장을 견준 결과다."
+      ],
+      "fixParagraph": "협력사 공장에 관한 주장에는 기준연도와 수치, 달성 기한, 측정 방법을 함께 밝혀 읽는 사람이 주장을 확인할 수 있도록 보완이 필요합니다.",
+      "evidencePages": [
+        10
+      ],
+      "evidenceInternal": "지어낸 판단 근거 29",
+      "position": null,
+      "exampleSentence": null
+    },
+    {
+      "page": 10,
+      "parts": [
+        "기후/환경 토픽"
+      ],
+      "sentence": "[예시 30] 제품 라인에서도 환경을 생각하는 경영을 계속 실천하겠습니다.",
+      "level": "Low",
+      "riskTags": [
+        "선언적 문장"
+      ],
+      "confirmedInEvidence": [],
+      "missingFields": [],
+      "reasonBullets": [
+        "지어낸 사유 30: 근거 조각과 문장을 견준 결과다."
+      ],
+      "fixParagraph": "제품 라인에 관한 주장에는 기준연도와 수치, 달성 기한, 측정 방법을 함께 밝혀 읽는 사람이 주장을 확인할 수 있도록 보완이 필요합니다.",
+      "evidencePages": [
+        10
+      ],
+      "evidenceInternal": "",
+      "position": null,
+      "exampleSentence": null
+    },
+    {
+      "page": 11,
+      "parts": [
+        "기후/환경 토픽"
+      ],
+      "sentence": "[예시 31] 물류 차량을(를) 100% 친환경으로 전환하겠습니다.",
+      "level": "High",
+      "riskTags": [
+        "미래 약속"
+      ],
+      "confirmedInEvidence": [],
+      "missingFields": [
+        "이행 계획",
+        "기준연도"
+      ],
+      "reasonBullets": [
+        "지어낸 사유 31: 근거 조각과 문장을 견준 결과다."
+      ],
+      "fixParagraph": "물류 차량에 관한 주장에는 기준연도와 수치, 달성 기한, 측정 방법을 함께 밝혀 읽는 사람이 주장을 확인할 수 있도록 보완이 필요합니다.",
+      "evidencePages": [
+        11
+      ],
+      "evidenceInternal": "지어낸 판단 근거 31",
+      "position": null,
+      "exampleSentence": null
+    },
+    {
+      "page": 11,
+      "parts": [
+        "기후/환경 토픽"
+      ],
+      "sentence": "[예시 32] 포장재의 탄소 배출을 획기적으로 줄였습니다.",
+      "level": "Mid",
+      "riskTags": [
+        "모호한 표현"
+      ],
+      "confirmedInEvidence": [],
+      "missingFields": [
+        "감축량 수치"
+      ],
+      "reasonBullets": [
+        "지어낸 사유 32: 근거 조각과 문장을 견준 결과다."
+      ],
+      "fixParagraph": "포장재에 관한 주장에는 기준연도와 수치, 달성 기한, 측정 방법을 함께 밝혀 읽는 사람이 주장을 확인할 수 있도록 보완이 필요합니다.",
+      "evidencePages": [
+        11
+      ],
+      "evidenceInternal": "지어낸 판단 근거 32",
+      "position": null,
+      "exampleSentence": null
+    },
+    {
+      "page": 11,
+      "parts": [
+        "기후/환경 토픽"
+      ],
+      "sentence": "[예시 33] 본사 건물에서도 환경을 생각하는 경영을 계속 실천하겠습니다.",
+      "level": "Low",
+      "riskTags": [
+        "선언적 문장"
+      ],
+      "confirmedInEvidence": [],
+      "missingFields": [],
+      "reasonBullets": [
+        "지어낸 사유 33: 근거 조각과 문장을 견준 결과다."
+      ],
+      "fixParagraph": "본사 건물에 관한 주장에는 기준연도와 수치, 달성 기한, 측정 방법을 함께 밝혀 읽는 사람이 주장을 확인할 수 있도록 보완이 필요합니다.",
+      "evidencePages": [
+        11
+      ],
+      "evidenceInternal": "",
+      "position": null,
+      "exampleSentence": null
+    },
+    {
+      "page": 12,
+      "parts": [
+        "기후/환경 토픽"
+      ],
+      "sentence": "[예시 34] 데이터센터을(를) 100% 친환경으로 전환하겠습니다.",
+      "level": "High",
+      "riskTags": [
+        "미래 약속"
+      ],
+      "confirmedInEvidence": [],
+      "missingFields": [
+        "이행 계획",
+        "기준연도"
+      ],
+      "reasonBullets": [
+        "지어낸 사유 34: 근거 조각과 문장을 견준 결과다."
+      ],
+      "fixParagraph": "데이터센터에 관한 주장에는 기준연도와 수치, 달성 기한, 측정 방법을 함께 밝혀 읽는 사람이 주장을 확인할 수 있도록 보완이 필요합니다.",
+      "evidencePages": [
+        12
+      ],
+      "evidenceInternal": "지어낸 판단 근거 34",
+      "position": null,
+      "exampleSentence": null
+    },
+    {
+      "page": 12,
+      "parts": [
+        "기후/환경 토픽"
+      ],
+      "sentence": "[예시 35] 협력사 공장의 탄소 배출을 획기적으로 줄였습니다.",
+      "level": "Mid",
+      "riskTags": [
+        "모호한 표현"
+      ],
+      "confirmedInEvidence": [],
+      "missingFields": [
+        "감축량 수치"
+      ],
+      "reasonBullets": [
+        "지어낸 사유 35: 근거 조각과 문장을 견준 결과다."
+      ],
+      "fixParagraph": "협력사 공장에 관한 주장에는 기준연도와 수치, 달성 기한, 측정 방법을 함께 밝혀 읽는 사람이 주장을 확인할 수 있도록 보완이 필요합니다.",
+      "evidencePages": [],
+      "evidenceInternal": "지어낸 판단 근거 35",
+      "position": null,
+      "exampleSentence": null
+    },
+    {
+      "page": 12,
+      "parts": [
+        "기후/환경 토픽"
+      ],
+      "sentence": "[예시 36] 제품 라인에서도 환경을 생각하는 경영을 계속 실천하겠습니다.",
+      "level": "Low",
+      "riskTags": [
+        "선언적 문장"
+      ],
+      "confirmedInEvidence": [],
+      "missingFields": [],
+      "reasonBullets": [
+        "지어낸 사유 36: 근거 조각과 문장을 견준 결과다."
+      ],
+      "fixParagraph": "제품 라인에 관한 주장에는 기준연도와 수치, 달성 기한, 측정 방법을 함께 밝혀 읽는 사람이 주장을 확인할 수 있도록 보완이 필요합니다.",
+      "evidencePages": [
+        12
+      ],
+      "evidenceInternal": "",
+      "position": null,
+      "exampleSentence": null
+    }
+  ],
+  "candidateStats": {
+    "raw": 60,
+    "hardDropped": 8,
+    "nonEnvDropped": 6,
+    "promoDropped": 5,
+    "tableDropped": 5,
+    "kept": 36,
+    "failedPages": []
+  },
+  "counts": {
+    "total": 36,
+    "byLevel": {
+      "High": 11,
+      "Mid": 14,
+      "Low": 11
+    },
+    "byPart": {
+      "CEO 메시지": {
+        "High": 2,
+        "Mid": 4,
+        "Low": 2
+      },
+      "회사소개": {
+        "High": 4,
+        "Mid": 5,
+        "Low": 4
+      },
+      "기후/환경 토픽": {
+        "High": 6,
+        "Mid": 6,
+        "Low": 6
+      }
+    }
+  },
+  "wordCounts": {
+    "total": [
+      {
+        "term": "친환경",
+        "count": 22
+      },
+      {
+        "term": "탄소중립",
+        "count": 11
+      },
+      {
+        "term": "green",
+        "count": 2
+      }
+    ],
+    "pages": [
+      {
+        "page": 2,
+        "counts": [
+          {
+            "term": "친환경",
+            "count": 2
+          },
+          {
+            "term": "탄소중립",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "page": 3,
+        "counts": [
+          {
+            "term": "친환경",
+            "count": 2
+          },
+          {
+            "term": "탄소중립",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "page": 4,
+        "counts": [
+          {
+            "term": "친환경",
+            "count": 2
+          },
+          {
+            "term": "탄소중립",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "page": 5,
+        "counts": [
+          {
+            "term": "친환경",
+            "count": 2
+          },
+          {
+            "term": "탄소중립",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "page": 6,
+        "counts": [
+          {
+            "term": "친환경",
+            "count": 2
+          },
+          {
+            "term": "탄소중립",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "page": 7,
+        "counts": [
+          {
+            "term": "친환경",
+            "count": 2
+          },
+          {
+            "term": "탄소중립",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "page": 8,
+        "counts": [
+          {
+            "term": "친환경",
+            "count": 2
+          },
+          {
+            "term": "탄소중립",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "page": 9,
+        "counts": [
+          {
+            "term": "친환경",
+            "count": 2
+          },
+          {
+            "term": "탄소중립",
+            "count": 1
+          },
+          {
+            "term": "green",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "page": 10,
+        "counts": [
+          {
+            "term": "친환경",
+            "count": 2
+          },
+          {
+            "term": "탄소중립",
+            "count": 1
+          },
+          {
+            "term": "green",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "page": 11,
+        "counts": [
+          {
+            "term": "친환경",
+            "count": 2
+          },
+          {
+            "term": "탄소중립",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "page": 12,
+        "counts": [
+          {
+            "term": "친환경",
+            "count": 2
+          },
+          {
+            "term": "탄소중립",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  "dryRun": null,
+  "report": {
+    "file": "greenwash-report.xlsx"
+  }
+}

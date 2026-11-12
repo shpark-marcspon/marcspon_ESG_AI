@@ -1,0 +1,90 @@
+{
+  "$comment": "synthetic — 전부 가상 값이다. 실제 연료나 전력의 계수가 아니며 산정에 쓰면 안 된다. CLI 예제가 이 파일 하나로 돌도록 환산표와 GWP 세트도 가상 표시로 함께 담았다.",
+  "unitConversions": [
+    { "from": "L", "to": "kL", "factor": "0.001", "source": { "kind": "definition", "note": "SI 접두어 k = 10^3" } },
+    { "from": "kL", "to": "L", "factor": "1000", "source": { "kind": "definition", "note": "SI 접두어 k = 10^3" } },
+    { "from": "kg", "to": "t", "factor": "0.001", "source": { "kind": "definition", "note": "1 t = 1000 kg" } },
+    { "from": "t", "to": "kg", "factor": "1000", "source": { "kind": "definition", "note": "1 t = 1000 kg" } },
+    { "from": "g", "to": "t", "factor": "0.000001", "source": { "kind": "definition", "note": "1 t = 10^6 g" } },
+    { "from": "kWh", "to": "MWh", "factor": "0.001", "source": { "kind": "definition", "note": "SI 접두어 M = 10^6, k = 10^3" } },
+    { "from": "MJ", "to": "TJ", "factor": "0.000001", "source": { "kind": "definition", "note": "SI 접두어 T = 10^12, M = 10^6" } },
+    { "from": "GJ", "to": "MJ", "factor": "1000", "source": { "kind": "definition", "note": "SI 접두어 G = 10^9, M = 10^6" } },
+    { "from": "GJ", "to": "TJ", "factor": "0.001", "source": { "kind": "definition", "note": "SI 접두어 T = 10^12, G = 10^9" } }
+  ],
+  "gwpSets": [
+    {
+      "id": "synthetic-gwp",
+      "label": "synthetic GWP (가상 값)",
+      "source": { "kind": "synthetic", "note": "테스트용 가상 값. 어느 IPCC 보고서의 값도 아니다." },
+      "values": { "CO2": "1", "CH4": "20", "N2O": "300" }
+    }
+  ],
+  "factors": [
+    {
+      "kind": "combustion",
+      "id": "synthetic:fuel-a:mobile",
+      "version": "synthetic-1",
+      "source": { "kind": "synthetic", "note": "가상 액체 연료 A, 이동연소. 산화계수 항이 없는 식." },
+      "fuel": "synthetic-fuel-a",
+      "combustionType": "mobile",
+      "calorific": { "value": "31.25", "energyUnit": "MJ", "perUnit": "L", "basis": "net" },
+      "emissionFactors": [
+        { "gas": "CO2", "value": "70000", "massUnit": "kg", "perEnergyUnit": "TJ" },
+        { "gas": "CH4", "value": "25", "massUnit": "kg", "perEnergyUnit": "TJ" },
+        { "gas": "N2O", "value": "8", "massUnit": "kg", "perEnergyUnit": "TJ" }
+      ]
+    },
+    {
+      "kind": "combustion",
+      "id": "synthetic:fuel-a:stationary",
+      "version": "synthetic-1",
+      "source": { "kind": "synthetic", "note": "가상 액체 연료 A, 고정연소. 같은 연료라도 연소 유형에 따라 계수가 다르다." },
+      "fuel": "synthetic-fuel-a",
+      "combustionType": "stationary",
+      "calorific": { "value": "31.25", "energyUnit": "MJ", "perUnit": "L", "basis": "net" },
+      "emissionFactors": [
+        { "gas": "CO2", "value": "70000", "massUnit": "kg", "perEnergyUnit": "TJ" },
+        { "gas": "CH4", "value": "3", "massUnit": "kg", "perEnergyUnit": "TJ" },
+        { "gas": "N2O", "value": "0.6", "massUnit": "kg", "perEnergyUnit": "TJ" }
+      ],
+      "oxidationFactor": "0.98"
+    },
+    {
+      "kind": "combustion",
+      "id": "synthetic:fuel-b:stationary",
+      "version": "synthetic-1",
+      "source": { "kind": "synthetic", "note": "가상 고체 연료 B. 발열량 기준 단위가 kg, 배출계수의 질량 단위가 기체마다 다르다(g, kg)." },
+      "fuel": "synthetic-fuel-b",
+      "combustionType": "stationary",
+      "calorific": { "value": "23.7", "energyUnit": "MJ", "perUnit": "kg", "basis": "net" },
+      "emissionFactors": [
+        { "gas": "CO2", "value": "94.567", "massUnit": "t", "perEnergyUnit": "TJ" },
+        { "gas": "CH4", "value": "1250", "massUnit": "g", "perEnergyUnit": "TJ" },
+        { "gas": "N2O", "value": "1.5", "massUnit": "kg", "perEnergyUnit": "TJ" }
+      ],
+      "oxidationFactor": "0.975"
+    },
+    {
+      "kind": "purchased_energy",
+      "id": "synthetic:electricity",
+      "version": "synthetic-1",
+      "source": { "kind": "synthetic", "note": "가상 전력 계수. 기체별 계수." },
+      "energyType": "electricity",
+      "perUnit": "MWh",
+      "emissionFactors": [
+        { "gas": "CO2", "value": "0.5", "massUnit": "t" },
+        { "gas": "CH4", "value": "0.004", "massUnit": "kg" },
+        { "gas": "N2O", "value": "0.008", "massUnit": "kg" }
+      ]
+    },
+    {
+      "kind": "purchased_energy",
+      "id": "synthetic:heat",
+      "version": "synthetic-1",
+      "source": { "kind": "synthetic", "note": "가상 열(스팀) 계수. 이미 CO2eq 로 환산된 계수 하나만 있는 경우." },
+      "energyType": "heat",
+      "perUnit": "TJ",
+      "emissionFactors": [{ "gas": "CO2e", "value": "56789.5", "massUnit": "kg" }]
+    }
+  ]
+}

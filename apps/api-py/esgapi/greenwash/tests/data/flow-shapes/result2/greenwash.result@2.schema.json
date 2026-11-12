@@ -1,0 +1,727 @@
+{
+  "$defs": {
+    "GreenwashResult2Checks": {
+      "additionalProperties": false,
+      "description": "코드가 판정 뒤에 잰 것. skipped = 잴 것이 없었다(판정 실패 등).",
+      "properties": {
+        "quoteInBlock": {
+          "enum": [
+            "pass",
+            "fail",
+            "skipped"
+          ],
+          "title": "Quoteinblock",
+          "type": "string"
+        },
+        "evidenceInPool": {
+          "enum": [
+            "pass",
+            "fail",
+            "skipped"
+          ],
+          "title": "Evidenceinpool",
+          "type": "string"
+        },
+        "categoryInList": {
+          "enum": [
+            "pass",
+            "fail",
+            "skipped"
+          ],
+          "title": "Categoryinlist",
+          "type": "string"
+        },
+        "levelRule": {
+          "enum": [
+            "pass",
+            "fail",
+            "skipped"
+          ],
+          "title": "Levelrule",
+          "type": "string"
+        },
+        "truncated": {
+          "description": "상한을 넘어 모음이 자른 칸.",
+          "items": {
+            "enum": [
+              "target.text",
+              "reason",
+              "module.confirmed",
+              "module.missing",
+              "evidence",
+              "evidence.blockRanges",
+              "criteriaLines",
+              "budget"
+            ],
+            "type": "string"
+          },
+          "title": "Truncated",
+          "type": "array"
+        }
+      },
+      "required": [
+        "quoteInBlock",
+        "evidenceInPool",
+        "categoryInList",
+        "levelRule",
+        "truncated"
+      ],
+      "title": "GreenwashResult2Checks",
+      "type": "object"
+    },
+    "GreenwashResult2CriteriaEvidence": {
+      "additionalProperties": false,
+      "description": "참조 기준 줄 하나(기준 판의 줄 id).",
+      "properties": {
+        "kind": {
+          "const": "criteria",
+          "title": "Kind",
+          "type": "string"
+        },
+        "lineId": {
+          "maxLength": 24,
+          "minLength": 1,
+          "title": "Lineid",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "lineId"
+      ],
+      "title": "GreenwashResult2CriteriaEvidence",
+      "type": "object"
+    },
+    "GreenwashResult2DocumentEvidence": {
+      "additionalProperties": false,
+      "description": "문서 근거 = 단락 하나의 자리. 글은 문서 산출물에서 blockRanges 로 읽는다.",
+      "properties": {
+        "kind": {
+          "const": "document",
+          "title": "Kind",
+          "type": "string"
+        },
+        "passageId": {
+          "maxLength": 16,
+          "minLength": 1,
+          "title": "Passageid",
+          "type": "string"
+        },
+        "blockRanges": {
+          "description": "단락을 이루는 블록의 범위(읽는 차례, 이어진 블록은 한 범위). 넘는 범위는 모음이 자르고 truncated 에 적는다.\n빈 목록은 그 항목 truncated 에 budget 이 있을 때만(check_result).",
+          "items": {
+            "items": {
+              "maxLength": 16,
+              "minLength": 1,
+              "type": "string"
+            },
+            "maxItems": 2,
+            "minItems": 2,
+            "type": "array"
+          },
+          "maxItems": 8,
+          "title": "Blockranges",
+          "type": "array"
+        },
+        "page": {
+          "description": "단락의 첫 쪽.",
+          "minimum": 1,
+          "title": "Page",
+          "type": "integer"
+        },
+        "span": {
+          "description": "[start, end) — 글머리 쪼갬 단락이 블록 하나일 때 그 블록 글 안의 글자 범위. 없으면 블록 글 전부.\n있으면 blockRanges 는 블록 하나의 범위 하나다(check_result).",
+          "items": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "maxItems": 2,
+          "minItems": 2,
+          "title": "Span",
+          "type": "array"
+        }
+      },
+      "required": [
+        "kind",
+        "passageId",
+        "blockRanges",
+        "page"
+      ],
+      "title": "GreenwashResult2DocumentEvidence",
+      "type": "object"
+    },
+    "GreenwashResult2DoneItem": {
+      "additionalProperties": false,
+      "description": "판정과 검사를 다 지난 항목.",
+      "properties": {
+        "key": {
+          "maxLength": 16,
+          "minLength": 1,
+          "title": "Key",
+          "type": "string"
+        },
+        "stableKey": {
+          "pattern": "^[0-9a-f]{32}$",
+          "title": "Stablekey",
+          "type": "string"
+        },
+        "status": {
+          "const": "done",
+          "title": "Status",
+          "type": "string"
+        },
+        "errorCode": {
+          "title": "Errorcode",
+          "type": "null"
+        },
+        "target": {
+          "$ref": "#/$defs/GreenwashResult2Target"
+        },
+        "verdict": {
+          "$ref": "#/$defs/GreenwashResult2Verdict"
+        },
+        "reason": {
+          "maxLength": 500,
+          "minLength": 1,
+          "title": "Reason",
+          "type": "string"
+        },
+        "evidence": {
+          "items": {
+            "discriminator": {
+              "mapping": {
+                "criteria": "#/$defs/GreenwashResult2CriteriaEvidence",
+                "document": "#/$defs/GreenwashResult2DocumentEvidence",
+                "human": "#/$defs/GreenwashResult2HumanEvidence"
+              },
+              "propertyName": "kind"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/GreenwashResult2DocumentEvidence"
+              },
+              {
+                "$ref": "#/$defs/GreenwashResult2CriteriaEvidence"
+              },
+              {
+                "$ref": "#/$defs/GreenwashResult2HumanEvidence"
+              }
+            ]
+          },
+          "maxItems": 12,
+          "title": "Evidence",
+          "type": "array"
+        },
+        "checks": {
+          "$ref": "#/$defs/GreenwashResult2Checks"
+        },
+        "module": {
+          "$ref": "#/$defs/GreenwashResult2Module"
+        }
+      },
+      "required": [
+        "key",
+        "stableKey",
+        "status",
+        "errorCode",
+        "target",
+        "verdict",
+        "reason",
+        "evidence",
+        "checks",
+        "module"
+      ],
+      "title": "GreenwashResult2DoneItem",
+      "type": "object"
+    },
+    "GreenwashResult2FailedItem": {
+      "additionalProperties": false,
+      "description": "실패한 항목(버리지 않는다). 판정은 됐는데 검사에 걸리면 verdict 가 남고, 판정 자체가 안 됐으면 null.",
+      "properties": {
+        "key": {
+          "maxLength": 16,
+          "minLength": 1,
+          "title": "Key",
+          "type": "string"
+        },
+        "stableKey": {
+          "pattern": "^[0-9a-f]{32}$",
+          "title": "Stablekey",
+          "type": "string"
+        },
+        "status": {
+          "const": "failed",
+          "title": "Status",
+          "type": "string"
+        },
+        "errorCode": {
+          "enum": [
+            "quote_not_found",
+            "evidence_outside_pool",
+            "category_unknown",
+            "level_rule_broken",
+            "judge_failed",
+            "judge_unparsed",
+            "judge_cut_off",
+            "evidence_search_failed",
+            "budget_exceeded"
+          ],
+          "title": "Errorcode",
+          "type": "string"
+        },
+        "target": {
+          "$ref": "#/$defs/GreenwashResult2Target"
+        },
+        "verdict": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/GreenwashResult2Verdict"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "reason": {
+          "maxLength": 500,
+          "title": "Reason",
+          "type": "string"
+        },
+        "evidence": {
+          "items": {
+            "discriminator": {
+              "mapping": {
+                "criteria": "#/$defs/GreenwashResult2CriteriaEvidence",
+                "document": "#/$defs/GreenwashResult2DocumentEvidence",
+                "human": "#/$defs/GreenwashResult2HumanEvidence"
+              },
+              "propertyName": "kind"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/GreenwashResult2DocumentEvidence"
+              },
+              {
+                "$ref": "#/$defs/GreenwashResult2CriteriaEvidence"
+              },
+              {
+                "$ref": "#/$defs/GreenwashResult2HumanEvidence"
+              }
+            ]
+          },
+          "maxItems": 12,
+          "title": "Evidence",
+          "type": "array"
+        },
+        "checks": {
+          "$ref": "#/$defs/GreenwashResult2Checks"
+        },
+        "module": {
+          "$ref": "#/$defs/GreenwashResult2Module"
+        }
+      },
+      "required": [
+        "key",
+        "stableKey",
+        "status",
+        "errorCode",
+        "target",
+        "verdict",
+        "reason",
+        "evidence",
+        "checks",
+        "module"
+      ],
+      "title": "GreenwashResult2FailedItem",
+      "type": "object"
+    },
+    "GreenwashResult2Failures": {
+      "additionalProperties": false,
+      "description": "실패 셈(구획 status failed 수, 항목 status failed 수 — 모든 구획의 항목 합).",
+      "properties": {
+        "segments": {
+          "minimum": 0,
+          "title": "Segments",
+          "type": "integer"
+        },
+        "items": {
+          "minimum": 0,
+          "title": "Items",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "segments",
+        "items"
+      ],
+      "title": "GreenwashResult2Failures",
+      "type": "object"
+    },
+    "GreenwashResult2HumanEvidence": {
+      "additionalProperties": false,
+      "description": "사람이 넣은 근거(칸만 — G4. 이 판의 흐름은 싣지 않는다).",
+      "properties": {
+        "kind": {
+          "const": "human",
+          "title": "Kind",
+          "type": "string"
+        },
+        "text": {
+          "maxLength": 2000,
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        },
+        "at": {
+          "title": "At",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "text",
+        "at"
+      ],
+      "title": "GreenwashResult2HumanEvidence",
+      "type": "object"
+    },
+    "GreenwashResult2Module": {
+      "additionalProperties": false,
+      "description": "그린워싱만의 칸.",
+      "properties": {
+        "confirmed": {
+          "description": "근거에서 확인된 것(줄마다 150자, 4줄까지).",
+          "items": {
+            "maxLength": 150,
+            "type": "string"
+          },
+          "maxItems": 4,
+          "title": "Confirmed",
+          "type": "array"
+        },
+        "missing": {
+          "description": "근거에 빠진 것.",
+          "items": {
+            "maxLength": 150,
+            "type": "string"
+          },
+          "maxItems": 4,
+          "title": "Missing",
+          "type": "array"
+        },
+        "criteriaLines": {
+          "description": "걸린 기준 줄 id.",
+          "items": {
+            "maxLength": 24,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 15,
+          "title": "Criterialines",
+          "type": "array"
+        },
+        "parts": {
+          "description": "문장 쪽이 든 파트 이름(겹치면 여럿).",
+          "items": {
+            "type": "string"
+          },
+          "title": "Parts",
+          "type": "array"
+        }
+      },
+      "required": [
+        "confirmed",
+        "missing",
+        "criteriaLines",
+        "parts"
+      ],
+      "title": "GreenwashResult2Module",
+      "type": "object"
+    },
+    "GreenwashResult2Segment": {
+      "additionalProperties": false,
+      "description": "구획 하나(후보 묶음). failed 면 items·unplaced 가 빈 목록이고 errorCode 는 실행기가 지은 code 다.",
+      "properties": {
+        "key": {
+          "$ref": "#/$defs/GreenwashResult2SegmentKeyFields"
+        },
+        "keySha256": {
+          "description": "구획 열쇠의 sha256(펼침 단계 data 의 keySha256 그대로 — core segment_key_sha256). 구획 목록\n`GET /runs/{run_id}/segments` 의 짝이자 고른 구획 다시(`retrySegments.keys`)에 넣는 값(GE1b D7).",
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Keysha256",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "done",
+            "failed"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "errorCode": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Errorcode"
+        },
+        "items": {
+          "items": {
+            "discriminator": {
+              "mapping": {
+                "done": "#/$defs/GreenwashResult2DoneItem",
+                "failed": "#/$defs/GreenwashResult2FailedItem"
+              },
+              "propertyName": "status"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/GreenwashResult2DoneItem"
+              },
+              {
+                "$ref": "#/$defs/GreenwashResult2FailedItem"
+              }
+            ]
+          },
+          "title": "Items",
+          "type": "array"
+        },
+        "unplaced": {
+          "items": {
+            "$ref": "#/$defs/GreenwashResult2Unplaced"
+          },
+          "maxItems": 64,
+          "title": "Unplaced",
+          "type": "array"
+        }
+      },
+      "required": [
+        "key",
+        "keySha256",
+        "status",
+        "errorCode",
+        "items",
+        "unplaced"
+      ],
+      "title": "GreenwashResult2Segment",
+      "type": "object"
+    },
+    "GreenwashResult2SegmentKeyFields": {
+      "additionalProperties": false,
+      "description": "구획 열쇠(core.flows.types.segment_key_fields 와 같은 칸). span 은 위치 표지(블록 번호)뿐이다.",
+      "properties": {
+        "kind": {
+          "title": "Kind",
+          "type": "string"
+        },
+        "span": {
+          "title": "Span",
+          "type": "string"
+        },
+        "documentSha256": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Documentsha256"
+        },
+        "parserVersion": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Parserversion"
+        }
+      },
+      "required": [
+        "kind",
+        "span",
+        "documentSha256",
+        "parserVersion"
+      ],
+      "title": "GreenwashResult2SegmentKeyFields",
+      "type": "object"
+    },
+    "GreenwashResult2Source": {
+      "additionalProperties": false,
+      "description": "점검한 문서.",
+      "properties": {
+        "fileName": {
+          "title": "Filename",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "pageCount": {
+          "minimum": 0,
+          "title": "Pagecount",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "fileName",
+        "sha256",
+        "pageCount"
+      ],
+      "title": "GreenwashResult2Source",
+      "type": "object"
+    },
+    "GreenwashResult2Target": {
+      "additionalProperties": false,
+      "description": "판단 대상 문장.",
+      "properties": {
+        "kind": {
+          "const": "sentence",
+          "title": "Kind",
+          "type": "string"
+        },
+        "text": {
+          "maxLength": 300,
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        },
+        "page": {
+          "minimum": 1,
+          "title": "Page",
+          "type": "integer"
+        },
+        "blockIds": {
+          "description": "문장이 든 블록(읽는 차례). 블록 경계를 넘는 문장은 이어진 블록 둘.",
+          "items": {
+            "maxLength": 16,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 2,
+          "minItems": 1,
+          "title": "Blockids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "kind",
+        "text",
+        "page",
+        "blockIds"
+      ],
+      "title": "GreenwashResult2Target",
+      "type": "object"
+    },
+    "GreenwashResult2Unplaced": {
+      "additionalProperties": false,
+      "description": "원문 블록에 못 붙인 후보 문장.",
+      "properties": {
+        "text": {
+          "maxLength": 300,
+          "minLength": 1,
+          "title": "Text",
+          "type": "string"
+        },
+        "page": {
+          "minimum": 1,
+          "title": "Page",
+          "type": "integer"
+        },
+        "errorCode": {
+          "const": "quote_not_found",
+          "title": "Errorcode",
+          "type": "string"
+        }
+      },
+      "required": [
+        "text",
+        "page",
+        "errorCode"
+      ],
+      "title": "GreenwashResult2Unplaced",
+      "type": "object"
+    },
+    "GreenwashResult2Verdict": {
+      "additionalProperties": false,
+      "properties": {
+        "level": {
+          "enum": [
+            "High",
+            "Mid",
+            "Low",
+            "None"
+          ],
+          "title": "Level",
+          "type": "string"
+        },
+        "category": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "판의 카테고리 목록 안의 이름. 목록이 비면(MARC-ENT-612 전) null 만.",
+          "title": "Category"
+        }
+      },
+      "required": [
+        "level",
+        "category"
+      ],
+      "title": "GreenwashResult2Verdict",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "greenwash.result@2. schemaVersion 이 첫 키다. 구획 차례 = 계획 차례(문서 읽는 차례), 항목 차례 = 구획 안\n후보 차례.",
+  "properties": {
+    "schemaVersion": {
+      "const": "greenwash.result@2",
+      "title": "Schemaversion",
+      "type": "string"
+    },
+    "source": {
+      "$ref": "#/$defs/GreenwashResult2Source"
+    },
+    "failures": {
+      "$ref": "#/$defs/GreenwashResult2Failures"
+    },
+    "budgetTrimmed": {
+      "description": "실행 바이트 예산으로 근거 범위·발췌 칸을 비운 항목 수(truncated 에 budget — check_result 가 다시 센다).",
+      "minimum": 0,
+      "title": "Budgettrimmed",
+      "type": "integer"
+    },
+    "segments": {
+      "items": {
+        "$ref": "#/$defs/GreenwashResult2Segment"
+      },
+      "title": "Segments",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "source",
+    "failures",
+    "budgetTrimmed",
+    "segments"
+  ],
+  "title": "GreenwashResult2",
+  "type": "object"
+}

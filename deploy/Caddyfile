@@ -1,0 +1,77 @@
+# 시연 서버의 역프록시·TLS(밴드 DP1). deploy/compose.prod.yaml 의 proxy 가 읽는다. 값은 컨테이너 환경에서 온다.
+#   SITE_DOMAIN   웹 주소의 호스트 이름 → api-py(웹 정적 파일과 /api 를 같은 출처에서 낸다)
+#   FILES_DOMAIN  저장소 주소의 호스트 이름 → storage(서명한 올리기 주소의 PUT 과 그 CORS 미리 묻기 OPTIONS 만)
+#
+# 두 이름 밖의 Host 는 앱에 닿지 않는다: http 는 https 로 돌려보낼 뿐이고, https 는 인증서가 없어 손잡기에서 끊기거나
+#   (IP 직접) 아래 끝 블록이 연결을 끊는다. api-py 의 ALLOWED_HOSTS = ["*"](config/settings/base.py)는
+#   「ALB 가 받을 호스트를 거른다」에 기댄다 — 이 서버에서는 이 파일이 그 자리다.
+# 로컬 리허설(SITE_DOMAIN=localhost, FILES_DOMAIN=files.localhost)은 Caddy 의 자체 CA 로 발급한다(밖 호출 0 — DP1 실측).
+#   Host 의 :포트 는 사이트 고르기에 걸리지 않는다(DP1 실측 — 큰 포트로 매핑해도 같은 블록).
+# 무효 조건: api-py·storage 의 서비스 이름·포트, 서명 꼴(Host 가 서명에 든다), 올리기 상한(MAX_UPLOAD_BYTES 50 MiB)이 바뀌면 다시 잰다.
+#   앱 올리기 상한(GHG_UPLOAD_MAX_BYTES 20 MiB)이 바뀌면 아래 {$SITE_DOMAIN} 의 request_buffers 도 다시 정한다(밴드 PX1).
+{
+	# 발급처는 Let's Encrypt 하나로 고정한다(ZeroSSL 대체 0 — 사용자 허락 MARC-ENT-418 의 범위).
+	# 연락 메일(email)은 두지 않는다: 빈 값이면 Caddyfile 이 파싱되지 않고(DP1 실측), Let's Encrypt 는 메일 없이 발급한다.
+	cert_issuer acme
+	servers {
+		# 보안 그룹이 tcp 80·443 만 연다. UDP(HTTP/3)는 쓰지 않는다.
+		protocols h1 h2
+	}
+}
+
+# 블록 몸은 snippet 하나씩이다 — 첫 벌 이름과 둘째 벌(데모 고정판, 밴드 DM1) 이름이 같은 거르기를 쓴다. 인자 하나 = upstream.
+#   둘째 벌 블록은 deploy/Caddyfile.demo2 이고, deploy/compose.edge-proxy.yaml 이 있을 때만 /etc/caddy/sites.d/ 에 묶인다.
+#   묶음이 없으면 아래 import 의 glob 이 빈다 — caddy 2.11.7 은 경고 한 줄만 내고 설정은 BASE 와 같다(DM1 실측 adapt 대조).
+(site) {
+	header {
+		Strict-Transport-Security "max-age=31536000"
+		-Server
+	}
+	# 응답 압축은 걸지 않는다: whitenoise 가 미리 만든 .gz 를 낸다(docker/api-py.Dockerfile).
+	# 응답 시간 제한은 두지 않는다(Caddy 기본 — 없음). 긴 일은 워커가 하고 웹은 짧은 폴링뿐이다.
+	# 본문 버퍼(밴드 PX1, MARC-ENT-593): Caddy 가 본문을 다 받은 뒤 api-py 에 넘긴다. 버퍼가 없으면 gunicorn sync 일꾼의
+	#   timeout 30초(apps/api-py/gunicorn.conf.py)가 느린 망의 전송 시간까지 세어, 20MB 를 ~650KiB/s 이하로 올리면 500(UP20 실측).
+	# 크기 = 가장 큰 앱 본문 상한 GHG_UPLOAD_MAX_BYTES 20 MiB(apps/api-py/esgapi/inventory/tools/xlsx_reader.py:65 — Scope 1·2
+	#   올리기는 맨 바이트 본문이라 multipart 머리가 없다) + 1 MiB 여유. 넘는 본문은 거절하지 않는다: 앞 21 MiB 를 쥔 뒤 Content-Length
+	#   그대로 넘기고 나머지는 흘린다 — 거절은 지금처럼 앱이 한다(413 body_too_large, PX1 실측). 버퍼는 메모리라 proxy mem_limit 과 같이 본다.
+	reverse_proxy {args[0]} {
+		request_buffers 21MiB
+	}
+}
+
+(files) {
+	header -Server
+	# 받기·목록·지우기는 저장소에 바로 가지 않는다(받기는 API 가 본문으로 낸다). 서명한 PUT 과 그 미리 묻기만 통과.
+	@not_upload not method PUT OPTIONS
+	respond @not_upload 403
+	# 서버 쪽 복사(다른 키를 원본으로 끌어오기)는 막는다 — 서명한 올리기 주소에는 쓰이지 않는다(리뷰 M2).
+	@copy header X-Amz-Copy-Source *
+	respond @copy 403
+	# PUT 은 서명한 올리기 주소(질의의 X-Amz-Signature)로만. 머리 서명(Authorization) PUT 은 브라우저 길이 아니다.
+	@unsigned_put {
+		method PUT
+		not query X-Amz-Signature=*
+	}
+	respond @unsigned_put 403
+	# 본문 상한. 앱의 올리기 상한(50 MiB) 위에 여유를 둔다. 크기는 서명 조건이라 저장소가 한 번 더 본다.
+	request_body {
+		max_size 60MB
+	}
+	# Host 머리는 바꾸지 않는다(Caddy 기본 — 받은 그대로 넘긴다). 저장소가 서명의 호스트와 대조한다.
+	reverse_proxy {args[0]}
+}
+
+{$SITE_DOMAIN} {
+	import site api-py:8000
+}
+
+{$FILES_DOMAIN} {
+	import files storage:7070
+}
+
+import /etc/caddy/sites.d/*.caddy
+
+# 두 이름 밖의 https 요청(인증서는 맞는데 Host 가 다른 것)은 끊는다.
+https:// {
+	abort
+}

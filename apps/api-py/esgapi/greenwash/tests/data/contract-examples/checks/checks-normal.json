@@ -1,0 +1,85 @@
+{
+  "schemaVersion": "greenwash.checks@1",
+  "currentUserId": 7,
+  "companyName": "가상 주식회사",
+  "documents": [
+    {
+      "documentId": 11,
+      "fileName": "가상-보고서-2025.pdf",
+      "reportYear": null,
+      "previousDocumentId": null,
+      "pageCount": 4,
+      "uploadedAt": "2026-10-19T21:00:00+09:00",
+      "uploadedBy": { "userId": 7, "name": "가상 사용자" }
+    },
+    {
+      "documentId": 12,
+      "fileName": "가상-보고서-2026.pdf",
+      "reportYear": null,
+      "previousDocumentId": null,
+      "pageCount": null,
+      "uploadedAt": null,
+      "uploadedBy": { "userId": 8, "name": "알 수 없는 사용자" }
+    }
+  ],
+  "runs": [
+    {
+      "runId": 101,
+      "documentId": 11,
+      "createdAt": "2026-10-19T21:01:00+09:00",
+      "finishedAt": "2026-10-19T21:24:30+09:00",
+      "createdByUserId": 7,
+      "status": "done",
+      "errorCode": null,
+      "failedPageCount": 1,
+      "steps": [
+        { "step": "extract", "status": "done", "done": null, "total": null },
+        { "step": "judge", "status": "done", "done": 4, "total": 4 }
+      ],
+      "checkedPages": 4,
+      "levelCounts": { "High": 1, "Mid": 2, "Low": 1 },
+      "review": {
+        "state": "confirmed",
+        "reviewed": 4,
+        "total": 4,
+        "confirmedAt": "2026-10-19T22:00:00+09:00",
+        "confirmedBy": { "id": 7, "name": "가상 사용자" }
+      }
+    },
+    {
+      "runId": 102,
+      "documentId": 12,
+      "createdAt": "2026-10-19T21:30:00+09:00",
+      "finishedAt": "2026-10-19T21:31:10+09:00",
+      "createdByUserId": 8,
+      "status": "failed",
+      "errorCode": "no_text_layer",
+      "failedPageCount": null,
+      "steps": [
+        { "step": "extract", "status": "failed", "done": null, "total": null },
+        { "step": "judge", "status": "pending", "done": null, "total": null }
+      ],
+      "checkedPages": 3,
+      "levelCounts": null,
+      "review": null
+    },
+    {
+      "runId": 103,
+      "documentId": 12,
+      "createdAt": "2026-10-19T21:40:00+09:00",
+      "finishedAt": null,
+      "createdByUserId": 7,
+      "status": "processing",
+      "errorCode": null,
+      "failedPageCount": null,
+      "steps": [
+        { "step": "extract", "status": "done", "done": null, "total": null },
+        { "step": "judge", "status": "running", "done": 1, "total": 3 }
+      ],
+      "checkedPages": 3,
+      "levelCounts": null,
+      "review": null
+    }
+  ],
+  "truncated": false
+}

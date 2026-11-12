@@ -1,0 +1,243 @@
+{
+  "schema_version": "0.1",
+  "source": {
+    "file_name": "synthetic-sample.pdf",
+    "sha256": "4af601d5862d847bb4066c2fd98f40bcff02b703d3952b766dece84d9904a8d6",
+    "page_count": 4
+  },
+  "config": {
+    "checker": {
+      "max_candidates_per_page": 3,
+      "max_chars_page_text": 2500,
+      "evidence_k": 2,
+      "max_chars_per_chunk": 450,
+      "use_evidence_failopen": false,
+      "max_chars_evidence_total": 1600,
+      "report_levels": [
+        "High",
+        "Mid",
+        "Low"
+      ],
+      "debug": true,
+      "debug_pages": 2,
+      "batch_eval": false,
+      "prompt_version": "2026-01-15-v1"
+    },
+    "chunking": {
+      "chunk_size": 800,
+      "chunk_overlap": 150,
+      "separators": [
+        "\n\n",
+        "\n",
+        " "
+      ],
+      "normalize": true,
+      "embedding_batch_size": 50
+    },
+    "chat": {
+      "temperature": 0.0,
+      "max_tokens": 1300
+    }
+  },
+  "models": {
+    "chat": "gpt-4.1-mini",
+    "embedding": "text-embedding-3-small"
+  },
+  "prompt_version": "2026-01-15-v1",
+  "provider": "dry-run",
+  "synthetic": false,
+  "parts": [
+    {
+      "name": "CEO 메시지",
+      "pages": [
+        1
+      ]
+    },
+    {
+      "name": "회사소개",
+      "pages": [
+        2
+      ]
+    },
+    {
+      "name": "기후/환경 토픽",
+      "pages": [
+        3,
+        4
+      ]
+    }
+  ],
+  "pages": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "dry_run": {
+    "pages_checked": 4,
+    "pages_with_text": 4,
+    "pages_truncated": 1,
+    "chunks": 9,
+    "embedding_index": {
+      "requests": 1,
+      "input_chars": 5401,
+      "input_tokens": {
+        "status": "measured",
+        "encoding": "cl100k_base",
+        "value": 5401
+      }
+    },
+    "rule_candidates": 9,
+    "lower": {
+      "chat": {
+        "requests": 8,
+        "input_chars": 9758,
+        "input_tokens": {
+          "status": "measured",
+          "encoding": "o200k_base",
+          "value": 9758
+        }
+      },
+      "chat_by_kind": {
+        "detect": {
+          "requests": 4,
+          "input_chars": 5403,
+          "input_tokens": {
+            "status": "measured",
+            "encoding": "o200k_base",
+            "value": 5403
+          }
+        },
+        "eval": {
+          "requests": 1,
+          "input_chars": 1949,
+          "input_tokens": {
+            "status": "measured",
+            "encoding": "o200k_base",
+            "value": 1949
+          }
+        },
+        "low_only": {
+          "requests": 3,
+          "input_chars": 2406,
+          "input_tokens": {
+            "status": "measured",
+            "encoding": "o200k_base",
+            "value": 2406
+          }
+        },
+        "repair": {
+          "requests": 0,
+          "input_chars": 0,
+          "input_tokens": {
+            "status": "measured",
+            "encoding": "o200k_base",
+            "value": 0
+          }
+        }
+      },
+      "embedding_queries": {
+        "requests": 4,
+        "input_chars": 142,
+        "input_tokens": {
+          "status": "measured",
+          "encoding": "cl100k_base",
+          "value": 142
+        }
+      },
+      "judged": 4
+    },
+    "upper": {
+      "chat": {
+        "requests": 32,
+        "input_chars": 65180,
+        "input_tokens": {
+          "status": "measured",
+          "encoding": "o200k_base",
+          "value": 65180
+        }
+      },
+      "chat_by_kind": {
+        "detect": {
+          "requests": 4,
+          "input_chars": 5403,
+          "input_tokens": {
+            "status": "measured",
+            "encoding": "o200k_base",
+            "value": 5403
+          }
+        },
+        "eval": {
+          "requests": 12,
+          "input_chars": 34593,
+          "input_tokens": {
+            "status": "measured",
+            "encoding": "o200k_base",
+            "value": 34593
+          }
+        },
+        "low_only": {
+          "requests": 4,
+          "input_chars": 7031,
+          "input_tokens": {
+            "status": "measured",
+            "encoding": "o200k_base",
+            "value": 7031
+          }
+        },
+        "repair": {
+          "requests": 12,
+          "input_chars": 18153,
+          "input_tokens": {
+            "status": "measured",
+            "encoding": "o200k_base",
+            "value": 18153
+          }
+        }
+      },
+      "embedding_queries": {
+        "requests": 16,
+        "input_chars": 1132,
+        "input_tokens": {
+          "status": "measured",
+          "encoding": "cl100k_base",
+          "value": 1132
+        }
+      },
+      "output_tokens_max": 41600,
+      "evidence_chars": 922,
+      "evidence_cap_reached": false
+    },
+    "per_page": [
+      {
+        "page": 1,
+        "text_chars": 273,
+        "truncated": false,
+        "rule_candidates": 3,
+        "lower_judged": 2
+      },
+      {
+        "page": 2,
+        "text_chars": 251,
+        "truncated": false,
+        "rule_candidates": 0,
+        "lower_judged": 0
+      },
+      {
+        "page": 3,
+        "text_chars": 397,
+        "truncated": false,
+        "rule_candidates": 3,
+        "lower_judged": 1
+      },
+      {
+        "page": 4,
+        "text_chars": 3739,
+        "truncated": true,
+        "rule_candidates": 3,
+        "lower_judged": 1
+      }
+    ]
+  },
+  "_made_by": "esg-lab 2a237d229210cbbc67fdc17f32db1472491f93bc (driver make_golden.py) · cd <esg-lab>/py && PYTHONPATH=. uv run --frozen --group greenwash python <G1a.out>/gw1-driver/make_golden.py dry-text <출력>"
+}

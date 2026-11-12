@@ -1,0 +1,47 @@
+{
+  "$comment": "검산 사례의 activity (가상의 조직과 사용량)",
+  "gwpSetId": "ipcc-ar5-100y-kr-nid-2025",
+  "activities": [
+    {
+      "id": "H02",
+      "orgUnit": "synthetic-site",
+      "period": "2025",
+      "sourceType": "stationary_combustion",
+      "fuel": "diesel",
+      "sector": "manufacturing_construction",
+      "parameterTiers": {
+        "calorific": 2,
+        "co2": 2,
+        "nonCo2": 1,
+        "oxidation": 2
+      },
+      "amount": "1000",
+      "unit": "L"
+    },
+    {
+      "id": "H05",
+      "orgUnit": "synthetic-site",
+      "period": "2025",
+      "sourceType": "stationary_combustion",
+      "fuel": "city-gas-lng",
+      "sector": "commercial_public",
+      "parameterTiers": {
+        "calorific": 2,
+        "co2": 2,
+        "nonCo2": 1,
+        "oxidation": 2
+      },
+      "amount": "12.345678",
+      "unit": "kNm3"
+    },
+    {
+      "id": "H07",
+      "orgUnit": "synthetic-site",
+      "period": "2025",
+      "sourceType": "purchased_electricity",
+      "factorId": "kr-ets-sample:electricity:2014-2016-avg",
+      "amount": "500000",
+      "unit": "kWh"
+    }
+  ]
+}

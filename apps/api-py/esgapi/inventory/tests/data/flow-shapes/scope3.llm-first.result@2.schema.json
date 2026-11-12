@@ -1,0 +1,1434 @@
+{
+  "$defs": {
+    "AdjustmentJson": {
+      "additionalProperties": false,
+      "properties": {
+        "currency": {
+          "title": "Currency",
+          "type": "string"
+        },
+        "targetCurrency": {
+          "title": "Targetcurrency",
+          "type": "string"
+        },
+        "targetPriceYear": {
+          "title": "Targetpriceyear",
+          "type": "integer"
+        },
+        "multiplier": {
+          "title": "Multiplier",
+          "type": "string"
+        },
+        "synthetic": {
+          "title": "Synthetic",
+          "type": "boolean"
+        },
+        "source": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AdjustmentSourceJson"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "currency",
+        "targetCurrency",
+        "targetPriceYear",
+        "multiplier",
+        "synthetic",
+        "source"
+      ],
+      "title": "AdjustmentJson",
+      "type": "object"
+    },
+    "AdjustmentProblemJson": {
+      "additionalProperties": false,
+      "properties": {
+        "index": {
+          "title": "Index",
+          "type": "integer"
+        },
+        "kind": {
+          "enum": [
+            "invalid_multiplier",
+            "missing_source"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "message": {
+          "title": "Message",
+          "type": "string"
+        }
+      },
+      "required": [
+        "index",
+        "kind",
+        "message"
+      ],
+      "title": "AdjustmentProblemJson",
+      "type": "object"
+    },
+    "AdjustmentSourceJson": {
+      "additionalProperties": false,
+      "properties": {
+        "url": {
+          "title": "Url",
+          "type": "string"
+        },
+        "checkedOn": {
+          "title": "Checkedon",
+          "type": "string"
+        }
+      },
+      "required": [
+        "url",
+        "checkedOn"
+      ],
+      "title": "AdjustmentSourceJson",
+      "type": "object"
+    },
+    "BasisJson": {
+      "additionalProperties": false,
+      "properties": {
+        "used": {
+          "enum": [
+            "activity",
+            "distance",
+            "spend"
+          ],
+          "title": "Used",
+          "type": "string"
+        },
+        "fellBack": {
+          "title": "Fellback",
+          "type": "boolean"
+        },
+        "fallbackReason": {
+          "anyOf": [
+            {
+              "enum": [
+                "no_activity_candidates",
+                "unit_mismatch",
+                "llm_found_none_suitable"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Fallbackreason"
+        }
+      },
+      "required": [
+        "used",
+        "fellBack",
+        "fallbackReason"
+      ],
+      "title": "BasisJson",
+      "type": "object"
+    },
+    "CandidateEvidenceJson": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "lexical": {
+          "$ref": "#/$defs/LexicalEvidenceJson"
+        },
+        "rrfScore": {
+          "title": "Rrfscore",
+          "type": "number"
+        },
+        "rank": {
+          "title": "Rank",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "rank"
+      ],
+      "title": "CandidateEvidenceJson",
+      "type": "object"
+    },
+    "CandidateStatsJson": {
+      "additionalProperties": false,
+      "properties": {
+        "total": {
+          "title": "Total",
+          "type": "integer"
+        },
+        "shown": {
+          "title": "Shown",
+          "type": "integer"
+        },
+        "lexicalMatches": {
+          "title": "Lexicalmatches",
+          "type": "integer"
+        },
+        "method": {
+          "enum": [
+            "lexical-v1",
+            "lexical-v2"
+          ],
+          "title": "Method",
+          "type": "string"
+        }
+      },
+      "required": [
+        "total",
+        "shown",
+        "lexicalMatches",
+        "method"
+      ],
+      "title": "CandidateStatsJson",
+      "type": "object"
+    },
+    "ClassificationFailedDecision": {
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "const": "classification_failed",
+          "title": "Status",
+          "type": "string"
+        },
+        "source": {
+          "const": "llm",
+          "title": "Source",
+          "type": "string"
+        },
+        "llm": {
+          "$ref": "#/$defs/LlmFailureJson"
+        }
+      },
+      "required": [
+        "status",
+        "source",
+        "llm"
+      ],
+      "title": "ClassificationFailedDecision",
+      "type": "object"
+    },
+    "ClassificationJson": {
+      "additionalProperties": false,
+      "properties": {
+        "category": {
+          "anyOf": [
+            {
+              "enum": [
+                1,
+                2,
+                4,
+                6,
+                7,
+                9
+              ],
+              "type": "integer"
+            },
+            {
+              "const": "other",
+              "type": "string"
+            }
+          ],
+          "title": "Category"
+        },
+        "keywords": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Keywords",
+          "type": "array"
+        },
+        "confidence": {
+          "enum": [
+            "high",
+            "medium",
+            "low"
+          ],
+          "title": "Confidence",
+          "type": "string"
+        },
+        "reason": {
+          "title": "Reason",
+          "type": "string"
+        }
+      },
+      "required": [
+        "category",
+        "keywords",
+        "confidence",
+        "reason"
+      ],
+      "title": "ClassificationJson",
+      "type": "object"
+    },
+    "ComputedCalc": {
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "const": "computed",
+          "title": "Status",
+          "type": "string"
+        },
+        "co2e": {
+          "title": "Co2E",
+          "type": "string"
+        },
+        "unit": {
+          "const": "tCO2eq",
+          "title": "Unit",
+          "type": "string"
+        },
+        "factorId": {
+          "title": "Factorid",
+          "type": "string"
+        },
+        "factorValueRaw": {
+          "title": "Factorvalueraw",
+          "type": "string"
+        },
+        "factorUnit": {
+          "title": "Factorunit",
+          "type": "string"
+        },
+        "activityAmount": {
+          "title": "Activityamount",
+          "type": "string"
+        },
+        "formula": {
+          "title": "Formula",
+          "type": "string"
+        },
+        "adjustment": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/AdjustmentJson"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "synthetic": {
+          "title": "Synthetic",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "status",
+        "co2e",
+        "unit",
+        "factorId",
+        "factorValueRaw",
+        "factorUnit",
+        "activityAmount",
+        "formula",
+        "adjustment",
+        "synthetic"
+      ],
+      "title": "ComputedCalc",
+      "type": "object"
+    },
+    "InvalidNumberCalc": {
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "const": "invalid_number",
+          "title": "Status",
+          "type": "string"
+        },
+        "factorId": {
+          "title": "Factorid",
+          "type": "string"
+        },
+        "field": {
+          "enum": [
+            "quantity",
+            "amount",
+            "weightKg",
+            "distanceKm",
+            "valueRaw",
+            "multiplier"
+          ],
+          "title": "Field",
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "factorId",
+        "field"
+      ],
+      "title": "InvalidNumberCalc",
+      "type": "object"
+    },
+    "LexicalEvidenceJson": {
+      "additionalProperties": false,
+      "properties": {
+        "rank": {
+          "title": "Rank",
+          "type": "integer"
+        },
+        "score": {
+          "title": "Score",
+          "type": "number"
+        },
+        "matchedTerms": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Matchedterms",
+          "type": "array"
+        }
+      },
+      "required": [
+        "rank",
+        "score",
+        "matchedTerms"
+      ],
+      "title": "LexicalEvidenceJson",
+      "type": "object"
+    },
+    "LlmFailureJson": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "enum": [
+            "schema_mismatch",
+            "refusal",
+            "truncated",
+            "provider_error",
+            "timeout",
+            "budget_exceeded"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "detail": {
+          "title": "Detail",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "detail"
+      ],
+      "title": "LlmFailureJson",
+      "type": "object"
+    },
+    "MemoryCategoryMismatchDecision": {
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "const": "memory_category_mismatch",
+          "title": "Status",
+          "type": "string"
+        },
+        "source": {
+          "const": "memory",
+          "title": "Source",
+          "type": "string"
+        },
+        "memoryEntry": {
+          "$ref": "#/$defs/MemoryEntryJson"
+        },
+        "factorCategories": {
+          "items": {
+            "type": "integer"
+          },
+          "title": "Factorcategories",
+          "type": "array"
+        }
+      },
+      "required": [
+        "status",
+        "source",
+        "memoryEntry",
+        "factorCategories"
+      ],
+      "title": "MemoryCategoryMismatchDecision",
+      "type": "object"
+    },
+    "MemoryEntryJson": {
+      "additionalProperties": false,
+      "properties": {
+        "key": {
+          "title": "Key",
+          "type": "string"
+        },
+        "category": {
+          "enum": [
+            1,
+            2,
+            4,
+            6,
+            7,
+            9
+          ],
+          "title": "Category",
+          "type": "integer"
+        },
+        "factorId": {
+          "title": "Factorid",
+          "type": "string"
+        },
+        "confirmedBy": {
+          "title": "Confirmedby",
+          "type": "string"
+        },
+        "confirmedAt": {
+          "title": "Confirmedat",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        }
+      },
+      "required": [
+        "key",
+        "category",
+        "factorId",
+        "confirmedBy",
+        "confirmedAt"
+      ],
+      "title": "MemoryEntryJson",
+      "type": "object"
+    },
+    "MemoryFactorExcludedDecision": {
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "const": "memory_factor_excluded",
+          "title": "Status",
+          "type": "string"
+        },
+        "source": {
+          "const": "memory",
+          "title": "Source",
+          "type": "string"
+        },
+        "memoryEntry": {
+          "$ref": "#/$defs/MemoryEntryJson"
+        },
+        "licenseStatus": {
+          "enum": [
+            "ok",
+            "disputed",
+            "unverified"
+          ],
+          "title": "Licensestatus",
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "source",
+        "memoryEntry",
+        "licenseStatus"
+      ],
+      "title": "MemoryFactorExcludedDecision",
+      "type": "object"
+    },
+    "MemoryFactorMissingDecision": {
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "const": "memory_factor_missing",
+          "title": "Status",
+          "type": "string"
+        },
+        "source": {
+          "const": "memory",
+          "title": "Source",
+          "type": "string"
+        },
+        "memoryEntry": {
+          "$ref": "#/$defs/MemoryEntryJson"
+        }
+      },
+      "required": [
+        "status",
+        "source",
+        "memoryEntry"
+      ],
+      "title": "MemoryFactorMissingDecision",
+      "type": "object"
+    },
+    "MissingAmountCalc": {
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "const": "missing_amount",
+          "title": "Status",
+          "type": "string"
+        },
+        "factorId": {
+          "title": "Factorid",
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "factorId"
+      ],
+      "title": "MissingAmountCalc",
+      "type": "object"
+    },
+    "MissingQuantityCalc": {
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "const": "missing_quantity",
+          "title": "Status",
+          "type": "string"
+        },
+        "factorId": {
+          "title": "Factorid",
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "factorId"
+      ],
+      "title": "MissingQuantityCalc",
+      "type": "object"
+    },
+    "NeedsCurrencyAdjustmentCalc": {
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "const": "needs_currency_adjustment",
+          "title": "Status",
+          "type": "string"
+        },
+        "factorId": {
+          "title": "Factorid",
+          "type": "string"
+        },
+        "currency": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Currency"
+        },
+        "targetCurrency": {
+          "title": "Targetcurrency",
+          "type": "string"
+        },
+        "targetPriceYear": {
+          "title": "Targetpriceyear",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "status",
+        "factorId",
+        "currency",
+        "targetCurrency",
+        "targetPriceYear"
+      ],
+      "title": "NeedsCurrencyAdjustmentCalc",
+      "type": "object"
+    },
+    "NeedsDistanceCalc": {
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "const": "needs_distance",
+          "title": "Status",
+          "type": "string"
+        },
+        "factorId": {
+          "title": "Factorid",
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "factorId"
+      ],
+      "title": "NeedsDistanceCalc",
+      "type": "object"
+    },
+    "NoCandidatesDecision": {
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "const": "no_candidates",
+          "title": "Status",
+          "type": "string"
+        },
+        "source": {
+          "const": "llm",
+          "title": "Source",
+          "type": "string"
+        },
+        "category": {
+          "enum": [
+            1,
+            2,
+            4,
+            6,
+            7,
+            9
+          ],
+          "title": "Category",
+          "type": "integer"
+        },
+        "classification": {
+          "$ref": "#/$defs/ClassificationJson"
+        },
+        "physical": {
+          "enum": [
+            "no_activity_candidates",
+            "unit_mismatch",
+            "llm_found_none_suitable"
+          ],
+          "title": "Physical",
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "source",
+        "category",
+        "classification",
+        "physical"
+      ],
+      "title": "NoCandidatesDecision",
+      "type": "object"
+    },
+    "NoSuitableFactorDecision": {
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "const": "no_suitable_factor",
+          "title": "Status",
+          "type": "string"
+        },
+        "source": {
+          "const": "llm",
+          "title": "Source",
+          "type": "string"
+        },
+        "category": {
+          "enum": [
+            1,
+            2,
+            4,
+            6,
+            7,
+            9
+          ],
+          "title": "Category",
+          "type": "integer"
+        },
+        "classification": {
+          "$ref": "#/$defs/ClassificationJson"
+        },
+        "physical": {
+          "enum": [
+            "no_activity_candidates",
+            "unit_mismatch",
+            "llm_found_none_suitable"
+          ],
+          "title": "Physical",
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "source",
+        "category",
+        "classification",
+        "physical"
+      ],
+      "title": "NoSuitableFactorDecision",
+      "type": "object"
+    },
+    "NotCalculatedCalc": {
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "const": "not_calculated",
+          "title": "Status",
+          "type": "string"
+        },
+        "reason": {
+          "title": "Reason",
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "reason"
+      ],
+      "title": "NotCalculatedCalc",
+      "type": "object"
+    },
+    "PickJson": {
+      "additionalProperties": false,
+      "properties": {
+        "factorId": {
+          "title": "Factorid",
+          "type": "string"
+        },
+        "reason": {
+          "title": "Reason",
+          "type": "string"
+        },
+        "confidence": {
+          "enum": [
+            "high",
+            "medium",
+            "low"
+          ],
+          "title": "Confidence",
+          "type": "string"
+        }
+      },
+      "required": [
+        "factorId",
+        "reason",
+        "confidence"
+      ],
+      "title": "PickJson",
+      "type": "object"
+    },
+    "PromptUsageJson": {
+      "additionalProperties": false,
+      "properties": {
+        "calls": {
+          "title": "Calls",
+          "type": "integer"
+        },
+        "attempts": {
+          "title": "Attempts",
+          "type": "integer"
+        },
+        "costUsd": {
+          "title": "Costusd",
+          "type": "number"
+        }
+      },
+      "required": [
+        "calls",
+        "attempts",
+        "costUsd"
+      ],
+      "title": "PromptUsageJson",
+      "type": "object"
+    },
+    "RecommendationFailedDecision": {
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "const": "recommendation_failed",
+          "title": "Status",
+          "type": "string"
+        },
+        "source": {
+          "const": "llm",
+          "title": "Source",
+          "type": "string"
+        },
+        "category": {
+          "enum": [
+            1,
+            2,
+            4,
+            6,
+            7,
+            9
+          ],
+          "title": "Category",
+          "type": "integer"
+        },
+        "classification": {
+          "$ref": "#/$defs/ClassificationJson"
+        },
+        "basis": {
+          "enum": [
+            "physical",
+            "spend"
+          ],
+          "title": "Basis",
+          "type": "string"
+        },
+        "llm": {
+          "$ref": "#/$defs/LlmFailureJson"
+        }
+      },
+      "required": [
+        "status",
+        "source",
+        "category",
+        "classification",
+        "basis",
+        "llm"
+      ],
+      "title": "RecommendationFailedDecision",
+      "type": "object"
+    },
+    "RecommendedDecision": {
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "const": "recommended",
+          "title": "Status",
+          "type": "string"
+        },
+        "source": {
+          "enum": [
+            "memory",
+            "llm"
+          ],
+          "title": "Source",
+          "type": "string"
+        },
+        "category": {
+          "enum": [
+            1,
+            2,
+            4,
+            6,
+            7,
+            9
+          ],
+          "title": "Category",
+          "type": "integer"
+        },
+        "picks": {
+          "items": {
+            "$ref": "#/$defs/PickJson"
+          },
+          "title": "Picks",
+          "type": "array"
+        },
+        "basis": {
+          "$ref": "#/$defs/BasisJson"
+        },
+        "classification": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ClassificationJson"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "memoryEntry": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/MemoryEntryJson"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "candidates": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/CandidateStatsJson"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "status",
+        "source",
+        "category",
+        "picks",
+        "basis",
+        "classification",
+        "memoryEntry",
+        "candidates"
+      ],
+      "title": "RecommendedDecision",
+      "type": "object"
+    },
+    "RejectedJson": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "enum": [
+            "duplicate_row_id",
+            "invalid_adjustments"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "rowId": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Rowid"
+        },
+        "problems": {
+          "items": {
+            "$ref": "#/$defs/AdjustmentProblemJson"
+          },
+          "title": "Problems",
+          "type": "array"
+        }
+      },
+      "required": [
+        "kind",
+        "rowId",
+        "problems"
+      ],
+      "title": "RejectedJson",
+      "type": "object"
+    },
+    "Scope3Done": {
+      "additionalProperties": false,
+      "description": "scope3.llm-first.result@2 — 끝까지 돈 것.",
+      "properties": {
+        "schemaVersion": {
+          "const": "scope3.llm-first.result@2",
+          "title": "Schemaversion",
+          "type": "string"
+        },
+        "status": {
+          "const": "done",
+          "title": "Status",
+          "type": "string"
+        },
+        "rows": {
+          "items": {
+            "$ref": "#/$defs/Scope3RowJson"
+          },
+          "title": "Rows",
+          "type": "array"
+        },
+        "groups": {
+          "items": {
+            "$ref": "#/$defs/Scope3GroupJson"
+          },
+          "title": "Groups",
+          "type": "array"
+        },
+        "usage": {
+          "$ref": "#/$defs/UsageJson"
+        },
+        "shortlist": {
+          "$ref": "#/$defs/ShortlistInfoJson"
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "status",
+        "rows",
+        "groups",
+        "usage",
+        "shortlist"
+      ],
+      "title": "Scope3Done",
+      "type": "object"
+    },
+    "Scope3GroupJson": {
+      "additionalProperties": false,
+      "properties": {
+        "key": {
+          "title": "Key",
+          "type": "string"
+        },
+        "rowIds": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Rowids",
+          "type": "array"
+        },
+        "decision": {
+          "discriminator": {
+            "mapping": {
+              "classification_failed": "#/$defs/ClassificationFailedDecision",
+              "memory_category_mismatch": "#/$defs/MemoryCategoryMismatchDecision",
+              "memory_factor_excluded": "#/$defs/MemoryFactorExcludedDecision",
+              "memory_factor_missing": "#/$defs/MemoryFactorMissingDecision",
+              "no_candidates": "#/$defs/NoCandidatesDecision",
+              "no_suitable_factor": "#/$defs/NoSuitableFactorDecision",
+              "recommendation_failed": "#/$defs/RecommendationFailedDecision",
+              "recommended": "#/$defs/RecommendedDecision",
+              "unsupported_category": "#/$defs/UnsupportedCategoryDecision"
+            },
+            "propertyName": "status"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/RecommendedDecision"
+            },
+            {
+              "$ref": "#/$defs/MemoryFactorMissingDecision"
+            },
+            {
+              "$ref": "#/$defs/MemoryCategoryMismatchDecision"
+            },
+            {
+              "$ref": "#/$defs/MemoryFactorExcludedDecision"
+            },
+            {
+              "$ref": "#/$defs/ClassificationFailedDecision"
+            },
+            {
+              "$ref": "#/$defs/UnsupportedCategoryDecision"
+            },
+            {
+              "$ref": "#/$defs/NoCandidatesDecision"
+            },
+            {
+              "$ref": "#/$defs/NoSuitableFactorDecision"
+            },
+            {
+              "$ref": "#/$defs/RecommendationFailedDecision"
+            }
+          ],
+          "title": "Decision"
+        },
+        "shortlists": {
+          "items": {
+            "$ref": "#/$defs/ShortlistTraceJson"
+          },
+          "title": "Shortlists",
+          "type": "array"
+        }
+      },
+      "required": [
+        "key",
+        "rowIds",
+        "decision",
+        "shortlists"
+      ],
+      "title": "Scope3GroupJson",
+      "type": "object"
+    },
+    "Scope3Rejected": {
+      "additionalProperties": false,
+      "description": "scope3.llm-first.result@2 — 입력이 틀려 한 묶음도 판단하지 않은 것.",
+      "properties": {
+        "schemaVersion": {
+          "const": "scope3.llm-first.result@2",
+          "title": "Schemaversion",
+          "type": "string"
+        },
+        "status": {
+          "const": "rejected",
+          "title": "Status",
+          "type": "string"
+        },
+        "rejected": {
+          "$ref": "#/$defs/RejectedJson"
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "status",
+        "rejected"
+      ],
+      "title": "Scope3Rejected",
+      "type": "object"
+    },
+    "Scope3RowJson": {
+      "additionalProperties": false,
+      "properties": {
+        "rowId": {
+          "title": "Rowid",
+          "type": "string"
+        },
+        "groupKey": {
+          "title": "Groupkey",
+          "type": "string"
+        },
+        "calc": {
+          "discriminator": {
+            "mapping": {
+              "computed": "#/$defs/ComputedCalc",
+              "invalid_number": "#/$defs/InvalidNumberCalc",
+              "missing_amount": "#/$defs/MissingAmountCalc",
+              "missing_quantity": "#/$defs/MissingQuantityCalc",
+              "needs_currency_adjustment": "#/$defs/NeedsCurrencyAdjustmentCalc",
+              "needs_distance": "#/$defs/NeedsDistanceCalc",
+              "not_calculated": "#/$defs/NotCalculatedCalc",
+              "unit_mismatch": "#/$defs/UnitMismatchCalc",
+              "unsupported_factor_unit": "#/$defs/UnsupportedFactorUnitCalc"
+            },
+            "propertyName": "status"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/ComputedCalc"
+            },
+            {
+              "$ref": "#/$defs/NeedsDistanceCalc"
+            },
+            {
+              "$ref": "#/$defs/NeedsCurrencyAdjustmentCalc"
+            },
+            {
+              "$ref": "#/$defs/MissingQuantityCalc"
+            },
+            {
+              "$ref": "#/$defs/MissingAmountCalc"
+            },
+            {
+              "$ref": "#/$defs/InvalidNumberCalc"
+            },
+            {
+              "$ref": "#/$defs/UnitMismatchCalc"
+            },
+            {
+              "$ref": "#/$defs/UnsupportedFactorUnitCalc"
+            },
+            {
+              "$ref": "#/$defs/NotCalculatedCalc"
+            }
+          ],
+          "title": "Calc"
+        }
+      },
+      "required": [
+        "rowId",
+        "groupKey",
+        "calc"
+      ],
+      "title": "Scope3RowJson",
+      "type": "object"
+    },
+    "ShortlistInfoJson": {
+      "additionalProperties": false,
+      "properties": {
+        "method": {
+          "enum": [
+            "lexical-v1",
+            "lexical-v2"
+          ],
+          "title": "Method",
+          "type": "string"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        }
+      },
+      "required": [
+        "method",
+        "description"
+      ],
+      "title": "ShortlistInfoJson",
+      "type": "object"
+    },
+    "ShortlistTraceJson": {
+      "additionalProperties": false,
+      "properties": {
+        "basis": {
+          "enum": [
+            "physical",
+            "spend"
+          ],
+          "title": "Basis",
+          "type": "string"
+        },
+        "method": {
+          "enum": [
+            "lexical-v1",
+            "lexical-v2"
+          ],
+          "title": "Method",
+          "type": "string"
+        },
+        "total": {
+          "title": "Total",
+          "type": "integer"
+        },
+        "shownIds": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Shownids",
+          "type": "array"
+        },
+        "evidence": {
+          "items": {
+            "$ref": "#/$defs/CandidateEvidenceJson"
+          },
+          "title": "Evidence",
+          "type": "array"
+        },
+        "failure": {
+          "title": "Failure",
+          "type": "null"
+        }
+      },
+      "required": [
+        "basis",
+        "method",
+        "total",
+        "shownIds",
+        "evidence",
+        "failure"
+      ],
+      "title": "ShortlistTraceJson",
+      "type": "object"
+    },
+    "UnitMismatchCalc": {
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "const": "unit_mismatch",
+          "title": "Status",
+          "type": "string"
+        },
+        "factorId": {
+          "title": "Factorid",
+          "type": "string"
+        },
+        "rowUnit": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Rowunit"
+        },
+        "factorUnit": {
+          "title": "Factorunit",
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "factorId",
+        "rowUnit",
+        "factorUnit"
+      ],
+      "title": "UnitMismatchCalc",
+      "type": "object"
+    },
+    "UnsupportedCategoryDecision": {
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "const": "unsupported_category",
+          "title": "Status",
+          "type": "string"
+        },
+        "source": {
+          "const": "llm",
+          "title": "Source",
+          "type": "string"
+        },
+        "classification": {
+          "$ref": "#/$defs/ClassificationJson"
+        }
+      },
+      "required": [
+        "status",
+        "source",
+        "classification"
+      ],
+      "title": "UnsupportedCategoryDecision",
+      "type": "object"
+    },
+    "UnsupportedFactorUnitCalc": {
+      "additionalProperties": false,
+      "properties": {
+        "status": {
+          "const": "unsupported_factor_unit",
+          "title": "Status",
+          "type": "string"
+        },
+        "factorId": {
+          "title": "Factorid",
+          "type": "string"
+        },
+        "factorUnit": {
+          "title": "Factorunit",
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "factorId",
+        "factorUnit"
+      ],
+      "title": "UnsupportedFactorUnitCalc",
+      "type": "object"
+    },
+    "UsageJson": {
+      "additionalProperties": false,
+      "properties": {
+        "calls": {
+          "title": "Calls",
+          "type": "integer"
+        },
+        "attempts": {
+          "title": "Attempts",
+          "type": "integer"
+        },
+        "costUsd": {
+          "title": "Costusd",
+          "type": "number"
+        },
+        "byPrompt": {
+          "additionalProperties": {
+            "$ref": "#/$defs/PromptUsageJson"
+          },
+          "title": "Byprompt",
+          "type": "object"
+        }
+      },
+      "required": [
+        "calls",
+        "attempts",
+        "costUsd",
+        "byPrompt"
+      ],
+      "title": "UsageJson",
+      "type": "object"
+    }
+  },
+  "discriminator": {
+    "mapping": {
+      "done": "#/$defs/Scope3Done",
+      "rejected": "#/$defs/Scope3Rejected"
+    },
+    "propertyName": "status"
+  },
+  "oneOf": [
+    {
+      "$ref": "#/$defs/Scope3Done"
+    },
+    {
+      "$ref": "#/$defs/Scope3Rejected"
+    }
+  ]
+}

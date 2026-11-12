@@ -1,0 +1,7 @@
+{
+  "parts": {
+    "ceo": [1],
+    "company": [2],
+    "climate": [3, 4]
+  }
+}

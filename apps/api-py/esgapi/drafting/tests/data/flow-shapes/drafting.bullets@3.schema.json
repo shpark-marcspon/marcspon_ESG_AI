@@ -1,0 +1,842 @@
+{
+  "$defs": {
+    "DraftingBase": {
+      "additionalProperties": false,
+      "description": "이어 받은 앞 실행(옵션 base.runId)과 이어 받았는가.",
+      "properties": {
+        "runId": {
+          "description": "앞 실행 id.",
+          "minimum": 1,
+          "title": "Runid",
+          "type": "integer"
+        },
+        "outlineId": {
+          "description": "앞 실행이 읽은 목차 판 id.",
+          "minimum": 1,
+          "title": "Outlineid",
+          "type": "integer"
+        },
+        "matched": {
+          "description": "앞 실행과 분해·판·설정이 같아 안 바뀐 잎을 옮겼는가(false 면 전부 다시 지었다 — 경고 base_not_reused).",
+          "title": "Matched",
+          "type": "boolean"
+        },
+        "reason": {
+          "anyOf": [
+            {
+              "enum": [
+                "document",
+                "versions",
+                "settings",
+                "base_rejected"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "matched false 의 까닭(document = 분해가 다름 · versions = 판이 다름 · settings = 경로·프롬프트가 다름 ·\nbase_rejected = 앞 실행이 거절로 끝남). matched true 면 null.",
+          "title": "Reason"
+        }
+      },
+      "required": [
+        "runId",
+        "outlineId",
+        "matched",
+        "reason"
+      ],
+      "title": "DraftingBase",
+      "type": "object"
+    },
+    "DraftingBasis": {
+      "additionalProperties": false,
+      "description": "실행이 선 문서 분해 한 벌(core 문서 산출물).",
+      "properties": {
+        "artifactId": {
+          "description": "core 문서 산출물 id.",
+          "minimum": 1,
+          "title": "Artifactid",
+          "type": "integer"
+        },
+        "parser": {
+          "$ref": "#/$defs/DraftingParser"
+        },
+        "epoch": {
+          "description": "산출물 판 열쇠의 EPOCH.",
+          "minimum": 1,
+          "title": "Epoch",
+          "type": "integer"
+        },
+        "pagesSha256": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "쪽 글 목록의 sha256(앞 실행 이어 받기의 분해 열쇠). null = 분해 행은 있으나 쪽 글을 펴지 않음(rejected\ntoo_large 행).",
+          "title": "Pagessha256"
+        }
+      },
+      "required": [
+        "artifactId",
+        "parser",
+        "epoch",
+        "pagesSha256"
+      ],
+      "title": "DraftingBasis",
+      "type": "object"
+    },
+    "DraftingBullet": {
+      "additionalProperties": false,
+      "description": "개조식 한 줄.",
+      "properties": {
+        "text": {
+          "description": "bullet 글(1~200자).",
+          "title": "Text",
+          "type": "string"
+        },
+        "sources": {
+          "description": "서버가 대 보고 남긴 근거(쪽 → 블록 차례 → 문장 번호 차례, 겹침 없음). 비면 unsupported 다.",
+          "items": {
+            "$ref": "#/$defs/DraftingSource"
+          },
+          "title": "Sources",
+          "type": "array"
+        },
+        "unsupported": {
+          "description": "근거 불명확(서버 판정 — 준 블록이 아니거나 bullet 의 숫자가 출처 블록 글에 없음). 지우지 않고 표시만.",
+          "title": "Unsupported",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "text",
+        "sources",
+        "unsupported"
+      ],
+      "title": "DraftingBullet",
+      "type": "object"
+    },
+    "DraftingDocument": {
+      "additionalProperties": false,
+      "description": "실행이 읽은 전년도 보고서.",
+      "properties": {
+        "documentId": {
+          "minimum": 1,
+          "title": "Documentid",
+          "type": "integer"
+        },
+        "fileName": {
+          "title": "Filename",
+          "type": "string"
+        },
+        "pageCount": {
+          "description": "PDF 의 쪽 수.",
+          "minimum": 0,
+          "title": "Pagecount",
+          "type": "integer"
+        },
+        "textPages": {
+          "description": "글자가 있는 쪽 수(빈 쪽 = 그림·스캔뿐).",
+          "minimum": 0,
+          "title": "Textpages",
+          "type": "integer"
+        },
+        "pages": {
+          "description": "분해한 쪽의 크기(쪽 오름). 분해 결과가 없으면(rejected too_large) 빈 목록.",
+          "items": {
+            "$ref": "#/$defs/DraftingPageSize"
+          },
+          "title": "Pages",
+          "type": "array"
+        }
+      },
+      "required": [
+        "documentId",
+        "fileName",
+        "pageCount",
+        "textPages",
+        "pages"
+      ],
+      "title": "DraftingDocument",
+      "type": "object"
+    },
+    "DraftingFailedBatch": {
+      "additionalProperties": false,
+      "description": "실패한 S2 묶음(그 쪽들은 어느 잎에도 달리지 않았다).",
+      "properties": {
+        "firstPage": {
+          "minimum": 1,
+          "title": "Firstpage",
+          "type": "integer"
+        },
+        "lastPage": {
+          "minimum": 1,
+          "title": "Lastpage",
+          "type": "integer"
+        },
+        "failure": {
+          "$ref": "#/$defs/DraftingFailure"
+        }
+      },
+      "required": [
+        "firstPage",
+        "lastPage",
+        "failure"
+      ],
+      "title": "DraftingFailedBatch",
+      "type": "object"
+    },
+    "DraftingFailure": {
+      "additionalProperties": false,
+      "description": "호출이나 답 읽기가 실패한 까닭.",
+      "properties": {
+        "kind": {
+          "description": "unparsable = 모델의 답을 읽지 못함. 그 밖은 모델 호출의 실패 갈래(core.llm 의 이름 그대로).",
+          "enum": [
+            "unparsable",
+            "provider_error",
+            "timeout",
+            "refusal",
+            "truncated",
+            "budget_exceeded",
+            "schema_mismatch"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "message": {
+          "description": "실패 갈래의 설명(모델 글·공급사 메시지·고객 데이터는 싣지 않는다).",
+          "title": "Message",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "message"
+      ],
+      "title": "DraftingFailure",
+      "type": "object"
+    },
+    "DraftingLeaf": {
+      "additionalProperties": false,
+      "description": "목차 잎 하나의 결과(목차 차례).",
+      "properties": {
+        "key": {
+          "description": "목차 마디 key.",
+          "title": "Key",
+          "type": "string"
+        },
+        "titlePath": {
+          "description": "대 → 잎 제목 경로.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Titlepath",
+          "type": "array"
+        },
+        "pages": {
+          "description": "S2 가 이 잎에 단 쪽(쪽 차례, 겹침 없음). 옮긴 잎은 앞 실행의 쪽.",
+          "items": {
+            "minimum": 1,
+            "type": "integer"
+          },
+          "title": "Pages",
+          "type": "array"
+        },
+        "reusedFrom": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/DraftingLeafOrigin"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "앞 실행에서 옮긴 잎이면 그 잎을 지은 실행(쪽·bullet·상자를 그대로 옮김). null = 이 실행이 지음."
+        },
+        "outcome": {
+          "discriminator": {
+            "mapping": {
+              "done": "#/$defs/DraftingLeafDone",
+              "failed": "#/$defs/DraftingLeafFailed",
+              "no_material": "#/$defs/DraftingLeafNoMaterial",
+              "not_run": "#/$defs/DraftingLeafNotRun"
+            },
+            "propertyName": "status"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/DraftingLeafDone"
+            },
+            {
+              "$ref": "#/$defs/DraftingLeafNoMaterial"
+            },
+            {
+              "$ref": "#/$defs/DraftingLeafFailed"
+            },
+            {
+              "$ref": "#/$defs/DraftingLeafNotRun"
+            }
+          ],
+          "title": "Outcome"
+        }
+      },
+      "required": [
+        "key",
+        "titlePath",
+        "pages",
+        "reusedFrom",
+        "outcome"
+      ],
+      "title": "DraftingLeaf",
+      "type": "object"
+    },
+    "DraftingLeafDone": {
+      "additionalProperties": false,
+      "description": "잎의 초안을 지었다.",
+      "properties": {
+        "status": {
+          "const": "done",
+          "title": "Status",
+          "type": "string"
+        },
+        "bullets": {
+          "description": "0~15 줄. 0 이면 모델이 근거로 쓸 사실을 찾지 못한 것이다.",
+          "items": {
+            "$ref": "#/$defs/DraftingBullet"
+          },
+          "title": "Bullets",
+          "type": "array"
+        }
+      },
+      "required": [
+        "status",
+        "bullets"
+      ],
+      "title": "DraftingLeafDone",
+      "type": "object"
+    },
+    "DraftingLeafFailed": {
+      "additionalProperties": false,
+      "description": "그 잎의 호출이나 답 읽기가 실패했다.",
+      "properties": {
+        "status": {
+          "const": "failed",
+          "title": "Status",
+          "type": "string"
+        },
+        "failure": {
+          "$ref": "#/$defs/DraftingFailure"
+        }
+      },
+      "required": [
+        "status",
+        "failure"
+      ],
+      "title": "DraftingLeafFailed",
+      "type": "object"
+    },
+    "DraftingLeafNoMaterial": {
+      "additionalProperties": false,
+      "description": "그 잎에 달린 쪽이 없다(S2 가 어느 쪽에도 그 잎을 달지 않음) — 호출하지 않았다.",
+      "properties": {
+        "status": {
+          "const": "no_material",
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "status"
+      ],
+      "title": "DraftingLeafNoMaterial",
+      "type": "object"
+    },
+    "DraftingLeafNotRun": {
+      "additionalProperties": false,
+      "description": "그 잎을 돌리지 않았다(실행이 rejected 로 멈춤).",
+      "properties": {
+        "status": {
+          "const": "not_run",
+          "title": "Status",
+          "type": "string"
+        },
+        "reason": {
+          "description": "돌리지 않은 까닭(사람에게 보일 한 문장).",
+          "title": "Reason",
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "reason"
+      ],
+      "title": "DraftingLeafNotRun",
+      "type": "object"
+    },
+    "DraftingLeafOrigin": {
+      "additionalProperties": false,
+      "description": "옮긴 잎을 실제로 지은 실행.",
+      "properties": {
+        "runId": {
+          "description": "그 잎을 지은 실행 id(옮김이 이어지면 처음 지은 실행).",
+          "minimum": 1,
+          "title": "Runid",
+          "type": "integer"
+        },
+        "outlineId": {
+          "description": "그 실행이 읽은 목차 판 id.",
+          "minimum": 1,
+          "title": "Outlineid",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "runId",
+        "outlineId"
+      ],
+      "title": "DraftingLeafOrigin",
+      "type": "object"
+    },
+    "DraftingMapping": {
+      "additionalProperties": false,
+      "description": "S2(쪽 → 목차 잎) 묶음의 셈.",
+      "properties": {
+        "batches": {
+          "description": "이 실행의 S2 묶음 수(호출 수 — 앞 실행을 이어 받아 다시 달 잎이 없으면 0 일 수 있음).",
+          "minimum": 0,
+          "title": "Batches",
+          "type": "integer"
+        },
+        "failedBatches": {
+          "items": {
+            "$ref": "#/$defs/DraftingFailedBatch"
+          },
+          "title": "Failedbatches",
+          "type": "array"
+        }
+      },
+      "required": [
+        "batches",
+        "failedBatches"
+      ],
+      "title": "DraftingMapping",
+      "type": "object"
+    },
+    "DraftingPageSize": {
+      "additionalProperties": false,
+      "description": "쪽 크기(PDF pt — 상자의 축척).",
+      "properties": {
+        "page": {
+          "minimum": 1,
+          "title": "Page",
+          "type": "integer"
+        },
+        "width": {
+          "title": "Width",
+          "type": "number"
+        },
+        "height": {
+          "title": "Height",
+          "type": "number"
+        }
+      },
+      "required": [
+        "page",
+        "width",
+        "height"
+      ],
+      "title": "DraftingPageSize",
+      "type": "object"
+    },
+    "DraftingParser": {
+      "additionalProperties": false,
+      "description": "분해한 파서.",
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "version": {
+          "title": "Version",
+          "type": "string"
+        },
+        "layout": {
+          "description": "분해 판(2 = 머리글·꼬리말 갈림).",
+          "enum": [
+            1,
+            2
+          ],
+          "title": "Layout",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "name",
+        "version",
+        "layout"
+      ],
+      "title": "DraftingParser",
+      "type": "object"
+    },
+    "DraftingResult": {
+      "additionalProperties": false,
+      "description": "drafting.bullets@3 — 원고작성 한 실행의 결과. schemaVersion 이 첫 키다.",
+      "properties": {
+        "schemaVersion": {
+          "const": "drafting.bullets@3",
+          "title": "Schemaversion",
+          "type": "string"
+        },
+        "basis": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/DraftingBasis"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "실행이 선 분해 한 벌. 산출물을 얻지 못하고 거절됐으면(rejected too_large — 분해 거절) null."
+        },
+        "base": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/DraftingBase"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "이어 받은 앞 실행(옵션 base). 옵션에 base 가 없으면 null."
+        },
+        "projectId": {
+          "minimum": 1,
+          "title": "Projectid",
+          "type": "integer"
+        },
+        "outlineId": {
+          "description": "실행이 읽은 목차 판의 id(만들 때 박은 판 — 큐 중에 목차를 고쳐도 이 판).",
+          "minimum": 1,
+          "title": "Outlineid",
+          "type": "integer"
+        },
+        "outlineSha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Outlinesha256",
+          "type": "string"
+        },
+        "status": {
+          "discriminator": {
+            "mapping": {
+              "done": "#/$defs/DraftingStatusDone",
+              "rejected": "#/$defs/DraftingStatusRejected"
+            },
+            "propertyName": "status"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/DraftingStatusDone"
+            },
+            {
+              "$ref": "#/$defs/DraftingStatusRejected"
+            }
+          ],
+          "title": "Status"
+        },
+        "document": {
+          "$ref": "#/$defs/DraftingDocument"
+        },
+        "leaves": {
+          "description": "목차 잎 전부(목차 차례).",
+          "items": {
+            "$ref": "#/$defs/DraftingLeaf"
+          },
+          "title": "Leaves",
+          "type": "array"
+        },
+        "mapping": {
+          "$ref": "#/$defs/DraftingMapping"
+        },
+        "settings": {
+          "$ref": "#/$defs/DraftingSettings"
+        },
+        "warnings": {
+          "items": {
+            "$ref": "#/$defs/DraftingWarning"
+          },
+          "title": "Warnings",
+          "type": "array"
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "basis",
+        "base",
+        "projectId",
+        "outlineId",
+        "outlineSha256",
+        "status",
+        "document",
+        "leaves",
+        "mapping",
+        "settings",
+        "warnings"
+      ],
+      "title": "DraftingResult",
+      "type": "object"
+    },
+    "DraftingSentence": {
+      "additionalProperties": false,
+      "description": "출처 블록 안의 문장 하나(표면 행 하나).",
+      "properties": {
+        "index": {
+          "description": "문장 번호(0부터 — 재료 표지·모델 답과 같은 번호). 표면 실제 행 번호(0부터, 빈 행이 빠져 건너뛸 수 있음).",
+          "minimum": 0,
+          "title": "Index",
+          "type": "integer"
+        },
+        "boxes": {
+          "description": "그 문장의 줄 상자(줄마다 하나). 표 행이면 그 행 칸들의 합집합 하나.",
+          "items": {
+            "items": {
+              "type": "number"
+            },
+            "maxItems": 4,
+            "minItems": 4,
+            "type": "array"
+          },
+          "minItems": 1,
+          "title": "Boxes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "index",
+        "boxes"
+      ],
+      "title": "DraftingSentence",
+      "type": "object"
+    },
+    "DraftingSettings": {
+      "additionalProperties": false,
+      "description": "실행이 쓴 경로·프롬프트.",
+      "properties": {
+        "routes": {
+          "$ref": "#/$defs/DraftingStepPair",
+          "description": "모델 경로 이름(models.json 의 route — 모의 실행이면 mock)."
+        },
+        "promptIds": {
+          "$ref": "#/$defs/DraftingStepPair",
+          "description": "프롬프트 id@판."
+        }
+      },
+      "required": [
+        "routes",
+        "promptIds"
+      ],
+      "title": "DraftingSettings",
+      "type": "object"
+    },
+    "DraftingSource": {
+      "additionalProperties": false,
+      "description": "bullet 의 근거 한 블록(표면 표 하나).",
+      "properties": {
+        "documentId": {
+          "description": "전년도 보고서 문서 id(실행이 읽은 문서).",
+          "minimum": 1,
+          "title": "Documentid",
+          "type": "integer"
+        },
+        "blockId": {
+          "description": "분해의 블록 id(표면 표 id).",
+          "title": "Blockid",
+          "type": "string"
+        },
+        "page": {
+          "description": "쪽 번호(1부터).",
+          "minimum": 1,
+          "title": "Page",
+          "type": "integer"
+        },
+        "blockBox": {
+          "description": "블록(표) 상자.",
+          "items": {
+            "type": "number"
+          },
+          "maxItems": 4,
+          "minItems": 4,
+          "title": "Blockbox",
+          "type": "array"
+        },
+        "sentence": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/DraftingSentence"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "근거 문장. null = 문장 자리를 못 냄(번호가 없거나 범위 밖, 또는 글자 자리가 없음) — 블록 상자만."
+        }
+      },
+      "required": [
+        "documentId",
+        "blockId",
+        "page",
+        "blockBox",
+        "sentence"
+      ],
+      "title": "DraftingSource",
+      "type": "object"
+    },
+    "DraftingStatusDone": {
+      "additionalProperties": false,
+      "description": "실행을 끝까지 돌렸다(잎마다의 성패는 outcome 이 말한다).",
+      "properties": {
+        "status": {
+          "const": "done",
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "status"
+      ],
+      "title": "DraftingStatusDone",
+      "type": "object"
+    },
+    "DraftingStatusRejected": {
+      "additionalProperties": false,
+      "description": "공급사를 부르기 전에 멈췄다.",
+      "properties": {
+        "status": {
+          "const": "rejected",
+          "title": "Status",
+          "type": "string"
+        },
+        "code": {
+          "description": "over_budget = 비용 위끝이 상한(DRAFTING_RUN_MAX_USD)을 넘음, too_large = 쪽 수 상한(300)을 넘음.",
+          "enum": [
+            "over_budget",
+            "too_large"
+          ],
+          "title": "Code",
+          "type": "string"
+        },
+        "stage": {
+          "description": "before_map = 쪽 → 목차 연결 전(호출 0), before_draft = 연결 뒤 초안 전(mapping 은 실리고 잎은 전부 not_run).",
+          "enum": [
+            "before_map",
+            "before_draft"
+          ],
+          "title": "Stage",
+          "type": "string"
+        },
+        "message": {
+          "title": "Message",
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "code",
+        "stage",
+        "message"
+      ],
+      "title": "DraftingStatusRejected",
+      "type": "object"
+    },
+    "DraftingStepPair": {
+      "additionalProperties": false,
+      "description": "단계 둘(map = S2 쪽 → 목차, draft = S3 개조식)의 값.",
+      "properties": {
+        "map": {
+          "title": "Map",
+          "type": "string"
+        },
+        "draft": {
+          "title": "Draft",
+          "type": "string"
+        }
+      },
+      "required": [
+        "map",
+        "draft"
+      ],
+      "title": "DraftingStepPair",
+      "type": "object"
+    },
+    "DraftingWarning": {
+      "additionalProperties": false,
+      "description": "경고 하나.",
+      "properties": {
+        "code": {
+          "enum": [
+            "page_truncated",
+            "material_truncated",
+            "mapping_incomplete",
+            "unknown_key",
+            "page_out_of_batch",
+            "source_not_given",
+            "sentence_out_of_range",
+            "unsupported_bullet",
+            "number_not_in_source",
+            "bullets_capped",
+            "base_not_reused",
+            "source_block_missing"
+          ],
+          "title": "Code",
+          "type": "string"
+        },
+        "message": {
+          "description": "사람에게 보일 한 문장(모델 글을 옮기지 않는다).",
+          "title": "Message",
+          "type": "string"
+        },
+        "key": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "그 경고의 목차 잎 key(없으면 null).",
+          "title": "Key"
+        },
+        "page": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "그 경고의 쪽(없으면 null).",
+          "title": "Page"
+        }
+      },
+      "required": [
+        "code",
+        "message",
+        "key",
+        "page"
+      ],
+      "title": "DraftingWarning",
+      "type": "object"
+    }
+  },
+  "$ref": "#/$defs/DraftingResult",
+  "description": "원고작성 한 실행의 결과(잎마다 개조식).",
+  "title": "drafting.bullets@3"
+}

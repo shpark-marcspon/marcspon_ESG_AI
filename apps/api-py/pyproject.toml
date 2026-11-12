@@ -1,0 +1,132 @@
+[project]
+name = "esgapi"
+version = "0.0.0"
+description = "Python(Django + django-ninja) API. 본 저장소의 바닥: config · core · 업무 모듈 여섯."
+requires-python = ">=3.13,<3.14"
+# 버전은 전부 고정한다(==). 올릴 때는 여기를 고치고 `uv lock` 을 다시 돌린다.
+dependencies = [
+    "django==5.2.18",
+    "django-ninja==1.7.1",
+    "pyjwt[crypto]==2.15.1",   # [crypto] = RS256 검증에 쓰는 cryptography 를 같이 설치
+    "psycopg[binary]==3.3.6",  # [binary] = 미리 빌드된 libpq 를 같이 받는다(이미지에 컴파일러가 필요 없다)
+    "gunicorn==26.2.0",
+    # core/llm 의 실제 공급사 어댑터가 쓰는 SDK 셋. 모듈은 이것을 직접 부르지 않는다(esgapi/core/llm 을 거친다).
+    "openai==3.26.0",
+    "anthropic==1.11.0",
+    "google-genai==2.28.0",
+    # 원본 파일 저장소(S3·S3 호환)의 SDK. 쓰는 곳은 esgapi/core/resources/storage.py 하나다.
+    # botocore 를 같이 고정한다: boto3 는 botocore 를 범위로만 묶어, 안 적으면 잠금이 그 범위의 최신 판을 집는다.
+    "boto3==1.43.101",
+    "botocore==1.43.101",
+    # 작업 큐(Celery)와 그 브로커 전송(kombu 의 SQS). 쓰는 곳은 esgapi/config/celery.py·core/resources/queue.py·
+    # reconcile/tasks.py 셋이다. `celery[sqs]` 덧붙임을 쓰지 않는다: 그 덧붙임은 boto3·urllib3·pycurl·kombu 를
+    # 범위로 끌어 잠금이 최신 판을 집는다. 필요한 것을 여기 직접 고정한다.
+    "celery==5.6.3",
+    "kombu==5.6.2",            # celery 는 kombu>=5.6.0 으로만 묶는다
+    # 아래 넷은 celery·kombu 가 범위로 끄는 것이다. 최신 판이 나온 지 2주가 안 돼(2026-10-05) 앞 판으로 고정한다.
+    "billiard==4.2.4",
+    "amqp==5.3.1",
+    "click-repl==0.3.0",
+    "wcwidth==0.8.5",
+    # kombu 의 SQS 받는 길(비동기 HTTP 클라이언트)이 쓴다. 이것이 없으면 워커가 뜨지 않는다(넣는 쪽은 없어도 된다).
+    "pycurl==7.48.0",
+    # 그린워싱(greenwash)이 쓰는 일곱. 판은 esg-lab py/uv.lock(GW1 이 실제로 쓴 판)과 같다(사용자 승인 MARC-TICK-74, 2026-10-15).
+    # 판을 올리려면 GW1 대조(노트북과 같음)를 다시 잰다.
+    "pypdf==6.20.1",
+    "langchain-text-splitters==1.1.3",
+    "langchain-core==1.6.10",  # text-splitters 가 범위로 끄는 판을 못박는다(직접 쓰지 않는다)
+    "numpy==2.5.4",
+    "tiktoken==0.14.0",
+    "jsonschema==4.26.0",
+    "openpyxl==3.1.5",
+    # 그린워싱 문장 위치(locate)가 쓰는 PDF 렌더러. 판은 services/parser 와 같다(사용자 승인 MARC-TICK-74, 2026-10-16).
+    # 판을 올리려면 services/parser 와 함께 올린다.
+    "pypdfium2==5.14.0",
+    # 웹 빌드(apps/web/dist)를 같은 프로세스가 정적 서빙한다(sid:MARC-ENT-198). 쓰는 곳은 config/settings/base.py 의
+    # MIDDLEWARE 한 줄과 WHITENOISE_* 설정 하나다. MIT. 덧붙임([brotli])은 쓰지 않는다.
+    "whitenoise==6.12.0",
+    # Scope 3 코랩 흐름(scope3.colab@157)이 쓰는 둘. 판은 처분 ⑩. 코랩 기준 임시(MARC-ENT-265, 추적 MARC-ISSUE-126).
+    # numpy·openpyxl 은 위 그린워싱 줄의 것을 같이 쓴다. 코랩(2.x)과 다르게 도는 자리는 colab_157/pdcompat.py 가 맞춘다(MARC-ENT-298).
+    "pandas==3.0.6",
+    "rapidfuzz==3.14.6",
+    # 영문번역(translation, MARC-ENT-158)이 쓰는 Word 읽기·쓰기. 판은 코랩이 설치한 python-docx 의 지금 판(코랩은 판 고정 없음).
+    # lxml 은 python-docx 가 끈다 — 리눅스 휠은 libxml2·libxslt·zlib·iconv 를 정적으로 묶는다(iconv LGPL-2.1,
+    # 사용자 승인 MARC-ENT-331, 납품 목록 MARC-ISSUE-89). 판을 올리면 읽개의 병합 칸·건너뛴 자식 동작(W11·W12)을 다시 잰다.
+    "python-docx==1.2.0",
+    "lxml==6.1.3",
+    "geographiclib==2.1",
+]
+
+[dependency-groups]
+dev = [
+    "pytest==9.1.1",
+    "pytest-django==4.14.0",
+    "pytest-xdist==3.8.0",    # 업무 층을 워커 둘로 나눠 돌린다(-n 2). 워커마다 테스트 DB 가 따로 생긴다
+    "ruff==0.16.10",
+    "pyright==1.1.414",
+    "import-linter==2.15",
+    "httpx==0.28.1",          # 통합 테스트(tests_integration)가 떠 있는 컨테이너를 부를 때 쓴다
+    "django-types==0.24.0",   # Django 의 타입 정보(pyright 용). 실행에는 쓰이지 않는다
+    "hypothesis==6.168.5",    # 속성 테스트(inventory). MPL-2.0 이라 dev 에만 둔다: 이미지는 --no-dev 로 만든다
+    "pandas-stubs==3.0.5.260914",  # pyright strict 용 pandas 타입. 실행에는 쓰이지 않는다 — django-types 꼴(MARC-ENT-298)
+]
+
+# 여기는 설치되는 패키지다(services/parser 와 다르다): 이미지에서 esgapi 를 .venv 안에 설치해 쓴다.
+[build-system]
+requires = ["hatchling==1.27.0"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["esgapi"]
+# 모듈 곁의 테스트(esgapi/<모듈>/tests)는 이미지에 싣지 않는다.
+exclude = ["esgapi/**/tests"]
+
+# ── 테스트 ── 세 층이다. 설정은 이것 하나고, 층은 표시(-m)와 Django 설정 모듈(--ds)로 고른다.
+#   순수   uv run pytest -q -m "not django_db and not security"     DB 없음. DB 에 닿으면 실패한다
+#   업무   scripts/test-business.sh -n 2                             -m django_db. 주인 역할, 테스트마다 롤백
+#   보안   scripts/test-security.sh                                  --ds=…test_security -m security. 앱 역할, 진짜 커밋, 직렬
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "esgapi.config.settings.test_business"
+pythonpath = ["."]
+# 순수·업무 층은 모듈 곁에(esgapi/<모듈>/tests), 보안 층은 tests/security 에. tests_integration 은 따로 부른다
+testpaths = ["esgapi", "tests/security"]
+python_files = ["test_*.py"]
+# --ignore: 테스트용 설정 파일의 이름도 test_ 로 시작한다. 테스트로 읽지 않게 한다.
+addopts = "--strict-markers --ignore=esgapi/config/settings"
+filterwarnings = ["error"]         # 경고(곧 없어질 쓰임 등)도 실패로 친다
+markers = [
+    "security: 보안 층. 앱 역할(esg_app)로 붙어 RLS·역할 권한·연결 상태를 잰다. --ds=esgapi.config.settings.test_security 와 같이",
+    "not_under_mutmut: 소스·코드 객체를 읽거나, 한 프로세스에서 pytest 를 거듭 부르면 뜻이 없는 시험. mutmut 사본에서만 뺀다(scripts/weekly.sh)",
+]
+
+# ── 린트·포맷 ──
+[tool.ruff]
+line-length = 120
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "SIM", "S", "DJ", "RUF"]
+ignore = [
+    "RUF001", "RUF002", "RUF003",  # 한국어 주석·문장의 글자를 '헷갈리는 글자'로 본다
+]
+
+[tool.ruff.lint.per-file-ignores]
+# Django 마이그레이션의 꼴(클래스 속성에 목록)과 makemigrations 가 만드는 긴 줄.
+# makemigrations 가 만든 파일은  uv run ruff check --fix <파일> && uv run ruff format <파일>  로 다듬어 커밋한다.
+"esgapi/**/migrations/*" = ["RUF012", "E501"]
+# 테스트: assert, 가짜 비밀, 테스트 DB 이름을 넣은 SQL
+"esgapi/**/tests/**" = ["S101", "S105", "S106", "S603", "S608"]
+"tests/**" = ["S101", "S105", "S106", "S603", "S608"]
+"conftest.py" = ["S101"]
+"tests_integration/**" = ["S101", "S105", "S106", "S603", "S607"]
+"scripts/**" = ["S603", "S607"]
+
+# ── 타입 검사 ──
+[tool.pyright]
+include = ["esgapi", "tests", "tests_integration", "scripts", "conftest.py", "manage.py", "gunicorn.conf.py"]
+exclude = ["**/__pycache__", ".venv"]
+typeCheckingMode = "strict"
+pythonVersion = "3.13"
+venvPath = "."
+venv = ".venv"
+extraPaths = ["scripts"]           # tests_integration 이 scripts/dev_edk.py 를 import 한다

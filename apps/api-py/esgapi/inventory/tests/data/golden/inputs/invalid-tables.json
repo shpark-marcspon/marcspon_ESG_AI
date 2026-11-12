@@ -1,0 +1,380 @@
+{
+  "$comment": "synthetic. 일부러 틀리게 적은 표다.",
+  "unitConversions": [
+    {
+      "from": "a",
+      "to": "b",
+      "factor": null,
+      "source": {
+        "kind": "synthetic",
+        "note": "n"
+      }
+    },
+    {
+      "from": "a",
+      "to": "b",
+      "factor": true,
+      "source": {
+        "kind": "synthetic",
+        "note": "n"
+      }
+    },
+    {
+      "from": "a",
+      "to": "b",
+      "factor": 1.5,
+      "source": {
+        "kind": "synthetic",
+        "note": "n"
+      }
+    },
+    {
+      "from": "a",
+      "to": "b",
+      "factor": 2.0,
+      "source": {
+        "kind": "synthetic",
+        "note": "n"
+      }
+    },
+    {
+      "from": "a",
+      "to": "b",
+      "factor": 1e+21,
+      "source": {
+        "kind": "synthetic",
+        "note": "n"
+      }
+    },
+    {
+      "from": "a",
+      "to": "b",
+      "factor": 1e-07,
+      "source": {
+        "kind": "synthetic",
+        "note": "n"
+      }
+    },
+    {
+      "from": "a",
+      "to": "b",
+      "factor": 123456789012345678901234567890,
+      "source": {
+        "kind": "synthetic",
+        "note": "n"
+      }
+    },
+    {
+      "from": "a",
+      "to": "b",
+      "factor": 1e-06,
+      "source": {
+        "kind": "synthetic",
+        "note": "n"
+      }
+    },
+    {
+      "from": "a",
+      "to": "b",
+      "factor": -0.0,
+      "source": {
+        "kind": "synthetic",
+        "note": "n"
+      }
+    },
+    {
+      "from": "a",
+      "to": "b",
+      "factor": "1e3",
+      "source": {
+        "kind": "synthetic",
+        "note": "n"
+      }
+    },
+    {
+      "from": "a",
+      "to": "b",
+      "factor": "１２",
+      "source": {
+        "kind": "synthetic",
+        "note": "n"
+      }
+    },
+    {
+      "from": "a",
+      "to": "b",
+      "factor": "a\"b\\c\n",
+      "source": {
+        "kind": "synthetic",
+        "note": "n"
+      }
+    },
+    {
+      "from": "a",
+      "to": "b",
+      "factor": "😀",
+      "source": {
+        "kind": "synthetic",
+        "note": "n"
+      }
+    },
+    {
+      "from": "a",
+      "to": "b",
+      "factor": [
+        1,
+        "2",
+        null,
+        [
+          2.5
+        ]
+      ],
+      "source": {
+        "kind": "synthetic",
+        "note": "n"
+      }
+    },
+    {
+      "from": "a",
+      "to": "b",
+      "factor": {
+        "b": 1,
+        "10": "x",
+        "2": [
+          true
+        ],
+        "a": {
+          "k": null
+        }
+      },
+      "source": {
+        "kind": "synthetic",
+        "note": "n"
+      }
+    },
+    {
+      "from": "a",
+      "to": "b",
+      "factor": "-21",
+      "source": {
+        "kind": "synthetic",
+        "note": "n"
+      }
+    },
+    {
+      "from": "a",
+      "to": "b",
+      "factor": "-0.5",
+      "source": {
+        "kind": "synthetic",
+        "note": "n"
+      }
+    },
+    {
+      "from": "a",
+      "to": "b",
+      "source": {
+        "kind": "synthetic",
+        "note": "n"
+      }
+    },
+    "x",
+    {
+      "from": "",
+      "to": "b",
+      "factor": "1",
+      "source": {
+        "kind": "definition",
+        "note": ""
+      }
+    }
+  ],
+  "gwpSets": [
+    7,
+    {
+      "id": "",
+      "label": "l",
+      "source": {
+        "kind": "synthetic",
+        "note": "n"
+      },
+      "values": []
+    },
+    {
+      "id": "g",
+      "label": "l",
+      "source": {
+        "note": "kind 가 없다"
+      },
+      "values": {
+        "CO2": "1",
+        "CH4": 21,
+        "1": "x"
+      }
+    },
+    {
+      "id": "g2",
+      "label": "l",
+      "source": {
+        "kind": [
+          "cited"
+        ],
+        "note": "n"
+      },
+      "values": {}
+    },
+    {
+      "id": "g3",
+      "label": "l",
+      "source": "출처",
+      "values": {}
+    },
+    {
+      "id": "g4",
+      "label": "l",
+      "source": {
+        "kind": "cited",
+        "title": "t",
+        "url": "",
+        "checkedOn": "어제"
+      },
+      "values": {}
+    }
+  ],
+  "factors": [
+    null,
+    {
+      "id": "f",
+      "version": "",
+      "source": {
+        "kind": "synthetic",
+        "note": "n"
+      },
+      "emissionFactors": "none"
+    },
+    {
+      "kind": "combustion",
+      "id": "c",
+      "version": "v",
+      "source": {
+        "kind": "cited",
+        "title": "",
+        "url": "ftp://x",
+        "checkedOn": "2026-10-01"
+      },
+      "emissionFactors": [
+        3,
+        {
+          "gas": "",
+          "value": "1",
+          "massUnit": "kg"
+        },
+        {
+          "gas": "CO2",
+          "massUnit": "kg"
+        }
+      ],
+      "fuel": "",
+      "combustionType": "both",
+      "calorific": {
+        "value": "x",
+        "basis": "low",
+        "energyUnit": "",
+        "perUnit": "L"
+      },
+      "oxidationFactor": null,
+      "sector": "",
+      "facilityUse": "발전",
+      "parameterTiers": {
+        "calorific": 5,
+        "co2": "2",
+        "oxidation": true
+      }
+    },
+    {
+      "kind": "combustion",
+      "id": "c2",
+      "version": "v",
+      "source": {
+        "kind": "synthetic",
+        "note": "n"
+      },
+      "emissionFactors": [],
+      "fuel": "f",
+      "combustionType": "mobile"
+    },
+    {
+      "kind": "combustion",
+      "id": "c3",
+      "version": "v",
+      "source": {
+        "kind": "synthetic",
+        "note": "n"
+      },
+      "emissionFactors": [],
+      "fuel": "f",
+      "combustionType": "mobile",
+      "calorific": {
+        "value": "1",
+        "basis": "net",
+        "energyUnit": "MJ",
+        "perUnit": "L"
+      },
+      "parameterTiers": {
+        "calorific": 1,
+        "co2": 2.0,
+        "nonCo2": 4,
+        "oxidation": 2
+      }
+    },
+    {
+      "kind": "combustion",
+      "id": "c4",
+      "version": "v",
+      "source": {
+        "kind": "synthetic",
+        "note": "n"
+      },
+      "emissionFactors": [],
+      "fuel": "f",
+      "combustionType": "mobile",
+      "calorific": {
+        "value": "1",
+        "basis": "net",
+        "energyUnit": "MJ",
+        "perUnit": "L"
+      },
+      "parameterTiers": "tier2"
+    },
+    {
+      "kind": "purchased_energy",
+      "id": "p",
+      "version": "v",
+      "source": {
+        "kind": "synthetic",
+        "note": "n"
+      },
+      "emissionFactors": [],
+      "energyType": "steam"
+    },
+    {
+      "kind": "scope3",
+      "id": "s",
+      "version": "v",
+      "source": {
+        "kind": "synthetic",
+        "note": "n"
+      },
+      "emissionFactors": []
+    },
+    {
+      "id": "n",
+      "version": "v",
+      "source": {
+        "kind": "synthetic",
+        "note": "n"
+      },
+      "emissionFactors": []
+    }
+  ]
+}

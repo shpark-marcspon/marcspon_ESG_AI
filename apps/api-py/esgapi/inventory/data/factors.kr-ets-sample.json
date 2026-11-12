@@ -1,0 +1,125 @@
+{
+  "$comment": "검산 사례용 표본 계수 3건. 값은 url 의 고시 원문(PDF)에서 2026-10-01 에 직접 읽었다. 한국 공인 계수의 전량 적재와 '어느 배출원에 어느 계수 조합을 쓰는가'는 계수 조합기(ts/factor-assembly)가 계수 표에서 조립하고, 이 파일은 그 결과와 대조하려고 남긴 손으로 묶은 표본이며 엔진이 실제 고시의 식 구조(순발열량, 기체별 계수, 산화계수, 기체마다 다른 질량 단위)를 표현할 수 있는지 보이는 데만 쓴다. 고시: 온실가스 배출권거래제의 배출량 보고 및 인증에 관한 지침 [시행 2025. 4. 11.] [환경부고시 제2025-64호] https://www.law.go.kr/LSW/admRulInfoP.do?admRulSeq=2100000257748",
+  "factors": [
+    {
+      "kind": "combustion",
+      "id": "kr-ets-sample:diesel:stationary:manufacturing:tier2",
+      "version": "환경부고시 제2025-64호",
+      "source": {
+        "kind": "cited",
+        "title": "배출권거래제 배출량 보고 및 인증 지침 별표 12 (경유 순발열량 35.2 MJ/L, CO2 73,200 kgCO2/TJ), 별표 10 (가스/디젤 오일 CH4 3, N2O 0.6 kg/TJ, 제조업·건설업), 별표 6 '3. 고정연소(액체연료)' (산화계수 Tier 2 0.99)",
+        "url": "https://www.law.go.kr/LSW/flDownload.do?flSeq=151024615&bylClsCd=200201",
+        "checkedOn": "2026-10-01",
+        "locator": "별표 12 PDF flSeq=151024615, 별표 10 PDF flSeq=151024595, 별표 6 PDF flSeq=151024511",
+        "note": "CO2 는 국가 고유 계수, CH4·N2O 는 2006 IPCC 기본 계수다. 이 조합은 지침의 Tier 2 조합이다 (발열량·CO2 계수·산화계수 Tier 2, CH4·N2O 는 Tier 1 뿐. 별표 6 원문 대조 2026-10-02, MARC-TICK-17)."
+      },
+      "fuel": "diesel",
+      "combustionType": "stationary",
+      "sector": "manufacturing_construction",
+      "parameterTiers": { "calorific": 2, "co2": 2, "nonCo2": 1, "oxidation": 2 },
+      "calorific": {
+        "value": "35.2",
+        "energyUnit": "MJ",
+        "perUnit": "L",
+        "basis": "net"
+      },
+      "emissionFactors": [
+        {
+          "gas": "CO2",
+          "value": "73200",
+          "massUnit": "kg",
+          "perEnergyUnit": "TJ"
+        },
+        {
+          "gas": "CH4",
+          "value": "3",
+          "massUnit": "kg",
+          "perEnergyUnit": "TJ"
+        },
+        {
+          "gas": "N2O",
+          "value": "0.6",
+          "massUnit": "kg",
+          "perEnergyUnit": "TJ"
+        }
+      ],
+      "oxidationFactor": "0.99"
+    },
+    {
+      "kind": "combustion",
+      "id": "kr-ets-sample:city-gas-lng:stationary:commercial:tier2",
+      "version": "환경부고시 제2025-64호",
+      "source": {
+        "kind": "cited",
+        "title": "배출권거래제 배출량 보고 및 인증 지침 별표 12 (도시가스(LNG) 순발열량 38.9 MJ/Nm3, CO2 56,100 kgCO2/TJ), 별표 10 (천연가스 CH4 5, N2O 0.1 kg/TJ, 상업·공공), 별표 6 '2. 고정연소(기체연료)' (산화계수 Tier 2 0.995)",
+        "url": "https://www.law.go.kr/LSW/flDownload.do?flSeq=151024615&bylClsCd=200201",
+        "checkedOn": "2026-10-01",
+        "locator": "별표 12 PDF flSeq=151024615, 별표 10 PDF flSeq=151024595, 별표 6 PDF flSeq=151024511",
+        "note": "CO2 는 국가 고유 계수, CH4·N2O 는 2006 IPCC 기본 계수다. 이 조합은 지침의 Tier 2 조합이다 (발열량·CO2 계수·산화계수 Tier 2, CH4·N2O 는 Tier 1 뿐. 별표 6 원문 대조 2026-10-02, MARC-TICK-17)."
+      },
+      "fuel": "city-gas-lng",
+      "combustionType": "stationary",
+      "sector": "commercial_public",
+      "parameterTiers": { "calorific": 2, "co2": 2, "nonCo2": 1, "oxidation": 2 },
+      "calorific": {
+        "value": "38.9",
+        "energyUnit": "MJ",
+        "perUnit": "Nm3",
+        "basis": "net"
+      },
+      "emissionFactors": [
+        {
+          "gas": "CO2",
+          "value": "56100",
+          "massUnit": "kg",
+          "perEnergyUnit": "TJ"
+        },
+        {
+          "gas": "CH4",
+          "value": "5",
+          "massUnit": "kg",
+          "perEnergyUnit": "TJ"
+        },
+        {
+          "gas": "N2O",
+          "value": "0.1",
+          "massUnit": "kg",
+          "perEnergyUnit": "TJ"
+        }
+      ],
+      "oxidationFactor": "0.995"
+    },
+    {
+      "kind": "purchased_energy",
+      "id": "kr-ets-sample:electricity:2014-2016-avg",
+      "version": "환경부고시 제2025-64호",
+      "source": {
+        "kind": "cited",
+        "title": "배출권거래제 배출량 보고 및 인증 지침 별표 6 '39. 외부에서 공급된 전기 사용' <표-69> 국가 고유 전력배출계수('14~'16년 평균): CO2 0.4567 tCO2/MWh, CH4 0.0036 kgCH4/MWh, N2O 0.0085 kgN2O/MWh",
+        "url": "https://www.law.go.kr/LSW/flDownload.do?flSeq=151024511&bylClsCd=200201",
+        "checkedOn": "2026-10-01",
+        "locator": "별표 6 PDF flSeq=151024511, 39번 배출활동 5. 매개변수별 관리기준 ② 배출계수",
+        "note": "고시에 실린 값이다. 더 최근의 전력배출계수가 공표됐는지는 확인하지 않았다."
+      },
+      "energyType": "electricity",
+      "perUnit": "MWh",
+      "emissionFactors": [
+        {
+          "gas": "CO2",
+          "value": "0.4567",
+          "massUnit": "t"
+        },
+        {
+          "gas": "CH4",
+          "value": "0.0036",
+          "massUnit": "kg"
+        },
+        {
+          "gas": "N2O",
+          "value": "0.0085",
+          "massUnit": "kg"
+        }
+      ]
+    }
+  ]
+}

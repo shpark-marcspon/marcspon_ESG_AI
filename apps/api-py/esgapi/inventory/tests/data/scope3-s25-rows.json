@@ -1,0 +1,2463 @@
+[
+  {
+    "rowId": "r001",
+    "source": "memory",
+    "predictedCategory": 1,
+    "keywords": null,
+    "shortlists": []
+  },
+  {
+    "rowId": "r002",
+    "source": "memory",
+    "predictedCategory": 1,
+    "keywords": null,
+    "shortlists": []
+  },
+  {
+    "rowId": "r003",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "polypropylene resin",
+      "polypropylene",
+      "PP resin",
+      "plastic resin",
+      "thermoplastic resin",
+      "polymer resin",
+      "petrochemical"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 260
+      }
+    ]
+  },
+  {
+    "rowId": "r004",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "polypropylene",
+      "PP homopolymer",
+      "polypropylene resin",
+      "plastic resin",
+      "thermoplastic polymer",
+      "polymer pellets"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 260
+      }
+    ]
+  },
+  {
+    "rowId": "r005",
+    "source": "memory",
+    "predictedCategory": 1,
+    "keywords": null,
+    "shortlists": []
+  },
+  {
+    "rowId": "r006",
+    "source": "memory",
+    "predictedCategory": 1,
+    "keywords": null,
+    "shortlists": []
+  },
+  {
+    "rowId": "r007",
+    "source": "memory",
+    "predictedCategory": 1,
+    "keywords": null,
+    "shortlists": []
+  },
+  {
+    "rowId": "r008",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "corrugated paper",
+      "containerboard",
+      "corrugated medium",
+      "kraftliner",
+      "paperboard",
+      "recycled paper",
+      "paper manufacturing"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 260
+      }
+    ]
+  },
+  {
+    "rowId": "r009",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "corrugated paper",
+      "containerboard",
+      "linerboard",
+      "corrugating medium",
+      "paperboard",
+      "pulp and paper"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 260
+      }
+    ]
+  },
+  {
+    "rowId": "r010",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "kraft paper",
+      "paper",
+      "packaging paper",
+      "paper products",
+      "pulp and paper"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 260
+      }
+    ]
+  },
+  {
+    "rowId": "r011",
+    "source": "memory",
+    "predictedCategory": 1,
+    "keywords": null,
+    "shortlists": []
+  },
+  {
+    "rowId": "r012",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "carbon steel bar",
+      "S45C steel",
+      "carbon steel",
+      "steel bar",
+      "steel products",
+      "carbon steel products"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 260
+      }
+    ]
+  },
+  {
+    "rowId": "r013",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "aluminium sheet",
+      "A5052",
+      "aluminium alloy",
+      "rolled aluminium",
+      "aluminium products"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 260
+      }
+    ]
+  },
+  {
+    "rowId": "r014",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "aluminium sheet",
+      "A5052",
+      "aluminium alloy",
+      "rolled aluminium",
+      "aluminium products"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 260
+      }
+    ]
+  },
+  {
+    "rowId": "r015",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "bare copper wire",
+      "copper wire",
+      "copper",
+      "non-insulated wire",
+      "non-ferrous metal",
+      "copper products"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 260
+      }
+    ]
+  },
+  {
+    "rowId": "r016",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "Portland cement",
+      "Type I Portland cement",
+      "cement",
+      "construction materials",
+      "clinker"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 260
+      }
+    ]
+  },
+  {
+    "rowId": "r017",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "flat glass",
+      "5 mm glass",
+      "glass sheet",
+      "float glass",
+      "building materials"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 260
+      }
+    ]
+  },
+  {
+    "rowId": "r018",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "epoxy resin",
+      "epoxy",
+      "resin",
+      "synthetic resin",
+      "thermosetting resin",
+      "chemical"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 260
+      }
+    ]
+  },
+  {
+    "rowId": "r019",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "epoxy resin",
+      "epoxy",
+      "resin",
+      "synthetic resin",
+      "thermosetting resin",
+      "chemical"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 260
+      }
+    ]
+  },
+  {
+    "rowId": "r020",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "caustic soda",
+      "sodium hydroxide",
+      "50% sodium hydroxide solution",
+      "industrial chemicals",
+      "alkali",
+      "chemical solution"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 260
+      }
+    ]
+  },
+  {
+    "rowId": "r021",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "sulfuric acid",
+      "98% sulfuric acid",
+      "inorganic acid",
+      "industrial chemical",
+      "chemical manufacturing"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 260
+      }
+    ]
+  },
+  {
+    "rowId": "r022",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "methanol",
+      "methyl alcohol",
+      "chemical",
+      "organic chemical",
+      "chemical production"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 260
+      }
+    ]
+  },
+  {
+    "rowId": "r023",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "liquid nitrogen",
+      "nitrogen",
+      "cryogenic gas",
+      "industrial gases"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 260
+      }
+    ]
+  },
+  {
+    "rowId": "r024",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "HDPE resin",
+      "high-density polyethylene resin",
+      "polyethylene resin",
+      "plastic resin",
+      "thermoplastic resin"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 260
+      }
+    ]
+  },
+  {
+    "rowId": "r025",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "PET resin",
+      "polyethylene terephthalate",
+      "plastic resin",
+      "polyester resin",
+      "virgin PET",
+      "thermoplastic resin"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 260
+      }
+    ]
+  },
+  {
+    "rowId": "r026",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "PVC compound",
+      "polyvinyl chloride",
+      "PVC resin",
+      "plastic compound",
+      "thermoplastic",
+      "plastics manufacturing"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 260
+      }
+    ]
+  },
+  {
+    "rowId": "r027",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "LDPE film",
+      "low-density polyethylene",
+      "polyethylene film",
+      "plastic film",
+      "packaging material",
+      "plastic manufacturing"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 260
+      }
+    ]
+  },
+  {
+    "rowId": "r028",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "bubble wrap",
+      "air cap packaging",
+      "plastic packaging",
+      "polyethylene film",
+      "packaging materials"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 260
+      }
+    ]
+  },
+  {
+    "rowId": "r029",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "plywood",
+      "wood panel",
+      "plywood board",
+      "timber",
+      "construction materials"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 2
+      }
+    ]
+  },
+  {
+    "rowId": "r030",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "OPP tape",
+      "polypropylene tape",
+      "adhesive tape",
+      "packing tape",
+      "plastic film",
+      "polypropylene",
+      "packaging materials"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 1
+      }
+    ]
+  },
+  {
+    "rowId": "r031",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "white sugar",
+      "refined sugar",
+      "sugar",
+      "cane sugar",
+      "beet sugar",
+      "food products"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 260
+      }
+    ]
+  },
+  {
+    "rowId": "r032",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "rigid printed circuit board",
+      "rigid PCB",
+      "printed wiring board",
+      "electronics",
+      "copper clad laminate",
+      "FR-4"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 260
+      }
+    ]
+  },
+  {
+    "rowId": "r033",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "lead-free solder",
+      "solder alloy",
+      "tin",
+      "silver",
+      "copper",
+      "electronics manufacturing"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 260
+      }
+    ]
+  },
+  {
+    "rowId": "r034",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "toluene",
+      "solvent",
+      "organic chemical",
+      "petrochemical",
+      "aromatic hydrocarbon"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 260
+      }
+    ]
+  },
+  {
+    "rowId": "r035",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "acetone",
+      "propanone",
+      "chemical",
+      "solvent",
+      "organic solvent",
+      "industrial chemicals"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 260
+      }
+    ]
+  },
+  {
+    "rowId": "r036",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "carbon black",
+      "carbon",
+      "rubber",
+      "pigment",
+      "industrial chemical",
+      "chemical raw material"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 260
+      }
+    ]
+  },
+  {
+    "rowId": "r037",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "natural rubber",
+      "rubber",
+      "latex",
+      "raw material",
+      "agriculture"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 260
+      }
+    ]
+  },
+  {
+    "rowId": "r038",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "tap water",
+      "municipal water",
+      "water supply",
+      "potable water",
+      "water utility"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 2
+      }
+    ]
+  },
+  {
+    "rowId": "r039",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "alkaline battery",
+      "AA battery",
+      "primary battery",
+      "zinc manganese dioxide",
+      "disposable battery",
+      "consumer electronics"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 5
+      }
+    ]
+  },
+  {
+    "rowId": "r040",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "alkaline battery",
+      "AA battery",
+      "primary battery",
+      "zinc manganese dioxide",
+      "disposable battery",
+      "consumer electronics"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 5
+      }
+    ]
+  },
+  {
+    "rowId": "r041",
+    "source": "memory",
+    "predictedCategory": 1,
+    "keywords": null,
+    "shortlists": []
+  },
+  {
+    "rowId": "r042",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "accounting audit",
+      "auditing services",
+      "financial audit",
+      "professional services"
+    ],
+    "shortlists": [
+      {
+        "basis": "spend",
+        "total": 1016
+      }
+    ]
+  },
+  {
+    "rowId": "r043",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "advertising agency fee",
+      "advertising services",
+      "marketing agency",
+      "marketing services"
+    ],
+    "shortlists": [
+      {
+        "basis": "spend",
+        "total": 1016
+      }
+    ]
+  },
+  {
+    "rowId": "r044",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "building cleaning service",
+      "janitorial services",
+      "commercial cleaning",
+      "facility maintenance",
+      "cleaning labor"
+    ],
+    "shortlists": [
+      {
+        "basis": "spend",
+        "total": 1016
+      }
+    ]
+  },
+  {
+    "rowId": "r045",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "building cleaning service",
+      "janitorial services",
+      "commercial cleaning",
+      "facility maintenance",
+      "cleaning labor"
+    ],
+    "shortlists": [
+      {
+        "basis": "spend",
+        "total": 1016
+      }
+    ]
+  },
+  {
+    "rowId": "r046",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "security services",
+      "security guard services",
+      "guarding services",
+      "protective services",
+      "facility security"
+    ],
+    "shortlists": [
+      {
+        "basis": "spend",
+        "total": 1016
+      }
+    ]
+  },
+  {
+    "rowId": "r047",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "mobile phone service",
+      "cellular service",
+      "mobile telecommunications",
+      "telecom subscription",
+      "wireless communication"
+    ],
+    "shortlists": [
+      {
+        "basis": "spend",
+        "total": 1016
+      }
+    ]
+  },
+  {
+    "rowId": "r048",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "dedicated internet line",
+      "internet access",
+      "telecommunications service",
+      "broadband service",
+      "network connectivity"
+    ],
+    "shortlists": [
+      {
+        "basis": "spend",
+        "total": 1016
+      }
+    ]
+  },
+  {
+    "rowId": "r049",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "cloud hosting",
+      "cloud computing",
+      "data center",
+      "web hosting",
+      "IT services"
+    ],
+    "shortlists": [
+      {
+        "basis": "spend",
+        "total": 1016
+      }
+    ]
+  },
+  {
+    "rowId": "r050",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "ERP software",
+      "software license",
+      "enterprise resource planning",
+      "business software",
+      "IT services"
+    ],
+    "shortlists": [
+      {
+        "basis": "spend",
+        "total": 1016
+      }
+    ]
+  },
+  {
+    "rowId": "r051",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "management consulting",
+      "business consulting",
+      "consulting services",
+      "professional services"
+    ],
+    "shortlists": [
+      {
+        "basis": "spend",
+        "total": 1016
+      }
+    ]
+  },
+  {
+    "rowId": "r052",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "environmental consulting",
+      "environmental consultancy",
+      "consulting services",
+      "sustainability consulting",
+      "environmental services"
+    ],
+    "shortlists": [
+      {
+        "basis": "spend",
+        "total": 1016
+      }
+    ]
+  },
+  {
+    "rowId": "r053",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "translation service",
+      "language services",
+      "professional services",
+      "business services"
+    ],
+    "shortlists": [
+      {
+        "basis": "spend",
+        "total": 1016
+      }
+    ]
+  },
+  {
+    "rowId": "r054",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "laboratory analysis",
+      "testing services",
+      "analytical testing",
+      "laboratory services",
+      "testing laboratory"
+    ],
+    "shortlists": [
+      {
+        "basis": "spend",
+        "total": 1016
+      }
+    ]
+  },
+  {
+    "rowId": "r055",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "staffing services",
+      "temporary labor",
+      "agency workers",
+      "labor supply",
+      "employment agency services",
+      "outsourced personnel"
+    ],
+    "shortlists": [
+      {
+        "basis": "spend",
+        "total": 1016
+      }
+    ]
+  },
+  {
+    "rowId": "r056",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "landscaping services",
+      "grounds maintenance",
+      "garden maintenance",
+      "lawn care",
+      "landscape management"
+    ],
+    "shortlists": [
+      {
+        "basis": "spend",
+        "total": 1016
+      }
+    ]
+  },
+  {
+    "rowId": "r057",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "cafeteria",
+      "catering",
+      "food service",
+      "contract catering",
+      "canteen operation",
+      "meal service"
+    ],
+    "shortlists": [
+      {
+        "basis": "spend",
+        "total": 1016
+      }
+    ]
+  },
+  {
+    "rowId": "r058",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "brochure",
+      "printing",
+      "commercial printing",
+      "paper",
+      "printed materials"
+    ],
+    "shortlists": [
+      {
+        "basis": "spend",
+        "total": 1016
+      }
+    ]
+  },
+  {
+    "rowId": "r059",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "brochure",
+      "printing",
+      "commercial printing",
+      "paper",
+      "printed materials"
+    ],
+    "shortlists": [
+      {
+        "basis": "spend",
+        "total": 1016
+      }
+    ]
+  },
+  {
+    "rowId": "r060",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "coffee beans",
+      "green coffee",
+      "roasted coffee",
+      "coffee",
+      "agriculture",
+      "food products"
+    ],
+    "shortlists": [
+      {
+        "basis": "spend",
+        "total": 1016
+      }
+    ]
+  },
+  {
+    "rowId": "r061",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "bottled water",
+      "drinking water",
+      "mineral water",
+      "PET bottle",
+      "plastic packaging"
+    ],
+    "shortlists": [
+      {
+        "basis": "spend",
+        "total": 1016
+      }
+    ]
+  },
+  {
+    "rowId": "r062",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "stationery",
+      "office supplies",
+      "ballpoint pen",
+      "paper clip",
+      "plastic",
+      "metal"
+    ],
+    "shortlists": [
+      {
+        "basis": "spend",
+        "total": 1016
+      }
+    ]
+  },
+  {
+    "rowId": "r063",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "laundry detergent",
+      "washing detergent",
+      "detergent",
+      "cleaning products",
+      "household chemicals"
+    ],
+    "shortlists": [
+      {
+        "basis": "spend",
+        "total": 1016
+      }
+    ]
+  },
+  {
+    "rowId": "r064",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "water-based paint",
+      "latex paint",
+      "paint",
+      "coatings",
+      "architectural paint"
+    ],
+    "shortlists": [
+      {
+        "basis": "spend",
+        "total": 1016
+      }
+    ]
+  },
+  {
+    "rowId": "r065",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "industrial adhesive",
+      "adhesive",
+      "glue",
+      "chemical products"
+    ],
+    "shortlists": [
+      {
+        "basis": "spend",
+        "total": 1016
+      }
+    ]
+  },
+  {
+    "rowId": "r066",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "first aid medicines",
+      "pharmaceuticals",
+      "medicines",
+      "medical supplies",
+      "first aid supplies"
+    ],
+    "shortlists": [
+      {
+        "basis": "spend",
+        "total": 1016
+      }
+    ]
+  },
+  {
+    "rowId": "r067",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "employee training",
+      "job training",
+      "vocational training",
+      "professional development",
+      "training services",
+      "corporate training"
+    ],
+    "shortlists": [
+      {
+        "basis": "spend",
+        "total": 1016
+      }
+    ]
+  },
+  {
+    "rowId": "r068",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "engineering design services",
+      "design engineering",
+      "engineering consultancy",
+      "technical design"
+    ],
+    "shortlists": [
+      {
+        "basis": "spend",
+        "total": 1016
+      }
+    ]
+  },
+  {
+    "rowId": "r069",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "production equipment maintenance",
+      "industrial equipment maintenance",
+      "machinery repair",
+      "equipment servicing",
+      "maintenance services"
+    ],
+    "shortlists": [
+      {
+        "basis": "spend",
+        "total": 1016
+      }
+    ]
+  },
+  {
+    "rowId": "r070",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "printer",
+      "multifunction printer",
+      "copier",
+      "office equipment rental",
+      "equipment leasing",
+      "printing services"
+    ],
+    "shortlists": [
+      {
+        "basis": "spend",
+        "total": 1016
+      }
+    ]
+  },
+  {
+    "rowId": "r071",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "fire insurance",
+      "insurance services",
+      "financial services",
+      "property insurance"
+    ],
+    "shortlists": [
+      {
+        "basis": "spend",
+        "total": 1016
+      }
+    ]
+  },
+  {
+    "rowId": "r072",
+    "source": "memory",
+    "predictedCategory": 2,
+    "keywords": null,
+    "shortlists": []
+  },
+  {
+    "rowId": "r073",
+    "source": "memory",
+    "predictedCategory": 2,
+    "keywords": null,
+    "shortlists": []
+  },
+  {
+    "rowId": "r074",
+    "source": "llm",
+    "predictedCategory": 2,
+    "keywords": [
+      "rack server",
+      "server",
+      "IT equipment",
+      "computer hardware",
+      "data center equipment"
+    ],
+    "shortlists": [
+      {
+        "basis": "spend",
+        "total": 1016
+      }
+    ]
+  },
+  {
+    "rowId": "r075",
+    "source": "llm",
+    "predictedCategory": 2,
+    "keywords": [
+      "storage equipment",
+      "data storage",
+      "server",
+      "storage array",
+      "IT equipment",
+      "computer hardware"
+    ],
+    "shortlists": [
+      {
+        "basis": "spend",
+        "total": 1016
+      }
+    ]
+  },
+  {
+    "rowId": "r076",
+    "source": "llm",
+    "predictedCategory": 2,
+    "keywords": [
+      "computer monitor",
+      "27-inch monitor",
+      "LCD display",
+      "LED display",
+      "computer equipment",
+      "electronic equipment"
+    ],
+    "shortlists": [
+      {
+        "basis": "spend",
+        "total": 1016
+      }
+    ]
+  },
+  {
+    "rowId": "r077",
+    "source": "llm",
+    "predictedCategory": 2,
+    "keywords": [
+      "office chair",
+      "office furniture",
+      "chair",
+      "furniture manufacturing",
+      "wood",
+      "metal",
+      "plastic"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 5
+      },
+      {
+        "basis": "spend",
+        "total": 1016
+      }
+    ]
+  },
+  {
+    "rowId": "r078",
+    "source": "llm",
+    "predictedCategory": 2,
+    "keywords": [
+      "wood",
+      "office desk",
+      "office furniture",
+      "furniture",
+      "wooden desk"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 5
+      },
+      {
+        "basis": "spend",
+        "total": 1016
+      }
+    ]
+  },
+  {
+    "rowId": "r079",
+    "source": "llm",
+    "predictedCategory": 2,
+    "keywords": [
+      "electric forklift",
+      "forklift truck",
+      "industrial truck",
+      "battery electric vehicle",
+      "material handling equipment",
+      "warehouse equipment"
+    ],
+    "shortlists": [
+      {
+        "basis": "spend",
+        "total": 1016
+      }
+    ]
+  },
+  {
+    "rowId": "r080",
+    "source": "llm",
+    "predictedCategory": 2,
+    "keywords": [
+      "CNC machine tool",
+      "computer numerical control",
+      "machine tool",
+      "industrial machinery",
+      "manufacturing equipment",
+      "metalworking machinery"
+    ],
+    "shortlists": [
+      {
+        "basis": "spend",
+        "total": 1016
+      }
+    ]
+  },
+  {
+    "rowId": "r081",
+    "source": "llm",
+    "predictedCategory": 2,
+    "keywords": [
+      "system air conditioner",
+      "air conditioning equipment",
+      "HVAC",
+      "commercial air conditioner",
+      "cooling equipment",
+      "capital equipment"
+    ],
+    "shortlists": [
+      {
+        "basis": "spend",
+        "total": 1016
+      }
+    ]
+  },
+  {
+    "rowId": "r082",
+    "source": "llm",
+    "predictedCategory": 2,
+    "keywords": [
+      "freight elevator",
+      "goods lift",
+      "industrial elevator",
+      "elevator equipment",
+      "material handling equipment",
+      "industrial machinery"
+    ],
+    "shortlists": [
+      {
+        "basis": "spend",
+        "total": 1016
+      }
+    ]
+  },
+  {
+    "rowId": "r083",
+    "source": "llm",
+    "predictedCategory": 2,
+    "keywords": [
+      "passenger car",
+      "business vehicle",
+      "motor vehicle",
+      "automobile",
+      "car manufacturing"
+    ],
+    "shortlists": [
+      {
+        "basis": "spend",
+        "total": 1016
+      }
+    ]
+  },
+  {
+    "rowId": "r084",
+    "source": "llm",
+    "predictedCategory": 2,
+    "keywords": [
+      "5-ton truck",
+      "cargo truck",
+      "heavy goods vehicle",
+      "commercial vehicle",
+      "diesel truck",
+      "road freight vehicle"
+    ],
+    "shortlists": [
+      {
+        "basis": "spend",
+        "total": 1016
+      }
+    ]
+  },
+  {
+    "rowId": "r085",
+    "source": "llm",
+    "predictedCategory": 2,
+    "keywords": [
+      "semiconductor test equipment",
+      "semiconductor testing machine",
+      "electronic test equipment",
+      "capital equipment",
+      "semiconductor manufacturing equipment"
+    ],
+    "shortlists": [
+      {
+        "basis": "spend",
+        "total": 1016
+      }
+    ]
+  },
+  {
+    "rowId": "r086",
+    "source": "llm",
+    "predictedCategory": 2,
+    "keywords": [
+      "automatic packaging machine",
+      "packaging machinery",
+      "industrial machinery",
+      "packaging equipment"
+    ],
+    "shortlists": [
+      {
+        "basis": "spend",
+        "total": 1016
+      }
+    ]
+  },
+  {
+    "rowId": "r087",
+    "source": "llm",
+    "predictedCategory": 2,
+    "keywords": [
+      "building construction",
+      "factory expansion",
+      "industrial building",
+      "construction services",
+      "capital project"
+    ],
+    "shortlists": [
+      {
+        "basis": "spend",
+        "total": 1016
+      }
+    ]
+  },
+  {
+    "rowId": "r088",
+    "source": "llm",
+    "predictedCategory": 2,
+    "keywords": [
+      "emergency generator",
+      "backup generator",
+      "diesel generator",
+      "generator set",
+      "power generation equipment",
+      "industrial machinery"
+    ],
+    "shortlists": [
+      {
+        "basis": "spend",
+        "total": 1016
+      }
+    ]
+  },
+  {
+    "rowId": "r089",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "LED lighting",
+      "lighting fixture",
+      "light replacement",
+      "lighting maintenance",
+      "electrical services"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 5
+      },
+      {
+        "basis": "spend",
+        "total": 1016
+      }
+    ]
+  },
+  {
+    "rowId": "r090",
+    "source": "llm",
+    "predictedCategory": 2,
+    "keywords": [
+      "digital copier",
+      "photocopier",
+      "office equipment",
+      "copy machine",
+      "printer",
+      "electrical equipment"
+    ],
+    "shortlists": [
+      {
+        "basis": "spend",
+        "total": 1016
+      }
+    ]
+  },
+  {
+    "rowId": "r091",
+    "source": "llm",
+    "predictedCategory": 2,
+    "keywords": [
+      "industrial pump",
+      "pump",
+      "industrial machinery",
+      "capital equipment",
+      "mechanical equipment"
+    ],
+    "shortlists": [
+      {
+        "basis": "spend",
+        "total": 1016
+      }
+    ]
+  },
+  {
+    "rowId": "r092",
+    "source": "memory",
+    "predictedCategory": 4,
+    "keywords": null,
+    "shortlists": []
+  },
+  {
+    "rowId": "r093",
+    "source": "memory",
+    "predictedCategory": 4,
+    "keywords": null,
+    "shortlists": []
+  },
+  {
+    "rowId": "r094",
+    "source": "memory",
+    "predictedCategory": 4,
+    "keywords": null,
+    "shortlists": []
+  },
+  {
+    "rowId": "r095",
+    "source": "llm",
+    "predictedCategory": 4,
+    "keywords": [
+      "refrigerated truck",
+      "refrigerated road freight",
+      "inbound transport",
+      "food ingredients",
+      "chilled goods"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 264
+      }
+    ]
+  },
+  {
+    "rowId": "r096",
+    "source": "llm",
+    "predictedCategory": 4,
+    "keywords": [
+      "upstream freight",
+      "ocean freight",
+      "container ship",
+      "sea transport",
+      "shipping",
+      "imported raw materials",
+      "Shanghai",
+      "Busan Port"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 264
+      }
+    ]
+  },
+  {
+    "rowId": "r097",
+    "source": "llm",
+    "predictedCategory": 4,
+    "keywords": [
+      "upstream freight",
+      "ocean freight",
+      "container ship",
+      "sea transport",
+      "shipping",
+      "imported raw materials",
+      "Shanghai",
+      "Busan Port"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 264
+      }
+    ]
+  },
+  {
+    "rowId": "r098",
+    "source": "llm",
+    "predictedCategory": 4,
+    "keywords": [
+      "limestone",
+      "bulk shipping",
+      "bulk carrier",
+      "ocean freight",
+      "maritime transport",
+      "Australia",
+      "Gladstone",
+      "Gwangyang Port"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 264
+      }
+    ]
+  },
+  {
+    "rowId": "r099",
+    "source": "llm",
+    "predictedCategory": 4,
+    "keywords": [
+      "air freight",
+      "air cargo",
+      "freight transport",
+      "aircraft",
+      "spare parts",
+      "international transport"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 264
+      }
+    ]
+  },
+  {
+    "rowId": "r100",
+    "source": "llm",
+    "predictedCategory": 4,
+    "keywords": [
+      "rail freight",
+      "rail transport",
+      "freight transport",
+      "materials",
+      "inbound logistics",
+      "intermodal transport"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 264
+      }
+    ]
+  },
+  {
+    "rowId": "r101",
+    "source": "llm",
+    "predictedCategory": 4,
+    "keywords": [
+      "material delivery",
+      "inbound transport",
+      "road freight",
+      "delivery van",
+      "1-ton van",
+      "light commercial vehicle"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 264
+      }
+    ]
+  },
+  {
+    "rowId": "r102",
+    "source": "llm",
+    "predictedCategory": 4,
+    "keywords": [
+      "chemical raw materials",
+      "tanker truck",
+      "road freight",
+      "upstream transportation",
+      "bulk liquid transport"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 264
+      }
+    ]
+  },
+  {
+    "rowId": "r103",
+    "source": "memory",
+    "predictedCategory": 9,
+    "keywords": null,
+    "shortlists": []
+  },
+  {
+    "rowId": "r104",
+    "source": "memory",
+    "predictedCategory": 9,
+    "keywords": null,
+    "shortlists": []
+  },
+  {
+    "rowId": "r105",
+    "source": "memory",
+    "predictedCategory": 9,
+    "keywords": null,
+    "shortlists": []
+  },
+  {
+    "rowId": "r106",
+    "source": "llm",
+    "predictedCategory": null,
+    "keywords": null,
+    "shortlists": []
+  },
+  {
+    "rowId": "r107",
+    "source": "llm",
+    "predictedCategory": null,
+    "keywords": null,
+    "shortlists": []
+  },
+  {
+    "rowId": "r108",
+    "source": "llm",
+    "predictedCategory": "other",
+    "keywords": [
+      "coastal shipping",
+      "domestic vessel",
+      "sea freight",
+      "marine transport",
+      "cargo shipping",
+      "coastal transport"
+    ],
+    "shortlists": []
+  },
+  {
+    "rowId": "r109",
+    "source": "llm",
+    "predictedCategory": 6,
+    "keywords": [
+      "business travel",
+      "air travel",
+      "international flight",
+      "economy class",
+      "passenger aircraft",
+      "passenger-kilometre"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 82
+      }
+    ]
+  },
+  {
+    "rowId": "r110",
+    "source": "llm",
+    "predictedCategory": 6,
+    "keywords": [
+      "business travel",
+      "air travel",
+      "international flight",
+      "economy class",
+      "passenger aircraft",
+      "passenger-kilometre"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 82
+      }
+    ]
+  },
+  {
+    "rowId": "r111",
+    "source": "llm",
+    "predictedCategory": 6,
+    "keywords": [
+      "air travel",
+      "business travel",
+      "international flight",
+      "business class",
+      "air passenger",
+      "passenger-kilometer"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 82
+      }
+    ]
+  },
+  {
+    "rowId": "r112",
+    "source": "llm",
+    "predictedCategory": 6,
+    "keywords": [
+      "domestic flight",
+      "air travel",
+      "business travel",
+      "passenger air transport",
+      "aircraft",
+      "aviation",
+      "passenger-kilometer"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 82
+      }
+    ]
+  },
+  {
+    "rowId": "r113",
+    "source": "memory",
+    "predictedCategory": 6,
+    "keywords": null,
+    "shortlists": []
+  },
+  {
+    "rowId": "r114",
+    "source": "memory",
+    "predictedCategory": 6,
+    "keywords": null,
+    "shortlists": []
+  },
+  {
+    "rowId": "r115",
+    "source": "llm",
+    "predictedCategory": 6,
+    "keywords": [
+      "taxi",
+      "business travel",
+      "passenger transport",
+      "road transport"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 82
+      }
+    ]
+  },
+  {
+    "rowId": "r116",
+    "source": "llm",
+    "predictedCategory": 6,
+    "keywords": [
+      "intercity bus",
+      "express bus",
+      "coach",
+      "bus travel",
+      "business travel",
+      "passenger transport"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 82
+      }
+    ]
+  },
+  {
+    "rowId": "r117",
+    "source": "llm",
+    "predictedCategory": 6,
+    "keywords": [
+      "business travel",
+      "subway",
+      "metro",
+      "urban rail",
+      "passenger transport",
+      "rail transport"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 82
+      }
+    ]
+  },
+  {
+    "rowId": "r118",
+    "source": "llm",
+    "predictedCategory": 6,
+    "keywords": [
+      "business travel",
+      "hotel",
+      "hotel accommodation",
+      "domestic lodging",
+      "overnight stay",
+      "hospitality"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 39
+      }
+    ]
+  },
+  {
+    "rowId": "r119",
+    "source": "llm",
+    "predictedCategory": 6,
+    "keywords": [
+      "business travel",
+      "hotel",
+      "lodging",
+      "hotel stay",
+      "accommodation",
+      "Japan"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 39
+      }
+    ]
+  },
+  {
+    "rowId": "r120",
+    "source": "llm",
+    "predictedCategory": 6,
+    "keywords": [
+      "hotel accommodation",
+      "business travel",
+      "overnight stay",
+      "lodging",
+      "hotel",
+      "hospitality"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 39
+      }
+    ]
+  },
+  {
+    "rowId": "r121",
+    "source": "llm",
+    "predictedCategory": 6,
+    "keywords": [
+      "hotel accommodation",
+      "hotel stay",
+      "overnight stay",
+      "business travel",
+      "lodging",
+      "Germany"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 39
+      }
+    ]
+  },
+  {
+    "rowId": "r122",
+    "source": "llm",
+    "predictedCategory": 6,
+    "keywords": [
+      "business travel",
+      "rental car",
+      "car hire",
+      "passenger car",
+      "road transport",
+      "vehicle rental"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 160
+      }
+    ]
+  },
+  {
+    "rowId": "r123",
+    "source": "llm",
+    "predictedCategory": 6,
+    "keywords": [
+      "passenger ferry",
+      "ferry travel",
+      "business travel",
+      "water transport",
+      "passenger-kilometer"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 82
+      }
+    ]
+  },
+  {
+    "rowId": "r124",
+    "source": "llm",
+    "predictedCategory": 7,
+    "keywords": [
+      "commuter bus",
+      "bus transport",
+      "passenger transport",
+      "employee commuting",
+      "road transport"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 20
+      }
+    ]
+  },
+  {
+    "rowId": "r125",
+    "source": "llm",
+    "predictedCategory": 7,
+    "keywords": [
+      "commuter bus",
+      "bus transport",
+      "passenger transport",
+      "employee commuting",
+      "road transport"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 20
+      }
+    ]
+  },
+  {
+    "rowId": "r126",
+    "source": "memory",
+    "predictedCategory": 7,
+    "keywords": null,
+    "shortlists": []
+  },
+  {
+    "rowId": "r127",
+    "source": "llm",
+    "predictedCategory": 7,
+    "keywords": [
+      "commuting",
+      "city bus",
+      "public bus",
+      "bus passenger transport",
+      "passenger-kilometer",
+      "urban transit"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 20
+      }
+    ]
+  },
+  {
+    "rowId": "r128",
+    "source": "llm",
+    "predictedCategory": 7,
+    "keywords": [
+      "employee commuting",
+      "private car",
+      "gasoline",
+      "petrol car",
+      "passenger vehicle",
+      "road transport"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 160
+      }
+    ]
+  },
+  {
+    "rowId": "r129",
+    "source": "llm",
+    "predictedCategory": 7,
+    "keywords": [
+      "commuting",
+      "private car",
+      "electric vehicle",
+      "electric car",
+      "passenger car",
+      "road transport"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 160
+      }
+    ]
+  },
+  {
+    "rowId": "r130",
+    "source": "llm",
+    "predictedCategory": 7,
+    "keywords": [
+      "employee commuting",
+      "private car",
+      "hybrid car",
+      "passenger car",
+      "commuting distance"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 160
+      }
+    ]
+  },
+  {
+    "rowId": "r131",
+    "source": "llm",
+    "predictedCategory": 7,
+    "keywords": [
+      "private car",
+      "commuting",
+      "passenger car",
+      "car travel",
+      "road transport",
+      "vehicle fuel"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 160
+      }
+    ]
+  },
+  {
+    "rowId": "r132",
+    "source": "llm",
+    "predictedCategory": 7,
+    "keywords": [
+      "motorcycle",
+      "motorbike",
+      "commuting",
+      "commuter travel",
+      "two-wheeler",
+      "motorcycle travel",
+      "gasoline motorcycle"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 160
+      }
+    ]
+  },
+  {
+    "rowId": "r133",
+    "source": "llm",
+    "predictedCategory": 7,
+    "keywords": [
+      "commuting",
+      "commuter rail",
+      "regional rail",
+      "passenger train",
+      "rail transport",
+      "passenger-kilometre"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 20
+      }
+    ]
+  },
+  {
+    "rowId": "r134",
+    "source": "llm",
+    "predictedCategory": 7,
+    "keywords": [
+      "teleworking",
+      "remote work",
+      "homeworking",
+      "telecommuting"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 3
+      }
+    ]
+  },
+  {
+    "rowId": "r135",
+    "source": "llm",
+    "predictedCategory": 7,
+    "keywords": [
+      "bicycle",
+      "cycling",
+      "commuting",
+      "bicycle commuting"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 160
+      }
+    ]
+  },
+  {
+    "rowId": "r136",
+    "source": "llm",
+    "predictedCategory": 7,
+    "keywords": [
+      "electric scooter",
+      "e-scooter",
+      "electric kick scooter",
+      "commuting",
+      "passenger transport",
+      "micromobility"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 160
+      }
+    ]
+  },
+  {
+    "rowId": "r137",
+    "source": "llm",
+    "predictedCategory": 7,
+    "keywords": [
+      "walking",
+      "walking commute",
+      "commuting",
+      "pedestrian travel"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 160
+      }
+    ]
+  },
+  {
+    "rowId": "r138",
+    "source": "llm",
+    "predictedCategory": 7,
+    "keywords": [
+      "employee commuting",
+      "commuting allowance",
+      "commuter benefits",
+      "employee transportation"
+    ],
+    "shortlists": []
+  },
+  {
+    "rowId": "r139",
+    "source": "llm",
+    "predictedCategory": 6,
+    "keywords": [
+      "business travel",
+      "overseas travel",
+      "per diem",
+      "travel allowance",
+      "business trip"
+    ],
+    "shortlists": []
+  },
+  {
+    "rowId": "r140",
+    "source": "llm",
+    "predictedCategory": 6,
+    "keywords": [
+      "business travel",
+      "business trip meals",
+      "restaurant meals",
+      "food service",
+      "overseas travel"
+    ],
+    "shortlists": []
+  },
+  {
+    "rowId": "r141",
+    "source": "llm",
+    "predictedCategory": "other",
+    "keywords": [
+      "drone delivery",
+      "pilot delivery",
+      "drone freight",
+      "goods transport",
+      "unmanned aerial vehicle"
+    ],
+    "shortlists": []
+  },
+  {
+    "rowId": "r142",
+    "source": "llm",
+    "predictedCategory": 4,
+    "keywords": [
+      "crude oil",
+      "petroleum",
+      "pipeline transport",
+      "oil pipeline",
+      "freight transport",
+      "upstream transportation"
+    ],
+    "shortlists": [
+      {
+        "basis": "physical",
+        "total": 264
+      }
+    ]
+  },
+  {
+    "rowId": "r143",
+    "source": "llm",
+    "predictedCategory": "other",
+    "keywords": [
+      "plastic waste",
+      "synthetic resin waste",
+      "waste treatment",
+      "waste disposal",
+      "waste recycling"
+    ],
+    "shortlists": []
+  },
+  {
+    "rowId": "r144",
+    "source": "llm",
+    "predictedCategory": 1,
+    "keywords": [
+      "office building",
+      "building maintenance",
+      "property management",
+      "facility management",
+      "office services",
+      "utilities"
+    ],
+    "shortlists": [
+      {
+        "basis": "spend",
+        "total": 1016
+      }
+    ]
+  },
+  {
+    "rowId": "r145",
+    "source": "llm",
+    "predictedCategory": "other",
+    "keywords": [
+      "gift certificate",
+      "gift card",
+      "voucher",
+      "retail voucher"
+    ],
+    "shortlists": []
+  },
+  {
+    "rowId": "r146",
+    "source": "llm",
+    "predictedCategory": "other",
+    "keywords": [
+      "miscellaneous expense",
+      "sundry expense"
+    ],
+    "shortlists": []
+  },
+  {
+    "rowId": "r147",
+    "source": "llm",
+    "predictedCategory": "other",
+    "keywords": [
+      "advance payment settlement",
+      "accounting settlement",
+      "advance payment",
+      "accounts receivable"
+    ],
+    "shortlists": []
+  },
+  {
+    "rowId": "r148",
+    "source": "llm",
+    "predictedCategory": "other",
+    "keywords": [
+      "electricity",
+      "purchased electricity",
+      "grid electricity",
+      "office building"
+    ],
+    "shortlists": []
+  }
+]

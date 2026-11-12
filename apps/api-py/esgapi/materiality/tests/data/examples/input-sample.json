@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "materiality.input@1",
+  "company": {"name": "가상물류"},
+  "industries": [
+    {"standard": "SASB", "industryName": "가상 산업 하나(Virtual Industry A)", "description": "가상 설명 — 가상의 물류 시설을 운영하는 산업"},
+    {"standard": "KSIC", "industryName": "가상 산업 둘", "description": "가상 설명 — 가상의 창고를 관리하는 산업"}
+  ],
+  "topics": [
+    {"topic": "가상토픽 하나", "description": "가상토픽 하나의 설명 — 가상의 배출 관리"},
+    {"topic": "가상토픽 둘", "description": "가상토픽 둘의 설명 — 가상의 안전 관리"},
+    {"topic": "가상토픽 셋", "description": "가상토픽 셋의 설명 — 가상의 이사회 운영"}
+  ],
+  "geoScope": "가상 범위(대한민국/EU 우선)",
+  "userLocation": "KR",
+  "mainLanguage": "한국어",
+  "dateRange": "2025-01-01~오늘까지",
+  "sector": "non_financial",
+  "latestEventMode": false,
+  "subtopicsByTopic": {
+    "가상토픽 하나": [{"name": "가상 서브토픽 가", "description": "가상 서브토픽 가의 설명"}]
+  },
+  "valueChain": [
+    {
+      "business_unit": "가상 사업부",
+      "business_unit_description": "가상 사업부 설명",
+      "value_chain_stage": "운영",
+      "stakeholder": "가상 이해관계자",
+      "business_activity": "가상 활동"
+    }
+  ]
+}

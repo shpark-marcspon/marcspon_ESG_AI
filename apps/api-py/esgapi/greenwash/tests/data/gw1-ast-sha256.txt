@@ -1,0 +1,12 @@
+# GW1(esg-lab py/greenwash, main 2a237d2)의 정규화 AST sha256. 뽑은 명령(apps/api-py 에서):
+#   uv run --frozen python -W ignore scripts/g1a_compare.py ast-sha256 <esg-lab>/py/greenwash
+# checker.py 는 GL1(MARC-TICK-112)에서 이어 돌기 꼭지를 달아 GW1 과 다르다 — 고정 밖
+heuristics.py d540182f440fa6294aedf97e439b9382d8d214ebb53157cdbaaa66227ef38d8a
+prompts.py f89219ae9f0e7fcc57db1ca6dc2a67c47580e0eef36813b9e270c348432e82c3
+parts.py a0b6557ec8595ea6f4ab3dfffc1dcd6a31fa11c3532a4857ff43f7f7dd1c9754
+wordcount.py 095818634c49319eba8a06449d577e5628bbebd045ac551430d6821717ee975b
+chunking.py 248c8a5d360800efcd4dce18d72112209960d9a55346c5b0a22897cd5b01c097
+retrieval.py d44c52d4659475ce99e8ba8e5ed2ea8f76a51885ea0eacb332e561336c0c8781
+dryrun.py 0695860798b119cddd9e1680cd536ef4b0449d351b365501397ccc4111634bdd
+pdftext.py 45968aa98bcd5f12442f157ef1df96ff0bba4978ccc159f3cd1cc9caf7c39009
+ports.py bdfa764e0e6168230fdc4821d3ed2263129b2be255356131237b66afaebfed06

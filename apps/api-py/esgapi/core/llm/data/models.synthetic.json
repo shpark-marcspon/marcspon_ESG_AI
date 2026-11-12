@@ -1,0 +1,42 @@
+{
+  "checkedOn": "2026-10-01",
+  "synthetic": true,
+  "note": "테스트와 --provider mock 전용 가상 모델이다. 단가와 한도는 실제 공급사 값이 아니며 계산하기 쉬운 숫자로 지어냈다.",
+  "sources": {},
+  "models": {
+    "mock-synthetic": {
+      "provider": "mock",
+      "apiModelId": "mock-synthetic",
+      "label": "모의 모델 (synthetic)",
+      "synthetic": true,
+      "pricing": { "input": 1.0, "output": 2.0, "cacheWrite": 1.25, "cacheRead": 0.1 },
+      "contextWindowTokens": 100000,
+      "maxOutputTokens": 4000,
+      "minCacheTokens": 1000,
+      "pdf": { "maxPagesPerRequest": 10, "maxRequestMb": 1 },
+      "structuredOutput": true,
+      "lifecycle": { "status": "synthetic", "retirement": null, "note": "가상 모델" },
+      "sourceRefs": [],
+      "notes": []
+    },
+    "mock-b-synthetic": {
+      "provider": "mock-b",
+      "apiModelId": "mock-b-synthetic",
+      "label": "모의 대체 모델 (synthetic)",
+      "synthetic": true,
+      "pricing": { "input": 2.0, "output": 4.0, "cacheWrite": 2.5, "cacheRead": 0.2 },
+      "contextWindowTokens": 100000,
+      "maxOutputTokens": 4000,
+      "minCacheTokens": 1000,
+      "pdf": { "maxPagesPerRequest": 10, "maxRequestMb": 1 },
+      "structuredOutput": true,
+      "lifecycle": { "status": "synthetic", "retirement": null, "note": "가상 모델" },
+      "sourceRefs": [],
+      "notes": []
+    }
+  },
+  "routes": {
+    "mock": ["mock-synthetic"],
+    "mock-with-fallback": ["mock-synthetic", "mock-b-synthetic"]
+  }
+}

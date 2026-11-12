@@ -1,0 +1,60 @@
+{
+ "documents": {
+  "kb_2025_kor": {
+   "inputs": {
+    "document.json": "0ad1a66097f70d98b9a861571de8a4129051db84de358bfeca3771da7e5f82e2",
+    "char-places.json": "d3fd8f04652f1903483ceb4f32779717802a7b7849922cbcb7bff2696a05670a"
+   },
+   "sections": {
+    "places": {
+     "count": 2938,
+     "sha256": "d0a956864186b519c2052c4d9151dafbc4024680c6210806144824c984b1b030"
+    }
+   }
+  },
+  "kb_2025_databook_kor": {
+   "inputs": {
+    "document.json": "c60c514dd92c5fec1ad0e82bee676fd59ea1256218b70f6c3839b190c22b6a96",
+    "char-places.json": "d65d98e8dbed6eeca139930aaf78b3c930dfa7072b808cac5737bd92c9cd3b0f"
+   },
+   "sections": {
+    "places": {
+     "count": 1292,
+     "sha256": "f4463372af78a1a1274d992d5beedf38dbb8b2f4c46b6e59602b1062aa789dd2"
+    }
+   }
+  },
+  "samsung_2026_kor": {
+   "inputs": {
+    "document.json": "3c00c599a78175fa9ba84cae8574333ee125191543fb69e89ff94c4fd9932bd5",
+    "char-places.json": "d476df0e04caaa486478be3ffc498c7fa1567c14bd3768c03f5bc2ca80ae2562"
+   },
+   "sections": {
+    "places": {
+     "count": 2049,
+     "sha256": "df6701e0a3d4a3c9c416e3f3884de101a20b5a4876e9b092b8b7230f737e5ffb"
+    }
+   }
+  },
+  "cosmax_2025_kor": {
+   "inputs": {
+    "document.json": "c11972565872e82faa43e366b3335254538423a05fcff525e9e0c68b6ce05736",
+    "char-places.json": "951562398717c34d0e56d6c33da665e7211e8b0d2c472720df908d690b9bf51c"
+   },
+   "sections": {
+    "places": {
+     "count": 2476,
+     "sha256": "33c982b6c42a917907bb01dff846bc06a44e01d919a9d39c129decf9c3c393d5"
+    }
+   }
+  }
+ },
+ "synthetic": {
+  "sections": {
+   "places": {
+    "count": 81,
+    "sha256": "15169aaa74460428fdd01dfc8c8653b8cb59fc44252fbc11096a9316e87eb479"
+   }
+  }
+ }
+}

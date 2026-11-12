@@ -1,0 +1,70 @@
+{
+  "$defs": {
+    "AiPromptIn": {
+      "additionalProperties": false,
+      "description": "프롬프트 칸 하나의 입력. 세 칸 다 필수. 글·메모 규칙은 받기(calc/ai_settings.check_prompts)가 본다.",
+      "properties": {
+        "key": {
+          "title": "Key",
+          "type": "string"
+        },
+        "text": {
+          "description": "전문(바이트 그대로 받는다).",
+          "title": "Text",
+          "type": "string"
+        },
+        "memo": {
+          "description": "칸 메모(앞뒤 공백을 뺀 값이 정규형).",
+          "title": "Memo",
+          "type": "string"
+        }
+      },
+      "required": [
+        "key",
+        "text",
+        "memo"
+      ],
+      "title": "AiPromptIn",
+      "type": "object"
+    },
+    "AiPromptStepIn": {
+      "additionalProperties": false,
+      "description": "한 단계의 프롬프트 칸 입력(모듈 명세 차례, 칸 전부).",
+      "properties": {
+        "key": {
+          "title": "Key",
+          "type": "string"
+        },
+        "prompts": {
+          "items": {
+            "$ref": "#/$defs/AiPromptIn"
+          },
+          "title": "Prompts",
+          "type": "array"
+        }
+      },
+      "required": [
+        "key",
+        "prompts"
+      ],
+      "title": "AiPromptStepIn",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "ai.prompts@1 — 단계마다의 프롬프트 글 입력(명세 차례, 단계 전부). 꼴 id 는 본문에 싣지 않는다.",
+  "properties": {
+    "steps": {
+      "items": {
+        "$ref": "#/$defs/AiPromptStepIn"
+      },
+      "title": "Steps",
+      "type": "array"
+    }
+  },
+  "required": [
+    "steps"
+  ],
+  "title": "AiPromptsIn",
+  "type": "object"
+}

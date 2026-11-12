@@ -1,0 +1,1173 @@
+{
+  "$defs": {
+    "ByKind": {
+      "additionalProperties": false,
+      "description": "대화 요청의 종류별 셈(노트북 프롬프트 넷: 탐지, 판정, Low 판정, 수정 방향 다시 묻기).",
+      "properties": {
+        "detect": {
+          "$ref": "#/$defs/Tally"
+        },
+        "eval": {
+          "$ref": "#/$defs/Tally"
+        },
+        "lowOnly": {
+          "$ref": "#/$defs/Tally"
+        },
+        "repair": {
+          "$ref": "#/$defs/Tally"
+        }
+      },
+      "required": [
+        "detect",
+        "eval",
+        "lowOnly",
+        "repair"
+      ],
+      "title": "ByKind",
+      "type": "object"
+    },
+    "CandidateStats": {
+      "additionalProperties": false,
+      "description": "후보 문장의 집계(점검 쪽마다 더한 것). 쪽마다 후보를 Low 꼴(선언적 문장)과 나머지로 나눠 각각 거른 뒤, 나머지는\n점수 높은 차례로 상한(maxCandidatesPerPage)까지, Low 꼴은 하나까지 남긴 것이 kept 다(쪽당 상한 + 1 까지. 그래서\nraw - 넷 ≥ kept). kept 가운데 AI 가 위험 없음으로 본 문장은 items 에 없다. 실패한 쪽의 후보는 들지 않는다.",
+      "properties": {
+        "raw": {
+          "description": "규칙과 AI 가 찾은 후보 문장 전부.",
+          "minimum": 0,
+          "title": "Raw",
+          "type": "integer"
+        },
+        "hardDropped": {
+          "description": "문장이 아니어서 버린 것(15자 미만, 제목·라벨 꼴, 끝맺음 없는 짧은 글).",
+          "minimum": 0,
+          "title": "Harddropped",
+          "type": "integer"
+        },
+        "nonEnvDropped": {
+          "description": "환경 낱말이 없어 버린 것.",
+          "minimum": 0,
+          "title": "Nonenvdropped",
+          "type": "integer"
+        },
+        "promoDropped": {
+          "description": "환경 낱말 없이 홍보 문구로 보여 버린 것. 노트북은 환경 낱말이 없는 문장을 앞에서 이미 버리므로\n실제로는 늘 0 이다.",
+          "minimum": 0,
+          "title": "Promodropped",
+          "type": "integer"
+        },
+        "tableDropped": {
+          "description": "표의 줄처럼 보이고 고위험 낱말이 없어 버린 것.",
+          "minimum": 0,
+          "title": "Tabledropped",
+          "type": "integer"
+        },
+        "kept": {
+          "description": "판정에 넘긴 후보(쪽당 상한 + Low 꼴 하나까지).",
+          "minimum": 0,
+          "title": "Kept",
+          "type": "integer"
+        },
+        "failedPages": {
+          "description": "실패한 쪽. 빈 목록이면 실패 없음.",
+          "items": {
+            "$ref": "#/$defs/FailedPage"
+          },
+          "title": "Failedpages",
+          "type": "array"
+        }
+      },
+      "required": [
+        "raw",
+        "hardDropped",
+        "nonEnvDropped",
+        "promoDropped",
+        "tableDropped",
+        "kept",
+        "failedPages"
+      ],
+      "title": "CandidateStats",
+      "type": "object"
+    },
+    "ChatParams": {
+      "additionalProperties": false,
+      "description": "노트북이 대화 모델에 주는 매개변수. 노트북 설정이며 실제로 넘겨졌는지는 실행기의 사용량 기록이 진실이다.",
+      "properties": {
+        "temperature": {
+          "title": "Temperature",
+          "type": "number"
+        },
+        "maxTokens": {
+          "title": "Maxtokens",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "temperature",
+        "maxTokens"
+      ],
+      "title": "ChatParams",
+      "type": "object"
+    },
+    "CheckerConfig": {
+      "additionalProperties": false,
+      "description": "노트북의 GWConfig 전부(값은 GW1 의 SCAN_CONFIG 를 채운 것). 화면에 보일 칸이 아니라 기록이다.",
+      "properties": {
+        "maxCandidatesPerPage": {
+          "description": "쪽마다 AI 에게서 받는 후보 문장의 상한.",
+          "title": "Maxcandidatesperpage",
+          "type": "integer"
+        },
+        "maxCharsPageText": {
+          "description": "쪽 글을 이 글자 수까지만 본다(넘으면 잘린다).",
+          "title": "Maxcharspagetext",
+          "type": "integer"
+        },
+        "evidenceK": {
+          "description": "문장마다 보여 주는 근거 조각 수.",
+          "title": "Evidencek",
+          "type": "integer"
+        },
+        "maxCharsPerChunk": {
+          "description": "근거 조각 하나의 글자 상한.",
+          "title": "Maxcharsperchunk",
+          "type": "integer"
+        },
+        "useEvidenceFailopen": {
+          "description": "근거를 못 찾았을 때 점검 쪽 밖도 볼지(E0 는 false).",
+          "title": "Useevidencefailopen",
+          "type": "boolean"
+        },
+        "maxCharsEvidenceTotal": {
+          "description": "근거 글의 합 상한.",
+          "title": "Maxcharsevidencetotal",
+          "type": "integer"
+        },
+        "reportLevels": {
+          "description": "결과에 싣는 등급.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Reportlevels",
+          "type": "array"
+        },
+        "debug": {
+          "title": "Debug",
+          "type": "boolean"
+        },
+        "debugPages": {
+          "title": "Debugpages",
+          "type": "integer"
+        },
+        "batchEval": {
+          "title": "Batcheval",
+          "type": "boolean"
+        },
+        "promptVersion": {
+          "description": "프롬프트의 판.",
+          "title": "Promptversion",
+          "type": "string"
+        }
+      },
+      "required": [
+        "maxCandidatesPerPage",
+        "maxCharsPageText",
+        "evidenceK",
+        "maxCharsPerChunk",
+        "useEvidenceFailopen",
+        "maxCharsEvidenceTotal",
+        "reportLevels",
+        "debug",
+        "debugPages",
+        "batchEval",
+        "promptVersion"
+      ],
+      "title": "CheckerConfig",
+      "type": "object"
+    },
+    "ChunkingConfig": {
+      "additionalProperties": false,
+      "description": "근거 색인의 조각 설정(노트북 셀 11 의 값).",
+      "properties": {
+        "chunkSize": {
+          "title": "Chunksize",
+          "type": "integer"
+        },
+        "chunkOverlap": {
+          "title": "Chunkoverlap",
+          "type": "integer"
+        },
+        "separators": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Separators",
+          "type": "array"
+        },
+        "normalize": {
+          "title": "Normalize",
+          "type": "boolean"
+        },
+        "embeddingBatchSize": {
+          "title": "Embeddingbatchsize",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "chunkSize",
+        "chunkOverlap",
+        "separators",
+        "normalize",
+        "embeddingBatchSize"
+      ],
+      "title": "ChunkingConfig",
+      "type": "object"
+    },
+    "Config": {
+      "additionalProperties": false,
+      "description": "점검 설정. GW1 의 config 그대로.",
+      "properties": {
+        "checker": {
+          "$ref": "#/$defs/CheckerConfig"
+        },
+        "chunking": {
+          "$ref": "#/$defs/ChunkingConfig"
+        },
+        "chat": {
+          "$ref": "#/$defs/ChatParams"
+        }
+      },
+      "required": [
+        "checker",
+        "chunking",
+        "chat"
+      ],
+      "title": "Config",
+      "type": "object"
+    },
+    "Counts": {
+      "additionalProperties": false,
+      "description": "items 에서 센 건수(새 셈이 아니라 items 를 다시 센 것).",
+      "properties": {
+        "total": {
+          "description": "전체 문장 수(= items 의 길이).",
+          "minimum": 0,
+          "title": "Total",
+          "type": "integer"
+        },
+        "byLevel": {
+          "$ref": "#/$defs/LevelCounts",
+          "description": "등급별 문장 수. 합이 total 이다."
+        },
+        "byPart": {
+          "additionalProperties": {
+            "$ref": "#/$defs/LevelCounts"
+          },
+          "description": "파트 이름(parts 의 name 전부, 빈 파트 포함) → 등급별 수. 두 파트에 든 쪽의 문장은 두 파트에서 다 센다(노트북\n동작). 그래서 byPart 의 합이 total 보다 클 수 있다.",
+          "title": "Bypart",
+          "type": "object"
+        }
+      },
+      "required": [
+        "total",
+        "byLevel",
+        "byPart"
+      ],
+      "title": "Counts",
+      "type": "object"
+    },
+    "DryRun": {
+      "additionalProperties": false,
+      "description": "보내지 않고 센 것(GW1 의 dry_run 칸 그대로). 입력 글자·토큰은 메시지의 글이고 메시지 틀 토큰은 들지 않는다.",
+      "properties": {
+        "pagesChecked": {
+          "description": "점검 쪽 수.",
+          "minimum": 0,
+          "title": "Pageschecked",
+          "type": "integer"
+        },
+        "pagesWithText": {
+          "description": "글이 있는 점검 쪽 수.",
+          "minimum": 0,
+          "title": "Pageswithtext",
+          "type": "integer"
+        },
+        "pagesTruncated": {
+          "description": "글이 상한(기본 2,500자)을 넘어 잘린 쪽.",
+          "minimum": 0,
+          "title": "Pagestruncated",
+          "type": "integer"
+        },
+        "chunks": {
+          "description": "문서 전체의 조각 수.",
+          "minimum": 0,
+          "title": "Chunks",
+          "type": "integer"
+        },
+        "embeddingIndex": {
+          "$ref": "#/$defs/Tally",
+          "description": "조각 전체를 임베딩하는 요청(묶음 50)."
+        },
+        "ruleCandidates": {
+          "description": "규칙이 뽑은 선언문 후보의 합(쪽당 끊은 뒤).",
+          "minimum": 0,
+          "title": "Rulecandidates",
+          "type": "integer"
+        },
+        "lower": {
+          "$ref": "#/$defs/DryRunLower"
+        },
+        "upper": {
+          "$ref": "#/$defs/DryRunUpper"
+        },
+        "perPage": {
+          "description": "점검 쪽마다(쪽 차례).",
+          "items": {
+            "$ref": "#/$defs/DryRunPage"
+          },
+          "title": "Perpage",
+          "type": "array"
+        }
+      },
+      "required": [
+        "pagesChecked",
+        "pagesWithText",
+        "pagesTruncated",
+        "chunks",
+        "embeddingIndex",
+        "ruleCandidates",
+        "lower",
+        "upper",
+        "perPage"
+      ],
+      "title": "DryRun",
+      "type": "object"
+    },
+    "DryRunLower": {
+      "additionalProperties": false,
+      "description": "아래끝: AI 후보 0, 다시 묻기 0, 근거 없음.",
+      "properties": {
+        "chat": {
+          "$ref": "#/$defs/Tally"
+        },
+        "chatByKind": {
+          "$ref": "#/$defs/ByKind"
+        },
+        "embeddingQueries": {
+          "$ref": "#/$defs/Tally"
+        },
+        "judged": {
+          "description": "판정한 문장 수(규칙 후보만).",
+          "minimum": 0,
+          "title": "Judged",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "chat",
+        "chatByKind",
+        "embeddingQueries",
+        "judged"
+      ],
+      "title": "DryRunLower",
+      "type": "object"
+    },
+    "DryRunPage": {
+      "additionalProperties": false,
+      "description": "점검 쪽 하나의 셈.",
+      "properties": {
+        "page": {
+          "description": "쪽 번호. 1부터.",
+          "minimum": 1,
+          "title": "Page",
+          "type": "integer"
+        },
+        "textChars": {
+          "description": "쪽 글의 글자 수(자르기 전).",
+          "minimum": 0,
+          "title": "Textchars",
+          "type": "integer"
+        },
+        "truncated": {
+          "description": "글이 상한을 넘어 잘렸는지.",
+          "title": "Truncated",
+          "type": "boolean"
+        },
+        "ruleCandidates": {
+          "description": "규칙이 뽑은 선언문 후보 수.",
+          "minimum": 0,
+          "title": "Rulecandidates",
+          "type": "integer"
+        },
+        "lowerJudged": {
+          "description": "아래끝에서 판정한 문장 수.",
+          "minimum": 0,
+          "title": "Lowerjudged",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "page",
+        "textChars",
+        "truncated",
+        "ruleCandidates",
+        "lowerJudged"
+      ],
+      "title": "DryRunPage",
+      "type": "object"
+    },
+    "DryRunResult": {
+      "additionalProperties": false,
+      "description": "greenwash.result@1 — dry-run(AI 를 부르지 않고 요청 수·글자·토큰만 센 실행). dryRun 이 채워지고 items 는 빈\n목록, candidateStats·counts·report 는 null 이다. wordCounts 는 AI 가 필요 없어 채운다. 키는 ScanResult 와 같다.",
+      "properties": {
+        "schemaVersion": {
+          "const": "greenwash.result@1",
+          "title": "Schemaversion",
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/$defs/Source"
+        },
+        "config": {
+          "$ref": "#/$defs/Config"
+        },
+        "models": {
+          "$ref": "#/$defs/Models",
+          "description": "노트북 설정의 모델 이름(실제로 불린 모델이 아니다)."
+        },
+        "promptVersion": {
+          "description": "노트북 프롬프트의 판. E0 는 2026-01-15-v1.",
+          "title": "Promptversion",
+          "type": "string"
+        },
+        "parts": {
+          "description": "파트 셋과 그 쪽.",
+          "items": {
+            "$ref": "#/$defs/Part"
+          },
+          "title": "Parts",
+          "type": "array"
+        },
+        "pages": {
+          "description": "점검할 쪽(파트의 합집합, 1부터, 오름차순).",
+          "items": {
+            "minimum": 1,
+            "type": "integer"
+          },
+          "title": "Pages",
+          "type": "array"
+        },
+        "extraTerms": {
+          "description": "사용자가 이 점검에 더한 단어(받은 꼴 그대로, 받은 차례). 판정 대상 키워드(환경 낱말)에 모두 썼고, 단어 빈도에는\n기본 목록과 겹치지 않는 것만 더했다. 한 번도 안 나온 단어는 빈도 표에 줄이 없다. 빈도 표의 『추가』 표시는 화면\n몫이다. 기본 목록 단어는 화면이 입력 때 막는다. 중복 제거와 기본 목록 비교는 대소문자·하이픈·띄어쓰기를 무시한\n글자 그대로라(「탄소 중립」 = 「탄소중립」), 노트북 목록에서 붙어 버린 낱말의 조각(예: eco)은 따로 세어진다.",
+          "items": {
+            "maxLength": 30,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 30,
+          "title": "Extraterms",
+          "type": "array"
+        },
+        "terms": {
+          "description": "이 실행이 의심 낱말 빈도에 센 낱말 전체(차례 그대로 — 밴드 G2d): AI 설정 판의 켠 대상 단어(판 차례) 뒤에 추가\n단어 가운데 비교 키가 판 단어와 같지 않은 것. 판의 대상 단어로 센 실행에만 있다 — 칸이 없으면 코드 기본 목록\n(GET /greenwash/terms/default) + 추가 단어로 셌다. 판 단어는 판정할 문장을 고르는 환경 낱말에는 쓰지 않았다(코드\n고정). 빈도 표의 『추가』 표시는 이 칸과 무관하게 기본 목록 기준이다.",
+          "items": {
+            "maxLength": 30,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 1030,
+          "title": "Terms",
+          "type": "array"
+        },
+        "items": {
+          "description": "dry-run 은 판정하지 않으므로 빈 목록.",
+          "items": {
+            "$ref": "#/$defs/Item"
+          },
+          "maxItems": 0,
+          "title": "Items",
+          "type": "array"
+        },
+        "candidateStats": {
+          "title": "Candidatestats",
+          "type": "null"
+        },
+        "counts": {
+          "title": "Counts",
+          "type": "null"
+        },
+        "wordCounts": {
+          "$ref": "#/$defs/WordCounts",
+          "description": "의심 낱말 빈도."
+        },
+        "dryRun": {
+          "$ref": "#/$defs/DryRun",
+          "description": "dry-run 의 셈."
+        },
+        "report": {
+          "title": "Report",
+          "type": "null"
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "source",
+        "config",
+        "models",
+        "promptVersion",
+        "parts",
+        "pages",
+        "extraTerms",
+        "items",
+        "candidateStats",
+        "counts",
+        "wordCounts",
+        "dryRun",
+        "report"
+      ],
+      "title": "DryRunResult",
+      "type": "object"
+    },
+    "DryRunUpper": {
+      "additionalProperties": false,
+      "description": "위끝: 쪽마다 탐지 1 + 판정 3 + Low 판정 1 + 다시 묻기 3 + 근거 물음 4(후보 상한 3 일 때).",
+      "properties": {
+        "chat": {
+          "$ref": "#/$defs/Tally"
+        },
+        "chatByKind": {
+          "$ref": "#/$defs/ByKind"
+        },
+        "embeddingQueries": {
+          "$ref": "#/$defs/Tally"
+        },
+        "outputTokensMax": {
+          "description": "대화 요청 수 × 출력 상한.",
+          "minimum": 0,
+          "title": "Outputtokensmax",
+          "type": "integer"
+        },
+        "evidenceChars": {
+          "description": "근거 글이 가장 길 때의 글자 수.",
+          "minimum": 0,
+          "title": "Evidencechars",
+          "type": "integer"
+        },
+        "evidenceCapReached": {
+          "description": "근거 글이 합 상한에 닿았는지.",
+          "title": "Evidencecapreached",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "chat",
+        "chatByKind",
+        "embeddingQueries",
+        "outputTokensMax",
+        "evidenceChars",
+        "evidenceCapReached"
+      ],
+      "title": "DryRunUpper",
+      "type": "object"
+    },
+    "FailedPage": {
+      "additionalProperties": false,
+      "description": "판정 중 예외가 나 건너뛴 쪽. 그 쪽의 후보는 집계에 들지 않고, 그 쪽에서 판정이 끝난 문장도 items 에 없다.",
+      "properties": {
+        "page": {
+          "description": "쪽 번호. 1부터.",
+          "minimum": 1,
+          "title": "Page",
+          "type": "integer"
+        },
+        "error": {
+          "description": "예외의 글.",
+          "title": "Error",
+          "type": "string"
+        }
+      },
+      "required": [
+        "page",
+        "error"
+      ],
+      "title": "FailedPage",
+      "type": "object"
+    },
+    "Item": {
+      "additionalProperties": false,
+      "description": "판정 문장 하나. items 의 차례는 한 번 쓰면 바뀌지 않는다 — (실행 id, items 차례 0부터)가 문장의 열쇠다.\n\nLow 이면 늘: riskTags = [\"선언적 문장\"], confirmedInEvidence = [], missingFields = [], evidenceInternal = \"\".\nfixParagraph 는 등급과 상관없이 늘 비지 않는다(High·Mid 는 60자, Low 는 40자보다 짧으면 노트북이 대신 쓰는 글이\n들어간다). Low 는 쪽마다 많아야 하나다.",
+      "properties": {
+        "page": {
+          "description": "문장이 나온 쪽. 1부터.",
+          "minimum": 1,
+          "title": "Page",
+          "type": "integer"
+        },
+        "parts": {
+          "description": "이 쪽이 든 파트의 이름 목록(Part.name). 한 쪽이 두 파트에 들면 둘이다.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Parts",
+          "type": "array"
+        },
+        "sentence": {
+          "description": "AI 가 돌려준 문장. 쪽 글에 그대로 있는지는 확인하지 않는다(노트북 동작).",
+          "title": "Sentence",
+          "type": "string"
+        },
+        "level": {
+          "description": "판정 등급.",
+          "enum": [
+            "High",
+            "Mid",
+            "Low"
+          ],
+          "title": "Level",
+          "type": "string"
+        },
+        "riskTags": {
+          "description": "위험 유형(AI 가 붙인 꼬리표, 셋까지). Low 는 [\"선언적 문장\"].",
+          "items": {
+            "type": "string"
+          },
+          "title": "Risktags",
+          "type": "array"
+        },
+        "confirmedInEvidence": {
+          "description": "근거에서 확인된 사실. Low 는 빈 목록.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Confirmedinevidence",
+          "type": "array"
+        },
+        "missingFields": {
+          "description": "근거에서 빠진 항목. Low 는 빈 목록.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Missingfields",
+          "type": "array"
+        },
+        "reasonBullets": {
+          "description": "판정 사유(줄마다 하나).",
+          "items": {
+            "type": "string"
+          },
+          "title": "Reasonbullets",
+          "type": "array"
+        },
+        "fixParagraph": {
+          "description": "수정 방향(늘 비지 않음). 노트북의 세 벌 칸(fix, action, fix_paragraph)을 한 칸으로 싣는다.",
+          "title": "Fixparagraph",
+          "type": "string"
+        },
+        "evidencePages": {
+          "description": "AI 에게 보여 준 근거 조각의 쪽(1부터). 빈 목록이면 「근거 없음」으로 판정한 것이다. Low 도 근거를 찾는다.",
+          "items": {
+            "minimum": 1,
+            "type": "integer"
+          },
+          "title": "Evidencepages",
+          "type": "array"
+        },
+        "evidenceInternal": {
+          "description": "판단 근거 한 줄(내부용). Low 는 빈 글이다.",
+          "title": "Evidenceinternal",
+          "type": "string"
+        },
+        "position": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Position"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "문장의 쪽 위 자리. 찾지 못했거나 좌표 엔진이 없으면 null. E0 흐름은 좌표 엔진이 없어 늘 null 이다(예시\nresult-normal.json 의 상자는 좌표 엔진이 생긴 뒤의 꼴을 보이려고 지은 값이다)."
+        },
+        "exampleSentence": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "고쳐 쓴 예시 문장. E0 는 늘 null(채우는 것은 다음 흐름 판).",
+          "title": "Examplesentence"
+        }
+      },
+      "required": [
+        "page",
+        "parts",
+        "sentence",
+        "level",
+        "riskTags",
+        "confirmedInEvidence",
+        "missingFields",
+        "reasonBullets",
+        "fixParagraph",
+        "evidencePages",
+        "evidenceInternal",
+        "position",
+        "exampleSentence"
+      ],
+      "title": "Item",
+      "type": "object"
+    },
+    "LevelCounts": {
+      "additionalProperties": false,
+      "description": "등급별 문장 수.",
+      "properties": {
+        "High": {
+          "minimum": 0,
+          "title": "High",
+          "type": "integer"
+        },
+        "Mid": {
+          "minimum": 0,
+          "title": "Mid",
+          "type": "integer"
+        },
+        "Low": {
+          "minimum": 0,
+          "title": "Low",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "High",
+        "Mid",
+        "Low"
+      ],
+      "title": "LevelCounts",
+      "type": "object"
+    },
+    "MeasuredTokens": {
+      "additionalProperties": false,
+      "description": "잰 토큰 수.",
+      "properties": {
+        "status": {
+          "const": "measured",
+          "title": "Status",
+          "type": "string"
+        },
+        "encoding": {
+          "description": "토큰 부호화의 이름(대화 o200k_base, 임베딩 cl100k_base).",
+          "title": "Encoding",
+          "type": "string"
+        },
+        "value": {
+          "minimum": 0,
+          "title": "Value",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "status",
+        "encoding",
+        "value"
+      ],
+      "title": "MeasuredTokens",
+      "type": "object"
+    },
+    "Models": {
+      "additionalProperties": false,
+      "description": "노트북이 정한 모델 이름. 실제로 불린 공급사·모델이 아니다 — 그것은 실행기의 사용량 기록이 진실이다.",
+      "properties": {
+        "chat": {
+          "title": "Chat",
+          "type": "string"
+        },
+        "embedding": {
+          "title": "Embedding",
+          "type": "string"
+        }
+      },
+      "required": [
+        "chat",
+        "embedding"
+      ],
+      "title": "Models",
+      "type": "object"
+    },
+    "PageTermCounts": {
+      "additionalProperties": false,
+      "description": "한 쪽의 낱말 수.",
+      "properties": {
+        "page": {
+          "description": "쪽 번호. 1부터.",
+          "minimum": 1,
+          "title": "Page",
+          "type": "integer"
+        },
+        "counts": {
+          "description": "그 쪽의 낱말 수. 많은 차례(같으면 노트북 낱말 목록의 차례).",
+          "items": {
+            "$ref": "#/$defs/TermCount"
+          },
+          "title": "Counts",
+          "type": "array"
+        }
+      },
+      "required": [
+        "page",
+        "counts"
+      ],
+      "title": "PageTermCounts",
+      "type": "object"
+    },
+    "Part": {
+      "additionalProperties": false,
+      "description": "파트 하나와 그 쪽(사람이 준 쪽 입력을 문서 범위로 자른 것).",
+      "properties": {
+        "name": {
+          "description": "파트 이름. E0 는 「CEO 메시지」·「회사소개」·「기후/환경 토픽」 셋이고 이 차례다.",
+          "title": "Name",
+          "type": "string"
+        },
+        "pages": {
+          "description": "이 파트의 쪽(1부터, 오름차순). 빈 목록이면 그 파트는 점검하지 않았다. 한 쪽이 두 파트에 들 수 있다.",
+          "items": {
+            "minimum": 1,
+            "type": "integer"
+          },
+          "title": "Pages",
+          "type": "array"
+        }
+      },
+      "required": [
+        "name",
+        "pages"
+      ],
+      "title": "Part",
+      "type": "object"
+    },
+    "Position": {
+      "additionalProperties": false,
+      "description": "문장이 쪽의 어디에 있는지. 문서 뷰어 계약(apps/web/src/doc-viewer/domain/contract.ts)의 강조에서 boxes 는\ninnerBoxes 에 대응한다. 뷰어의 바깥 box 는 boxes 를 감싸는 상자로 지어 쓴다. 쪽 크기는 결과에 없다(PDF 에서 읽는다).",
+      "properties": {
+        "page": {
+          "description": "쪽 번호. 1부터(항목의 page 와 같은 셈).",
+          "minimum": 1,
+          "title": "Page",
+          "type": "integer"
+        },
+        "boxes": {
+          "description": "줄마다 상자 하나. 문장이 두 줄에 걸치면 상자 둘이다.",
+          "items": {
+            "description": "[left, top, right, bottom]. 단위는 포인트(pt), 원점은 쪽의 왼쪽 위(문서 뷰어의 계약과 같다). left ≤ right, top ≤ bottom.",
+            "items": {
+              "type": "number"
+            },
+            "maxItems": 4,
+            "minItems": 4,
+            "type": "array"
+          },
+          "minItems": 1,
+          "title": "Boxes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "page",
+        "boxes"
+      ],
+      "title": "Position",
+      "type": "object"
+    },
+    "Report": {
+      "additionalProperties": false,
+      "description": "흐름이 낸 파일.",
+      "properties": {
+        "file": {
+          "const": "greenwash-report.xlsx",
+          "description": "엑셀 보고서의 파일 이름(흐름의 출력 파일).",
+          "title": "File",
+          "type": "string"
+        }
+      },
+      "required": [
+        "file"
+      ],
+      "title": "Report",
+      "type": "object"
+    },
+    "ScanResult": {
+      "additionalProperties": false,
+      "description": "greenwash.result@1 — 점검한 실행(dry-run 아님). dryRun 이 null 이고 candidateStats·counts·report 가 채워진다.\n점검 쪽이 없으면 items 가 빈 목록이다. 키 차례는 아래와 같고 schemaVersion 이 첫 키다.",
+      "properties": {
+        "schemaVersion": {
+          "const": "greenwash.result@1",
+          "title": "Schemaversion",
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/$defs/Source"
+        },
+        "config": {
+          "$ref": "#/$defs/Config"
+        },
+        "models": {
+          "$ref": "#/$defs/Models",
+          "description": "노트북 설정의 모델 이름(실제로 불린 모델이 아니다)."
+        },
+        "promptVersion": {
+          "description": "노트북 프롬프트의 판. E0 는 2026-01-15-v1.",
+          "title": "Promptversion",
+          "type": "string"
+        },
+        "parts": {
+          "description": "파트 셋과 그 쪽.",
+          "items": {
+            "$ref": "#/$defs/Part"
+          },
+          "title": "Parts",
+          "type": "array"
+        },
+        "pages": {
+          "description": "점검한 쪽(파트의 합집합, 1부터, 오름차순). 근거를 찾아도 되는 쪽과 같다.",
+          "items": {
+            "minimum": 1,
+            "type": "integer"
+          },
+          "title": "Pages",
+          "type": "array"
+        },
+        "extraTerms": {
+          "description": "사용자가 이 점검에 더한 단어(받은 꼴 그대로, 받은 차례). 판정 대상 키워드(환경 낱말)에 모두 썼고, 단어 빈도에는\n기본 목록과 겹치지 않는 것만 더했다. 한 번도 안 나온 단어는 빈도 표에 줄이 없다. 빈도 표의 『추가』 표시는 화면\n몫이다. 기본 목록 단어는 화면이 입력 때 막는다. 중복 제거와 기본 목록 비교는 대소문자·하이픈·띄어쓰기를 무시한\n글자 그대로라(「탄소 중립」 = 「탄소중립」), 노트북 목록에서 붙어 버린 낱말의 조각(예: eco)은 따로 세어진다.",
+          "items": {
+            "maxLength": 30,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 30,
+          "title": "Extraterms",
+          "type": "array"
+        },
+        "terms": {
+          "description": "이 실행이 의심 낱말 빈도에 센 낱말 전체(차례 그대로 — 밴드 G2d): AI 설정 판의 켠 대상 단어(판 차례) 뒤에 추가\n단어 가운데 비교 키가 판 단어와 같지 않은 것. 판의 대상 단어로 센 실행에만 있다 — 칸이 없으면 코드 기본 목록\n(GET /greenwash/terms/default) + 추가 단어로 셌다. 판 단어는 판정할 문장을 고르는 환경 낱말에는 쓰지 않았다(코드\n고정). 빈도 표의 『추가』 표시는 이 칸과 무관하게 기본 목록 기준이다.",
+          "items": {
+            "maxLength": 30,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 1030,
+          "title": "Terms",
+          "type": "array"
+        },
+        "items": {
+          "description": "판정 문장. 쪽 차례, 쪽 안에서는 노트북이 낸 차례. 실행마다 한 번 쓰면 바뀌지 않고 items 의 차례가 고정이다 —\n(runId, itemIndex) 가 문장의 고정 열쇠다(검토 표시·비교·엑셀이 이것으로 잇는다).",
+          "items": {
+            "$ref": "#/$defs/Item"
+          },
+          "title": "Items",
+          "type": "array"
+        },
+        "candidateStats": {
+          "$ref": "#/$defs/CandidateStats",
+          "description": "후보 집계."
+        },
+        "counts": {
+          "$ref": "#/$defs/Counts",
+          "description": "items 의 건수."
+        },
+        "wordCounts": {
+          "$ref": "#/$defs/WordCounts",
+          "description": "의심 낱말 빈도."
+        },
+        "dryRun": {
+          "description": "dry-run 이 아니므로 null.",
+          "title": "Dryrun",
+          "type": "null"
+        },
+        "report": {
+          "$ref": "#/$defs/Report",
+          "description": "엑셀 보고서."
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "source",
+        "config",
+        "models",
+        "promptVersion",
+        "parts",
+        "pages",
+        "extraTerms",
+        "items",
+        "candidateStats",
+        "counts",
+        "wordCounts",
+        "dryRun",
+        "report"
+      ],
+      "title": "ScanResult",
+      "type": "object"
+    },
+    "Source": {
+      "additionalProperties": false,
+      "description": "점검한 파일.",
+      "properties": {
+        "fileName": {
+          "description": "올린 파일의 이름.",
+          "title": "Filename",
+          "type": "string"
+        },
+        "sha256": {
+          "description": "파일 바이트의 sha256(소문자 16진 64자).",
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "pageCount": {
+          "description": "문서의 쪽 수.",
+          "minimum": 0,
+          "title": "Pagecount",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "fileName",
+        "sha256",
+        "pageCount"
+      ],
+      "title": "Source",
+      "type": "object"
+    },
+    "Tally": {
+      "additionalProperties": false,
+      "description": "요청 수와 보낼 글의 양.",
+      "properties": {
+        "requests": {
+          "description": "요청 수.",
+          "minimum": 0,
+          "title": "Requests",
+          "type": "integer"
+        },
+        "inputChars": {
+          "description": "보낼 글의 글자 수.",
+          "minimum": 0,
+          "title": "Inputchars",
+          "type": "integer"
+        },
+        "inputTokens": {
+          "description": "보낼 글의 토큰 수.",
+          "discriminator": {
+            "mapping": {
+              "measured": "#/$defs/MeasuredTokens",
+              "unmeasured": "#/$defs/UnmeasuredTokens"
+            },
+            "propertyName": "status"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/MeasuredTokens"
+            },
+            {
+              "$ref": "#/$defs/UnmeasuredTokens"
+            }
+          ],
+          "title": "Inputtokens"
+        }
+      },
+      "required": [
+        "requests",
+        "inputChars",
+        "inputTokens"
+      ],
+      "title": "Tally",
+      "type": "object"
+    },
+    "TermCount": {
+      "additionalProperties": false,
+      "description": "의심 낱말 하나와 그 수.",
+      "properties": {
+        "term": {
+          "description": "의심 낱말(노트북의 낱말 목록 그대로).",
+          "title": "Term",
+          "type": "string"
+        },
+        "count": {
+          "description": "나온 수(1 이상 — 안 나온 낱말은 싣지 않는다).",
+          "minimum": 1,
+          "title": "Count",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "term",
+        "count"
+      ],
+      "title": "TermCount",
+      "type": "object"
+    },
+    "UnmeasuredTokens": {
+      "additionalProperties": false,
+      "description": "못 잰 토큰 수. 못 쟀으면 0 이 아니라 이 갈래다.",
+      "properties": {
+        "status": {
+          "const": "unmeasured",
+          "title": "Status",
+          "type": "string"
+        },
+        "encoding": {
+          "title": "Encoding",
+          "type": "string"
+        },
+        "reason": {
+          "description": "못 잰 까닭.",
+          "title": "Reason",
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "encoding",
+        "reason"
+      ],
+      "title": "UnmeasuredTokens",
+      "type": "object"
+    },
+    "WordCounts": {
+      "additionalProperties": false,
+      "description": "의심 낱말의 빈도. 문서 전체를 센다(점검 쪽만이 아니다). AI 를 쓰지 않으므로 dry-run 에서도 채운다.",
+      "properties": {
+        "total": {
+          "description": "문서 전체의 낱말 수. 많은 차례(같으면 처음 나온 쪽의 차례, 같은 쪽 안에서는 노트북 낱말 목록의 차례).",
+          "items": {
+            "$ref": "#/$defs/TermCount"
+          },
+          "title": "Total",
+          "type": "array"
+        },
+        "pages": {
+          "description": "쪽마다의 낱말 수(쪽 차례). 낱말이 하나도 없는 쪽은 싣지 않는다.",
+          "items": {
+            "$ref": "#/$defs/PageTermCounts"
+          },
+          "title": "Pages",
+          "type": "array"
+        }
+      },
+      "required": [
+        "total",
+        "pages"
+      ],
+      "title": "WordCounts",
+      "type": "object"
+    }
+  },
+  "anyOf": [
+    {
+      "$ref": "#/$defs/ScanResult"
+    },
+    {
+      "$ref": "#/$defs/DryRunResult"
+    }
+  ],
+  "description": "흐름 greenwash.colab@E0 의 결과. 두 갈래(ScanResult·DryRunResult)의 키는 같고 dryRun 이 null 이면 ScanResult(점검한 실행), 아니면 DryRunResult(dry-run)다. 갈래마다의 규칙은 $defs 의 두 갈래 description 에. 결과는 실행마다 한 번 쓰면 바뀌지 않고 items 의 차례가 고정이다 — (runId, itemIndex) 가 문장의 고정 열쇠다(검토 표시·비교·엑셀이 이것으로 잇는다).",
+  "title": "greenwash.result@1"
+}

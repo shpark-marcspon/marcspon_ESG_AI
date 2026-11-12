@@ -1,0 +1,22 @@
+{
+  "schemaVersion": "greenwash.review@3",
+  "runId": 101,
+  "state": "in_review",
+  "confirmedAt": null,
+  "confirmedBy": null,
+  "marks": [
+    {
+      "itemIndex": 0,
+      "decision": "adopted",
+      "excludeReason": null
+    },
+    {
+      "itemIndex": 2,
+      "decision": "excluded",
+      "excludeReason": "신규 공장의 재생에너지 인증서를 부록에 싣고 있어 근거가 있다고 보았다."
+    }
+  ],
+  "edits": [],
+  "evidence": [],
+  "rejudges": []
+}

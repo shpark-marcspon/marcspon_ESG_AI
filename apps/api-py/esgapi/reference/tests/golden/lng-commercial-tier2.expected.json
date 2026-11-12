@@ -1,0 +1,212 @@
+{
+  "ok": true,
+  "value": {
+    "factor": {
+      "kind": "combustion",
+      "id": "kr-ets:stationary:도시가스(LNG):commercial_public:cv2_co2ef2_ch4n2o1_ox2",
+      "version": "환경부고시 제2025-64호 (2025-04-11 시행)",
+      "source": {
+        "kind": "cited",
+        "title": "온실가스 배출권거래제의 배출량 보고 및 인증에 관한 지침 (환경부고시 제2025-64호 (2025-04-11 시행)): calorific 38.9 MJ/N㎥ ← kr-ets-byl12:hv:p1r20:net, CO2 56,100 kgCO2/TJ ← kr-ets-byl12:ef:p3r18:CO2, CH4 5 kgCH4/TJ ← kr-ets-byl10:p2t0r18:CH4:3, N2O 0.1 kgN2O/TJ ← kr-ets-byl10:p2t0r18:N2O:6, oxidation 0.995 무차원/무차원 ← kr-ets-byl06:ox:2:t2",
+        "url": "https://www.law.go.kr/LSW/admRulLsInfoP.do?admRulSeq=2100000257748",
+        "checkedOn": "2026-10-02",
+        "locator": "kr-ets-byl12 PDF 1쪽 발열량 표 20행 순발열량 | kr-ets-byl12 PDF 3쪽 배출계수 표 18행 이산화탄소 배출계수 | kr-ets-byl10 PDF 2쪽 표0 18행 CH4 상업공공 | kr-ets-byl10 PDF 2쪽 표0 18행 N2O 상업공공가정기타 | kr-ets-byl06 PDF 14쪽 「2. 고정연소 (기체연료)」 5. 매개변수별 관리기준 ④ 산화계수 Tier 2",
+        "note": "계수 조합기가 계수 표의 낱줄에서 조립했다. 발열량 Tier 2, CO2 계수 Tier 2, CH4·N2O 계수 Tier 1, 산화계수 Tier 2 (직접 지정), 부문 상업ㆍ공공. 추정 대응 2건을 탔다 (지침에 없는 대응): 도시가스(LNG) → 기체; 도시가스(LNG) → 천연가스 (kr-ets-byl10)."
+      },
+      "fuel": "도시가스(LNG)",
+      "combustionType": "stationary",
+      "sector": "commercial_public",
+      "parameterTiers": {
+        "calorific": 2,
+        "co2": 2,
+        "oxidation": 2,
+        "nonCo2": 1
+      },
+      "calorific": {
+        "value": "38.9",
+        "energyUnit": "MJ",
+        "perUnit": "Nm3",
+        "basis": "net"
+      },
+      "emissionFactors": [
+        {
+          "gas": "CO2",
+          "value": "56100",
+          "massUnit": "kg",
+          "perEnergyUnit": "TJ"
+        },
+        {
+          "gas": "CH4",
+          "value": "5",
+          "massUnit": "kg",
+          "perEnergyUnit": "TJ"
+        },
+        {
+          "gas": "N2O",
+          "value": "0.1",
+          "massUnit": "kg",
+          "perEnergyUnit": "TJ"
+        }
+      ],
+      "oxidationFactor": "0.995"
+    },
+    "evidence": {
+      "guideline": {
+        "name": "온실가스 배출권거래제의 배출량 보고 및 인증에 관한 지침",
+        "version": "환경부고시 제2025-64호 (2025-04-11 시행)",
+        "url": "https://www.law.go.kr/LSW/admRulLsInfoP.do?admRulSeq=2100000257748"
+      },
+      "fuelState": {
+        "value": "기체",
+        "basis": "assumed",
+        "locator": "PDF 10쪽 「2. 고정연소 (기체연료)」 1. 배출활동 개요"
+      },
+      "sector": {
+        "key": "commercial_public",
+        "label": "상업ㆍ공공",
+        "basis": "input",
+        "ksicCode": null,
+        "locator": "PDF 4쪽 ③ 상업ㆍ공공"
+      },
+      "tiers": {
+        "values": {
+          "calorific": 2,
+          "co2": 2,
+          "oxidation": 2,
+          "nonCo2": 1
+        },
+        "basis": "explicit",
+        "group": null,
+        "locators": [
+          "별표 6 고정연소 각 절 「3. 보고대상 온실가스」 표: CH4·N2O 의 산정방법론은 Tier 1 뿐이다",
+          "별표 6 고정연소 각 절 「4. 배출량 산정방법론」: 산화계수는 CO2 배출계수와 동일한 산정등급을 사용하여야 한다"
+        ]
+      },
+      "parameters": [
+        {
+          "parameter": "calorific",
+          "tier": 2,
+          "rule": "② 열량계수 Tier 2: 별표 12 의 국가 고유 발열량 (순발열량)",
+          "recordId": "kr-ets-byl12:hv:p1r20:net",
+          "sourceId": "kr-ets-byl12",
+          "sourceName": "온실가스 배출권거래제의 배출량 보고 및 인증에 관한 지침 [별표 12] 연료별 국가 고유 발열량 및 배출계수",
+          "url": "https://www.law.go.kr/LSW/admRulLsInfoP.do?admRulSeq=2100000257748",
+          "retrieved": "2026-10-01",
+          "fileSha256": "dbbd8a0c3c2b61de8e9a0f9a09f727598bf5e2fbbfcada2d2f2b980fe96a65e0",
+          "locator": "PDF 1쪽 발열량 표 20행 순발열량",
+          "nameUsed": "도시가스(LNG)",
+          "nameMapping": null,
+          "valueRaw": "38.9",
+          "value": "38.9",
+          "unit": "MJ/N㎥",
+          "conditions": {}
+        },
+        {
+          "parameter": "CO2",
+          "tier": 2,
+          "rule": "③ 배출계수 Tier 2: 제15조제2항의 국가 고유 배출계수 (별표 12)",
+          "recordId": "kr-ets-byl12:ef:p3r18:CO2",
+          "sourceId": "kr-ets-byl12",
+          "sourceName": "온실가스 배출권거래제의 배출량 보고 및 인증에 관한 지침 [별표 12] 연료별 국가 고유 발열량 및 배출계수",
+          "url": "https://www.law.go.kr/LSW/admRulLsInfoP.do?admRulSeq=2100000257748",
+          "retrieved": "2026-10-01",
+          "fileSha256": "dbbd8a0c3c2b61de8e9a0f9a09f727598bf5e2fbbfcada2d2f2b980fe96a65e0",
+          "locator": "PDF 3쪽 배출계수 표 18행 이산화탄소 배출계수",
+          "nameUsed": "도시가스(LNG)",
+          "nameMapping": null,
+          "valueRaw": "56,100",
+          "value": "56100",
+          "unit": "kgCO2/TJ",
+          "conditions": {
+            "병합 셀": "원문 표에서 천연가스(LNG) 행과 한 칸을 같이 쓴다"
+          }
+        },
+        {
+          "parameter": "CH4",
+          "tier": 1,
+          "rule": "③ 배출계수 Tier 1: 별표 10 의 IPCC 기본 배출계수 (부문별). CH4·N2O 는 Tier 1 뿐이다",
+          "recordId": "kr-ets-byl10:p2t0r18:CH4:3",
+          "sourceId": "kr-ets-byl10",
+          "sourceName": "온실가스 배출권거래제의 배출량 보고 및 인증에 관한 지침 [별표 10] 2006 IPCC 국가 인벤토리 가이드라인 기본 배출계수",
+          "url": "https://www.law.go.kr/LSW/admRulLsInfoP.do?admRulSeq=2100000257748",
+          "retrieved": "2026-10-01",
+          "fileSha256": "12cb63b71ea9e0aee60cbc8caa6954245fbaaa45af292c79040e09eecdde7531",
+          "locator": "PDF 2쪽 표0 18행 CH4 상업공공",
+          "nameUsed": "천연가스",
+          "nameMapping": {
+            "domestic": "도시가스(LNG)",
+            "ipcc": "천연가스",
+            "basis": "assumed",
+            "locator": "PDF 2쪽 표0 18행"
+          },
+          "valueRaw": "5",
+          "value": "5",
+          "unit": "kgCH4/TJ",
+          "conditions": {
+            "부문": "상업공공"
+          }
+        },
+        {
+          "parameter": "N2O",
+          "tier": 1,
+          "rule": "③ 배출계수 Tier 1: 별표 10 의 IPCC 기본 배출계수 (부문별). CH4·N2O 는 Tier 1 뿐이다",
+          "recordId": "kr-ets-byl10:p2t0r18:N2O:6",
+          "sourceId": "kr-ets-byl10",
+          "sourceName": "온실가스 배출권거래제의 배출량 보고 및 인증에 관한 지침 [별표 10] 2006 IPCC 국가 인벤토리 가이드라인 기본 배출계수",
+          "url": "https://www.law.go.kr/LSW/admRulLsInfoP.do?admRulSeq=2100000257748",
+          "retrieved": "2026-10-01",
+          "fileSha256": "12cb63b71ea9e0aee60cbc8caa6954245fbaaa45af292c79040e09eecdde7531",
+          "locator": "PDF 2쪽 표0 18행 N2O 상업공공가정기타",
+          "nameUsed": "천연가스",
+          "nameMapping": {
+            "domestic": "도시가스(LNG)",
+            "ipcc": "천연가스",
+            "basis": "assumed",
+            "locator": "PDF 2쪽 표0 18행"
+          },
+          "valueRaw": "0.1",
+          "value": "0.1",
+          "unit": "kgN2O/TJ",
+          "conditions": {
+            "부문": "상업공공가정기타"
+          }
+        },
+        {
+          "parameter": "oxidation",
+          "tier": 2,
+          "rule": "④ 산화계수: 별표 6 의 그 연료 상태 절에 적힌 값",
+          "recordId": "kr-ets-byl06:ox:2:t2",
+          "sourceId": "kr-ets-byl06",
+          "sourceName": "온실가스 배출권거래제의 배출량 보고 및 인증에 관한 지침 [별표 6] 배출활동별 온실가스 배출량 등의 세부산정방법 및 기준",
+          "url": "https://www.law.go.kr/LSW/admRulLsInfoP.do?admRulSeq=2100000257748",
+          "retrieved": "2026-10-02",
+          "fileSha256": "8f265fd4677028b27cc6fe85f5994fce0e5155dc33320f08305db4f0c000f24b",
+          "locator": "PDF 14쪽 「2. 고정연소 (기체연료)」 5. 매개변수별 관리기준 ④ 산화계수 Tier 2",
+          "nameUsed": "고정연소 (기체연료)",
+          "nameMapping": null,
+          "valueRaw": "0.995",
+          "value": "0.995",
+          "unit": "무차원/무차원",
+          "conditions": {
+            "연료 상태": "기체",
+            "산정등급": "Tier 2"
+          }
+        }
+      ],
+      "assumptions": [
+        {
+          "kind": "fuel_state",
+          "detail": "도시가스(LNG) → 기체",
+          "note": "별표 6 의 문장은 LNG 를 기체연료로 들 뿐 「도시가스(LNG)」 라는 이름을 적지 않는다. LNG 로 만든 도시가스라는 이름 풀이에 기댄 추정이다.",
+          "locator": "PDF 10쪽 「2. 고정연소 (기체연료)」 1. 배출활동 개요"
+        },
+        {
+          "kind": "fuel_name",
+          "detail": "도시가스(LNG) → 천연가스 (kr-ets-byl10)",
+          "note": "별표 10·11 의 「국내에너지원 기준」 열에는 천연가스(LNG) 만 있고 도시가스(LNG) 는 없다. 별표 12 의 배출계수 표에서 도시가스(LNG) 가 천연가스(LNG) 와 CO2 계수 칸을 같이 쓰는 것(병합 셀)을 근거로 같은 IPCC 연료(천연가스)로 보았다. 지침의 문장으로 확인한 대응이 아니다.",
+          "locator": "PDF 2쪽 표0 18행"
+        }
+      ]
+    }
+  }
+}

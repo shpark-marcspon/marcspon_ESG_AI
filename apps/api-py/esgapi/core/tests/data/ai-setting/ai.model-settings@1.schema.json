@@ -1,0 +1,63 @@
+{
+  "$defs": {
+    "AiModelStepIn": {
+      "additionalProperties": false,
+      "description": "한 단계의 모델 설정 입력. 다섯 칸 다 필수. 범위·능력은 받기(calc/ai_settings.check_model_settings)가 본다.",
+      "properties": {
+        "key": {
+          "title": "Key",
+          "type": "string"
+        },
+        "route": {
+          "title": "Route",
+          "type": "string"
+        },
+        "temperature": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "null = 싣지 않음.",
+          "title": "Temperature"
+        },
+        "webSearch": {
+          "title": "Websearch",
+          "type": "boolean"
+        },
+        "maxOutputTokens": {
+          "title": "Maxoutputtokens",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "key",
+        "route",
+        "temperature",
+        "webSearch",
+        "maxOutputTokens"
+      ],
+      "title": "AiModelStepIn",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "ai.model-settings@1 — 단계마다의 모델 설정 입력(명세 차례). 꼴 id 는 본문에 싣지 않는다.",
+  "properties": {
+    "steps": {
+      "items": {
+        "$ref": "#/$defs/AiModelStepIn"
+      },
+      "title": "Steps",
+      "type": "array"
+    }
+  },
+  "required": [
+    "steps"
+  ],
+  "title": "AiModelSettingsIn",
+  "type": "object"
+}

@@ -1,0 +1,105 @@
+{
+  "version": 2,
+  "unit": "tCO2eq",
+  "notice": "손으로 쓴 예시다. 품목, 수량, 계수, 배출량 전부 지어낸 값이다. 배출량은 tCO2eq, 계수는 kgCO2e/단위다.",
+  "categories": ["구매한 제품과 서비스", "자본재", "업스트림 운송", "출장", "통근"],
+  "rows": [
+    {
+      "id": "s1",
+      "raw": { "itemName": "수지 원료", "quantity": 1200, "unit": "kg" },
+      "processing": "결과 생성",
+      "ai": {
+        "category": "구매한 제품과 서비스",
+        "categoryNote": "생산에 쓰는 원료다.",
+        "candidates": [
+          { "id": "s1-a", "factorName": "예시 계수: 수지(국내)", "factorValue": 1.5, "factorUnit": "kgCO2e/kg", "source": "예시 계수표 A", "reason": "품목과 같은 재질의 국내 계수다.", "confidence": "high", "emission": 1.8 },
+          { "id": "s1-b", "factorName": "예시 계수: 수지(해외)", "factorValue": 2.5, "factorUnit": "kgCO2e/kg", "source": "예시 계수표 B", "reason": "같은 재질이지만 다른 지역 기준이다.", "confidence": "medium", "emission": 3 },
+          { "id": "s1-c", "factorName": "예시 계수: 플라스틱 평균", "factorValue": 3, "factorUnit": "kgCO2e/kg", "source": "예시 계수표 B", "reason": "상위 분류의 평균이다.", "confidence": "low", "emission": 3.6 }
+        ]
+      },
+      "review": { "status": "pending" }
+    },
+    {
+      "id": "s2",
+      "raw": { "itemName": "강판", "quantity": 40, "unit": "t" },
+      "processing": "결과 생성",
+      "ai": {
+        "category": "구매한 제품과 서비스",
+        "candidates": [
+          { "id": "s2-a", "factorName": "예시 계수: 강판", "factorValue": 2000, "factorUnit": "kgCO2e/t", "source": "예시 계수표 A", "reason": "품목 이름과 같다.", "confidence": "high", "emission": 80 }
+        ]
+      },
+      "review": { "status": "accepted" }
+    },
+    {
+      "id": "s3",
+      "raw": { "itemName": "지게차", "quantity": 2, "unit": "대" },
+      "processing": "결과 생성",
+      "ai": {
+        "category": "구매한 제품과 서비스",
+        "categoryNote": "장비 구매로 보았다.",
+        "candidates": [
+          { "id": "s3-a", "factorName": "예시 계수: 산업 기계(금액 기준)", "factorValue": null, "factorUnit": "kgCO2e/원", "source": "예시 계수표 B", "emission": null },
+          { "id": "s3-b", "factorName": "예시 계수: 운반 장비", "factorValue": 5200, "factorUnit": "kgCO2e/대", "source": "예시 계수표 A", "reason": "용도가 같은 장비다.", "confidence": "medium", "emission": 10.4 }
+        ]
+      },
+      "review": { "status": "edited", "edit": { "category": "자본재", "candidateId": "s3-b", "emission": 10.4 } }
+    },
+    {
+      "id": "s4",
+      "raw": { "itemName": "화물 운송(입고)", "quantity": 350, "unit": "km" },
+      "processing": "결과 생성",
+      "ai": {
+        "category": "업스트림 운송",
+        "candidates": [
+          { "id": "s4-a", "factorName": "예시 계수: 화물차 운송", "factorValue": 0.8, "factorUnit": "kgCO2e/km", "source": "예시 계수표 A", "reason": "운송 수단이 같다.", "confidence": "high", "emission": 0.28 }
+        ]
+      },
+      "review": { "status": "finalized" }
+    },
+    {
+      "id": "s5",
+      "raw": { "itemName": "기타 용역", "quantity": 1, "unit": "식" },
+      "processing": "후보 없음",
+      "ai": { "category": null, "candidates": [] },
+      "review": { "status": "pending" }
+    },
+    {
+      "id": "s6",
+      "raw": { "itemName": "출장 항공", "quantity": 9000, "unit": "인km" },
+      "processing": "결과 생성",
+      "ai": {
+        "category": "출장",
+        "candidates": [
+          { "id": "s6-a", "factorName": "예시 계수: 항공(단거리)", "factorValue": 0.15, "factorUnit": "kgCO2e/인km", "source": "예시 계수표 B", "reason": "거리 구간을 알 수 없어 단거리로 보았다.", "confidence": "low", "emission": 1.35 },
+          { "id": "s6-b", "factorName": "예시 계수: 항공(장거리)", "factorValue": 0.1, "factorUnit": "kgCO2e/인km", "source": "예시 계수표 B", "reason": "장거리 구간의 계수다.", "confidence": "low", "emission": 0.9 }
+        ]
+      },
+      "review": { "status": "rejected", "rejectReason": "거리 구간을 확인한 뒤 다시 본다" }
+    },
+    {
+      "id": "s7",
+      "raw": { "itemName": "통근 버스", "quantity": 12, "unit": "개월" },
+      "processing": "결과 생성",
+      "ai": {
+        "category": "통근",
+        "candidates": [
+          { "id": "s7-a", "factorName": "예시 계수: 버스", "factorValue": 100, "factorUnit": "kgCO2e/개월", "source": "예시 계수표 A", "emission": 1.2 }
+        ]
+      },
+      "review": { "status": "rerequested" }
+    },
+    {
+      "id": "s8",
+      "raw": { "itemName": "포장 상자", "quantity": 5000, "unit": "개" },
+      "processing": "결과 생성",
+      "ai": {
+        "category": "구매한 제품과 서비스",
+        "candidates": [
+          { "id": "s8-a", "factorName": "예시 계수: 골판지", "factorValue": 0.2, "factorUnit": "kgCO2e/개", "source": "예시 계수표 A", "reason": "재질이 같다.", "confidence": "medium", "emission": 1 }
+        ]
+      },
+      "review": { "status": "declined" }
+    }
+  ]
+}

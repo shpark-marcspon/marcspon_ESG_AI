@@ -1,0 +1,41 @@
+{
+  "$comment": "검산 사례의 activity (가상의 조직과 사용량)",
+  "gwpSetId": "synthetic-gwp",
+  "activities": [
+    {
+      "id": "H08",
+      "orgUnit": "synthetic-site",
+      "period": "2025",
+      "sourceType": "mobile_combustion",
+      "fuel": "synthetic-fuel-a",
+      "amount": "800",
+      "unit": "L"
+    },
+    {
+      "id": "H09",
+      "orgUnit": "synthetic-site",
+      "period": "2025",
+      "sourceType": "stationary_combustion",
+      "fuel": "synthetic-fuel-a",
+      "amount": "1.2",
+      "unit": "kL"
+    },
+    {
+      "id": "H11",
+      "orgUnit": "synthetic-site",
+      "period": "2025",
+      "sourceType": "purchased_heat",
+      "amount": "15.5",
+      "unit": "GJ"
+    },
+    {
+      "id": "H14",
+      "orgUnit": "synthetic-site",
+      "period": "2025",
+      "sourceType": "mobile_combustion",
+      "fuel": "synthetic-fuel-a",
+      "amount": "0.001",
+      "unit": "L"
+    }
+  ]
+}

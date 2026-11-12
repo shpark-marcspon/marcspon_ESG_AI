@@ -1,0 +1,11 @@
+# 시험 끄는 꼴 허용 목록 — scripts/check_test_weakening.py 가 읽는다(DG1, MARC-ISSUE-266).
+# 한 줄 = <경로>\t<줄 글(앞뒤 빈칸 뗀 원문 그대로)>\t<까닭 — 언제·누가 켜서 도는지>. 까닭 칸이 비면 검사가 빨강(켜는 법 없는 허용).
+# 규칙 셋:
+#  1. 줄은 그 skip 을 더하는 밴드가 같은 커밋에 넣는다.
+#  2. 병합 전 감독이 검사의 「새 허용」 줄(까닭 칸)을 읽고 「진행」한다.
+#  3. 쓰이지 않는 줄은 남겨도 된다. 검사는 경로가 바뀐 같은 글을 받지 않는다 — 파일을 옮기면 이 줄도 고친다.
+apps/api-py/esgapi/config/tests/test_web.py	pytest.skip(f"{WEB_DIST} 가 없다(웹을 빌드하지 않았다)")	apps/web/dist 가 있을 때만 잰다(빌드는 git 밖) — 웹을 빌드한 체크아웃의 전량 verify 에서 돈다(SW1 9496c95e)
+apps/api-py/esgapi/core/tests/test_parser_port.py	pytest.skip("reconcile 의 서비스가 아직 없다")  # pragma: no cover	reconcile 서비스 파일이 없을 때만(pragma: no cover) — 지금 main 에는 파일이 있어 전량 verify 에서 늘 돈다
+apps/api-py/esgapi/translation/tests/service/actions/test_batches_threshold.py	pytest.mark.skipif(os.environ.get("TR3B_THRESHOLD") != "1", reason="문턱 재기는 TR3B_THRESHOLD=1 로 따로 한 번"),	TR3B_THRESHOLD=1 로 TR3b 러너·검증자가 한 번씩 켜서 돎(band-reports/archive/TR3b.md 「감독 덧」) — 전량에선 2 skipped
+apps/api-py/tests/security/test_run_bundles.py	pytest.skip("RUNBUNDLE_S3_* 가 없다 — scripts/section4-RX1a.sh --with-containers 가 compose storage 로 돌린다")	전량 verify 의 보안 층이 compose storage 값 RUNBUNDLE_S3_* 다섯을 넘겨 늘 돈다(SS1, scripts/verify.sh)
+apps/web/src/entities/greenwash/model/contract-types.test.ts	expect(true).toBe(true);	빈 시험 — 재는 것은 tsc(typecheck 단계)의 Expect<…>, 파일 머리 주석 :2

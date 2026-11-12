@@ -1,0 +1,960 @@
+{
+  "gwpSetId": "synthetic-gwp",
+  "rows": [
+    {
+      "rowId": "r1",
+      "orgUnit": "synthetic-plant-1",
+      "period": "2025-01",
+      "scope": 1,
+      "sourceType": "mobile_combustion",
+      "status": "ok",
+      "co2e": "1.8225",
+      "unit": "tCO2eq",
+      "energy": {
+        "value": "25000",
+        "unit": "MJ"
+      },
+      "gases": [
+        {
+          "gas": "CO2",
+          "mass": "1.75",
+          "massUnit": "t",
+          "gwp": "1",
+          "co2e": "1.75"
+        },
+        {
+          "gas": "CH4",
+          "mass": "0.000625",
+          "massUnit": "t",
+          "gwp": "20",
+          "co2e": "0.0125"
+        },
+        {
+          "gas": "N2O",
+          "mass": "0.0002",
+          "massUnit": "t",
+          "gwp": "300",
+          "co2e": "0.06"
+        }
+      ],
+      "evidence": {
+        "factor": {
+          "id": "synthetic:fuel-a:mobile",
+          "version": "synthetic-1",
+          "source": {
+            "kind": "synthetic",
+            "note": "가상 액체 연료 A, 이동연소. 산화계수 항이 없는 식."
+          }
+        },
+        "gwpSet": {
+          "id": "synthetic-gwp",
+          "label": "synthetic GWP (가상 값)",
+          "source": {
+            "kind": "synthetic",
+            "note": "테스트용 가상 값. 어느 IPCC 보고서의 값도 아니다."
+          }
+        },
+        "calorificBasis": "net",
+        "oxidationFactor": null,
+        "sector": null,
+        "parameterTiers": null,
+        "facilityUse": null,
+        "steps": [
+          {
+            "label": "에너지량",
+            "formula": "800 L × 31.25 MJ/L (순발열량)",
+            "result": "25000",
+            "unit": "MJ"
+          },
+          {
+            "label": "단위 환산 (CO2 배출계수의 에너지 단위)",
+            "formula": "25000 MJ × 0.000001 TJ/MJ",
+            "result": "0.025",
+            "unit": "TJ",
+            "conversion": {
+              "from": "MJ",
+              "to": "TJ",
+              "factor": "0.000001",
+              "source": {
+                "kind": "definition",
+                "note": "SI 접두어 T = 10^12, M = 10^6"
+              }
+            }
+          },
+          {
+            "label": "CO2 배출량",
+            "formula": "0.025 TJ × 70000 kgCO2/TJ",
+            "result": "1750",
+            "unit": "kgCO2"
+          },
+          {
+            "label": "단위 환산 (CO2 질량)",
+            "formula": "1750 kg × 0.001 t/kg",
+            "result": "1.75",
+            "unit": "t",
+            "conversion": {
+              "from": "kg",
+              "to": "t",
+              "factor": "0.001",
+              "source": {
+                "kind": "definition",
+                "note": "1 t = 1000 kg"
+              }
+            }
+          },
+          {
+            "label": "CO2 환산",
+            "formula": "1.75 tCO2 × GWP 1 (synthetic-gwp)",
+            "result": "1.75",
+            "unit": "tCO2eq"
+          },
+          {
+            "label": "단위 환산 (CH4 배출계수의 에너지 단위)",
+            "formula": "25000 MJ × 0.000001 TJ/MJ",
+            "result": "0.025",
+            "unit": "TJ",
+            "conversion": {
+              "from": "MJ",
+              "to": "TJ",
+              "factor": "0.000001",
+              "source": {
+                "kind": "definition",
+                "note": "SI 접두어 T = 10^12, M = 10^6"
+              }
+            }
+          },
+          {
+            "label": "CH4 배출량",
+            "formula": "0.025 TJ × 25 kgCH4/TJ",
+            "result": "0.625",
+            "unit": "kgCH4"
+          },
+          {
+            "label": "단위 환산 (CH4 질량)",
+            "formula": "0.625 kg × 0.001 t/kg",
+            "result": "0.000625",
+            "unit": "t",
+            "conversion": {
+              "from": "kg",
+              "to": "t",
+              "factor": "0.001",
+              "source": {
+                "kind": "definition",
+                "note": "1 t = 1000 kg"
+              }
+            }
+          },
+          {
+            "label": "CH4 환산",
+            "formula": "0.000625 tCH4 × GWP 20 (synthetic-gwp)",
+            "result": "0.0125",
+            "unit": "tCO2eq"
+          },
+          {
+            "label": "단위 환산 (N2O 배출계수의 에너지 단위)",
+            "formula": "25000 MJ × 0.000001 TJ/MJ",
+            "result": "0.025",
+            "unit": "TJ",
+            "conversion": {
+              "from": "MJ",
+              "to": "TJ",
+              "factor": "0.000001",
+              "source": {
+                "kind": "definition",
+                "note": "SI 접두어 T = 10^12, M = 10^6"
+              }
+            }
+          },
+          {
+            "label": "N2O 배출량",
+            "formula": "0.025 TJ × 8 kgN2O/TJ",
+            "result": "0.2",
+            "unit": "kgN2O"
+          },
+          {
+            "label": "단위 환산 (N2O 질량)",
+            "formula": "0.2 kg × 0.001 t/kg",
+            "result": "0.0002",
+            "unit": "t",
+            "conversion": {
+              "from": "kg",
+              "to": "t",
+              "factor": "0.001",
+              "source": {
+                "kind": "definition",
+                "note": "1 t = 1000 kg"
+              }
+            }
+          },
+          {
+            "label": "N2O 환산",
+            "formula": "0.0002 tN2O × GWP 300 (synthetic-gwp)",
+            "result": "0.06",
+            "unit": "tCO2eq"
+          },
+          {
+            "label": "합산",
+            "formula": "1.75 (CO2) + 0.0125 (CH4) + 0.06 (N2O)",
+            "result": "1.8225",
+            "unit": "tCO2eq"
+          }
+        ]
+      }
+    },
+    {
+      "rowId": "r2",
+      "orgUnit": "synthetic-plant-1",
+      "period": "2025-01",
+      "scope": 1,
+      "sourceType": "stationary_combustion",
+      "status": "ok",
+      "co2e": "2.5815",
+      "unit": "tCO2eq",
+      "energy": {
+        "value": "37500",
+        "unit": "MJ"
+      },
+      "gases": [
+        {
+          "gas": "CO2",
+          "mass": "2.5725",
+          "massUnit": "t",
+          "gwp": "1",
+          "co2e": "2.5725"
+        },
+        {
+          "gas": "CH4",
+          "mass": "0.0001125",
+          "massUnit": "t",
+          "gwp": "20",
+          "co2e": "0.00225"
+        },
+        {
+          "gas": "N2O",
+          "mass": "0.0000225",
+          "massUnit": "t",
+          "gwp": "300",
+          "co2e": "0.00675"
+        }
+      ],
+      "evidence": {
+        "factor": {
+          "id": "synthetic:fuel-a:stationary",
+          "version": "synthetic-1",
+          "source": {
+            "kind": "synthetic",
+            "note": "가상 액체 연료 A, 고정연소. 같은 연료라도 연소 유형에 따라 계수가 다르다."
+          }
+        },
+        "gwpSet": {
+          "id": "synthetic-gwp",
+          "label": "synthetic GWP (가상 값)",
+          "source": {
+            "kind": "synthetic",
+            "note": "테스트용 가상 값. 어느 IPCC 보고서의 값도 아니다."
+          }
+        },
+        "calorificBasis": "net",
+        "oxidationFactor": "0.98",
+        "sector": null,
+        "parameterTiers": null,
+        "facilityUse": null,
+        "steps": [
+          {
+            "label": "단위 환산 (사용량 → 발열량 기준 단위)",
+            "formula": "1.2 kL × 1000 L/kL",
+            "result": "1200",
+            "unit": "L",
+            "conversion": {
+              "from": "kL",
+              "to": "L",
+              "factor": "1000",
+              "source": {
+                "kind": "definition",
+                "note": "SI 접두어 k = 10^3"
+              }
+            }
+          },
+          {
+            "label": "에너지량",
+            "formula": "1200 L × 31.25 MJ/L (순발열량)",
+            "result": "37500",
+            "unit": "MJ"
+          },
+          {
+            "label": "단위 환산 (CO2 배출계수의 에너지 단위)",
+            "formula": "37500 MJ × 0.000001 TJ/MJ",
+            "result": "0.0375",
+            "unit": "TJ",
+            "conversion": {
+              "from": "MJ",
+              "to": "TJ",
+              "factor": "0.000001",
+              "source": {
+                "kind": "definition",
+                "note": "SI 접두어 T = 10^12, M = 10^6"
+              }
+            }
+          },
+          {
+            "label": "CO2 배출량",
+            "formula": "0.0375 TJ × 70000 kgCO2/TJ × 산화계수 0.98",
+            "result": "2572.5",
+            "unit": "kgCO2"
+          },
+          {
+            "label": "단위 환산 (CO2 질량)",
+            "formula": "2572.5 kg × 0.001 t/kg",
+            "result": "2.5725",
+            "unit": "t",
+            "conversion": {
+              "from": "kg",
+              "to": "t",
+              "factor": "0.001",
+              "source": {
+                "kind": "definition",
+                "note": "1 t = 1000 kg"
+              }
+            }
+          },
+          {
+            "label": "CO2 환산",
+            "formula": "2.5725 tCO2 × GWP 1 (synthetic-gwp)",
+            "result": "2.5725",
+            "unit": "tCO2eq"
+          },
+          {
+            "label": "단위 환산 (CH4 배출계수의 에너지 단위)",
+            "formula": "37500 MJ × 0.000001 TJ/MJ",
+            "result": "0.0375",
+            "unit": "TJ",
+            "conversion": {
+              "from": "MJ",
+              "to": "TJ",
+              "factor": "0.000001",
+              "source": {
+                "kind": "definition",
+                "note": "SI 접두어 T = 10^12, M = 10^6"
+              }
+            }
+          },
+          {
+            "label": "CH4 배출량",
+            "formula": "0.0375 TJ × 3 kgCH4/TJ",
+            "result": "0.1125",
+            "unit": "kgCH4"
+          },
+          {
+            "label": "단위 환산 (CH4 질량)",
+            "formula": "0.1125 kg × 0.001 t/kg",
+            "result": "0.0001125",
+            "unit": "t",
+            "conversion": {
+              "from": "kg",
+              "to": "t",
+              "factor": "0.001",
+              "source": {
+                "kind": "definition",
+                "note": "1 t = 1000 kg"
+              }
+            }
+          },
+          {
+            "label": "CH4 환산",
+            "formula": "0.0001125 tCH4 × GWP 20 (synthetic-gwp)",
+            "result": "0.00225",
+            "unit": "tCO2eq"
+          },
+          {
+            "label": "단위 환산 (N2O 배출계수의 에너지 단위)",
+            "formula": "37500 MJ × 0.000001 TJ/MJ",
+            "result": "0.0375",
+            "unit": "TJ",
+            "conversion": {
+              "from": "MJ",
+              "to": "TJ",
+              "factor": "0.000001",
+              "source": {
+                "kind": "definition",
+                "note": "SI 접두어 T = 10^12, M = 10^6"
+              }
+            }
+          },
+          {
+            "label": "N2O 배출량",
+            "formula": "0.0375 TJ × 0.6 kgN2O/TJ",
+            "result": "0.0225",
+            "unit": "kgN2O"
+          },
+          {
+            "label": "단위 환산 (N2O 질량)",
+            "formula": "0.0225 kg × 0.001 t/kg",
+            "result": "0.0000225",
+            "unit": "t",
+            "conversion": {
+              "from": "kg",
+              "to": "t",
+              "factor": "0.001",
+              "source": {
+                "kind": "definition",
+                "note": "1 t = 1000 kg"
+              }
+            }
+          },
+          {
+            "label": "N2O 환산",
+            "formula": "0.0000225 tN2O × GWP 300 (synthetic-gwp)",
+            "result": "0.00675",
+            "unit": "tCO2eq"
+          },
+          {
+            "label": "합산",
+            "formula": "2.5725 (CO2) + 0.00225 (CH4) + 0.00675 (N2O)",
+            "result": "2.5815",
+            "unit": "tCO2eq"
+          }
+        ]
+      }
+    },
+    {
+      "rowId": "r3",
+      "orgUnit": "synthetic-plant-1",
+      "period": "2025-02",
+      "scope": 1,
+      "sourceType": "stationary_combustion",
+      "status": "ok",
+      "co2e": "7.59098114784",
+      "unit": "tCO2eq",
+      "energy": {
+        "value": "81907.2",
+        "unit": "MJ"
+      },
+      "gases": [
+        {
+          "gas": "CO2",
+          "mass": "7.55207522784",
+          "massUnit": "t",
+          "gwp": "1",
+          "co2e": "7.55207522784"
+        },
+        {
+          "gas": "CH4",
+          "mass": "0.000102384",
+          "massUnit": "t",
+          "gwp": "20",
+          "co2e": "0.00204768"
+        },
+        {
+          "gas": "N2O",
+          "mass": "0.0001228608",
+          "massUnit": "t",
+          "gwp": "300",
+          "co2e": "0.03685824"
+        }
+      ],
+      "evidence": {
+        "factor": {
+          "id": "synthetic:fuel-b:stationary",
+          "version": "synthetic-1",
+          "source": {
+            "kind": "synthetic",
+            "note": "가상 고체 연료 B. 발열량 기준 단위가 kg, 배출계수의 질량 단위가 기체마다 다르다(g, kg)."
+          }
+        },
+        "gwpSet": {
+          "id": "synthetic-gwp",
+          "label": "synthetic GWP (가상 값)",
+          "source": {
+            "kind": "synthetic",
+            "note": "테스트용 가상 값. 어느 IPCC 보고서의 값도 아니다."
+          }
+        },
+        "calorificBasis": "net",
+        "oxidationFactor": "0.975",
+        "sector": null,
+        "parameterTiers": null,
+        "facilityUse": null,
+        "steps": [
+          {
+            "label": "단위 환산 (사용량 → 발열량 기준 단위)",
+            "formula": "3.456 t × 1000 kg/t",
+            "result": "3456",
+            "unit": "kg",
+            "conversion": {
+              "from": "t",
+              "to": "kg",
+              "factor": "1000",
+              "source": {
+                "kind": "definition",
+                "note": "1 t = 1000 kg"
+              }
+            }
+          },
+          {
+            "label": "에너지량",
+            "formula": "3456 kg × 23.7 MJ/kg (순발열량)",
+            "result": "81907.2",
+            "unit": "MJ"
+          },
+          {
+            "label": "단위 환산 (CO2 배출계수의 에너지 단위)",
+            "formula": "81907.2 MJ × 0.000001 TJ/MJ",
+            "result": "0.0819072",
+            "unit": "TJ",
+            "conversion": {
+              "from": "MJ",
+              "to": "TJ",
+              "factor": "0.000001",
+              "source": {
+                "kind": "definition",
+                "note": "SI 접두어 T = 10^12, M = 10^6"
+              }
+            }
+          },
+          {
+            "label": "CO2 배출량",
+            "formula": "0.0819072 TJ × 94.567 tCO2/TJ × 산화계수 0.975",
+            "result": "7.55207522784",
+            "unit": "tCO2"
+          },
+          {
+            "label": "CO2 환산",
+            "formula": "7.55207522784 tCO2 × GWP 1 (synthetic-gwp)",
+            "result": "7.55207522784",
+            "unit": "tCO2eq"
+          },
+          {
+            "label": "단위 환산 (CH4 배출계수의 에너지 단위)",
+            "formula": "81907.2 MJ × 0.000001 TJ/MJ",
+            "result": "0.0819072",
+            "unit": "TJ",
+            "conversion": {
+              "from": "MJ",
+              "to": "TJ",
+              "factor": "0.000001",
+              "source": {
+                "kind": "definition",
+                "note": "SI 접두어 T = 10^12, M = 10^6"
+              }
+            }
+          },
+          {
+            "label": "CH4 배출량",
+            "formula": "0.0819072 TJ × 1250 gCH4/TJ",
+            "result": "102.384",
+            "unit": "gCH4"
+          },
+          {
+            "label": "단위 환산 (CH4 질량)",
+            "formula": "102.384 g × 0.000001 t/g",
+            "result": "0.000102384",
+            "unit": "t",
+            "conversion": {
+              "from": "g",
+              "to": "t",
+              "factor": "0.000001",
+              "source": {
+                "kind": "definition",
+                "note": "1 t = 10^6 g"
+              }
+            }
+          },
+          {
+            "label": "CH4 환산",
+            "formula": "0.000102384 tCH4 × GWP 20 (synthetic-gwp)",
+            "result": "0.00204768",
+            "unit": "tCO2eq"
+          },
+          {
+            "label": "단위 환산 (N2O 배출계수의 에너지 단위)",
+            "formula": "81907.2 MJ × 0.000001 TJ/MJ",
+            "result": "0.0819072",
+            "unit": "TJ",
+            "conversion": {
+              "from": "MJ",
+              "to": "TJ",
+              "factor": "0.000001",
+              "source": {
+                "kind": "definition",
+                "note": "SI 접두어 T = 10^12, M = 10^6"
+              }
+            }
+          },
+          {
+            "label": "N2O 배출량",
+            "formula": "0.0819072 TJ × 1.5 kgN2O/TJ",
+            "result": "0.1228608",
+            "unit": "kgN2O"
+          },
+          {
+            "label": "단위 환산 (N2O 질량)",
+            "formula": "0.1228608 kg × 0.001 t/kg",
+            "result": "0.0001228608",
+            "unit": "t",
+            "conversion": {
+              "from": "kg",
+              "to": "t",
+              "factor": "0.001",
+              "source": {
+                "kind": "definition",
+                "note": "1 t = 1000 kg"
+              }
+            }
+          },
+          {
+            "label": "N2O 환산",
+            "formula": "0.0001228608 tN2O × GWP 300 (synthetic-gwp)",
+            "result": "0.03685824",
+            "unit": "tCO2eq"
+          },
+          {
+            "label": "합산",
+            "formula": "7.55207522784 (CO2) + 0.00204768 (CH4) + 0.03685824 (N2O)",
+            "result": "7.59098114784",
+            "unit": "tCO2eq"
+          }
+        ]
+      }
+    },
+    {
+      "rowId": "r4",
+      "orgUnit": "synthetic-plant-2",
+      "period": "2025-01",
+      "scope": 2,
+      "sourceType": "purchased_electricity",
+      "status": "ok",
+      "co2e": "125.62",
+      "unit": "tCO2eq",
+      "energy": null,
+      "gases": [
+        {
+          "gas": "CO2",
+          "mass": "125",
+          "massUnit": "t",
+          "gwp": "1",
+          "co2e": "125"
+        },
+        {
+          "gas": "CH4",
+          "mass": "0.001",
+          "massUnit": "t",
+          "gwp": "20",
+          "co2e": "0.02"
+        },
+        {
+          "gas": "N2O",
+          "mass": "0.002",
+          "massUnit": "t",
+          "gwp": "300",
+          "co2e": "0.6"
+        }
+      ],
+      "evidence": {
+        "factor": {
+          "id": "synthetic:electricity",
+          "version": "synthetic-1",
+          "source": {
+            "kind": "synthetic",
+            "note": "가상 전력 계수. 기체별 계수."
+          }
+        },
+        "gwpSet": {
+          "id": "synthetic-gwp",
+          "label": "synthetic GWP (가상 값)",
+          "source": {
+            "kind": "synthetic",
+            "note": "테스트용 가상 값. 어느 IPCC 보고서의 값도 아니다."
+          }
+        },
+        "calorificBasis": null,
+        "oxidationFactor": null,
+        "sector": null,
+        "parameterTiers": null,
+        "facilityUse": null,
+        "steps": [
+          {
+            "label": "단위 환산 (사용량 → 배출계수 기준 단위)",
+            "formula": "250000 kWh × 0.001 MWh/kWh",
+            "result": "250",
+            "unit": "MWh",
+            "conversion": {
+              "from": "kWh",
+              "to": "MWh",
+              "factor": "0.001",
+              "source": {
+                "kind": "definition",
+                "note": "SI 접두어 M = 10^6, k = 10^3"
+              }
+            }
+          },
+          {
+            "label": "CO2 배출량",
+            "formula": "250 MWh × 0.5 tCO2/MWh",
+            "result": "125",
+            "unit": "tCO2"
+          },
+          {
+            "label": "CO2 환산",
+            "formula": "125 tCO2 × GWP 1 (synthetic-gwp)",
+            "result": "125",
+            "unit": "tCO2eq"
+          },
+          {
+            "label": "CH4 배출량",
+            "formula": "250 MWh × 0.004 kgCH4/MWh",
+            "result": "1",
+            "unit": "kgCH4"
+          },
+          {
+            "label": "단위 환산 (CH4 질량)",
+            "formula": "1 kg × 0.001 t/kg",
+            "result": "0.001",
+            "unit": "t",
+            "conversion": {
+              "from": "kg",
+              "to": "t",
+              "factor": "0.001",
+              "source": {
+                "kind": "definition",
+                "note": "1 t = 1000 kg"
+              }
+            }
+          },
+          {
+            "label": "CH4 환산",
+            "formula": "0.001 tCH4 × GWP 20 (synthetic-gwp)",
+            "result": "0.02",
+            "unit": "tCO2eq"
+          },
+          {
+            "label": "N2O 배출량",
+            "formula": "250 MWh × 0.008 kgN2O/MWh",
+            "result": "2",
+            "unit": "kgN2O"
+          },
+          {
+            "label": "단위 환산 (N2O 질량)",
+            "formula": "2 kg × 0.001 t/kg",
+            "result": "0.002",
+            "unit": "t",
+            "conversion": {
+              "from": "kg",
+              "to": "t",
+              "factor": "0.001",
+              "source": {
+                "kind": "definition",
+                "note": "1 t = 1000 kg"
+              }
+            }
+          },
+          {
+            "label": "N2O 환산",
+            "formula": "0.002 tN2O × GWP 300 (synthetic-gwp)",
+            "result": "0.6",
+            "unit": "tCO2eq"
+          },
+          {
+            "label": "합산",
+            "formula": "125 (CO2) + 0.02 (CH4) + 0.6 (N2O)",
+            "result": "125.62",
+            "unit": "tCO2eq"
+          }
+        ]
+      }
+    },
+    {
+      "rowId": "r5",
+      "orgUnit": "synthetic-plant-2",
+      "period": "2025-02",
+      "scope": 2,
+      "sourceType": "purchased_heat",
+      "status": "ok",
+      "co2e": "0.88023725",
+      "unit": "tCO2eq",
+      "energy": null,
+      "gases": [
+        {
+          "gas": "CO2e",
+          "mass": "0.88023725",
+          "massUnit": "t",
+          "gwp": null,
+          "co2e": "0.88023725"
+        }
+      ],
+      "evidence": {
+        "factor": {
+          "id": "synthetic:heat",
+          "version": "synthetic-1",
+          "source": {
+            "kind": "synthetic",
+            "note": "가상 열(스팀) 계수. 이미 CO2eq 로 환산된 계수 하나만 있는 경우."
+          }
+        },
+        "gwpSet": {
+          "id": "synthetic-gwp",
+          "label": "synthetic GWP (가상 값)",
+          "source": {
+            "kind": "synthetic",
+            "note": "테스트용 가상 값. 어느 IPCC 보고서의 값도 아니다."
+          }
+        },
+        "calorificBasis": null,
+        "oxidationFactor": null,
+        "sector": null,
+        "parameterTiers": null,
+        "facilityUse": null,
+        "steps": [
+          {
+            "label": "단위 환산 (사용량 → 배출계수 기준 단위)",
+            "formula": "15.5 GJ × 0.001 TJ/GJ",
+            "result": "0.0155",
+            "unit": "TJ",
+            "conversion": {
+              "from": "GJ",
+              "to": "TJ",
+              "factor": "0.001",
+              "source": {
+                "kind": "definition",
+                "note": "SI 접두어 T = 10^12, G = 10^9"
+              }
+            }
+          },
+          {
+            "label": "CO2e 배출량",
+            "formula": "0.0155 TJ × 56789.5 kgCO2e/TJ",
+            "result": "880.23725",
+            "unit": "kgCO2e"
+          },
+          {
+            "label": "단위 환산 (CO2e 질량)",
+            "formula": "880.23725 kg × 0.001 t/kg",
+            "result": "0.88023725",
+            "unit": "t",
+            "conversion": {
+              "from": "kg",
+              "to": "t",
+              "factor": "0.001",
+              "source": {
+                "kind": "definition",
+                "note": "1 t = 1000 kg"
+              }
+            }
+          },
+          {
+            "label": "합산",
+            "formula": "0.88023725 (CO2e)",
+            "result": "0.88023725",
+            "unit": "tCO2eq"
+          }
+        ]
+      }
+    },
+    {
+      "rowId": "r6",
+      "orgUnit": "synthetic-plant-2",
+      "period": "2025-02",
+      "scope": null,
+      "sourceType": null,
+      "status": "failed",
+      "failure": {
+        "kind": "invalid_activity",
+        "field": "sourceType",
+        "value": "scope3_travel",
+        "reason": "알 수 없는 배출원 유형이거나 행이 객체가 아니다"
+      }
+    }
+  ],
+  "aggregation": {
+    "by": [
+      "scope",
+      "sourceType"
+    ],
+    "groups": [
+      {
+        "key": {
+          "scope": "1",
+          "sourceType": "mobile_combustion"
+        },
+        "co2e": "1.8225",
+        "co2eByGas": {
+          "CO2": "1.75",
+          "CH4": "0.0125",
+          "N2O": "0.06"
+        },
+        "okRowCount": 1,
+        "failedRowIds": [],
+        "complete": true
+      },
+      {
+        "key": {
+          "scope": "1",
+          "sourceType": "stationary_combustion"
+        },
+        "co2e": "10.17248114784",
+        "co2eByGas": {
+          "CO2": "10.12457522784",
+          "CH4": "0.00429768",
+          "N2O": "0.04360824"
+        },
+        "okRowCount": 2,
+        "failedRowIds": [],
+        "complete": true
+      },
+      {
+        "key": {
+          "scope": "2",
+          "sourceType": "purchased_electricity"
+        },
+        "co2e": "125.62",
+        "co2eByGas": {
+          "CO2": "125",
+          "CH4": "0.02",
+          "N2O": "0.6"
+        },
+        "okRowCount": 1,
+        "failedRowIds": [],
+        "complete": true
+      },
+      {
+        "key": {
+          "scope": "2",
+          "sourceType": "purchased_heat"
+        },
+        "co2e": "0.88023725",
+        "co2eByGas": {
+          "CO2e": "0.88023725"
+        },
+        "okRowCount": 1,
+        "failedRowIds": [],
+        "complete": true
+      },
+      {
+        "key": {
+          "scope": "null",
+          "sourceType": "null"
+        },
+        "co2e": "0",
+        "co2eByGas": {},
+        "okRowCount": 0,
+        "failedRowIds": [
+          "r6"
+        ],
+        "complete": false
+      }
+    ],
+    "total": {
+      "co2e": "138.49521839784",
+      "co2eByGas": {
+        "CO2": "136.87457522784",
+        "CH4": "0.03679768",
+        "N2O": "0.70360824",
+        "CO2e": "0.88023725"
+      },
+      "okRowCount": 5,
+      "failedRowIds": [
+        "r6"
+      ],
+      "complete": false
+    }
+  }
+}

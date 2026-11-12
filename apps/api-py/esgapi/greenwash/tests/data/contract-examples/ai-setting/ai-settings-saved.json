@@ -1,0 +1,42 @@
+{
+  "schemaVersion": "greenwash.ai-settings@2",
+  "companyId": 1,
+  "applied": {
+    "kind": "saved",
+    "id": 12
+  },
+  "default": {
+    "name": "colab-2026-01-15-v1",
+    "title": "기본 설정",
+    "evalPromptSha256": "1eb626446da6942b93aca4991f4057de2e15a5b66adf167ea226c8399ab49b0f"
+  },
+  "items": [
+    {
+      "id": 12,
+      "name": "v2",
+      "title": "지어낸 판 이름",
+      "status": "applied",
+      "createdAt": "2026-10-20T10:30:00+09:00",
+      "createdBy": {
+        "id": 3,
+        "name": "가상 운영자"
+      },
+      "memo": "예외 조항 한 줄 끔(지어낸 메모)",
+      "evalPromptSha256": "b7b81426e3a3097fb91e7a4bcbf559f0214b2aa96e7af3a72178961d0c87f066"
+    },
+    {
+      "id": 11,
+      "name": "v1",
+      "title": null,
+      "status": "past",
+      "createdAt": "2026-10-20T09:00:00+09:00",
+      "createdBy": {
+        "id": 4,
+        "name": null
+      },
+      "memo": "",
+      "evalPromptSha256": "1eb626446da6942b93aca4991f4057de2e15a5b66adf167ea226c8399ab49b0f"
+    }
+  ],
+  "total": 2
+}

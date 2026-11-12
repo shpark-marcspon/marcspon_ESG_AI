@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "lib": ["ES2022"],
+    "types": ["node"],
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "noFallthroughCasesInSwitch": true,
+    "verbatimModuleSyntax": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    // 개발할 때(타입 검사, 테스트)는 다른 패키지를 빌드 없이 소스(.ts)로 바로 읽는다.
+    // 각 패키지 package.json 의 exports 에 있는 "source" 조건이 이것과 짝이다.
+    // 이미지를 만들 때는 tsconfig.build.json 이 이 조건을 끄고 dist(.js)를 쓴다.
+    "customConditions": ["source"]
+  }
+}

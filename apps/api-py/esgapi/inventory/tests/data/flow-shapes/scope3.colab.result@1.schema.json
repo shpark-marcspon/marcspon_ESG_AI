@@ -1,0 +1,1915 @@
+{
+  "$defs": {
+    "ColabActivityAmountJson": {
+      "additionalProperties": false,
+      "description": "활동량. Spend: 금액(value·unit \"KRW\")과 셈의 기준 금액(USD 갈래면 USD), 폐기물: 처리량(입력 단위)과 kg 값·\n단위환산비고. unit·baseUnit 은 코랩 글자.",
+      "properties": {
+        "value": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        },
+        "unit": {
+          "title": "Unit",
+          "type": "string"
+        },
+        "baseValue": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Basevalue"
+        },
+        "baseUnit": {
+          "title": "Baseunit",
+          "type": "string"
+        },
+        "note": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Note"
+        }
+      },
+      "required": [
+        "value",
+        "unit",
+        "baseValue",
+        "baseUnit",
+        "note"
+      ],
+      "title": "ColabActivityAmountJson",
+      "type": "object"
+    },
+    "ColabActivityFactorJson": {
+      "additionalProperties": false,
+      "description": "쓴 계수(계수 책의 시트·제목·값·단위·열·NAICS 코드). 폐기물은 title·code 가 null(코랩이 이름을 안 낸다).",
+      "properties": {
+        "sheet": {
+          "title": "Sheet",
+          "type": "string"
+        },
+        "title": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Title"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        },
+        "unit": {
+          "title": "Unit",
+          "type": "string"
+        },
+        "column": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Column"
+        },
+        "code": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Code"
+        },
+        "sourceText": {
+          "title": "Sourcetext",
+          "type": "string"
+        }
+      },
+      "required": [
+        "sheet",
+        "title",
+        "value",
+        "unit",
+        "column",
+        "code"
+      ],
+      "title": "ColabActivityFactorJson",
+      "type": "object"
+    },
+    "ColabActivityOriginStepJson": {
+      "additionalProperties": false,
+      "properties": {
+        "step": {
+          "enum": [
+            "mapping",
+            "unit",
+            "fx",
+            "factor",
+            "mode",
+            "distance"
+          ],
+          "title": "Step",
+          "type": "string"
+        },
+        "origin": {
+          "enum": [
+            "rule",
+            "ai",
+            "estimate"
+          ],
+          "title": "Origin",
+          "type": "string"
+        },
+        "via": {
+          "title": "Via",
+          "type": "string"
+        }
+      },
+      "required": [
+        "step",
+        "origin",
+        "via"
+      ],
+      "title": "ColabActivityOriginStepJson",
+      "type": "object"
+    },
+    "ColabActivityRowJson": {
+      "additionalProperties": false,
+      "description": "C4-2·C9-2·C6-2·C5 의 줄 하나(S3C-b1)와 거리 줄(C4-1·C9-1 — S3C-b2a). co2e(tCO2eq)·formula 는 코랩 결과 행의\n「배출량(tCO2e)」·「계산식」(C6 은 후처리 뒤, C5 는 화석기원). origin 은 숫자에 닿는 단계 가운데 가장 약한 것,\nfactor 단계가 없으면 null — 숫자에 닿는 단계는 kind 별이다: 지출·폐기물 kind 는 mapping·unit·fx·factor(mode 는\n넣지 않음), 거리 kind 는 거기에 mode·distance 를 더한다. distance 는 거리 kind 만(그 밖은 null).",
+      "properties": {
+        "rowId": {
+          "title": "Rowid",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "transport_spend",
+            "travel_spend",
+            "waste",
+            "transport_distance",
+            "travel_distance",
+            "commute"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "month": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Month"
+        },
+        "activity": {
+          "$ref": "#/$defs/ColabActivityAmountJson"
+        },
+        "factor": {
+          "$ref": "#/$defs/ColabActivityFactorJson"
+        },
+        "co2e": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Co2E"
+        },
+        "unit": {
+          "const": "tCO2eq",
+          "title": "Unit",
+          "type": "string"
+        },
+        "formula": {
+          "title": "Formula",
+          "type": "string"
+        },
+        "treatment": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Treatment"
+        },
+        "biogenic": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ColabBiogenicJson"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "mode": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ColabModeJson"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "distance": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ColabDistanceJson"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "origin": {
+          "anyOf": [
+            {
+              "enum": [
+                "rule",
+                "ai",
+                "estimate"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Origin"
+        },
+        "originSteps": {
+          "items": {
+            "$ref": "#/$defs/ColabActivityOriginStepJson"
+          },
+          "title": "Originsteps",
+          "type": "array"
+        },
+        "missing": {
+          "items": {
+            "enum": [
+              "amount",
+              "factor",
+              "factorValue"
+            ],
+            "type": "string"
+          },
+          "title": "Missing",
+          "type": "array"
+        },
+        "input": {
+          "$ref": "#/$defs/ColabRowInputJson"
+        }
+      },
+      "required": [
+        "rowId",
+        "kind",
+        "month",
+        "activity",
+        "factor",
+        "co2e",
+        "unit",
+        "formula",
+        "treatment",
+        "biogenic",
+        "mode",
+        "distance",
+        "origin",
+        "originSteps",
+        "missing"
+      ],
+      "title": "ColabActivityRowJson",
+      "type": "object"
+    },
+    "ColabAllocationJson": {
+      "additionalProperties": false,
+      "description": "임차·임대 자산(C8·C13)의 배분. method 는 코랩 「산정방식」(에너지사용량·면적배분·인원배분), buildingTotal 은\n「건물전체사용량」, areaRatio·personRatio 는 「면적비율」·「인원비율」(그 방식이 아니면 null).",
+      "properties": {
+        "method": {
+          "title": "Method",
+          "type": "string"
+        },
+        "buildingTotal": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Buildingtotal"
+        },
+        "areaRatio": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Arearatio"
+        },
+        "personRatio": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Personratio"
+        }
+      },
+      "required": [
+        "method",
+        "buildingTotal",
+        "areaRatio",
+        "personRatio"
+      ],
+      "title": "ColabAllocationJson",
+      "type": "object"
+    },
+    "ColabBiogenicJson": {
+      "additionalProperties": false,
+      "description": "C5 의 화석·생물기원 나눔(tCO2eq). co2e 는 fossilCo2e 와 같은 화석기원 몫이다.",
+      "properties": {
+        "fossilCo2e": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Fossilco2E"
+        },
+        "biogenicCo2e": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Biogenicco2E"
+        },
+        "fcf": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Fcf"
+        },
+        "note": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Note"
+        }
+      },
+      "required": [
+        "fossilCo2e",
+        "biogenicCo2e",
+        "fcf",
+        "note"
+      ],
+      "title": "ColabBiogenicJson",
+      "type": "object"
+    },
+    "ColabC12PartJson": {
+      "additionalProperties": false,
+      "description": "C12 처리방법 하나(S3Q1). share 는 0~1 수(엔진 `_pct` 뒤 — 웹이 %), factor 는 kgCO2eq/kg(비중이 하나도 없는 줄은\n처리방법 평균), used 는 가중에 들었는가. 둘 다 repr(float), NaN·없음은 null.",
+      "properties": {
+        "treatment": {
+          "enum": [
+            "매립",
+            "소각",
+            "재활용"
+          ],
+          "title": "Treatment",
+          "type": "string"
+        },
+        "share": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Share"
+        },
+        "factor": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Factor"
+        },
+        "used": {
+          "title": "Used",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "treatment",
+        "share",
+        "factor",
+        "used"
+      ],
+      "title": "ColabC12PartJson",
+      "type": "object"
+    },
+    "ColabC12TreatmentsJson": {
+      "additionalProperties": false,
+      "description": "C12 줄의 처리방법별 값(S3Q1 — 셈에 닿지 않는 보기 칸). shareTotal 은 used 비중의 합(표시용, 비중이 하나도 없으면\nnull), parts 는 셋(엔진 차례). 가중 배출계수는 줄의 factor.value 다.",
+      "properties": {
+        "branch": {
+          "enum": [
+            "code",
+            "name",
+            "average"
+          ],
+          "title": "Branch",
+          "type": "string"
+        },
+        "shareTotal": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Sharetotal"
+        },
+        "parts": {
+          "items": {
+            "$ref": "#/$defs/ColabC12PartJson"
+          },
+          "title": "Parts",
+          "type": "array"
+        }
+      },
+      "required": [
+        "branch",
+        "shareTotal",
+        "parts"
+      ],
+      "title": "ColabC12TreatmentsJson",
+      "type": "object"
+    },
+    "ColabDistanceJson": {
+      "additionalProperties": false,
+      "description": "거리 줄의 거리(S3C-b2a). km 는 셈에 쓴 거리(두 번째 길 포함, repr(float)) — 코랩 결과 칸 「운송거리(km)」(입력값\n이거나 본 고리 값, None 가능)와 다를 수 있다. via 는 거리의 길(input·geocode·ai_straight·ai_road·none, 공항 AI 로\n지점을 바꿨으면 끝에 +airport — 거리 kind 가 더할 수 있다). geoMode 는 거리 길에 넘긴 mode(운송 표준코드 그대로,\n템플릿 입력 거리면 null). departure·arrival 은 원문. roundTrip(거리왕복계수 1·2)·people·trips·workdays 는 출장·통근\n줄 몫이고 C4-1·C9-1 은 null.",
+      "properties": {
+        "km": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Km"
+        },
+        "via": {
+          "title": "Via",
+          "type": "string"
+        },
+        "geoMode": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Geomode"
+        },
+        "departure": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Departure"
+        },
+        "arrival": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Arrival"
+        },
+        "roundTrip": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Roundtrip"
+        },
+        "people": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "People"
+        },
+        "trips": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Trips"
+        },
+        "workdays": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Workdays"
+        }
+      },
+      "required": [
+        "km",
+        "via",
+        "geoMode",
+        "departure",
+        "arrival",
+        "roundTrip",
+        "people",
+        "trips",
+        "workdays"
+      ],
+      "title": "ColabDistanceJson",
+      "type": "object"
+    },
+    "ColabEmptySheetJson": {
+      "additionalProperties": false,
+      "properties": {
+        "sheet": {
+          "title": "Sheet",
+          "type": "string"
+        },
+        "category": {
+          "title": "Category",
+          "type": "string"
+        },
+        "status": {
+          "const": "empty",
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "sheet",
+        "category",
+        "status"
+      ],
+      "title": "ColabEmptySheetJson",
+      "type": "object"
+    },
+    "ColabEnergyMatchJson": {
+      "additionalProperties": false,
+      "description": "에너지 계수 사슬의 매칭(코랩 `_LAST_EF_MATCH_INFO[\"energy\"]` — C11·C14 결과의 EF매핑방식·EF매핑점수).\ntype 은 코랩 match_type 글자(exact_raw·alias_exact·alias_contains·contains·fuzzy·unit_priority_alias·\nlegacy_lookup·not_found …), score 는 그 점수(repr(float), legacy_lookup 이면 null).",
+      "properties": {
+        "type": {
+          "title": "Type",
+          "type": "string"
+        },
+        "score": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Score"
+        }
+      },
+      "required": [
+        "type",
+        "score"
+      ],
+      "title": "ColabEnergyMatchJson",
+      "type": "object"
+    },
+    "ColabEnergyRowJson": {
+      "additionalProperties": false,
+      "description": "결과 시트 일곱(C3·C8·C11·C12·C13·C14·C15 — S3C-c1a 에서 세움)의 줄 하나. 칸 꼴은 ColabActivityRowJson 을\n본뜬다. activity 는 사용량(입력 값·단위)과 환산 뒤(baseValue·baseUnit), note 는 단위환산비고. factor 는 쓴\n계수(sheet 에너지·에너지_C3·폐기물_C12, title 은 EF매핑명, unit 은 EF단위 글자) — 계수를 쓰지 않는 kind\n(investment)면 null.\nco2e·formula 는 코랩 결과 행의 「배출량(tCO2e)」·「계산식」(C12 는 화석기원). match 는 에너지 계수 사슬을 탄 줄만,\nallocation 은 C8·C13, biogenic 은 C12, product 는 C11, investment 는 C15 만(그 밖은 null). origin 은 숫자에 닿는\n단계(unit·factor) 가운데 가장 약한 것, factor 단계가 없으면 null.",
+      "properties": {
+        "rowId": {
+          "title": "Rowid",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "fuel_energy",
+            "leased_asset",
+            "leased_out_asset",
+            "product_use",
+            "product_eol",
+            "franchise",
+            "investment"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "month": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Month"
+        },
+        "activity": {
+          "$ref": "#/$defs/ColabActivityAmountJson"
+        },
+        "factor": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ColabActivityFactorJson"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "co2e": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Co2E"
+        },
+        "unit": {
+          "const": "tCO2eq",
+          "title": "Unit",
+          "type": "string"
+        },
+        "formula": {
+          "title": "Formula",
+          "type": "string"
+        },
+        "match": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ColabEnergyMatchJson"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "allocation": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ColabAllocationJson"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "biogenic": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ColabBiogenicJson"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "product": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ColabProductUseJson"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "investment": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ColabInvestmentJson"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "origin": {
+          "anyOf": [
+            {
+              "enum": [
+                "rule",
+                "ai",
+                "estimate"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Origin"
+        },
+        "originSteps": {
+          "items": {
+            "$ref": "#/$defs/ColabActivityOriginStepJson"
+          },
+          "title": "Originsteps",
+          "type": "array"
+        },
+        "missing": {
+          "items": {
+            "enum": [
+              "amount",
+              "factor",
+              "factorValue"
+            ],
+            "type": "string"
+          },
+          "title": "Missing",
+          "type": "array"
+        },
+        "treatments": {
+          "$ref": "#/$defs/ColabC12TreatmentsJson"
+        },
+        "input": {
+          "$ref": "#/$defs/ColabRowInputJson"
+        }
+      },
+      "required": [
+        "rowId",
+        "kind",
+        "month",
+        "activity",
+        "factor",
+        "co2e",
+        "unit",
+        "formula",
+        "match",
+        "allocation",
+        "biogenic",
+        "product",
+        "investment",
+        "origin",
+        "originSteps",
+        "missing"
+      ],
+      "title": "ColabEnergyRowJson",
+      "type": "object"
+    },
+    "ColabFactorBookJson": {
+      "additionalProperties": false,
+      "properties": {
+        "sheet": {
+          "title": "Sheet",
+          "type": "string"
+        },
+        "column": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Column"
+        },
+        "year": {
+          "title": "Year",
+          "type": "integer"
+        },
+        "reload": {
+          "enum": [
+            "reloaded",
+            "kept_initial"
+          ],
+          "title": "Reload",
+          "type": "string"
+        },
+        "reloadProblem": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Reloadproblem"
+        }
+      },
+      "required": [
+        "sheet",
+        "column",
+        "year",
+        "reload",
+        "reloadProblem"
+      ],
+      "title": "ColabFactorBookJson",
+      "type": "object"
+    },
+    "ColabFactorJson": {
+      "additionalProperties": false,
+      "description": "대표 계수(구매_USEPA 의 NAICS Title 과 보고연도 원화 열의 값). source 는 코랩 후보의 source 글자.",
+      "properties": {
+        "title": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Title"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        },
+        "unit": {
+          "const": "kgCO2e/KRW",
+          "title": "Unit",
+          "type": "string"
+        },
+        "column": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Column"
+        },
+        "source": {
+          "title": "Source",
+          "type": "string"
+        }
+      },
+      "required": [
+        "title",
+        "value",
+        "unit",
+        "column",
+        "source"
+      ],
+      "title": "ColabFactorJson",
+      "type": "object"
+    },
+    "ColabFactorSheetJson": {
+      "additionalProperties": false,
+      "description": "계수 시트 하나의 읽기(S3C-b1, 거리 운송 계수 `운송` 은 S3C-b2a): 다시 읽음 / 첫 읽기를 그대로 씀 / 둘 다 비었음 /\n첫 읽기만 씀(initial — 맵을 첫 읽기로만 짓는 시트). header 는 쓴 머리글 줄(0부터), rows 는 읽힌 줄 수.",
+      "properties": {
+        "sheet": {
+          "title": "Sheet",
+          "type": "string"
+        },
+        "read": {
+          "enum": [
+            "reloaded",
+            "kept_initial",
+            "empty",
+            "initial"
+          ],
+          "title": "Read",
+          "type": "string"
+        },
+        "header": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Header"
+        },
+        "rows": {
+          "title": "Rows",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "sheet",
+        "read",
+        "header",
+        "rows"
+      ],
+      "title": "ColabFactorSheetJson",
+      "type": "object"
+    },
+    "ColabFailedSheetJson": {
+      "additionalProperties": false,
+      "properties": {
+        "sheet": {
+          "title": "Sheet",
+          "type": "string"
+        },
+        "category": {
+          "title": "Category",
+          "type": "string"
+        },
+        "status": {
+          "const": "failed",
+          "title": "Status",
+          "type": "string"
+        },
+        "error": {
+          "title": "Error",
+          "type": "string"
+        }
+      },
+      "required": [
+        "sheet",
+        "category",
+        "status",
+        "error"
+      ],
+      "title": "ColabFailedSheetJson",
+      "type": "object"
+    },
+    "ColabGroupJson": {
+      "additionalProperties": false,
+      "properties": {
+        "key": {
+          "title": "Key",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "reason": {
+          "title": "Reason",
+          "type": "string"
+        },
+        "family": {
+          "title": "Family",
+          "type": "string"
+        },
+        "category": {
+          "title": "Category",
+          "type": "string"
+        },
+        "llm": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ColabGroupLlmJson"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "key",
+        "name",
+        "reason",
+        "family",
+        "category",
+        "llm"
+      ],
+      "title": "ColabGroupJson",
+      "type": "object"
+    },
+    "ColabGroupLlmJson": {
+      "additionalProperties": false,
+      "description": "그룹 이름 LLM 한 번. answer 는 코랩이 쓴 글자(실패면 \"Unknown\"), reason 은 실패의 core.llm kind.",
+      "properties": {
+        "outcome": {
+          "enum": [
+            "success",
+            "truncated",
+            "refusal",
+            "failed"
+          ],
+          "title": "Outcome",
+          "type": "string"
+        },
+        "answer": {
+          "title": "Answer",
+          "type": "string"
+        },
+        "reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Reason"
+        }
+      },
+      "required": [
+        "outcome",
+        "answer",
+        "reason"
+      ],
+      "title": "ColabGroupLlmJson",
+      "type": "object"
+    },
+    "ColabInvestmentJson": {
+      "additionalProperties": false,
+      "description": "투자(C15). share 는 지분율(%), scope1·scope2 는 피투자기업 배출량(입력 칸의 수).",
+      "properties": {
+        "share": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Share"
+        },
+        "scope1": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Scope1"
+        },
+        "scope2": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Scope2"
+        }
+      },
+      "required": [
+        "share",
+        "scope1",
+        "scope2"
+      ],
+      "title": "ColabInvestmentJson",
+      "type": "object"
+    },
+    "ColabModeJson": {
+      "additionalProperties": false,
+      "description": "정규화한 이동·운송수단과 그 산정 출처. 줄 origin 에 넣는지는 kind 별이다 — 지출 kind(C6-2 정규화이동수단)는 넣지\n않고, 거리 kind(transport_distance·travel_distance·commute — 운송수단이 계수를 정한다)는 넣는다.",
+      "properties": {
+        "value": {
+          "title": "Value",
+          "type": "string"
+        },
+        "origin": {
+          "enum": [
+            "rule",
+            "ai",
+            "estimate"
+          ],
+          "title": "Origin",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value",
+        "origin"
+      ],
+      "title": "ColabModeJson",
+      "type": "object"
+    },
+    "ColabNotTargetSheetJson": {
+      "additionalProperties": false,
+      "properties": {
+        "sheet": {
+          "title": "Sheet",
+          "type": "string"
+        },
+        "status": {
+          "const": "not_target",
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "sheet",
+        "status"
+      ],
+      "title": "ColabNotTargetSheetJson",
+      "type": "object"
+    },
+    "ColabNotYetSupportedSheetJson": {
+      "additionalProperties": false,
+      "properties": {
+        "sheet": {
+          "title": "Sheet",
+          "type": "string"
+        },
+        "category": {
+          "title": "Category",
+          "type": "string"
+        },
+        "status": {
+          "const": "not_yet_supported",
+          "title": "Status",
+          "type": "string"
+        },
+        "band": {
+          "enum": [
+            "S3C-b",
+            "S3C-c"
+          ],
+          "title": "Band",
+          "type": "string"
+        }
+      },
+      "required": [
+        "sheet",
+        "category",
+        "status",
+        "band"
+      ],
+      "title": "ColabNotYetSupportedSheetJson",
+      "type": "object"
+    },
+    "ColabOriginStepJson": {
+      "additionalProperties": false,
+      "properties": {
+        "step": {
+          "enum": [
+            "group",
+            "factor",
+            "spend"
+          ],
+          "title": "Step",
+          "type": "string"
+        },
+        "origin": {
+          "enum": [
+            "rule",
+            "ai",
+            "estimate"
+          ],
+          "title": "Origin",
+          "type": "string"
+        },
+        "via": {
+          "title": "Via",
+          "type": "string"
+        }
+      },
+      "required": [
+        "step",
+        "origin",
+        "via"
+      ],
+      "title": "ColabOriginStepJson",
+      "type": "object"
+    },
+    "ColabProcessedSheetJson": {
+      "additionalProperties": false,
+      "properties": {
+        "sheet": {
+          "title": "Sheet",
+          "type": "string"
+        },
+        "category": {
+          "title": "Category",
+          "type": "string"
+        },
+        "status": {
+          "const": "processed",
+          "title": "Status",
+          "type": "string"
+        },
+        "rows": {
+          "items": {
+            "discriminator": {
+              "mapping": {
+                "commute": "#/$defs/ColabActivityRowJson",
+                "franchise": "#/$defs/ColabEnergyRowJson",
+                "fuel_energy": "#/$defs/ColabEnergyRowJson",
+                "investment": "#/$defs/ColabEnergyRowJson",
+                "leased_asset": "#/$defs/ColabEnergyRowJson",
+                "leased_out_asset": "#/$defs/ColabEnergyRowJson",
+                "product_eol": "#/$defs/ColabEnergyRowJson",
+                "product_use": "#/$defs/ColabEnergyRowJson",
+                "purchase": "#/$defs/ColabRowJson",
+                "transport_distance": "#/$defs/ColabActivityRowJson",
+                "transport_spend": "#/$defs/ColabActivityRowJson",
+                "travel_distance": "#/$defs/ColabActivityRowJson",
+                "travel_spend": "#/$defs/ColabActivityRowJson",
+                "waste": "#/$defs/ColabActivityRowJson"
+              },
+              "propertyName": "kind"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/ColabRowJson"
+              },
+              {
+                "$ref": "#/$defs/ColabActivityRowJson"
+              },
+              {
+                "$ref": "#/$defs/ColabEnergyRowJson"
+              }
+            ]
+          },
+          "title": "Rows",
+          "type": "array"
+        }
+      },
+      "required": [
+        "sheet",
+        "category",
+        "status",
+        "rows"
+      ],
+      "title": "ColabProcessedSheetJson",
+      "type": "object"
+    },
+    "ColabProductUseJson": {
+      "additionalProperties": false,
+      "description": "판매제품 사용(C11). years 는 코랩 「사용기간(년)」, totalUsage 는 「총사용량」(제품수량 × 제품당 사용량 ×\n사용기간).",
+      "properties": {
+        "years": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Years"
+        },
+        "totalUsage": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Totalusage"
+        }
+      },
+      "required": [
+        "years",
+        "totalUsage"
+      ],
+      "title": "ColabProductUseJson",
+      "type": "object"
+    },
+    "ColabRecommendationJson": {
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        },
+        "expectedCo2e": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Expectedco2E"
+        }
+      },
+      "required": [
+        "title",
+        "value",
+        "expectedCo2e"
+      ],
+      "title": "ColabRecommendationJson",
+      "type": "object"
+    },
+    "ColabRejectedJson": {
+      "additionalProperties": false,
+      "properties": {
+        "reason": {
+          "enum": [
+            "reader_problem",
+            "factor_book",
+            "legacy_template"
+          ],
+          "title": "Reason",
+          "type": "string"
+        },
+        "detail": {
+          "title": "Detail",
+          "type": "string"
+        }
+      },
+      "required": [
+        "reason",
+        "detail"
+      ],
+      "title": "ColabRejectedJson",
+      "type": "object"
+    },
+    "ColabRowInputJson": {
+      "additionalProperties": false,
+      "description": "그 줄의 입력 칸(MARC-ISSUE-524 — 템플릿 엑셀 줄의 글자를 다시 싣는다). 키 열여섯(짓는 쪽은 늘 다 싣는다), 그\n시트에 원천 열이 없거나 칸이 비면(빈 글·NaN·없음) null. useMonths 는 S3R3 에 더한 키라 검사에서 NotRequired 다 —\n그 전(키 열다섯)에 저장된 결과도 같은 판으로 통과한다(다시 셈 0, 없으면 null 취급).\n글은 글자 그대로(공백도 걷지 않음), 수는 repr(float)(정수 입력도 \"13.0\").\n원천은 처리기 key 별 코랩 결과 frame 의 열(표준화 이름 바꿈 뒤 — colab_157/serialize.py 의 원천 표):\n\n- country: 국가(C15 밖 전부)\n- site: 사업장(C1·C2·C3·C4·C5·C7·C9), C6-1·C6-2 는 출장주체(바꿈 뒤 「사업장」)\n- name: C1 품목명(상세 품목명/서비스명 — 그룹 이름으로 덮기 전) · C2 자산명(상세 자산명) · C4 자재명→제품명 ·\n  C9 제품명→자재명 · C5 폐기물 종류→상세폐기물명(→ 는 카테고리에서 값이 든 첫 열) · C8·C13 자산명(임차·임대자산명)\n  · C11·C12 제품명 · C14 프랜차이즈명 · C15 피투자기업명\n- vehicle: C4-2·C9-2 운송수단, C6-2 출장항목(바꿈 뒤 「이동수단」) — 지출 kind 의 mode 는 null 이라 입력 글을 여기\n- energy: C3 연료/에너지명 · C8·C13 에너지종류(바꿈 뒤 「에너지원」) · C11 에너지명 · C14 연료 종류\n- people: C6-1·C6-2·C7 인원수\n- buildingArea·usedArea: C8-2·C13-2 건물전체 면적·사용 면적\n- buildingPeople·ownPeople: C8-3·C13-3 건물전체 인원수·자사 인원수\n- productCount: C11 제품수량 · sales·weight·weightUnit: C12 판매량·제품중량·제품중량 단위 · stores: C14 가맹점 수\n- useMonths: C11 수명(개월) 혹은 평균 사용기간(개월)(바꿈 뒤 「수명(개월)」)",
+      "properties": {
+        "country": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Country"
+        },
+        "site": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Site"
+        },
+        "name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Name"
+        },
+        "vehicle": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Vehicle"
+        },
+        "energy": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Energy"
+        },
+        "people": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "People"
+        },
+        "buildingArea": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Buildingarea"
+        },
+        "usedArea": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Usedarea"
+        },
+        "buildingPeople": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Buildingpeople"
+        },
+        "ownPeople": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Ownpeople"
+        },
+        "productCount": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Productcount"
+        },
+        "sales": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Sales"
+        },
+        "weight": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Weight"
+        },
+        "weightUnit": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Weightunit"
+        },
+        "stores": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Stores"
+        },
+        "useMonths": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Usemonths"
+        }
+      },
+      "required": [
+        "country",
+        "site",
+        "name",
+        "vehicle",
+        "energy",
+        "people",
+        "buildingArea",
+        "usedArea",
+        "buildingPeople",
+        "ownPeople",
+        "productCount",
+        "sales",
+        "weight",
+        "weightUnit",
+        "stores"
+      ],
+      "title": "ColabRowInputJson",
+      "type": "object"
+    },
+    "ColabRowJson": {
+      "additionalProperties": false,
+      "description": "C1·C2 의 줄 하나. co2e(tCO2eq)·formula·추천의 expectedCo2e 는 코랩 후처리(구매금액 × 계수 / 1000) 뒤의 값.",
+      "properties": {
+        "rowId": {
+          "title": "Rowid",
+          "type": "string"
+        },
+        "kind": {
+          "const": "purchase",
+          "title": "Kind",
+          "type": "string"
+        },
+        "month": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Month"
+        },
+        "amount": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Amount"
+        },
+        "spendKrw": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Spendkrw"
+        },
+        "spendNote": {
+          "title": "Spendnote",
+          "type": "string"
+        },
+        "factor": {
+          "$ref": "#/$defs/ColabFactorJson"
+        },
+        "co2e": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Co2E"
+        },
+        "unit": {
+          "const": "tCO2eq",
+          "title": "Unit",
+          "type": "string"
+        },
+        "formula": {
+          "title": "Formula",
+          "type": "string"
+        },
+        "recommendations": {
+          "items": {
+            "$ref": "#/$defs/ColabRecommendationJson"
+          },
+          "title": "Recommendations",
+          "type": "array"
+        },
+        "group": {
+          "$ref": "#/$defs/ColabGroupJson"
+        },
+        "origin": {
+          "anyOf": [
+            {
+              "enum": [
+                "rule",
+                "ai",
+                "estimate"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Origin"
+        },
+        "originSteps": {
+          "items": {
+            "$ref": "#/$defs/ColabOriginStepJson"
+          },
+          "title": "Originsteps",
+          "type": "array"
+        },
+        "missing": {
+          "items": {
+            "enum": [
+              "amount",
+              "factor",
+              "factorValue"
+            ],
+            "type": "string"
+          },
+          "title": "Missing",
+          "type": "array"
+        },
+        "input": {
+          "$ref": "#/$defs/ColabRowInputJson"
+        }
+      },
+      "required": [
+        "rowId",
+        "kind",
+        "month",
+        "amount",
+        "spendKrw",
+        "spendNote",
+        "factor",
+        "co2e",
+        "unit",
+        "formula",
+        "recommendations",
+        "group",
+        "origin",
+        "originSteps",
+        "missing"
+      ],
+      "title": "ColabRowJson",
+      "type": "object"
+    },
+    "Scope3ColabDone": {
+      "additionalProperties": false,
+      "description": "scope3.colab.result@1 — 끝까지 돈 것. llmCalls: 프롬프트 id → 갈래(success·failed:<kind> …) → 부른 수.",
+      "properties": {
+        "schemaVersion": {
+          "const": "scope3.colab.result@1",
+          "title": "Schemaversion",
+          "type": "string"
+        },
+        "status": {
+          "const": "done",
+          "title": "Status",
+          "type": "string"
+        },
+        "reportYear": {
+          "title": "Reportyear",
+          "type": "integer"
+        },
+        "factorBook": {
+          "$ref": "#/$defs/ColabFactorBookJson"
+        },
+        "factorSheets": {
+          "items": {
+            "$ref": "#/$defs/ColabFactorSheetJson"
+          },
+          "title": "Factorsheets",
+          "type": "array"
+        },
+        "sheets": {
+          "items": {
+            "discriminator": {
+              "mapping": {
+                "empty": "#/$defs/ColabEmptySheetJson",
+                "failed": "#/$defs/ColabFailedSheetJson",
+                "not_target": "#/$defs/ColabNotTargetSheetJson",
+                "not_yet_supported": "#/$defs/ColabNotYetSupportedSheetJson",
+                "processed": "#/$defs/ColabProcessedSheetJson"
+              },
+              "propertyName": "status"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/ColabProcessedSheetJson"
+              },
+              {
+                "$ref": "#/$defs/ColabNotTargetSheetJson"
+              },
+              {
+                "$ref": "#/$defs/ColabNotYetSupportedSheetJson"
+              },
+              {
+                "$ref": "#/$defs/ColabEmptySheetJson"
+              },
+              {
+                "$ref": "#/$defs/ColabFailedSheetJson"
+              }
+            ]
+          },
+          "title": "Sheets",
+          "type": "array"
+        },
+        "llmCalls": {
+          "additionalProperties": {
+            "additionalProperties": {
+              "type": "integer"
+            },
+            "type": "object"
+          },
+          "title": "Llmcalls",
+          "type": "object"
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "status",
+        "reportYear",
+        "factorBook",
+        "factorSheets",
+        "sheets",
+        "llmCalls"
+      ],
+      "title": "Scope3ColabDone",
+      "type": "object"
+    },
+    "Scope3ColabRejected": {
+      "additionalProperties": false,
+      "description": "scope3.colab.result@1 — 템플릿을 못 읽음·계수 책을 못 지음·새 v1 템플릿이 아님.",
+      "properties": {
+        "schemaVersion": {
+          "const": "scope3.colab.result@1",
+          "title": "Schemaversion",
+          "type": "string"
+        },
+        "status": {
+          "const": "rejected",
+          "title": "Status",
+          "type": "string"
+        },
+        "rejected": {
+          "$ref": "#/$defs/ColabRejectedJson"
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "status",
+        "rejected"
+      ],
+      "title": "Scope3ColabRejected",
+      "type": "object"
+    }
+  },
+  "discriminator": {
+    "mapping": {
+      "done": "#/$defs/Scope3ColabDone",
+      "rejected": "#/$defs/Scope3ColabRejected"
+    },
+    "propertyName": "status"
+  },
+  "oneOf": [
+    {
+      "$ref": "#/$defs/Scope3ColabDone"
+    },
+    {
+      "$ref": "#/$defs/Scope3ColabRejected"
+    }
+  ]
+}

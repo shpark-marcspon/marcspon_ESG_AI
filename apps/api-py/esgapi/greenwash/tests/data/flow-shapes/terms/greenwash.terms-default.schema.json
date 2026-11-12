@@ -1,0 +1,19 @@
+{
+  "additionalProperties": false,
+  "description": "기본 단어 목록(의심 낱말). 노트북 목록을 글자·차례 그대로 싣는다 — 흠을 고치지 않는다.\n\n노트북에서 쉼표가 빠져 두 낱말이 붙은 것(예: 「eco프리」)도 그대로다.\n화면이 사용자가 더하는 단어와 견줄 때의 키: `normalize_term(t).replace(\" \", \"\")` — 소문자로 바꾸고 `- _ / · • ∙` 를\n공백으로 바꾼 뒤 공백을 접고 모두 지운다(calc/wordcount.normalize_term, G1c 의 「추가 단어」 규칙. 「탄소 중립」 =\n「탄소중립」).",
+  "properties": {
+    "terms": {
+      "description": "기본 단어(노트북의 차례).",
+      "items": {
+        "type": "string"
+      },
+      "title": "Terms",
+      "type": "array"
+    }
+  },
+  "required": [
+    "terms"
+  ],
+  "title": "GreenwashDefaultTerms",
+  "type": "object"
+}

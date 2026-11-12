@@ -1,0 +1,167 @@
+/* 그린워싱 화면의 움직임(밴드 GA1 — 시연 다듬기). 시안에 없는 것이라 길이·이징은 디자인 6c 에서 그대로 두기로 했다.
+   모두 prefers-reduced-motion: no-preference 안에만 둔다 — 움직임을 줄인 사용자에게는 클래스가 아무것도 하지 않는다.
+   이름은 gw-m- 로 시작한다(다른 칸과 겹치지 않게). 시차는 style 의 --gw-m-delay 로 준다. */
+@media (prefers-reduced-motion: no-preference) {
+  /* 들어올 때 아래에서 떠오른다 */
+  .gw-m-rise {
+    animation: gw-m-rise 420ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: var(--gw-m-delay, 0ms);
+  }
+
+  /* 막대가 왼쪽에서 자란다(안쪽 막대에 단다 — 폭은 그대로, 그리는 것만 늘린다) */
+  .gw-m-grow {
+    transform-origin: left center;
+    animation: gw-m-grow 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: var(--gw-m-delay, 0ms);
+  }
+
+  /* 진행 중 막대 위로 빛줄기가 흐른다(숫자가 잠깐 멈춰도 살아 있어 보이게) */
+  .gw-m-flow {
+    position: relative;
+    overflow: hidden;
+  }
+  .gw-m-flow::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      100deg,
+      transparent 20%,
+      rgb(255 255 255 / 0.45) 50%,
+      transparent 80%
+    );
+    transform: translateX(-100%);
+    animation: gw-m-flow 1.6s ease-in-out infinite;
+  }
+
+  /* 지금 단계 점 둘레로 고리가 퍼진다 */
+  .gw-m-ring {
+    animation: gw-m-ring 1.6s ease-out infinite;
+  }
+
+  /* 끝난 단계의 체크가 튀어 나온다 */
+  .gw-m-pop {
+    animation: gw-m-pop 360ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  }
+
+  /* 쪽 미리보기의 문장 상자: 살짝 크게 나타나 자리 잡고, 두 번 빛난다 */
+  .gw-m-mark {
+    animation:
+      gw-m-mark-in 380ms cubic-bezier(0.22, 1, 0.36, 1) both,
+      gw-m-mark-glow 900ms ease-out 380ms 2;
+  }
+
+  /* 내용이 바뀔 때 짧게 비친다(상세 칸 — 문장마다 새로 그린다) */
+  .gw-m-fade {
+    animation: gw-m-fade 220ms ease-out both;
+  }
+
+  /* 막대 폭이 바뀔 때 미끄러진다 */
+  .gw-m-width {
+    transition: width 500ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* 온실가스 DB3 — sid:MARC-TICK-538 */
+  /* 세로 막대가 바닥에서 자란다(3개년 막대 — 막대 요소에 단다) */
+  .gw-m-grow-y {
+    transform-origin: center bottom;
+    animation: gw-m-grow-y 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: var(--gw-m-delay, 0ms);
+  }
+  /* 고리를 12시에서 시계 방향으로 쓸어 드러낸다(도넛 — mask 안 원에 단다) */
+  .gw-m-sweep {
+    animation: gw-m-sweep 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: var(--gw-m-delay, 0ms);
+  }
+}
+
+@keyframes gw-m-rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes gw-m-grow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+@keyframes gw-m-flow {
+  to {
+    transform: translateX(100%);
+  }
+}
+/* 고리 색은 support-orange 토큰(orange-500, 테마가 :root 에 내보내는 변수 — 디자인 6c), 알파만 줄인다 */
+@keyframes gw-m-ring {
+  0% {
+    box-shadow: 0 0 0 0
+      color-mix(in srgb, var(--marcspon-token-support-orange) 45%, transparent);
+  }
+  100% {
+    box-shadow: 0 0 0 10px
+      color-mix(in srgb, var(--marcspon-token-support-orange) 0%, transparent);
+  }
+}
+@keyframes gw-m-pop {
+  from {
+    transform: scale(0.4);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+@keyframes gw-m-mark-in {
+  from {
+    opacity: 0;
+    transform: scale(1.08);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes gw-m-mark-glow {
+  0% {
+    filter: drop-shadow(0 0 0 currentColor);
+  }
+  40% {
+    filter: drop-shadow(0 0 6px currentColor);
+  }
+  100% {
+    filter: drop-shadow(0 0 0 currentColor);
+  }
+}
+@keyframes gw-m-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+/* 온실가스 DB3 — sid:MARC-TICK-538 */
+@keyframes gw-m-grow-y {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: none;
+  }
+}
+@keyframes gw-m-sweep {
+  from {
+    stroke-dashoffset: var(--gw-m-round);
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}

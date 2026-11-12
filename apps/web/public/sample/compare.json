@@ -1,0 +1,56 @@
+{
+  "version": 1,
+  "notice": "예시 자료다. PDF 는 코드로 만든 것이고(tools/sample-layout.ts), 판정은 손으로 적은 것이다.",
+  "documents": [
+    {
+      "id": "a",
+      "title": "예시 보고서 A",
+      "url": "sample/sample-a.pdf",
+      "pages": [
+        { "width": 595, "height": 842 },
+        { "width": 595, "height": 842 },
+        { "width": 842, "height": 595 }
+      ]
+    },
+    {
+      "id": "b",
+      "title": "예시 데이터북 B",
+      "url": "sample/sample-b.pdf",
+      "pages": [
+        { "width": 842, "height": 595 },
+        { "width": 842, "height": 595 }
+      ]
+    }
+  ],
+  "kinds": [
+    { "kind": "match", "label": "일치", "color": "#15803d" },
+    { "kind": "mismatch", "label": "불일치", "color": "#dc2626" },
+    { "kind": "unverified", "label": "확인 못 함", "color": "#6b7280" }
+  ],
+  "highlights": [
+    { "id": "1-a", "documentId": "a", "page": 1, "box": [72, 200, 522, 320], "innerBox": [372, 230, 522, 260], "kind": "match", "text": "1,234" },
+    { "id": "1-b", "documentId": "b", "page": 1, "box": [100, 150, 700, 270], "innerBox": [550, 180, 700, 210], "kind": "match", "text": "1,234" },
+
+    { "id": "2-a", "documentId": "a", "page": 1, "box": [72, 200, 522, 320], "innerBox": [372, 260, 522, 290], "kind": "mismatch", "text": "2,300" },
+    { "id": "2-b", "documentId": "b", "page": 1, "box": [100, 150, 700, 270], "innerBox": [550, 210, 700, 240], "kind": "mismatch", "text": "2,290" },
+
+    { "id": "3-a", "documentId": "a", "page": 1, "box": [72, 200, 522, 320], "innerBox": [222, 290, 372, 320], "kind": "match", "text": "3,710" },
+    { "id": "3-b", "documentId": "b", "page": 1, "box": [100, 150, 700, 270], "innerBox": [400, 240, 550, 270], "kind": "match", "text": "3,710" },
+
+    { "id": "4-a", "documentId": "a", "page": 1, "box": [72, 114, 523, 136], "innerBox": [226, 114, 270, 136], "kind": "match", "text": "1,234" },
+    { "id": "4-b", "documentId": "b", "page": 1, "box": [100, 150, 700, 270], "innerBox": [550, 180, 700, 210], "kind": "match", "text": "1,234" },
+
+    { "id": "5-a", "documentId": "a", "page": 2, "box": [72, 100, 522, 220], "innerBox": [222, 160, 372, 190], "kind": "match", "text": "88.5" },
+    { "id": "5-b", "documentId": "b", "page": 2, "box": [100, 94, 740, 116], "innerBox": [296, 94, 340, 116], "kind": "match", "text": "88.5" },
+
+    { "id": "6-a", "documentId": "a", "page": 3, "box": [100, 80, 300, 140], "kind": "unverified" }
+  ],
+  "items": [
+    { "id": "1", "title": "Scope 1 · 2024", "detail": "A 1,234 = B 1,234", "highlightIds": ["1-a", "1-b"], "review": { "status": "pending" } },
+    { "id": "2", "title": "Scope 2 · 2024", "detail": "A 2,300 ≠ B 2,290", "highlightIds": ["2-a", "2-b"], "review": { "status": "pending" } },
+    { "id": "3", "title": "Total · 2023", "detail": "A 3,710 = B 3,710", "highlightIds": ["3-a", "3-b"], "review": { "status": "pending" } },
+    { "id": "4", "title": "문장 속 숫자 1,234", "detail": "A 의 문장 = B 의 표 칸(항목 1 과 같은 칸)", "highlightIds": ["4-a", "4-b"], "review": { "status": "pending" } },
+    { "id": "5", "title": "Renewable share", "detail": "A 의 표 칸 88.5 = B 의 문장 88.5", "highlightIds": ["5-a", "5-b"], "review": { "status": "pending" } },
+    { "id": "6", "title": "돌아간 쪽의 상자", "detail": "B 에 짝이 없다. 쪽 자체가 90도 돌아가 있다.", "highlightIds": ["6-a"], "review": { "status": "pending" } }
+  ]
+}

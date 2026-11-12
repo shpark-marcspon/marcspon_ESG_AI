@@ -1,0 +1,10 @@
+{
+  "nodes": [
+    {"key": "env", "parentKey": null, "depth": 1, "title": "환경", "requirement": ""},
+    {"key": "env-climate", "parentKey": "env", "depth": 2, "title": "기후변화 대응", "requirement": ""},
+    {"key": "env-climate-ghg", "parentKey": "env-climate", "depth": 3, "title": "온실가스 배출 관리", "requirement": "전년도 배출량과 감축 활동을 개조식으로"},
+    {"key": "env-climate-energy", "parentKey": "env-climate", "depth": 3, "title": "에너지 사용", "requirement": "재생에너지 전환 계획"},
+    {"key": "soc", "parentKey": null, "depth": 1, "title": "사회", "requirement": ""},
+    {"key": "soc-safety", "parentKey": "soc", "depth": 2, "title": "안전보건", "requirement": "산업재해율과 안전 교육"}
+  ]
+}

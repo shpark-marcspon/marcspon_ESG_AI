@@ -1,0 +1,1201 @@
+{
+  "$defs": {
+    "AutofixDone": {
+      "additionalProperties": false,
+      "description": "자동수정을 끝까지 돌렸다.",
+      "properties": {
+        "status": {
+          "const": "done",
+          "title": "Status",
+          "type": "string"
+        },
+        "pages": {
+          "items": {
+            "$ref": "#/$defs/AutofixPage"
+          },
+          "title": "Pages",
+          "type": "array"
+        },
+        "translatedText": {
+          "description": "자동수정을 반영한 영문 번역 전문(쪽 번호 차례, 쪽 사이 빈 줄 하나).",
+          "title": "Translatedtext",
+          "type": "string"
+        },
+        "bilingualText": {
+          "description": "그 글로 다시 지은 국문 병기본 전문.",
+          "title": "Bilingualtext",
+          "type": "string"
+        },
+        "stop": {
+          "title": "Stop",
+          "type": "null"
+        },
+        "notRunReason": {
+          "title": "Notrunreason",
+          "type": "null"
+        }
+      },
+      "required": [
+        "status",
+        "pages",
+        "translatedText",
+        "bilingualText",
+        "stop",
+        "notRunReason"
+      ],
+      "title": "AutofixDone",
+      "type": "object"
+    },
+    "AutofixNotRun": {
+      "additionalProperties": false,
+      "description": "자동수정을 돌리지 않았다.",
+      "properties": {
+        "status": {
+          "const": "not_run",
+          "title": "Status",
+          "type": "string"
+        },
+        "pages": {
+          "items": {
+            "$ref": "#/$defs/AutofixPage"
+          },
+          "maxItems": 0,
+          "title": "Pages",
+          "type": "array"
+        },
+        "translatedText": {
+          "title": "Translatedtext",
+          "type": "null"
+        },
+        "bilingualText": {
+          "title": "Bilingualtext",
+          "type": "null"
+        },
+        "stop": {
+          "title": "Stop",
+          "type": "null"
+        },
+        "notRunReason": {
+          "description": "disabled = 입력 autofix false, review_stopped = 검수가 멈춤, earlier_variant_stopped = 앞 문체의 자동수정이\n멈춤.",
+          "enum": [
+            "disabled",
+            "review_stopped",
+            "earlier_variant_stopped"
+          ],
+          "title": "Notrunreason",
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "pages",
+        "translatedText",
+        "bilingualText",
+        "stop",
+        "notRunReason"
+      ],
+      "title": "AutofixNotRun",
+      "type": "object"
+    },
+    "AutofixPage": {
+      "additionalProperties": false,
+      "description": "자동수정한 쪽 하나(이슈나 남은 한국어가 있는 쪽만).",
+      "properties": {
+        "pageNum": {
+          "minimum": 0,
+          "title": "Pagenum",
+          "type": "integer"
+        },
+        "changed": {
+          "title": "Changed",
+          "type": "boolean"
+        },
+        "reason": {
+          "enum": [
+            "llm_repair_applied",
+            "no_change_needed",
+            "table_pipe_signature_changed_safe_current_used"
+          ],
+          "title": "Reason",
+          "type": "string"
+        },
+        "issueCount": {
+          "minimum": 0,
+          "title": "Issuecount",
+          "type": "integer"
+        },
+        "spanReplacements": {
+          "items": {
+            "$ref": "#/$defs/SpanReplacement"
+          },
+          "title": "Spanreplacements",
+          "type": "array"
+        },
+        "koreanRepairRounds": {
+          "items": {
+            "$ref": "#/$defs/KoreanRepairRound"
+          },
+          "title": "Koreanrepairrounds",
+          "type": "array"
+        },
+        "remainingKoreanAfter": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Remainingkoreanafter",
+          "type": "array"
+        }
+      },
+      "required": [
+        "pageNum",
+        "changed",
+        "reason",
+        "issueCount",
+        "spanReplacements",
+        "koreanRepairRounds",
+        "remainingKoreanAfter"
+      ],
+      "title": "AutofixPage",
+      "type": "object"
+    },
+    "AutofixStop": {
+      "additionalProperties": false,
+      "description": "자동수정이 멈춘 자리(코랩은 셀이 멈춰 자동수정 파일을 쓰지 않는다).",
+      "properties": {
+        "kind": {
+          "description": "remaining_korean = 보정 뒤에도 한국어가 남음(코랩 ValueError), call_failed = LLM 호출 실패.",
+          "enum": [
+            "remaining_korean",
+            "call_failed"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "pageNum": {
+          "minimum": 0,
+          "title": "Pagenum",
+          "type": "integer"
+        },
+        "remainingKorean": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Remainingkorean",
+          "type": "array"
+        },
+        "message": {
+          "title": "Message",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "pageNum",
+        "remainingKorean",
+        "message"
+      ],
+      "title": "AutofixStop",
+      "type": "object"
+    },
+    "AutofixStopped": {
+      "additionalProperties": false,
+      "description": "자동수정이 멈췄다. 앞 쪽들의 결과도 버린다(코랩은 파일을 쓰지 않았다).",
+      "properties": {
+        "status": {
+          "const": "stopped",
+          "title": "Status",
+          "type": "string"
+        },
+        "pages": {
+          "items": {
+            "$ref": "#/$defs/AutofixPage"
+          },
+          "maxItems": 0,
+          "title": "Pages",
+          "type": "array"
+        },
+        "translatedText": {
+          "title": "Translatedtext",
+          "type": "null"
+        },
+        "bilingualText": {
+          "title": "Bilingualtext",
+          "type": "null"
+        },
+        "stop": {
+          "$ref": "#/$defs/AutofixStop"
+        },
+        "notRunReason": {
+          "title": "Notrunreason",
+          "type": "null"
+        }
+      },
+      "required": [
+        "status",
+        "pages",
+        "translatedText",
+        "bilingualText",
+        "stop",
+        "notRunReason"
+      ],
+      "title": "AutofixStopped",
+      "type": "object"
+    },
+    "DocumentInfo": {
+      "additionalProperties": false,
+      "description": "원문을 쪽으로 나눈 결과.",
+      "properties": {
+        "pageNumbers": {
+          "description": "번역 대상 쪽 조각의 쪽 번호(쪽 범위를 거른 뒤, 원문 차례 — 같은 번호가 두 번 나오면 두 번).",
+          "items": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "title": "Pagenumbers",
+          "type": "array"
+        },
+        "duplicatePages": {
+          "additionalProperties": {
+            "minimum": 2,
+            "type": "integer"
+          },
+          "description": "원문에서 같은 [PAGE n] 이 여러 번 나와 합친 쪽(쪽 번호 글자 → 나온 횟수, 코랩 셀 18). 없으면 빈 객체.",
+          "title": "Duplicatepages",
+          "type": "object"
+        },
+        "sourceSha256": {
+          "description": "원문 글(문서를 글로 읽은 것 — 셀 7 앞)의 UTF-8 sha256. 실패 쪽만 다시 돌릴 때 앞 실행과 같은 원문인지 본다.",
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sourcesha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "pageNumbers",
+        "duplicatePages",
+        "sourceSha256"
+      ],
+      "title": "DocumentInfo",
+      "type": "object"
+    },
+    "EditorialQa": {
+      "additionalProperties": false,
+      "description": "범용 Editorial QA 게이트 한 번의 기록(코랩 GENERIC_EDITORIAL_QA_LOGS 한 줄). 점수는 LLM 이 낸다.",
+      "properties": {
+        "ran": {
+          "description": "false = 게이트를 부르지 않음(reason 이 skipped_…).",
+          "title": "Ran",
+          "type": "boolean"
+        },
+        "reason": {
+          "description": "코랩의 reason 글자 그대로.",
+          "enum": [
+            "skipped_table_or_short_text",
+            "skipped_too_long",
+            "json_parse_failed",
+            "no_revised_text",
+            "score_and_issues_acceptable",
+            "structure_tag_changed",
+            "korean_leftover_increased",
+            "revised_text_applied"
+          ],
+          "title": "Reason",
+          "type": "string"
+        },
+        "qualityScore": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "LLM 의 quality_score(0-100). 게이트가 안 돌았거나 JSON 을 못 읽었으면 null.",
+          "title": "Qualityscore"
+        },
+        "scoreDefaulted": {
+          "description": "true = quality_score 가 없거나 정수로 못 읽어 코랩이 100 으로 친 것(코랩 W2).",
+          "title": "Scoredefaulted",
+          "type": "boolean"
+        },
+        "hasCriticalIssue": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Hascriticalissue"
+        },
+        "applied": {
+          "description": "true = revised_text 를 번역문으로 썼다.",
+          "title": "Applied",
+          "type": "boolean"
+        },
+        "issues": {
+          "$ref": "#/$defs/JsonValue",
+          "description": "LLM 이 낸 issues 그대로(코랩도 꼴을 보지 않는다). 없으면 []."
+        }
+      },
+      "required": [
+        "ran",
+        "reason",
+        "qualityScore",
+        "scoreDefaulted",
+        "hasCriticalIssue",
+        "applied",
+        "issues"
+      ],
+      "title": "EditorialQa",
+      "type": "object"
+    },
+    "EngineConstants": {
+      "additionalProperties": false,
+      "description": "엔진 판의 상수(코랩 기본값). 결과에 비추기만 한다.",
+      "properties": {
+        "editorialQaMinScore": {
+          "description": "범용 QA 점수 문턱(코랩 GENERIC_EDITORIAL_QA_MIN_SCORE 96).",
+          "title": "Editorialqaminscore",
+          "type": "integer"
+        },
+        "tableBatchSize": {
+          "description": "표 칸 JSON 묶음의 칸 수(코랩 24).",
+          "title": "Tablebatchsize",
+          "type": "integer"
+        },
+        "polishMinChars": {
+          "description": "윤문·쪽 게이트의 최소 글자 수(공백 뺌, 코랩 EDITORIAL_POLISH_MIN_CHARS 120).",
+          "title": "Polishminchars",
+          "type": "integer"
+        },
+        "polishMaxChars": {
+          "description": "윤문·범용 QA 의 최대 글자 수(코랩 EDITORIAL_POLISH_MAX_CHARS 6000).",
+          "title": "Polishmaxchars",
+          "type": "integer"
+        },
+        "koreanRepairRounds": {
+          "description": "구획마다 한국어 잔존 보정의 최대 횟수(코랩 MAX_UNTRANSLATED_REPAIR_ROUNDS 2).",
+          "title": "Koreanrepairrounds",
+          "type": "integer"
+        },
+        "autofixKoreanRepairRounds": {
+          "description": "자동수정 뒤 한국어 보정의 최대 횟수(코랩 PART_QA_AUTOFIX_MAX_KOREAN_REPAIR_ROUNDS 1).",
+          "title": "Autofixkoreanrepairrounds",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "editorialQaMinScore",
+        "tableBatchSize",
+        "polishMinChars",
+        "polishMaxChars",
+        "koreanRepairRounds",
+        "autofixKoreanRepairRounds"
+      ],
+      "title": "EngineConstants",
+      "type": "object"
+    },
+    "Fragment": {
+      "additionalProperties": false,
+      "description": "쪽 조각 하나의 번역(코랩 셀 49 run_translation 의 한 바퀴 — 같은 쪽 번호가 두 번 나오면 조각도 둘).",
+      "properties": {
+        "pageNum": {
+          "minimum": 0,
+          "title": "Pagenum",
+          "type": "integer"
+        },
+        "status": {
+          "description": "error = 쪽 안에서 예외가 났다(LLM 호출 실패·한국어 잔존 등). 번역 글은 코랩대로\n`[TRANSLATION_ERROR page=n]` + 원문이고, 그 글이 병기·검수·자동수정으로 흘러간다(코랩 W7).",
+          "enum": [
+            "translated",
+            "error"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "error": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "status error 의 까닭(예외 글). translated 면 null.",
+          "title": "Error"
+        },
+        "editorialQa": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/EditorialQa"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "그 문체의 범용 QA 기록. 쪽이 그 게이트에 닿기 전에 실패했으면 null."
+        },
+        "remainingKorean": {
+          "description": "쪽이 한국어 잔존으로 실패했으면(error 가 「[치명] 번역 결과에 한국어가 남아…」) 남은 줄 — 코랩 셈 그대로 40줄·\n줄당 300자까지(error 글에는 앞 10줄만). 그 밖은 빈 목록. 용어집에 넣을 낱말을 화면이 고르게 한다.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Remainingkorean",
+          "type": "array"
+        }
+      },
+      "required": [
+        "pageNum",
+        "status",
+        "error",
+        "editorialQa",
+        "remainingKorean"
+      ],
+      "title": "Fragment",
+      "type": "object"
+    },
+    "GlossaryMiss": {
+      "additionalProperties": false,
+      "description": "용어집 반영 검사의 미반영 하나(코랩 셀 57 — 보고만, 결과를 바꾸지 않는다).",
+      "properties": {
+        "pageNum": {
+          "minimum": 0,
+          "title": "Pagenum",
+          "type": "integer"
+        },
+        "termKo": {
+          "title": "Termko",
+          "type": "string"
+        },
+        "termEn": {
+          "title": "Termen",
+          "type": "string"
+        },
+        "sourceCount": {
+          "description": "그 쪽 원문에 국문 key 가 나온 횟수.",
+          "minimum": 0,
+          "title": "Sourcecount",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "pageNum",
+        "termKo",
+        "termEn",
+        "sourceCount"
+      ],
+      "title": "GlossaryMiss",
+      "type": "object"
+    },
+    "JsonValue": {},
+    "KoreanRepairRound": {
+      "additionalProperties": false,
+      "description": "자동수정 뒤 한국어 보정 한 번.",
+      "properties": {
+        "changed": {
+          "title": "Changed",
+          "type": "boolean"
+        },
+        "remainingKorean": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Remainingkorean",
+          "type": "array"
+        },
+        "reason": {
+          "anyOf": [
+            {
+              "const": "table_pipe_signature_changed_safe_current_used",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "표 pipe 구조가 바뀌어 보정본을 버렸으면 그 까닭(코랩 글자). 아니면 null.",
+          "title": "Reason"
+        }
+      },
+      "required": [
+        "changed",
+        "remainingKorean",
+        "reason"
+      ],
+      "title": "KoreanRepairRound",
+      "type": "object"
+    },
+    "Page": {
+      "additionalProperties": false,
+      "description": "검수한 쪽 하나(코랩 셀 65 의 공통 쪽 — 원문과 번역에 다 있는 쪽 번호, 오름차순).",
+      "properties": {
+        "pageNum": {
+          "minimum": 0,
+          "title": "Pagenum",
+          "type": "integer"
+        },
+        "translated": {
+          "description": "그 쪽의 영문 번역(같은 번호의 조각을 합친 글).",
+          "title": "Translated",
+          "type": "string"
+        },
+        "bilingual": {
+          "description": "그 쪽의 국문 병기본(제목 첫 줄에만 국문 병기).",
+          "title": "Bilingual",
+          "type": "string"
+        },
+        "review": {
+          "discriminator": {
+            "mapping": {
+              "call_failed": "#/$defs/ReviewStopped",
+              "not_run": "#/$defs/ReviewStopped",
+              "parse_failed": "#/$defs/ReviewDone",
+              "reviewed": "#/$defs/ReviewDone"
+            },
+            "propertyName": "status"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/ReviewDone"
+            },
+            {
+              "$ref": "#/$defs/ReviewStopped"
+            }
+          ],
+          "title": "Review"
+        }
+      },
+      "required": [
+        "pageNum",
+        "translated",
+        "bilingual",
+        "review"
+      ],
+      "title": "Page",
+      "type": "object"
+    },
+    "Rejection": {
+      "additionalProperties": false,
+      "description": "번역을 시작하지 않은 까닭(코랩이 실행을 멈춘 자리).",
+      "properties": {
+        "kind": {
+          "description": "no_pages = 쪽 범위 안에 [PAGE n] 쪽이 없음(코랩 ValueError), ceo_page_limit = CEO 파트의 쪽 조각 수가 상한을\n넘음(코랩 eval_js 경고 + SystemExit), unsupported_input = 받지 않는 문서 꼴. 아래 넷은 실행이 공급사를 부르기 전에\n멈춘 것(코랩에 없는 자리 — TR2): too_large = 쪽 조각·원문 글자·계획 호출 수가 상한을 넘음, over_budget = 호출\n비용의 위끝이 한 실행의 금액 상한을 넘음, retry_source_not_found = 다시 돌릴 앞 실행이 없음(남의 회사·다른 모듈·\n끝나지 않음·앞 결과가 거절이어도 이 갈래), retry_source_mismatch = 앞 실행의 원문·문체 묶음이 이 실행과 다름.",
+          "enum": [
+            "no_pages",
+            "ceo_page_limit",
+            "unsupported_input",
+            "too_large",
+            "over_budget",
+            "retry_source_not_found",
+            "retry_source_mismatch"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "message": {
+          "title": "Message",
+          "type": "string"
+        },
+        "pageCount": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "번역 대상 쪽 조각 수(ceo_page_limit 일 때). 그 밖은 null.",
+          "title": "Pagecount"
+        },
+        "limit": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "CEO 쪽 한도(ceo_page_limit 일 때). 그 밖은 null.",
+          "title": "Limit"
+        }
+      },
+      "required": [
+        "kind",
+        "message",
+        "pageCount",
+        "limit"
+      ],
+      "title": "Rejection",
+      "type": "object"
+    },
+    "ResultWarning": {
+      "additionalProperties": false,
+      "description": "경고 한 줄 — 코랩이 print(\"[주의] …\") 하던 자리마다 code 하나.",
+      "properties": {
+        "code": {
+          "description": "예: polish_tags_changed(윤문이 구조 태그를 바꿔 원 번역 유지), table_json_fallback(표 JSON 을 못 읽어 칸 단위\n번역), llm_truncated·llm_refused(LLM 답이 잘림·거절 — 코랩대로 그 글로 계속), duplicate_pages(같은 쪽 합침).",
+          "title": "Code",
+          "type": "string"
+        },
+        "message": {
+          "title": "Message",
+          "type": "string"
+        },
+        "pageNum": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Pagenum"
+        },
+        "variant": {
+          "anyOf": [
+            {
+              "enum": [
+                "single",
+                "A",
+                "B"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Variant"
+        }
+      },
+      "required": [
+        "code",
+        "message",
+        "pageNum",
+        "variant"
+      ],
+      "title": "ResultWarning",
+      "type": "object"
+    },
+    "RetryInfo": {
+      "additionalProperties": false,
+      "description": "실패 쪽만 다시 돌린 실행(코랩 셀 50 RETRY_PAGES — TR2).",
+      "properties": {
+        "fromRunId": {
+          "description": "번역 글을 가져온 앞 실행.",
+          "minimum": 1,
+          "title": "Fromrunid",
+          "type": "integer"
+        },
+        "pages": {
+          "description": "다시 번역하라고 고른 쪽(옵션 그대로).",
+          "items": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "title": "Pages",
+          "type": "array"
+        },
+        "skippedPages": {
+          "description": "고른 쪽 가운데 원문에 없어 건너뛴 쪽(코랩 「원문에서 찾을 수 없음, 건너뜀」 — 경고 retry_page_missing 과\n같은 쪽).",
+          "items": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "title": "Skippedpages",
+          "type": "array"
+        }
+      },
+      "required": [
+        "fromRunId",
+        "pages",
+        "skippedPages"
+      ],
+      "title": "RetryInfo",
+      "type": "object"
+    },
+    "ReviewDone": {
+      "additionalProperties": false,
+      "description": "검수를 돌렸다.",
+      "properties": {
+        "status": {
+          "description": "parse_failed = 검수 LLM 의 답을 JSON 으로 못 읽어 모델 이슈 0 으로 친 것(코랩 W8). 용어집 검사 이슈는 남는다.",
+          "enum": [
+            "reviewed",
+            "parse_failed"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "issues": {
+          "items": {
+            "$ref": "#/$defs/ReviewIssue"
+          },
+          "title": "Issues",
+          "type": "array"
+        },
+        "counts": {
+          "$ref": "#/$defs/SeverityCounts"
+        },
+        "message": {
+          "title": "Message",
+          "type": "null"
+        }
+      },
+      "required": [
+        "status",
+        "issues",
+        "counts",
+        "message"
+      ],
+      "title": "ReviewDone",
+      "type": "object"
+    },
+    "ReviewIssue": {
+      "additionalProperties": false,
+      "description": "검수 이슈 하나.",
+      "properties": {
+        "issueType": {
+          "description": "이슈 유형(코랩 ALLOWED_ISSUE_TYPES 열 가운데 하나 — 모델 이슈는 거른 뒤라 그 안이다).",
+          "title": "Issuetype",
+          "type": "string"
+        },
+        "severity": {
+          "description": "심각도(모델이 낸 글자를 대문자로 — HIGH·MEDIUM·LOW 밖의 글자도 코랩대로 남는다).",
+          "title": "Severity",
+          "type": "string"
+        },
+        "originalSpan": {
+          "description": "고칠 영문 구간. 번역문에 없으면 코랩대로 빈 글이다.",
+          "title": "Originalspan",
+          "type": "string"
+        },
+        "suggestion": {
+          "title": "Suggestion",
+          "type": "string"
+        },
+        "reason": {
+          "title": "Reason",
+          "type": "string"
+        },
+        "source": {
+          "description": "model = 검수 LLM 이 냄(거름 sanitize_issues 를 지남), glossary_rule = 용어집 정확 매칭 검사가 냄(결정적).",
+          "enum": [
+            "model",
+            "glossary_rule"
+          ],
+          "title": "Source",
+          "type": "string"
+        }
+      },
+      "required": [
+        "issueType",
+        "severity",
+        "originalSpan",
+        "suggestion",
+        "reason",
+        "source"
+      ],
+      "title": "ReviewIssue",
+      "type": "object"
+    },
+    "ReviewStopped": {
+      "additionalProperties": false,
+      "description": "검수가 이 쪽에서 멈췄거나(call_failed — LLM 호출 실패, 코랩은 셀이 멈춘다) 앞 쪽이 멈춰 돌지 않았다(not_run).",
+      "properties": {
+        "status": {
+          "enum": [
+            "call_failed",
+            "not_run"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "issues": {
+          "items": {
+            "$ref": "#/$defs/ReviewIssue"
+          },
+          "maxItems": 0,
+          "title": "Issues",
+          "type": "array"
+        },
+        "counts": {
+          "$ref": "#/$defs/SeverityCounts"
+        },
+        "message": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "call_failed 의 까닭. not_run 이면 null.",
+          "title": "Message"
+        }
+      },
+      "required": [
+        "status",
+        "issues",
+        "counts",
+        "message"
+      ],
+      "title": "ReviewStopped",
+      "type": "object"
+    },
+    "Routes": {
+      "additionalProperties": false,
+      "description": "역할별 core.llm 경로.",
+      "properties": {
+        "translate": {
+          "description": "번역·윤문·게이트·자동수정의 경로(파트 ceo_message 면 standard, 아니면 light-anthropic).",
+          "title": "Translate",
+          "type": "string"
+        },
+        "review": {
+          "description": "검수의 경로(파트와 무관하게 light-anthropic — 코랩 W3).",
+          "title": "Review",
+          "type": "string"
+        }
+      },
+      "required": [
+        "translate",
+        "review"
+      ],
+      "title": "Routes",
+      "type": "object"
+    },
+    "Settings": {
+      "additionalProperties": false,
+      "description": "실행 설정. 실제로 불린 모델·사용량은 실행 기록이 진실이다.",
+      "properties": {
+        "part": {
+          "enum": [
+            "ceo_message",
+            "story",
+            "general"
+          ],
+          "title": "Part",
+          "type": "string"
+        },
+        "variants": {
+          "description": "번역한 문체([\"single\"] 또는 [\"A\",\"B\"]).",
+          "items": {
+            "enum": [
+              "single",
+              "A",
+              "B"
+            ],
+            "type": "string"
+          },
+          "title": "Variants",
+          "type": "array"
+        },
+        "routes": {
+          "$ref": "#/$defs/Routes"
+        },
+        "promptIds": {
+          "description": "이 판이 쓰는 core.llm 프롬프트 id(`translation/<자리>@<판>` — 쪽 system 일곱 자리는 @2).",
+          "items": {
+            "type": "string"
+          },
+          "title": "Promptids",
+          "type": "array"
+        },
+        "engine": {
+          "const": "colab_158",
+          "title": "Engine",
+          "type": "string"
+        },
+        "constants": {
+          "$ref": "#/$defs/EngineConstants"
+        },
+        "retry": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/RetryInfo"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "실패 쪽만 다시 돌린 실행이면 그 앞 실행과 쪽, 아니면 null."
+        }
+      },
+      "required": [
+        "part",
+        "variants",
+        "routes",
+        "promptIds",
+        "engine",
+        "constants",
+        "retry"
+      ],
+      "title": "Settings",
+      "type": "object"
+    },
+    "SeverityCounts": {
+      "additionalProperties": false,
+      "description": "심각도별 이슈 수(코랩 QA Word 요약표의 셈 — 글자가 정확히 HIGH·MEDIUM·LOW 인 것만).",
+      "properties": {
+        "high": {
+          "minimum": 0,
+          "title": "High",
+          "type": "integer"
+        },
+        "medium": {
+          "minimum": 0,
+          "title": "Medium",
+          "type": "integer"
+        },
+        "low": {
+          "minimum": 0,
+          "title": "Low",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "high",
+        "medium",
+        "low"
+      ],
+      "title": "SeverityCounts",
+      "type": "object"
+    },
+    "SpanReplacement": {
+      "additionalProperties": false,
+      "description": "자동수정의 직접 치환 하나(이슈의 originalSpan → suggestion).",
+      "properties": {
+        "issueType": {
+          "title": "Issuetype",
+          "type": "string"
+        },
+        "originalSpan": {
+          "title": "Originalspan",
+          "type": "string"
+        },
+        "suggestion": {
+          "title": "Suggestion",
+          "type": "string"
+        }
+      },
+      "required": [
+        "issueType",
+        "originalSpan",
+        "suggestion"
+      ],
+      "title": "SpanReplacement",
+      "type": "object"
+    },
+    "TranslationDone": {
+      "additionalProperties": false,
+      "description": "translation.result@1 — 번역을 돌렸다.",
+      "properties": {
+        "schemaVersion": {
+          "const": "translation.result@1",
+          "title": "Schemaversion",
+          "type": "string"
+        },
+        "status": {
+          "const": "done",
+          "title": "Status",
+          "type": "string"
+        },
+        "rejection": {
+          "title": "Rejection",
+          "type": "null"
+        },
+        "settings": {
+          "$ref": "#/$defs/Settings"
+        },
+        "document": {
+          "$ref": "#/$defs/DocumentInfo"
+        },
+        "variants": {
+          "items": {
+            "$ref": "#/$defs/Variant"
+          },
+          "minItems": 1,
+          "title": "Variants",
+          "type": "array"
+        },
+        "warnings": {
+          "items": {
+            "$ref": "#/$defs/ResultWarning"
+          },
+          "title": "Warnings",
+          "type": "array"
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "status",
+        "rejection",
+        "settings",
+        "document",
+        "variants",
+        "warnings"
+      ],
+      "title": "TranslationDone",
+      "type": "object"
+    },
+    "TranslationRejected": {
+      "additionalProperties": false,
+      "description": "translation.result@1 — 번역을 시작하지 않았다.",
+      "properties": {
+        "schemaVersion": {
+          "const": "translation.result@1",
+          "title": "Schemaversion",
+          "type": "string"
+        },
+        "status": {
+          "const": "rejected",
+          "title": "Status",
+          "type": "string"
+        },
+        "rejection": {
+          "$ref": "#/$defs/Rejection"
+        },
+        "settings": {
+          "$ref": "#/$defs/Settings"
+        },
+        "document": {
+          "$ref": "#/$defs/DocumentInfo"
+        },
+        "variants": {
+          "items": {
+            "$ref": "#/$defs/Variant"
+          },
+          "maxItems": 0,
+          "title": "Variants",
+          "type": "array"
+        },
+        "warnings": {
+          "items": {
+            "$ref": "#/$defs/ResultWarning"
+          },
+          "title": "Warnings",
+          "type": "array"
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "status",
+        "rejection",
+        "settings",
+        "document",
+        "variants",
+        "warnings"
+      ],
+      "title": "TranslationRejected",
+      "type": "object"
+    },
+    "Variant": {
+      "additionalProperties": false,
+      "description": "문체 하나의 결과.",
+      "properties": {
+        "label": {
+          "enum": [
+            "single",
+            "A",
+            "B"
+          ],
+          "title": "Label",
+          "type": "string"
+        },
+        "translatedText": {
+          "description": "영문 번역 전문(코랩 번역 txt — 조각을 빈 줄 하나로 이은 것).",
+          "title": "Translatedtext",
+          "type": "string"
+        },
+        "bilingualText": {
+          "description": "국문 병기본 전문(코랩 병기 txt).",
+          "title": "Bilingualtext",
+          "type": "string"
+        },
+        "fragments": {
+          "items": {
+            "$ref": "#/$defs/Fragment"
+          },
+          "title": "Fragments",
+          "type": "array"
+        },
+        "pages": {
+          "items": {
+            "$ref": "#/$defs/Page"
+          },
+          "title": "Pages",
+          "type": "array"
+        },
+        "glossaryCheck": {
+          "items": {
+            "$ref": "#/$defs/GlossaryMiss"
+          },
+          "title": "Glossarycheck",
+          "type": "array"
+        },
+        "autofix": {
+          "discriminator": {
+            "mapping": {
+              "done": "#/$defs/AutofixDone",
+              "not_run": "#/$defs/AutofixNotRun",
+              "stopped": "#/$defs/AutofixStopped"
+            },
+            "propertyName": "status"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/AutofixDone"
+            },
+            {
+              "$ref": "#/$defs/AutofixStopped"
+            },
+            {
+              "$ref": "#/$defs/AutofixNotRun"
+            }
+          ],
+          "title": "Autofix"
+        }
+      },
+      "required": [
+        "label",
+        "translatedText",
+        "bilingualText",
+        "fragments",
+        "pages",
+        "glossaryCheck",
+        "autofix"
+      ],
+      "title": "Variant",
+      "type": "object"
+    }
+  },
+  "description": "영문번역 한 건의 결과.",
+  "discriminator": {
+    "mapping": {
+      "done": "#/$defs/TranslationDone",
+      "rejected": "#/$defs/TranslationRejected"
+    },
+    "propertyName": "status"
+  },
+  "oneOf": [
+    {
+      "$ref": "#/$defs/TranslationDone"
+    },
+    {
+      "$ref": "#/$defs/TranslationRejected"
+    }
+  ],
+  "title": "translation.result@1"
+}

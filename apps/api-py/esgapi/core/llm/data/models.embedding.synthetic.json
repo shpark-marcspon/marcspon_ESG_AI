@@ -1,0 +1,29 @@
+{
+  "checkedOn": "2026-10-15",
+  "synthetic": true,
+  "note": "가상 임베딩 모델. 단가·한도·차원은 실제 값이 아니다. 차원 256 은 esg-lab GW1(py/greenwash/ports.py)의 MockEmbedding 과 같게 둔 것이고, 벡터도 같은 셈으로 짓는다(providers/mock.py 의 mock_vector). esg-lab ts/llm 의 가상 모델(mock-embedding-synthetic, 차원 64, 낱말 해시)과는 다른 모델이라 이름을 갈랐다.",
+  "sources": {},
+  "models": {},
+  "routes": {},
+  "embeddingModels": {
+    "mock-embedding-gw1-synthetic": {
+      "provider": "mock",
+      "apiModelId": "mock-embedding",
+      "label": "모의 임베딩(가상, GW1 과 같은 벡터)",
+      "synthetic": true,
+      "pricing": { "input": 1 },
+      "dimensions": 256,
+      "maxInputTokens": 8192,
+      "maxInputsPerRequest": 2048,
+      "maxTokensPerRequest": 300000,
+      "multilingual": null,
+      "sourceRefs": [],
+      "notes": [
+        "가상 모델. 한도는 실제 모델과 같은 수로 두었다(흐름이 가상 모델로 돌 때 실제와 같은 데서 막히게)"
+      ]
+    }
+  },
+  "embeddingRoutes": {
+    "mock-gw1": "mock-embedding-gw1-synthetic"
+  }
+}

@@ -1,0 +1,184 @@
+{
+ "documents": {
+  "kb_2025_kor": {
+   "inputs": {
+    "document.json": "99e487830d825627e5c71b01458b967ba8d6d81d953c0fbfb968bd68e06c7dc8"
+   },
+   "sections": {
+    "facts": {
+     "count": 2938,
+     "sha256": "348bfdd01eb150749125fd88a2bc8f712df7ef170c0e4651d0fa78b8726497db"
+    },
+    "nonValues": {
+     "count": 1660,
+     "sha256": "1eb819e1615867bf2eff452171611a863b7ec36e588cde1866b3ef0910069f91"
+    },
+    "grids": {
+     "count": 144,
+     "sha256": "a56cb902f96fcae1bf80c2288179c02f173ecc2728ddbd2603d792c700fd44e0"
+    },
+    "failed": {
+     "count": 3,
+     "sha256": "6c7d56fde353cf3f002456e7c8cb49fda4143f218e46e8c52804c90170b5362a"
+    },
+    "kinds": {
+     "count": 2938,
+     "sha256": "7c013d47d7ee0b1fbd32417ae8cb976601772a357a01955f6d3c90fdd32f675f"
+    },
+    "count": {
+     "count": 2938,
+     "sha256": "7a6936b1522b2f5526db2e4745598617695c449c039aa6126a9ce31646a2884b"
+    },
+    "masks": {
+     "count": 7367,
+     "sha256": "18192531d5b24570c6c6179607a7ea7f2f727d320e5209dd2fe6d0af809f9346"
+    }
+   }
+  },
+  "kb_2025_databook_kor": {
+   "inputs": {
+    "document.json": "a9da12fdde428a10785749ce08749de2347e2d8a49eb8b4801d69d99b8b3821f"
+   },
+   "sections": {
+    "facts": {
+     "count": 1292,
+     "sha256": "bbd9000ae3a44b987382f739063caf922a4331be5f42ad0484dd8abd797e708d"
+    },
+    "nonValues": {
+     "count": 1678,
+     "sha256": "fb4516905bb26dcdc6dc40be6a51ec1ea30df57f537a689fdcc1d9007274e4e7"
+    },
+    "grids": {
+     "count": 203,
+     "sha256": "694fd239bd09b4357c0ce4b120033e95bab97d94f2ff177837f771377485077f"
+    },
+    "failed": {
+     "count": 1,
+     "sha256": "21214ef8136e2d8f8bb8477b3cb28422cd160a411e374fd6b554d9505f373d5e"
+    },
+    "kinds": {
+     "count": 1292,
+     "sha256": "983d14516812c333ed6394240817524a2cdc37253d5e514df74a4fe39de25790"
+    },
+    "count": {
+     "count": 1292,
+     "sha256": "1634d9579da680b614989dfd28e20d36d42c27e181bee1a05e998ec29068408d"
+    },
+    "masks": {
+     "count": 7153,
+     "sha256": "2b9f5616fff57f93b00d186016169fbda3f0aff90672f07d34270878f0ec8d16"
+    }
+   }
+  },
+  "samsung_2026_kor": {
+   "inputs": {
+    "document.json": "bd4f8b8534da91a979cadeea66a7262a8110d5cfddcee3404a18f6234ab0b76d"
+   },
+   "sections": {
+    "facts": {
+     "count": 2067,
+     "sha256": "3e3396c0ab58e9bd95859494a17550af8da46b210b992ff3e85f6e22e2f966d0"
+    },
+    "nonValues": {
+     "count": 2109,
+     "sha256": "42abfa7973453d32203e74139b311be7751afe149f88c235c18a9076fe60e75f"
+    },
+    "grids": {
+     "count": 139,
+     "sha256": "df8288953bea8ae697ce07a95111e3c978cda6fc4d9b83086fc0dcd420419afa"
+    },
+    "failed": {
+     "count": 1,
+     "sha256": "c5f68c99789a0de3a41dc55ec4ae11ddc89f2a0ef806424e330b91b357342216"
+    },
+    "kinds": {
+     "count": 2067,
+     "sha256": "25c392ab8f8bb885c5ac8b0961de18b9506d636d9fe2839d9fd732c9eeda7e56"
+    },
+    "count": {
+     "count": 2067,
+     "sha256": "1fb24f234a254b7abe377de163d82f9c39caa0e6e4ff92cc548f20ae82424b44"
+    },
+    "masks": {
+     "count": 6095,
+     "sha256": "0cfd4511d2a81b3fe1f89a029e2598505469dafd42cc00571282b8861479b6df"
+    }
+   }
+  },
+  "cosmax_2025_kor": {
+   "inputs": {
+    "document.json": "b3b5c2f14c740e4b9515f6bd5241e297f909f1a1cfffa1815b61cc7494dd7883"
+   },
+   "sections": {
+    "facts": {
+     "count": 2476,
+     "sha256": "59752cbfdfaac9cc06a6860781b50d3b4cb9dc93d24ad70523d095b07b340d15"
+    },
+    "nonValues": {
+     "count": 2881,
+     "sha256": "1f2338f57fdbb4b507355195e0334d149a571340eda0a653ba25eba796bd0559"
+    },
+    "grids": {
+     "count": 228,
+     "sha256": "8efcd5ce2d540560c93fa39bb0650c43a970183da645d8845268edc595d5868c"
+    },
+    "failed": {
+     "count": 1,
+     "sha256": "0ab9479b890dcea7517451136422ed6ce6f157e1c118718c3557d0ee95ec4440"
+    },
+    "kinds": {
+     "count": 2476,
+     "sha256": "9bc831b5ee3e8c1986e8dcef47f6d04aa15a14bb2a4e2e02e218572ef05617d7"
+    },
+    "count": {
+     "count": 2476,
+     "sha256": "4f5bc2465296c5dfdd58df6b61390133edcb940aa6460852add3405b8ecc192f"
+    },
+    "masks": {
+     "count": 10820,
+     "sha256": "f9cb0a5b4ae40b93d620825d856b49a6499d56ad39d30d188038f19cf5e3cf2a"
+    }
+   }
+  }
+ },
+ "synthetic": {
+  "sections": {
+   "facts": {
+    "count": 99,
+    "sha256": "577e9b8998ec4368e57c0b987439627ac0bc6a7c4875973b29aaf41ce1c4ec6c"
+   },
+   "nonValues": {
+    "count": 62,
+    "sha256": "d363aaa051cf02b0de595018225e4f59fafe77b06278869b265275081c3ebb4d"
+   },
+   "grids": {
+    "count": 4,
+    "sha256": "4ad667dddafc78fb869afb2b62321d43e9564c95d0b60d9ce20d2564ab3369f2"
+   },
+   "failed": {
+    "count": 2,
+    "sha256": "201bbe45a34a1a7bd28bce1256da91a71bf1ca7c8f9c4a083e73475217fead3f"
+   },
+   "kinds": {
+    "count": 99,
+    "sha256": "005d3dbe36798200c06d0cb5c3fc5104ecb151aff180459ee941abe3faaa00dd"
+   },
+   "count": {
+    "count": 99,
+    "sha256": "c51e71da81f01c542462b5104b933709b73e0d8be137b0ec1bcaf162c022322a"
+   },
+   "masks": {
+    "count": 128,
+    "sha256": "ca267fb934526b236f07521b393399fe15bdef7c48e8573468baed2b54e41212"
+   },
+   "dec": {
+    "count": 34,
+    "sha256": "06c69bd318b5af540159a234a6cac1c34da51c49bb9f4462657dc3f3a6f2d261"
+   },
+   "notation": {
+    "count": 400,
+    "sha256": "9feedad0f44b5ad50435e71a630e36022713d51ff5cdf567a8b510ac7e08a1e2"
+   }
+  }
+ }
+}

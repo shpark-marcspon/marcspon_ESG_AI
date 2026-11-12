@@ -1,0 +1,4 @@
+# 이 저장소 안의 패키지들. 서로를 "workspace:*" 로 가리킨다.
+packages:
+  - "apps/*"
+  - "packages/*"

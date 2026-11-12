@@ -1,0 +1,621 @@
+{
+  "$defs": {
+    "TranslationLayout": {
+      "additionalProperties": false,
+      "description": "translation.layout@1 — PDF 영문번역 한 건의 블록·좌표 결과.",
+      "properties": {
+        "schemaVersion": {
+          "const": "translation.layout@1",
+          "title": "Schemaversion",
+          "type": "string"
+        },
+        "status": {
+          "description": "결과 translation.result@1 의 status.",
+          "enum": [
+            "done",
+            "rejected"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "sourceSha256": {
+          "description": "엔진에 넣은 태그 글의 sha256(result@1 document.sourceSha256 과 같다).",
+          "title": "Sourcesha256",
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/$defs/TranslationLayoutSource"
+        },
+        "pages": {
+          "items": {
+            "$ref": "#/$defs/TranslationLayoutPage"
+          },
+          "title": "Pages",
+          "type": "array"
+        },
+        "units": {
+          "items": {
+            "$ref": "#/$defs/TranslationLayoutUnit"
+          },
+          "title": "Units",
+          "type": "array"
+        },
+        "variants": {
+          "description": "rejected 면 빈 목록.",
+          "items": {
+            "$ref": "#/$defs/TranslationLayoutVariant"
+          },
+          "title": "Variants",
+          "type": "array"
+        },
+        "skipped": {
+          "$ref": "#/$defs/TranslationLayoutSkipped"
+        },
+        "warnings": {
+          "items": {
+            "$ref": "#/$defs/TranslationLayoutWarning"
+          },
+          "title": "Warnings",
+          "type": "array"
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "status",
+        "sourceSha256",
+        "source",
+        "pages",
+        "units",
+        "variants",
+        "skipped",
+        "warnings"
+      ],
+      "title": "TranslationLayout",
+      "type": "object"
+    },
+    "TranslationLayoutCell": {
+      "additionalProperties": false,
+      "description": "표 단위의 비지 않은 칸.",
+      "properties": {
+        "row": {
+          "description": "원 표의 행 번호(빈 행을 뺀 pipe 행 번호가 아니다).",
+          "minimum": 0,
+          "title": "Row",
+          "type": "integer"
+        },
+        "col": {
+          "minimum": 0,
+          "title": "Col",
+          "type": "integer"
+        },
+        "id": {
+          "description": "`<표 id>:r<행>c<열>`.",
+          "title": "Id",
+          "type": "string"
+        },
+        "bbox": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "number"
+              },
+              "maxItems": 4,
+              "minItems": 4,
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "칸 글자의 상자. 글자 자리를 잇지 못했으면 null.",
+          "title": "Bbox"
+        },
+        "source": {
+          "description": "칸 글 + 그 칸의 각주 표시.",
+          "title": "Source",
+          "type": "string"
+        }
+      },
+      "required": [
+        "row",
+        "col",
+        "id",
+        "bbox",
+        "source"
+      ],
+      "title": "TranslationLayoutCell",
+      "type": "object"
+    },
+    "TranslationLayoutMember": {
+      "additionalProperties": false,
+      "description": "단위를 이룬 파서 블록(표 단위면 표 하나).",
+      "properties": {
+        "id": {
+          "description": "파서의 위치 id(`p3-b5`, 표는 `p3-t1`).",
+          "title": "Id",
+          "type": "string"
+        },
+        "key": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "파서의 내용 해시 키(쪽 범위·상자 흔들림에 같다).",
+          "title": "Key"
+        },
+        "kind": {
+          "enum": [
+            "heading",
+            "paragraph",
+            "table"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "bbox": {
+          "items": {
+            "type": "number"
+          },
+          "maxItems": 4,
+          "minItems": 4,
+          "title": "Bbox",
+          "type": "array"
+        },
+        "source": {
+          "description": "원문(표는 엔진에 넣은 pipe 표 글).",
+          "title": "Source",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "key",
+        "kind",
+        "bbox",
+        "source"
+      ],
+      "title": "TranslationLayoutMember",
+      "type": "object"
+    },
+    "TranslationLayoutPage": {
+      "additionalProperties": false,
+      "description": "쪽 범위 안의 쪽.",
+      "properties": {
+        "page": {
+          "minimum": 0,
+          "title": "Page",
+          "type": "integer"
+        },
+        "width": {
+          "minimum": 0,
+          "title": "Width",
+          "type": "number"
+        },
+        "height": {
+          "minimum": 0,
+          "title": "Height",
+          "type": "number"
+        },
+        "textLayer": {
+          "description": "none = 글자 층이 없는 쪽(그림·스캔 — 번역하지 않음).",
+          "enum": [
+            "present",
+            "none"
+          ],
+          "title": "Textlayer",
+          "type": "string"
+        }
+      },
+      "required": [
+        "page",
+        "width",
+        "height",
+        "textLayer"
+      ],
+      "title": "TranslationLayoutPage",
+      "type": "object"
+    },
+    "TranslationLayoutParser": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "version": {
+          "title": "Version",
+          "type": "string"
+        },
+        "layout": {
+          "const": 2,
+          "description": "파서의 분해 판(번역 판 2만 받는다).",
+          "title": "Layout",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "name",
+        "version",
+        "layout"
+      ],
+      "title": "TranslationLayoutParser",
+      "type": "object"
+    },
+    "TranslationLayoutPlacedCell": {
+      "additionalProperties": false,
+      "properties": {
+        "row": {
+          "description": "원 표의 행 번호.",
+          "minimum": 0,
+          "title": "Row",
+          "type": "integer"
+        },
+        "col": {
+          "minimum": 0,
+          "title": "Col",
+          "type": "integer"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "row",
+        "col",
+        "text"
+      ],
+      "title": "TranslationLayoutPlacedCell",
+      "type": "object"
+    },
+    "TranslationLayoutPlacedUnit": {
+      "additionalProperties": false,
+      "description": "문체 하나에서 단위 하나의 번역 — `units` 와 같은 차례.",
+      "properties": {
+        "tag": {
+          "anyOf": [
+            {
+              "pattern": "^(BLOCK|VISUAL|TABLE) [1-9][0-9]*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Tag"
+        },
+        "page": {
+          "minimum": 0,
+          "title": "Page",
+          "type": "integer"
+        },
+        "level": {
+          "description": "block = 멤버마다 번역(translations 가 멤버 차례), group = 묶음 번역 하나(문단 수가 바뀜 — 상자는 멤버 전부),\ncell = 칸마다(cells), table = 표 번역 하나(행·열 모양이 바뀜), source_only = 번역하지 않음(머리글·꼬리말),\nmissing = 번역에서 이 태그를 찾지 못함(글은 unplaced 에 있을 수 있다).",
+          "enum": [
+            "block",
+            "group",
+            "cell",
+            "table",
+            "source_only",
+            "missing"
+          ],
+          "title": "Level",
+          "type": "string"
+        },
+        "translations": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Translations"
+        },
+        "cells": {
+          "description": "level cell 만.",
+          "items": {
+            "$ref": "#/$defs/TranslationLayoutPlacedCell"
+          },
+          "title": "Cells",
+          "type": "array"
+        }
+      },
+      "required": [
+        "tag",
+        "page",
+        "level",
+        "translations"
+      ],
+      "title": "TranslationLayoutPlacedUnit",
+      "type": "object"
+    },
+    "TranslationLayoutSkipped": {
+      "additionalProperties": false,
+      "properties": {
+        "emptyTables": {
+          "description": "칸이 다 빈 표(파서 표 id) — 번역 단위가 아니다.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Emptytables",
+          "type": "array"
+        },
+        "imageOnlyPages": {
+          "description": "글자 층이 없는 쪽.",
+          "items": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "title": "Imageonlypages",
+          "type": "array"
+        }
+      },
+      "required": [
+        "emptyTables",
+        "imageOnlyPages"
+      ],
+      "title": "TranslationLayoutSkipped",
+      "type": "object"
+    },
+    "TranslationLayoutSource": {
+      "additionalProperties": false,
+      "description": "원본 PDF 와 그것을 읽은 판.",
+      "properties": {
+        "pdfSha256": {
+          "description": "실행 문서 바이트의 sha256(PDF 가 아니어도).",
+          "title": "Pdfsha256",
+          "type": "string"
+        },
+        "pageCount": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "PDF 의 쪽 수. 파서 앞에서 거절했으면 null.",
+          "title": "Pagecount"
+        },
+        "parser": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/TranslationLayoutParser"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "파서 앞에서 거절했으면 null."
+        },
+        "adapter": {
+          "description": "어댑터 판(`pdf_tags@1`).",
+          "title": "Adapter",
+          "type": "string"
+        }
+      },
+      "required": [
+        "pdfSha256",
+        "pageCount",
+        "parser",
+        "adapter"
+      ],
+      "title": "TranslationLayoutSource",
+      "type": "object"
+    },
+    "TranslationLayoutUnit": {
+      "additionalProperties": false,
+      "description": "번역 단위 하나(엔진의 태그 하나) — 지도 차례(쪽, 읽는 차례).",
+      "properties": {
+        "tag": {
+          "anyOf": [
+            {
+              "pattern": "^(BLOCK|VISUAL|TABLE) [1-9][0-9]*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "쪽 안의 태그(`BLOCK 2`). 머리글·꼬리말은 null(태그 글 밖 — 번역하지 않음).",
+          "title": "Tag"
+        },
+        "page": {
+          "minimum": 0,
+          "title": "Page",
+          "type": "integer"
+        },
+        "kind": {
+          "description": "block = 제목과 이어지는 문단 묶음, visual = 도표 라벨 묶음(글자 층만), table, header·footer = 머리글·꼬리말.",
+          "enum": [
+            "block",
+            "visual",
+            "table",
+            "header",
+            "footer"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "members": {
+          "items": {
+            "$ref": "#/$defs/TranslationLayoutMember"
+          },
+          "title": "Members",
+          "type": "array"
+        },
+        "cells": {
+          "description": "표 단위만.",
+          "items": {
+            "$ref": "#/$defs/TranslationLayoutCell"
+          },
+          "title": "Cells",
+          "type": "array"
+        },
+        "rows": {
+          "description": "표 단위만: pipe 표의 행(머리 행 = 0) → 원 표 행 번호.",
+          "items": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "title": "Rows",
+          "type": "array"
+        }
+      },
+      "required": [
+        "tag",
+        "page",
+        "kind",
+        "members"
+      ],
+      "title": "TranslationLayoutUnit",
+      "type": "object"
+    },
+    "TranslationLayoutUnplaced": {
+      "additionalProperties": false,
+      "description": "단위에 붙이지 못한 번역 글(버리지 않는다).",
+      "properties": {
+        "page": {
+          "minimum": 0,
+          "title": "Page",
+          "type": "integer"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "page",
+        "text"
+      ],
+      "title": "TranslationLayoutUnplaced",
+      "type": "object"
+    },
+    "TranslationLayoutVariant": {
+      "additionalProperties": false,
+      "description": "문체 하나(result@1 의 문체 차례).",
+      "properties": {
+        "label": {
+          "enum": [
+            "single",
+            "A",
+            "B"
+          ],
+          "title": "Label",
+          "type": "string"
+        },
+        "stage": {
+          "description": "쓴 글: 자동수정이 done 이면 autofix.translatedText, 아니면 translatedText.",
+          "enum": [
+            "autofix",
+            "translated"
+          ],
+          "title": "Stage",
+          "type": "string"
+        },
+        "units": {
+          "items": {
+            "$ref": "#/$defs/TranslationLayoutPlacedUnit"
+          },
+          "title": "Units",
+          "type": "array"
+        },
+        "unplaced": {
+          "items": {
+            "$ref": "#/$defs/TranslationLayoutUnplaced"
+          },
+          "title": "Unplaced",
+          "type": "array"
+        }
+      },
+      "required": [
+        "label",
+        "stage",
+        "units",
+        "unplaced"
+      ],
+      "title": "TranslationLayoutVariant",
+      "type": "object"
+    },
+    "TranslationLayoutWarning": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "enum": [
+            "image_only_page",
+            "tag_missing",
+            "tag_extra",
+            "tag_shift",
+            "page_missing",
+            "length_ratio"
+          ],
+          "title": "Code",
+          "type": "string"
+        },
+        "page": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Page"
+        },
+        "tag": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Tag"
+        },
+        "variant": {
+          "anyOf": [
+            {
+              "enum": [
+                "single",
+                "A",
+                "B"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "문체(되붙임 경고). 어댑터의 경고(image_only_page)는 null.",
+          "title": "Variant"
+        }
+      },
+      "required": [
+        "code",
+        "page",
+        "tag",
+        "variant"
+      ],
+      "title": "TranslationLayoutWarning",
+      "type": "object"
+    }
+  },
+  "$ref": "#/$defs/TranslationLayout",
+  "description": "PDF 영문번역 한 건의 블록·좌표 결과.",
+  "title": "translation.layout@1"
+}

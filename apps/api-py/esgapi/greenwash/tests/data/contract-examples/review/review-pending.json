@@ -1,0 +1,11 @@
+{
+  "schemaVersion": "greenwash.review@3",
+  "runId": 101,
+  "state": "pending",
+  "confirmedAt": null,
+  "confirmedBy": null,
+  "marks": [],
+  "edits": [],
+  "evidence": [],
+  "rejudges": []
+}

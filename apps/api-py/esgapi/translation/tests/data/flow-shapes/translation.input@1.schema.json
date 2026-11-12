@@ -1,0 +1,269 @@
+{
+  "$defs": {
+    "Company": {
+      "additionalProperties": false,
+      "description": "회사 기본 정보(코랩 셀 22). 기본값이 없다 — 코랩의 값은 한 고객사의 글이다.",
+      "properties": {
+        "name": {
+          "description": "회사 이름(코랩 COMPANY_NAME).",
+          "title": "Name",
+          "type": "string"
+        },
+        "preferredSubject": {
+          "description": "산업·주제 글(코랩 PREFERRED_SUBJECT).",
+          "title": "Preferredsubject",
+          "type": "string"
+        },
+        "industryStandards": {
+          "description": "준수 기준 글(코랩 INDUSTRY_STANDARDS). 번역 system 글의 「Reporting frameworks:」 줄과 회사 문체 글에 든다.",
+          "title": "Industrystandards",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "preferredSubject",
+        "industryStandards"
+      ],
+      "title": "Company",
+      "type": "object"
+    },
+    "Glossary": {
+      "additionalProperties": false,
+      "description": "용어집(코랩 셀 10 GLOSSARY·셀 13 FINAL_GLOSSARY). 저장소에 기본 용어집은 없다.",
+      "properties": {
+        "base": {
+          "description": "평가 용어집(코랩 GLOSSARY). 목록 안 같은 ko 는 뒤가 이긴다(dict 처럼).",
+          "items": {
+            "$ref": "#/$defs/GlossaryPair"
+          },
+          "title": "Base",
+          "type": "array"
+        },
+        "final": {
+          "description": "최종 용어집(코랩 FINAL_GLOSSARY). base 와 같은 ko 면 값은 이것이, 자리는 base 의 것이 이긴다.",
+          "items": {
+            "$ref": "#/$defs/GlossaryPair"
+          },
+          "title": "Final",
+          "type": "array"
+        }
+      },
+      "required": [
+        "base",
+        "final"
+      ],
+      "title": "Glossary",
+      "type": "object"
+    },
+    "GlossaryPair": {
+      "additionalProperties": false,
+      "description": "용어집 한 짝(국문 key → 영문 value).",
+      "properties": {
+        "ko": {
+          "title": "Ko",
+          "type": "string"
+        },
+        "en": {
+          "title": "En",
+          "type": "string"
+        }
+      },
+      "required": [
+        "ko",
+        "en"
+      ],
+      "title": "GlossaryPair",
+      "type": "object"
+    },
+    "PageRange": {
+      "additionalProperties": false,
+      "description": "번역할 쪽 범위(코랩 셀 6 PAGE_START·PAGE_END). null 이면 그쪽 끝이 열린다.",
+      "properties": {
+        "start": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Start"
+        },
+        "end": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "End"
+        }
+      },
+      "required": [
+        "start",
+        "end"
+      ],
+      "title": "PageRange",
+      "type": "object"
+    },
+    "PeerGroupStyle": {
+      "additionalProperties": false,
+      "description": "peer group 문체 글(코랩 셀 27 PEER_GROUP_STYLE_PROMPT — 고객사 맞춤 글이라 입력으로 받는다).",
+      "properties": {
+        "prompt": {
+          "title": "Prompt",
+          "type": "string"
+        }
+      },
+      "required": [
+        "prompt"
+      ],
+      "title": "PeerGroupStyle",
+      "type": "object"
+    },
+    "StructuredText": {
+      "additionalProperties": false,
+      "description": "구조 태그가 든 국문 글(코랩 셀 7 의 txt·md 갈래 — 코랩은 docx 도 이 글로 바꿔 받는다).\n\n쪽은 한 줄 전체가 `[PAGE n]` 인 줄로만 갈린다. 태그가 없으면 결과는 rejected(no_pages)다.",
+      "properties": {
+        "kind": {
+          "const": "structuredText",
+          "title": "Kind",
+          "type": "string"
+        },
+        "text": {
+          "title": "Text",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "text"
+      ],
+      "title": "StructuredText",
+      "type": "object"
+    },
+    "Style": {
+      "additionalProperties": false,
+      "description": "번역 문체(코랩 셀 40).",
+      "properties": {
+        "compareAb": {
+          "description": "true = A·B 두 문체로 각각 번역(코랩 USE_AB_STYLE). 코랩 기본 false.",
+          "title": "Compareab",
+          "type": "boolean"
+        },
+        "single": {
+          "description": "compareAb 가 false 일 때 쓰는 문체(코랩 SINGLE_STYLE). 코랩 기본 B.",
+          "enum": [
+            "A",
+            "B"
+          ],
+          "title": "Single",
+          "type": "string"
+        }
+      },
+      "required": [
+        "compareAb",
+        "single"
+      ],
+      "title": "Style",
+      "type": "object"
+    },
+    "TranslationInput": {
+      "additionalProperties": false,
+      "description": "translation.input@1 — 영문번역 한 건의 입력. schemaVersion 이 첫 키다.",
+      "properties": {
+        "schemaVersion": {
+          "const": "translation.input@1",
+          "title": "Schemaversion",
+          "type": "string"
+        },
+        "document": {
+          "discriminator": {
+            "mapping": {
+              "structuredText": "#/$defs/StructuredText"
+            },
+            "propertyName": "kind"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/StructuredText"
+            }
+          ],
+          "title": "Document"
+        },
+        "company": {
+          "$ref": "#/$defs/Company"
+        },
+        "glossary": {
+          "$ref": "#/$defs/Glossary"
+        },
+        "part": {
+          "description": "번역할 파트(코랩 셀 38 CURRENT_PART). ceo_message 면 번역 모델이 경로 standard(Sonnet)다.",
+          "enum": [
+            "ceo_message",
+            "story",
+            "general"
+          ],
+          "title": "Part",
+          "type": "string"
+        },
+        "style": {
+          "$ref": "#/$defs/Style"
+        },
+        "peerGroupStyle": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/PeerGroupStyle"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "null = peer 문체를 싣지 않음(코랩 USE_PEER_GROUP_STYLE=False). 코랩 기본은 켬 — 「코랩과 다른 자리」."
+        },
+        "pages": {
+          "$ref": "#/$defs/PageRange"
+        },
+        "ceoPageLimit": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "ceo_message 파트에서 번역할 수 있는 쪽 조각 수의 상한(코랩 셀 49 CEO_PAGE_LIMIT, 코랩 값 6). null = 제한 없음.",
+          "title": "Ceopagelimit"
+        },
+        "autofix": {
+          "description": "검수 이슈 기반 자동수정을 돌릴지(코랩 셀 67 APPLY_PART_QA_AUTOFIX, 코랩 값 true).",
+          "title": "Autofix",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "document",
+        "company",
+        "glossary",
+        "part",
+        "style",
+        "peerGroupStyle",
+        "pages",
+        "ceoPageLimit",
+        "autofix"
+      ],
+      "title": "TranslationInput",
+      "type": "object"
+    }
+  },
+  "$ref": "#/$defs/TranslationInput",
+  "description": "영문번역 한 건의 입력.",
+  "title": "translation.input@1"
+}

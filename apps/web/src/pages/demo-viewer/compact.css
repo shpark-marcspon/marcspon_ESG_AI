@@ -1,0 +1,201 @@
+/* 둘째 화면의 모양. 증명용이라 최소한만. 본 화면(doc-viewer/ui/viewer.css)의 클래스를 하나도 쓰지 않는다. */
+.cv-root {
+  display: grid;
+  grid-template: auto 1fr / 1fr 260px;
+  height: 100%;
+  min-height: 0;
+  font:
+    12px/1.4 ui-monospace,
+    monospace;
+  color: #0f172a;
+  outline: none;
+}
+.cv-top {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  align-items: center;
+  padding: 4px 8px;
+  background: #0f172a;
+  color: #e2e8f0;
+}
+.cv-kind {
+  margin-right: 6px;
+  padding: 0 2px;
+  border: 0;
+  border-bottom: 3px solid;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+.cv-kind[aria-pressed='false'] {
+  opacity: 0.4;
+  border-bottom-style: dotted;
+}
+.cv-notice {
+  white-space: pre-wrap;
+  opacity: 0.8;
+}
+.cv-panes {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  min-width: 0;
+  min-height: 0;
+}
+.cv-pane {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  border-right: 1px solid #0f172a;
+}
+/* 스크롤 상자의 높이는 화면이 정한다(PageStack 의 머리말). */
+.cv-scroller {
+  flex: 1;
+  min-height: 0;
+  background: #e2e8f0;
+}
+.cv-page {
+  background: #fff;
+}
+.cv-tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-items: center;
+  padding: 2px 6px;
+  border-top: 1px solid #0f172a;
+}
+.cv-tools button,
+.cv-tools input {
+  font: inherit;
+}
+.cv-tools input {
+  width: 4em;
+}
+.cv-doc {
+  flex: 1;
+  min-width: 60px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 목록: 한 줄에 한 항목 */
+.cv-side {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.cv-items {
+  flex: 1;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  list-style: none;
+}
+.cv-item button {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  width: 100%;
+  height: 22px;
+  padding: 0 6px 0 0;
+  border: 0;
+  border-bottom: 1px solid #e2e8f0;
+  background: none;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.cv-item[data-selected='true'] button {
+  background: #0f172a;
+  color: #fff;
+}
+.cv-item:hover:not([data-selected='true']) button {
+  background: #f1f5f9;
+}
+.cv-item[data-kind-hidden='true']:not([data-selected='true']) .cv-title {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+.cv-bar {
+  align-self: stretch;
+  width: 4px;
+}
+.cv-title {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.cv-status {
+  font-weight: 400;
+}
+.cv-status[data-status='pending'] {
+  opacity: 0.45;
+}
+.cv-review {
+  display: grid;
+  gap: 4px;
+  padding: 6px;
+  border-top: 2px solid #0f172a;
+}
+.cv-review p {
+  margin: 0;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.cv-review textarea {
+  font: inherit;
+  resize: vertical;
+}
+.cv-review [role='alert'] {
+  color: #b91c1c;
+}
+
+/* 쪽 위 강조: 형광펜과 밑줄. 조각의 자리는 HighlightOverlay 가 준다. 색은 조각의 color 로 받아 currentColor 로 쓴다. */
+.cv-mark {
+  padding: 0;
+  border: 0;
+  border-bottom: 2px solid currentColor;
+  background: color-mix(in srgb, currentColor 22%, transparent);
+  mix-blend-mode: multiply;
+  cursor: pointer;
+}
+/* 옅게: 고르지도 가리키지도 않은 것은 밑줄만. */
+.cv-marks[data-mode='outline']
+  .cv-mark:not([data-selected='true'], [data-pointed='true']) {
+  background: none;
+}
+.cv-marks[data-mode='outline'] .cv-mark-group:hover .cv-mark {
+  background: color-mix(in srgb, currentColor 22%, transparent);
+}
+.cv-mark[data-pointed='true'] {
+  background: color-mix(in srgb, currentColor 40%, transparent);
+}
+.cv-mark[data-selected='true'] {
+  border-bottom-width: 4px;
+  background: color-mix(in srgb, currentColor 55%, transparent);
+}
+.cv-mark-group:has(:focus-visible) .cv-mark {
+  outline: 2px dotted currentColor;
+}
+.cv-count {
+  position: absolute;
+  left: 0;
+  bottom: 100%;
+  padding: 0 2px;
+  background: currentColor;
+  font:
+    9px/11px ui-monospace,
+    monospace;
+  -webkit-text-fill-color: #fff;
+}
+.cv-context {
+  border-left: 3px solid #0f172a;
+}

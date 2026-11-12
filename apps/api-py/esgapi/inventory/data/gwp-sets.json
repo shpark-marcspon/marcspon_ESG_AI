@@ -1,0 +1,31 @@
+{
+  "$comment": "GWP 세트. 값은 아래 url 의 원문에서 2026-10-01 에 직접 읽었다. AR4 등 원문을 열어 확인하지 않은 세트는 넣지 않았다.",
+  "gwpSets": [
+    {
+      "id": "kr-ets-decree-annex2",
+      "label": "배출권거래법 시행령 별표 2 (CH4 21, N2O 310)",
+      "source": {
+        "kind": "cited",
+        "title": "온실가스 배출권의 할당 및 거래에 관한 법률 시행령 [시행 2026. 4. 29.] [대통령령 제36285호] 별표 2 온실가스별 지구온난화 계수 <개정 2025. 2. 7.>",
+        "url": "https://www.law.go.kr/LSW/flDownload.do?gubun=&flSeq=163672079&bylClsCd=110201",
+        "checkedOn": "2026-10-01",
+        "locator": "법령 본문: https://www.law.go.kr/LSW/lsInfoP.do?lsiSeq=285737 제31조제2항, 별표 2",
+        "note": "별표는 어느 IPCC 평가보고서의 값인지 적지 않는다. 2025 국가 온실가스 인벤토리 보고서는 과거 국가 통계가 '제2차 IPCC 평가 보고서상의 지수'를 썼다고 적는다."
+      },
+      "values": { "CO2": "1", "CH4": "21", "N2O": "310" }
+    },
+    {
+      "id": "ipcc-ar5-100y-kr-nid-2025",
+      "label": "IPCC 제5차 평가보고서 100년 기준 (국가 온실가스 인벤토리 적용값: CH4 28, N2O 265)",
+      "source": {
+        "kind": "cited",
+        "title": "2025 국가 온실가스 인벤토리(1990~2023) 보고서(NID), 온실가스종합정보센터, 표 1-9 온실가스별 지구온난화지수(GWP)",
+        "url": "https://www.gir.go.kr/home/board/read.do?menuId=36&boardId=90&boardMasterId=2",
+        "checkedOn": "2026-10-01",
+        "locator": "첨부 '2025년 국가 온실가스 인벤토리 보고서_국문.pdf' 표 1-9 (1.7장)",
+        "note": "IPCC AR5 원문이 아니라 국가 인벤토리 보고서에 실린 표에서 읽었다."
+      },
+      "values": { "CO2": "1", "CH4": "28", "N2O": "265" }
+    }
+  ]
+}

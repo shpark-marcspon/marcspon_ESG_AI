@@ -1,0 +1,214 @@
+{
+  "schemaVersion": "translation.result@1",
+  "status": "done",
+  "rejection": null,
+  "settings": {
+    "part": "general",
+    "variants": [
+      "single"
+    ],
+    "routes": {
+      "translate": "light-openai-41",
+      "review": "light-openai-41"
+    },
+    "promptIds": [
+      "translation/cell@2",
+      "translation/table-batch@2",
+      "translation/section@2",
+      "translation/polish@2",
+      "translation/editorial-qa@2",
+      "translation/glossary-repair@2",
+      "translation/korean-repair@2",
+      "translation/review@1",
+      "translation/autofix@1",
+      "translation/autofix-korean@1"
+    ],
+    "engine": "colab_158",
+    "constants": {
+      "editorialQaMinScore": 96,
+      "tableBatchSize": 24,
+      "polishMinChars": 120,
+      "polishMaxChars": 6000,
+      "koreanRepairRounds": 2,
+      "autofixKoreanRepairRounds": 1
+    },
+    "retry": null
+  },
+  "document": {
+    "pageNumbers": [
+      1,
+      2,
+      3
+    ],
+    "duplicatePages": {},
+    "sourceSha256": "0000000000000000000000000000000000000000000000000000000000000000"
+  },
+  "variants": [
+    {
+      "label": "single",
+      "translatedText": "[PAGE 1]\n[BLOCK 1]\nClimate Action Strategy\nABC Corp manages GHG emissions across its virtual sites.\n\n[PAGE 2]\n[TABLE 1]\nEnergy Use\n| Item | 2025 |\n| --- | --- |\n| Electricity | 1,200 MWh |\n\n[TRANSLATION_ERROR page=3]\n[PAGE 3]\n[BLOCK 1]\n가상 본문입니다.",
+      "bilingualText": "[PAGE 1]\n[BLOCK 1]\nClimate Action Strategy (기후변화 대응 전략)\nABC Corp manages GHG emissions across its virtual sites.\n\n[PAGE 2]\n[TABLE 1]\nEnergy Use (에너지 사용량)\n| Item | 2025 |\n| --- | --- |\n| Electricity | 1,200 MWh |\n\n[TRANSLATION_ERROR page=3]\n\n[PAGE 3]\n[BLOCK 1]\n가상 본문입니다.",
+      "fragments": [
+        {
+          "pageNum": 1,
+          "status": "translated",
+          "error": null,
+          "editorialQa": {
+            "ran": true,
+            "reason": "score_and_issues_acceptable",
+            "qualityScore": 97,
+            "scoreDefaulted": false,
+            "hasCriticalIssue": false,
+            "applied": false,
+            "issues": []
+          },
+          "remainingKorean": []
+        },
+        {
+          "pageNum": 2,
+          "status": "translated",
+          "error": null,
+          "editorialQa": {
+            "ran": false,
+            "reason": "skipped_table_or_short_text",
+            "qualityScore": null,
+            "scoreDefaulted": false,
+            "hasCriticalIssue": null,
+            "applied": false,
+            "issues": []
+          },
+          "remainingKorean": []
+        },
+        {
+          "pageNum": 3,
+          "status": "error",
+          "error": "[치명] 번역 결과에 한국어가 남아 있어 중단합니다.\n아래 문구를 GLOSSARY 또는 FINAL_GLOSSARY에 추가한 뒤 재실행하세요.\n- 가상 본문입니다.",
+          "editorialQa": null,
+          "remainingKorean": []
+        }
+      ],
+      "pages": [
+        {
+          "pageNum": 1,
+          "translated": "[PAGE 1]\n[BLOCK 1]\nClimate Action Strategy\nABC Corp manages GHG emissions across its virtual sites.",
+          "bilingual": "[PAGE 1]\n[BLOCK 1]\nClimate Action Strategy (기후변화 대응 전략)\nABC Corp manages GHG emissions across its virtual sites.",
+          "review": {
+            "status": "reviewed",
+            "issues": [
+              {
+                "issueType": "GLOSSARY_VIOLATION",
+                "severity": "HIGH",
+                "originalSpan": "",
+                "suggestion": "'가상사업장'는 용어집에 따라 'Virtual Site'로 그대로 통일하는 것이 좋습니다.",
+                "reason": "원문에 용어집 용어 '가상사업장'가 정확히 등장하지만, 번역문에서 지정 번역어 'Virtual Site'가 확인되지 않았습니다. 용어집 value는 대소문자와 줄바꿈/공백 차이를 제외하고 그대로 반영되어야 합니다.",
+                "source": "glossary_rule"
+              },
+              {
+                "issueType": "UNNATURAL",
+                "severity": "LOW",
+                "originalSpan": "across its virtual sites",
+                "suggestion": "at its virtual sites",
+                "reason": "가상 검수 이유",
+                "source": "model"
+              }
+            ],
+            "counts": {
+              "high": 1,
+              "medium": 0,
+              "low": 1
+            },
+            "message": null
+          }
+        },
+        {
+          "pageNum": 2,
+          "translated": "[PAGE 2]\n[TABLE 1]\nEnergy Use\n| Item | 2025 |\n| --- | --- |\n| Electricity | 1,200 MWh |\n\n[TRANSLATION_ERROR page=3]",
+          "bilingual": "[PAGE 2]\n[TABLE 1]\nEnergy Use (에너지 사용량)\n| Item | 2025 |\n| --- | --- |\n| Electricity | 1,200 MWh |\n\n[TRANSLATION_ERROR page=3]",
+          "review": {
+            "status": "parse_failed",
+            "issues": [],
+            "counts": {
+              "high": 0,
+              "medium": 0,
+              "low": 0
+            },
+            "message": null
+          }
+        },
+        {
+          "pageNum": 3,
+          "translated": "[PAGE 3]\n[BLOCK 1]\n가상 본문입니다.",
+          "bilingual": "[PAGE 3]\n[BLOCK 1]\n가상 본문입니다.",
+          "review": {
+            "status": "reviewed",
+            "issues": [
+              {
+                "issueType": "UNTRANSLATED",
+                "severity": "HIGH",
+                "originalSpan": "가상 본문입니다.",
+                "suggestion": "This is a virtual body text.",
+                "reason": "가상 검수 이유",
+                "source": "model"
+              }
+            ],
+            "counts": {
+              "high": 1,
+              "medium": 0,
+              "low": 0
+            },
+            "message": null
+          }
+        }
+      ],
+      "glossaryCheck": [
+        {
+          "pageNum": 1,
+          "termKo": "가상사업장",
+          "termEn": "Virtual Site",
+          "sourceCount": 1
+        }
+      ],
+      "autofix": {
+        "status": "done",
+        "pages": [
+          {
+            "pageNum": 1,
+            "changed": true,
+            "reason": "llm_repair_applied",
+            "issueCount": 2,
+            "spanReplacements": [
+              {
+                "issueType": "UNNATURAL",
+                "originalSpan": "across its virtual sites",
+                "suggestion": "at its virtual sites"
+              }
+            ],
+            "koreanRepairRounds": [],
+            "remainingKoreanAfter": []
+          },
+          {
+            "pageNum": 3,
+            "changed": true,
+            "reason": "llm_repair_applied",
+            "issueCount": 1,
+            "spanReplacements": [],
+            "koreanRepairRounds": [],
+            "remainingKoreanAfter": []
+          }
+        ],
+        "translatedText": "[PAGE 1]\n[BLOCK 1]\nClimate Action Strategy\nABC Corp manages GHG emissions at its Virtual Site.\n\n[PAGE 2]\n[TABLE 1]\nEnergy Use\n| Item | 2025 |\n| --- | --- |\n| Electricity | 1,200 MWh |\n\n[TRANSLATION_ERROR page=3]\n\n[PAGE 3]\n[BLOCK 1]\nThis is a virtual body text.",
+        "bilingualText": "[PAGE 1]\n[BLOCK 1]\nClimate Action Strategy (기후변화 대응 전략)\nABC Corp manages GHG emissions at its Virtual Site.\n\n[PAGE 2]\n[TABLE 1]\nEnergy Use (에너지 사용량)\n| Item | 2025 |\n| --- | --- |\n| Electricity | 1,200 MWh |\n\n[TRANSLATION_ERROR page=3]\n\n[PAGE 3]\n[BLOCK 1]\nThis is a virtual body text.",
+        "stop": null,
+        "notRunReason": null
+      }
+    }
+  ],
+  "warnings": [
+    {
+      "code": "llm_truncated",
+      "message": "가상 경고 — LLM 답이 출력 상한에서 잘려 그 글로 계속했다.",
+      "pageNum": 2,
+      "variant": "single"
+    }
+  ]
+}

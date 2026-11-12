@@ -1,0 +1,73 @@
+{
+  "ok": true,
+  "value": {
+    "factor": {
+      "kind": "purchased_energy",
+      "id": "electricity:gir-2025:소비단:2023:ipcc_2006:co2e",
+      "version": "2025-12-18 공고",
+      "source": {
+        "kind": "cited",
+        "title": "2025년 승인 국가 온실가스 배출·흡수계수 (2025-12-18 공고): CO2e 0.4173 t CO2-eq/MWh ← gir-2025:main:r6",
+        "url": "https://www.gir.go.kr/home/board/read.do?menuId=36&boardId=86&boardMasterId=2",
+        "checkedOn": "2026-10-01",
+        "locator": "gir-2025 HWPX 전력배출계수 표 6행",
+        "note": "계수 조합기가 계수 표의 낱줄에서 조립했다. 온실가스종합정보센터(GIR) 공표 값을 쓴 것은 조립 조건(입력)이다. 이 값이 지침 별표 6 Tier 2 문장의 「센터에서 확인하여 지침에 수록된 경우」 에 해당하는지는 판단하지 않았다. 이 CO2 환산 계수에는 GWP 가 이미 들어 있다: IPCC 5차 평가보고서(AR5) GWP (GIR 2025 공고 전력배출계수 표 주석 1)의 *). 엔진은 GWP 를 다시 곱하지 않으므로 계산에 고른 GWP 세트와 다를 수 있다."
+      },
+      "energyType": "electricity",
+      "variant": "gir-2025:소비단:2023:ipcc_2006:co2e",
+      "year": 2023,
+      "perUnit": "MWh",
+      "emissionFactors": [
+        {
+          "gas": "CO2e",
+          "value": "0.4173",
+          "massUnit": "t"
+        }
+      ]
+    },
+    "evidence": {
+      "request": {
+        "energyType": "electricity",
+        "source": "gir_published",
+        "gasForm": "co2e",
+        "gir": {
+          "edition": 2025,
+          "period": {
+            "kind": "single_year",
+            "year": 2023
+          },
+          "boundary": "consumption",
+          "methodology": "ipcc_2006"
+        }
+      },
+      "co2eGwp": "IPCC 5차 평가보고서(AR5) GWP (GIR 2025 공고 전력배출계수 표 주석 1)의 *)",
+      "sourceChoice": {
+        "value": "gir_published",
+        "basis": "input",
+        "note": "온실가스종합정보센터(GIR) 공표 값을 쓴 것은 조립 조건(입력)이다. 이 값이 지침 별표 6 Tier 2 문장의 「센터에서 확인하여 지침에 수록된 경우」 에 해당하는지는 판단하지 않았다."
+      },
+      "rule": "2025년 승인 국가 온실가스 배출·흡수계수 (2025-12-18 공고) 공표 표에서 입력한 판·기간·소비단·산정기준의 낱줄",
+      "parameters": [
+        {
+          "gas": "CO2e",
+          "recordId": "gir-2025:main:r6",
+          "sourceId": "gir-2025",
+          "sourceName": "2025년 승인 국가 온실가스 배출·흡수계수",
+          "sourceVersion": "2025-12-18 공고",
+          "url": "https://www.gir.go.kr/home/board/read.do?menuId=36&boardId=86&boardMasterId=2",
+          "retrieved": "2026-10-01",
+          "fileSha256": "07ba51110ee200994cdf99ae4b8a4418b7cd406587da2ca31b02e68b68a3e2e7",
+          "locator": "HWPX 전력배출계수 표 6행",
+          "valueRaw": "0.4173",
+          "value": "0.4173",
+          "unit": "t CO2-eq/MWh",
+          "conditions": {
+            "기준": "소비단",
+            "산정기준": "’06 IPCC 지침",
+            "기간": "‘23년"
+          }
+        }
+      ]
+    }
+  }
+}

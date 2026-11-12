@@ -1,0 +1,612 @@
+{
+  "_comment": "Scope 3 데이터 엑셀(S3D1)의 표시 글·열 차례 — 웹 상수와 같은 글자(apps/web/src/pages/ghg-scope3/ui/xlsxLabels.test.ts 가 대조한다). workbook 은 엑셀에만 있는 글.",
+  "emissionUnit": "tCO2eq",
+  "factorNumerator": "kgCO2eq",
+  "layouts": [
+    "C1",
+    "C2",
+    "C3",
+    "C4-1",
+    "C4-2",
+    "C5",
+    "C6-1",
+    "C6-2",
+    "C7",
+    "C8-1",
+    "C8-2",
+    "C8-3",
+    "C9-1",
+    "C9-2",
+    "C11",
+    "C12",
+    "C13-1",
+    "C13-2",
+    "C13-3",
+    "C14",
+    "C15"
+  ],
+  "sheetLayouts": {
+    "C1": [
+      "row",
+      "inCountry",
+      "inSite",
+      "group",
+      "inName",
+      "spendKrw",
+      "co2e",
+      "share",
+      "factor",
+      "source"
+    ],
+    "C2": [
+      "row",
+      "inCountry",
+      "inSite",
+      "group",
+      "inName",
+      "spendKrw",
+      "co2e",
+      "share",
+      "factor",
+      "source"
+    ],
+    "C3": [
+      "row",
+      "inEnergy",
+      "activity",
+      "co2e",
+      "share",
+      "factor"
+    ],
+    "C4-1": [
+      "row",
+      "inName",
+      "baseAmount",
+      "km",
+      "co2e",
+      "share",
+      "factor"
+    ],
+    "C4-2": [
+      "row",
+      "inCountry",
+      "inSite",
+      "inName",
+      "activity",
+      "co2e",
+      "share",
+      "factor"
+    ],
+    "C5": [
+      "row",
+      "inSite",
+      "inName",
+      "treatment",
+      "activity",
+      "co2e",
+      "share",
+      "biogenic",
+      "factor",
+      "fcf"
+    ],
+    "C6-1": [
+      "row",
+      "mode",
+      "people",
+      "km",
+      "roundTrip",
+      "trips",
+      "co2e",
+      "share",
+      "factor"
+    ],
+    "C6-2": [
+      "row",
+      "inCountry",
+      "inSite",
+      "inVehicle",
+      "inPeople",
+      "activity",
+      "co2e",
+      "share",
+      "factor"
+    ],
+    "C7": [
+      "row",
+      "mode",
+      "km",
+      "people",
+      "workdays",
+      "co2e",
+      "share",
+      "factor"
+    ],
+    "C8-1": [
+      "row",
+      "inCountry",
+      "inName",
+      "inEnergy",
+      "activity",
+      "co2e",
+      "share",
+      "factor"
+    ],
+    "C8-2": [
+      "row",
+      "inCountry",
+      "inName",
+      "inEnergy",
+      "inBuildingArea",
+      "inUsedArea",
+      "buildingTotal",
+      "co2e",
+      "share",
+      "factor"
+    ],
+    "C8-3": [
+      "row",
+      "inCountry",
+      "inName",
+      "inEnergy",
+      "inBuildingPeople",
+      "inOwnPeople",
+      "buildingTotal",
+      "co2e",
+      "share",
+      "factor"
+    ],
+    "C9-1": [
+      "row",
+      "mode",
+      "inName",
+      "baseAmount",
+      "km",
+      "co2e",
+      "share",
+      "factor"
+    ],
+    "C9-2": [
+      "row",
+      "inCountry",
+      "inSite",
+      "inName",
+      "inVehicle",
+      "activity",
+      "co2e",
+      "share",
+      "factor"
+    ],
+    "C11": [
+      "row",
+      "inName",
+      "inProductCount",
+      "inEnergy",
+      "activity",
+      "inUseMonths",
+      "co2e",
+      "share",
+      "factor"
+    ],
+    "C12": [
+      "row",
+      "inName",
+      "inSales",
+      "inWeight",
+      "co2e",
+      "share",
+      "biogenic",
+      "factor",
+      "fcf"
+    ],
+    "C13-1": [
+      "row",
+      "inCountry",
+      "inName",
+      "inEnergy",
+      "activity",
+      "co2e",
+      "share",
+      "factor"
+    ],
+    "C13-2": [
+      "row",
+      "inCountry",
+      "inName",
+      "inEnergy",
+      "inBuildingArea",
+      "inUsedArea",
+      "buildingTotal",
+      "co2e",
+      "share",
+      "factor"
+    ],
+    "C13-3": [
+      "row",
+      "inCountry",
+      "inName",
+      "inEnergy",
+      "inBuildingPeople",
+      "inOwnPeople",
+      "buildingTotal",
+      "co2e",
+      "share",
+      "factor"
+    ],
+    "C14": [
+      "row",
+      "inCountry",
+      "inName",
+      "inStores",
+      "inEnergy",
+      "activity",
+      "co2e",
+      "share",
+      "factor"
+    ],
+    "C15": [
+      "row",
+      "inName",
+      "investShare",
+      "scope1",
+      "scope2",
+      "co2e",
+      "share"
+    ],
+    "generic": [
+      "row",
+      "co2e",
+      "share",
+      "factor"
+    ]
+  },
+  "layoutByKind": {
+    "purchase": {
+      "Category1": "C1",
+      "Category2": "C2"
+    },
+    "transport_spend": {
+      "Category4": "C4-2",
+      "Category9": "C9-2"
+    },
+    "travel_spend": {
+      "Category6": "C6-2"
+    },
+    "waste": {
+      "Category5": "C5"
+    },
+    "transport_distance": {
+      "Category4": "C4-1",
+      "Category9": "C9-1"
+    },
+    "travel_distance": {
+      "Category6": "C6-1"
+    },
+    "commute": {
+      "Category7": "C7"
+    },
+    "fuel_energy": {
+      "Category3": "C3"
+    },
+    "leased_asset": {
+      "Category8": "C8-1"
+    },
+    "leased_out_asset": {
+      "Category13": "C13-1"
+    },
+    "product_use": {
+      "Category11": "C11"
+    },
+    "product_eol": {
+      "Category12": "C12"
+    },
+    "franchise": {
+      "Category14": "C14"
+    },
+    "investment": {
+      "Category15": "C15"
+    }
+  },
+  "textColumns": [
+    "inCountry",
+    "inSite",
+    "inName",
+    "inVehicle",
+    "inEnergy",
+    "group",
+    "treatment",
+    "mode"
+  ],
+  "inputColumns": {
+    "inCountry": "country",
+    "inSite": "site",
+    "inName": "name",
+    "inEnergy": "energy",
+    "inVehicle": "vehicle",
+    "inPeople": "people",
+    "inBuildingArea": "buildingArea",
+    "inUsedArea": "usedArea",
+    "inBuildingPeople": "buildingPeople",
+    "inOwnPeople": "ownPeople",
+    "inProductCount": "productCount",
+    "inUseMonths": "useMonths",
+    "inSales": "sales",
+    "inWeight": "weight",
+    "inStores": "stores"
+  },
+  "inputKeys": [
+    "country",
+    "site",
+    "name",
+    "vehicle",
+    "energy",
+    "people",
+    "buildingArea",
+    "usedArea",
+    "buildingPeople",
+    "ownPeople",
+    "productCount",
+    "sales",
+    "weight",
+    "weightUnit",
+    "stores",
+    "useMonths"
+  ],
+  "activityKinds": [
+    "transport_spend",
+    "travel_spend",
+    "waste",
+    "transport_distance",
+    "travel_distance",
+    "commute"
+  ],
+  "energyKinds": [
+    "fuel_energy",
+    "leased_asset",
+    "leased_out_asset",
+    "product_use",
+    "product_eol",
+    "franchise",
+    "investment"
+  ],
+  "columns": {
+    "row": "행",
+    "inCountry": "국가",
+    "inSite": "사업장",
+    "inName": "이름",
+    "inVehicle": "수단",
+    "inEnergy": "에너지명",
+    "inPeople": "인원수",
+    "inBuildingArea": "건물전체 면적",
+    "inUsedArea": "사용 면적",
+    "inBuildingPeople": "건물전체 인원수",
+    "inOwnPeople": "자사 인원수",
+    "inProductCount": "제품수량",
+    "inSales": "판매량",
+    "inWeight": "제품 중량",
+    "inStores": "가맹점 수",
+    "inUseMonths": "평균사용기간 (개월)",
+    "group": "그룹명",
+    "spendKrw": "금액",
+    "treatment": "처리 방법",
+    "mode": "수단",
+    "activity": "활동량",
+    "baseAmount": "환산 활동량",
+    "people": "인원수",
+    "km": "거리(km)",
+    "roundTrip": "왕복계수",
+    "trips": "이동횟수",
+    "workdays": "근무일수",
+    "buildingTotal": "건물전체 사용량",
+    "investShare": "지분율(%)",
+    "scope1": "피투자 Scope 1",
+    "scope2": "피투자 Scope 2",
+    "factor": "배출계수",
+    "source": "출처",
+    "co2e": "온실가스 배출량",
+    "share": "배출량 비율",
+    "biogenic": "생물기원 CO2",
+    "fcf": "FCF"
+  },
+  "sheetColumns": {
+    "C1": {
+      "inName": "품목명",
+      "spendKrw": "연간지출금액(원)"
+    },
+    "C2": {
+      "inName": "자산명",
+      "spendKrw": "연간취득금액(원)"
+    },
+    "C3": {
+      "inEnergy": "연료·에너지명",
+      "activity": "연간 사용량"
+    },
+    "C4-1": {
+      "inName": "자재명/품목명",
+      "baseAmount": "연간운송량",
+      "km": "운송거리(km)"
+    },
+    "C4-2": {
+      "inName": "자재명/품목명",
+      "activity": "연간운송금액"
+    },
+    "C5": {
+      "inSite": "사업장명",
+      "inName": "폐기물",
+      "treatment": "처리 방법",
+      "activity": "연간처리량"
+    },
+    "C6-1": {
+      "mode": "교통 수단",
+      "people": "인원수",
+      "km": "이동거리(km)",
+      "roundTrip": "왕복계수",
+      "trips": "연간이동횟수"
+    },
+    "C6-2": {
+      "inSite": "출장주체",
+      "inVehicle": "출장항목",
+      "inPeople": "인원수",
+      "activity": "연간 지출 금액"
+    },
+    "C7": {
+      "mode": "교통수단",
+      "km": "이동거리(km)",
+      "people": "인원수",
+      "workdays": "연간근무일수"
+    },
+    "C8-1": {
+      "inName": "임차자산명",
+      "inEnergy": "에너지 종류",
+      "activity": "연간사용량"
+    },
+    "C8-2": {
+      "inName": "임차자산명",
+      "inEnergy": "에너지 종류",
+      "inBuildingArea": "건물전체 면적",
+      "inUsedArea": "사용 면적",
+      "buildingTotal": "건물전체 연간사용량"
+    },
+    "C8-3": {
+      "inName": "임차자산명",
+      "inEnergy": "에너지 종류",
+      "inBuildingPeople": "건물전체 인원수",
+      "inOwnPeople": "자사 인원수",
+      "buildingTotal": "건물전체 연간사용량"
+    },
+    "C9-1": {
+      "mode": "운송수단",
+      "inName": "제품명",
+      "baseAmount": "연간운송량",
+      "km": "운송거리(km)"
+    },
+    "C9-2": {
+      "inName": "제품명",
+      "inVehicle": "운송수단",
+      "activity": "연간운송금액"
+    },
+    "C11": {
+      "inName": "제품명",
+      "inProductCount": "제품수량",
+      "inEnergy": "에너지명",
+      "activity": "제품당 연간 에너지 사용량",
+      "inUseMonths": "평균사용기간 (개월)"
+    },
+    "C12": {
+      "inName": "제품명",
+      "inSales": "판매량",
+      "inWeight": "제품 중량"
+    },
+    "C13-1": {
+      "inName": "임대자산명",
+      "inEnergy": "에너지 종류",
+      "activity": "연간사용량"
+    },
+    "C13-2": {
+      "inName": "임대자산명",
+      "inEnergy": "에너지 종류",
+      "inBuildingArea": "건물 전체 면적",
+      "inUsedArea": "사용 면적",
+      "buildingTotal": "건물전체 연간사용량"
+    },
+    "C13-3": {
+      "inName": "임대자산명",
+      "inEnergy": "에너지 종류",
+      "inBuildingPeople": "건물 전체 인원수",
+      "inOwnPeople": "자사 인원수",
+      "buildingTotal": "건물전체 연간사용량"
+    },
+    "C14": {
+      "inName": "프랜차이즈 명",
+      "inStores": "가맹점 수",
+      "inEnergy": "연료 종류",
+      "activity": "연료 사용량"
+    },
+    "C15": {
+      "inName": "기업명",
+      "investShare": "지분율(%)",
+      "scope1": "피투자 Scope 1",
+      "scope2": "피투자 Scope 2",
+      "co2e": "총 온실가스 배출량"
+    }
+  },
+  "sourceKinds": {
+    "manual_keyword": "usepa",
+    "db_keyword": "usepa",
+    "legacy_fallback": "usepa",
+    "manual_title": "usepa-estimate"
+  },
+  "sourceBooks": {
+    "usepa": "US EPA",
+    "usepa-estimate": "US EPA"
+  },
+  "sourceSheets": {
+    "폐기물_C5": "폐기물 배출계수 표",
+    "폐기물_C12": "폐기물 배출계수 표"
+  },
+  "sourcePurchasePrefix": "구매_USEPA",
+  "modeLabels": {
+    "flight": "항공",
+    "flight_dom": "항공(국내선)",
+    "flight_short": "항공(단거리)",
+    "flight_long": "항공(장거리)",
+    "flight_biz": "항공(비즈니스)",
+    "flight_short_biz": "항공(단거리 · 비즈니스)",
+    "flight_long_biz": "항공(장거리 · 비즈니스)",
+    "flight_long_prem": "항공(장거리 · 프리미엄 이코노미)",
+    "flight_first": "항공(퍼스트)",
+    "flight_long_first": "항공(장거리 · 퍼스트)",
+    "train": "철도",
+    "tram": "경전철 · 트램",
+    "subway": "지하철",
+    "bus": "버스",
+    "coach": "장거리 버스",
+    "taxi": "택시",
+    "car": "승용차",
+    "car_small": "승용차(소형)",
+    "car_medium": "승용차(중형)",
+    "car_large": "승용차(대형)",
+    "car_hybrid": "승용차(하이브리드)",
+    "car_ev": "전기차",
+    "rental_car": "렌터카",
+    "motorcycle": "오토바이",
+    "motorcycle_small": "오토바이(소형)",
+    "motorcycle_large": "오토바이(대형)",
+    "ferry": "여객선",
+    "ferry_foot": "여객선(도보 승선)",
+    "walk": "도보",
+    "bicycle": "자전거",
+    "lodging": "숙박",
+    "road": "도로(트럭)",
+    "parcel": "택배",
+    "rail": "철도",
+    "sea": "해상",
+    "air": "항공",
+    "sea_bulk": "해상(벌크선)",
+    "inland_water": "내륙 수로"
+  },
+  "modeOther": "기타",
+  "biogenicCategories": [
+    "C5",
+    "C12"
+  ],
+  "workbook": {
+    "summarySheet": "Scope 3 배출량",
+    "summaryHead": [
+      "카테고리",
+      "카테고리 이름",
+      "총 배출량",
+      "생물기원 CO2",
+      "시트 수",
+      "실패 시트 수",
+      "제외 줄 수",
+      "수정 줄 수"
+    ],
+    "summaryTotal": "Scope 3 합계",
+    "sheetHead": "시트",
+    "excludedHead": "제외",
+    "editedHead": "수정",
+    "unitSuffix": " 단위",
+    "mark": "Y",
+    "sheetTotal": "시트 합계"
+  }
+}

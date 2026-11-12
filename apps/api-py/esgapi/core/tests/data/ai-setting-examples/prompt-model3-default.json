@@ -1,0 +1,141 @@
+{
+  "schemaVersion": "ai.prompt-model@3",
+  "module": "greenwash",
+  "settingName": "colab-2026-01-15-v1",
+  "editable": {
+    "prompts": false,
+    "model": true
+  },
+  "modelSettingsSha256": "6392cbf83b77fcbd9c5032a1050d075165094e756d53b6204395cf46bac041ec",
+  "models": [
+    {
+      "key": "judge",
+      "label": "판정",
+      "model": {
+        "route": "light-openai-41",
+        "models": [
+          {
+            "key": "gpt-4.1-mini",
+            "label": "OpenAI GPT-4.1 Mini",
+            "provider": "openai"
+          }
+        ],
+        "temperature": 0.0,
+        "webSearch": false,
+        "maxOutputTokens": 1300
+      },
+      "routeChoices": [
+        {
+          "route": "light-openai-41",
+          "models": [
+            {
+              "key": "gpt-4.1-mini",
+              "label": "OpenAI GPT-4.1 Mini",
+              "provider": "openai"
+            }
+          ],
+          "acceptsTemperature": true,
+          "webSearchAvailable": false,
+          "maxOutputTokensMax": 32768
+        },
+        {
+          "route": "standard-openai-41",
+          "models": [
+            {
+              "key": "gpt-4.1",
+              "label": "OpenAI GPT-4.1",
+              "provider": "openai"
+            }
+          ],
+          "acceptsTemperature": true,
+          "webSearchAvailable": false,
+          "maxOutputTokensMax": 32768
+        }
+      ],
+      "unavailableRoutes": []
+    }
+  ],
+  "promptGroups": [
+    {
+      "key": "judge",
+      "label": "판정",
+      "modelSlots": [
+        "judge"
+      ],
+      "prompts": [
+        {
+          "key": "detect",
+          "label": "문장 찾기",
+          "promptId": "greenwash/detect@1",
+          "promptVersion": "2026-01-15-v1",
+          "sha256": "4c1e9d1367f44df30d4fd36ec67c5fb43a7b3847bec622024e3875fb3cb75337",
+          "text": "너는 지속가능성 보고서의 문장을 읽고 과장된 환경 주장을 찾는 검토자다.\n[출력(JSON only)]\n[\"문장\"]",
+          "memo": "지어낸 기본 메모: 문장 찾기",
+          "defaultText": "너는 지속가능성 보고서의 문장을 읽고 과장된 환경 주장을 찾는 검토자다.\n[출력(JSON only)]\n[\"문장\"]",
+          "isDefault": true,
+          "outputSection": "[출력(JSON only)]\n[\"문장\"]",
+          "outputKept": true
+        },
+        {
+          "key": "eval",
+          "label": "판정",
+          "promptId": "greenwash/eval@1",
+          "promptVersion": "2026-01-15-v1",
+          "sha256": "1b4f46ad0131b3f3724359689d4bfa0c731df2f8b55a3c8e442b2c4f38ee6c80",
+          "text": "아래 기준표의 항목마다 문장이 해당하는지 판정하고 근거를 한 줄로 적어라.\n[출력(JSON only)]\n{\"level\": \"High|Mid\"}",
+          "memo": "지어낸 기본 메모: 판정",
+          "defaultText": "아래 기준표의 항목마다 문장이 해당하는지 판정하고 근거를 한 줄로 적어라.\n[출력(JSON only)]\n{\"level\": \"High|Mid\"}",
+          "isDefault": true,
+          "outputSection": "[출력(JSON only)]\n{\"level\": \"High|Mid\"}",
+          "outputKept": true
+        }
+      ]
+    }
+  ],
+  "limits": {
+    "textMax": 8000,
+    "memoMax": 500
+  },
+  "fixed": [
+    {
+      "key": "parts",
+      "label": "파트",
+      "items": [
+        {
+          "key": "intro",
+          "label": "소개 쪽",
+          "value": null
+        },
+        {
+          "key": "env",
+          "label": "환경 쪽",
+          "value": null
+        }
+      ]
+    },
+    {
+      "key": "processing",
+      "label": "처리 값",
+      "items": [
+        {
+          "key": "per_page",
+          "label": "쪽당 후보 문장",
+          "value": 3
+        },
+        {
+          "key": "mode",
+          "label": "방식",
+          "value": "빠름"
+        },
+        {
+          "key": "tags",
+          "label": "꼬리표",
+          "value": [
+            "가",
+            "나"
+          ]
+        }
+      ]
+    }
+  ]
+}

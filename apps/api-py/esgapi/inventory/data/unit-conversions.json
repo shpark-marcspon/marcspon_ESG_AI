@@ -1,0 +1,30 @@
+{
+  "$comment": "단위 환산표. 전부 정의상 정확한 곱셈 계수다 (SI 접두어, 1 L = 1 dm3, 1 kWh = 3.6 MJ, 1 t = 1000 kg). 측정값이나 고시값이 아니라서 url 대신 definition 으로 표시했다. 엔진은 (from, to) 쌍을 그대로 찾고 역방향이나 다단계를 유도하지 않으므로 필요한 쌍을 모두 적는다. m3 ↔ Nm3 는 온도·압력 없이 환산할 수 없어 일부러 두지 않았다.",
+  "unitConversions": [
+    { "from": "L", "to": "kL", "factor": "0.001", "source": { "kind": "definition", "note": "SI 접두어 k = 10^3" } },
+    { "from": "kL", "to": "L", "factor": "1000", "source": { "kind": "definition", "note": "SI 접두어 k = 10^3" } },
+    { "from": "m3", "to": "L", "factor": "1000", "source": { "kind": "definition", "note": "1 L = 1 dm3 = 0.001 m3" } },
+    { "from": "L", "to": "m3", "factor": "0.001", "source": { "kind": "definition", "note": "1 L = 1 dm3 = 0.001 m3" } },
+    { "from": "m3", "to": "kL", "factor": "1", "source": { "kind": "definition", "note": "1 kL = 1000 L = 1 m3" } },
+    { "from": "kL", "to": "m3", "factor": "1", "source": { "kind": "definition", "note": "1 kL = 1000 L = 1 m3" } },
+    { "from": "kNm3", "to": "Nm3", "factor": "1000", "source": { "kind": "definition", "note": "천 Nm3 = 10^3 Nm3" } },
+    { "from": "Nm3", "to": "kNm3", "factor": "0.001", "source": { "kind": "definition", "note": "천 Nm3 = 10^3 Nm3" } },
+    { "from": "g", "to": "kg", "factor": "0.001", "source": { "kind": "definition", "note": "SI 접두어 k = 10^3" } },
+    { "from": "kg", "to": "g", "factor": "1000", "source": { "kind": "definition", "note": "SI 접두어 k = 10^3" } },
+    { "from": "kg", "to": "t", "factor": "0.001", "source": { "kind": "definition", "note": "1 t = 1000 kg" } },
+    { "from": "t", "to": "kg", "factor": "1000", "source": { "kind": "definition", "note": "1 t = 1000 kg" } },
+    { "from": "g", "to": "t", "factor": "0.000001", "source": { "kind": "definition", "note": "1 t = 10^6 g" } },
+    { "from": "kWh", "to": "MWh", "factor": "0.001", "source": { "kind": "definition", "note": "SI 접두어 M = 10^6, k = 10^3" } },
+    { "from": "MWh", "to": "kWh", "factor": "1000", "source": { "kind": "definition", "note": "SI 접두어 M = 10^6, k = 10^3" } },
+    { "from": "GWh", "to": "MWh", "factor": "1000", "source": { "kind": "definition", "note": "SI 접두어 G = 10^9, M = 10^6" } },
+    { "from": "kWh", "to": "MJ", "factor": "3.6", "source": { "kind": "definition", "note": "1 kWh = 1000 W × 3600 s = 3.6 MJ" } },
+    { "from": "MWh", "to": "MJ", "factor": "3600", "source": { "kind": "definition", "note": "1 MWh = 3600 MJ" } },
+    { "from": "MWh", "to": "GJ", "factor": "3.6", "source": { "kind": "definition", "note": "1 MWh = 3.6 GJ" } },
+    { "from": "MJ", "to": "GJ", "factor": "0.001", "source": { "kind": "definition", "note": "SI 접두어 G = 10^9, M = 10^6" } },
+    { "from": "GJ", "to": "MJ", "factor": "1000", "source": { "kind": "definition", "note": "SI 접두어 G = 10^9, M = 10^6" } },
+    { "from": "MJ", "to": "TJ", "factor": "0.000001", "source": { "kind": "definition", "note": "SI 접두어 T = 10^12, M = 10^6" } },
+    { "from": "TJ", "to": "MJ", "factor": "1000000", "source": { "kind": "definition", "note": "SI 접두어 T = 10^12, M = 10^6" } },
+    { "from": "GJ", "to": "TJ", "factor": "0.001", "source": { "kind": "definition", "note": "SI 접두어 T = 10^12, G = 10^9" } },
+    { "from": "TJ", "to": "GJ", "factor": "1000", "source": { "kind": "definition", "note": "SI 접두어 T = 10^12, G = 10^9" } }
+  ]
+}

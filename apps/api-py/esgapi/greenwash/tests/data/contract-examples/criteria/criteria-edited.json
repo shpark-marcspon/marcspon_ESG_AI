@@ -1,0 +1,181 @@
+{
+  "schemaVersion": "greenwash.criteria@1",
+  "version": "example-edited-v1",
+  "rows": [
+    {
+      "id": "keyword-ghg",
+      "category": "targetKeyword",
+      "order": 1,
+      "enabled": true,
+      "text": "온실가스",
+      "terms": [
+        "탄소",
+        "온실가스",
+        "CO2",
+        "CO₂",
+        "탄소중립",
+        "넷제로",
+        "Net Zero",
+        "기후중립"
+      ],
+      "verdict": "coreEvidenceApplies",
+      "guideline": null
+    },
+    {
+      "id": "keyword-exclusion",
+      "category": "targetKeyword",
+      "order": 2,
+      "enabled": true,
+      "text": "배제용어",
+      "terms": [
+        "친환경",
+        "환경친화",
+        "자연적",
+        "생분해 가능",
+        "기후중립",
+        "에코",
+        "지속가능성",
+        "동물친화적",
+        "플라스틱중립",
+        "탈플라스틱",
+        "산림벌채 중단",
+        "녹색전환"
+      ],
+      "verdict": "coreEvidenceApplies",
+      "guideline": null
+    },
+    {
+      "id": "evidence-quantity",
+      "category": "coreEvidence",
+      "order": 3,
+      "enabled": true,
+      "text": "정량 수치(절감량/비율 등) 또는 정량 산출 결과",
+      "terms": null,
+      "verdict": "highIfMissing",
+      "guideline": {
+        "text": "[기관] · [조항]",
+        "status": "draft"
+      }
+    },
+    {
+      "id": "evidence-baseline",
+      "category": "coreEvidence",
+      "order": 4,
+      "enabled": true,
+      "text": "기준연도/비교 기준(예: 2019 대비, 기준기간)",
+      "terms": null,
+      "verdict": "highIfMissing",
+      "guideline": null
+    },
+    {
+      "id": "evidence-boundary",
+      "category": "coreEvidence",
+      "order": 5,
+      "enabled": true,
+      "text": "범위/경계(조직/사업/제품/지역, Scope 1/2/3, 포함·제외 조건)",
+      "terms": null,
+      "verdict": "highIfMissing",
+      "guideline": null
+    },
+    {
+      "id": "evidence-offset",
+      "category": "coreEvidence",
+      "order": 6,
+      "enabled": true,
+      "text": "온실가스 용어만 해당: 감축과 상쇄(크레딧/REC 등) 구분(혼용 또는 불명확하면 High)",
+      "terms": null,
+      "verdict": "highIfMissing",
+      "guideline": null
+    },
+    {
+      "id": "high-1",
+      "category": "high",
+      "order": 7,
+      "enabled": true,
+      "text": "절대적·단언적 표현(100%, 완전, 제로, 무공해, 기후중립, 탄소배출 제로 등), 사업영역 배제용어(친환경 신기술/신사업, 청정 기술, 그린 투자, 그린 포트폴리오),관용적 오사용 표현(청정수소, 청정 LNG, 그린 디젤) + 근거 불충분",
+      "terms": null,
+      "verdict": "High",
+      "guideline": null
+    },
+    {
+      "id": "high-2",
+      "category": "high",
+      "order": 8,
+      "enabled": true,
+      "text": "탄소중립·넷제로 같은 목표를 기준연도와 이행 경로, 제3자 검증 계획 없이 단정해 쓰는 경우",
+      "terms": null,
+      "verdict": "High",
+      "guideline": null
+    },
+    {
+      "id": "high-3",
+      "category": "high",
+      "order": 9,
+      "enabled": true,
+      "text": "온실가스/배제용어 Claim인데, 위 [온실가스/배제용어 강화 규칙]의 핵심 근거가 컨텍스트에서 충분히 확인되지 않음",
+      "terms": null,
+      "verdict": "High",
+      "guideline": null
+    },
+    {
+      "id": "high-4",
+      "category": "high",
+      "order": 10,
+      "enabled": true,
+      "text": "환경주장 목표 및 성과가 있으나 정량 수치가 없는 경우",
+      "terms": null,
+      "verdict": "High",
+      "guideline": null
+    },
+    {
+      "id": "mid-1",
+      "category": "mid",
+      "order": 11,
+      "enabled": true,
+      "text": "환경 주장·성과·목표는 있으나 기준연도/목표연도/비교 기준, 범위(Scope/사업/제품), 실행계획 중 일부가 불충분하여 오해 소지가 남는 경우",
+      "terms": null,
+      "verdict": "Mid",
+      "guideline": null
+    },
+    {
+      "id": "exception-1",
+      "category": "exception",
+      "order": 12,
+      "enabled": true,
+      "text": "국제 기구/이니셔티브 승인: SBTi 목표 승인, RE100 가입 승인 등 외부 공인 기관의 검토를 통과한 사실.",
+      "terms": null,
+      "verdict": "NonRisk",
+      "guideline": null
+    },
+    {
+      "id": "exception-2",
+      "category": "exception",
+      "order": 13,
+      "enabled": true,
+      "text": "공인 인증 획득: ISO 14001(환경경영), 환경표지 인증, 저탄소 제품 인증 등 국가/국제 표준 인증 취득 사실.",
+      "terms": null,
+      "verdict": "NonRisk",
+      "guideline": null
+    },
+    {
+      "id": "exception-3",
+      "category": "exception",
+      "order": 14,
+      "enabled": true,
+      "text": "제3자 검증 완료: 공인 인증기관으로부터 제3자 검증(Assurance)을 완료했다는 명시적 언급.",
+      "terms": null,
+      "verdict": "NonRisk",
+      "guideline": null
+    },
+    {
+      "id": "exception-4",
+      "category": "exception",
+      "order": 15,
+      "enabled": false,
+      "text": "법적/거버넌스 체계: IFRS S2에서 요구하는 이사회 보고 체계, 기후 리스크 관리 프로세스 구축 등 제도적 장치 기술.",
+      "terms": null,
+      "verdict": "NonRisk",
+      "guideline": null
+    }
+  ]
+}

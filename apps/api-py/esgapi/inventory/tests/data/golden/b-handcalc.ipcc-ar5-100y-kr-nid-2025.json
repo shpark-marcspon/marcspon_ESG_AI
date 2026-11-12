@@ -1,0 +1,649 @@
+{
+  "gwpSetId": "ipcc-ar5-100y-kr-nid-2025",
+  "rows": [
+    {
+      "rowId": "H02",
+      "orgUnit": "synthetic-site",
+      "period": "2025",
+      "scope": 1,
+      "sourceType": "stationary_combustion",
+      "status": "ok",
+      "co2e": "2.5594272",
+      "unit": "tCO2eq",
+      "energy": {
+        "value": "35200",
+        "unit": "MJ"
+      },
+      "gases": [
+        {
+          "gas": "CO2",
+          "mass": "2.5508736",
+          "massUnit": "t",
+          "gwp": "1",
+          "co2e": "2.5508736"
+        },
+        {
+          "gas": "CH4",
+          "mass": "0.0001056",
+          "massUnit": "t",
+          "gwp": "28",
+          "co2e": "0.0029568"
+        },
+        {
+          "gas": "N2O",
+          "mass": "0.00002112",
+          "massUnit": "t",
+          "gwp": "265",
+          "co2e": "0.0055968"
+        }
+      ],
+      "evidence": {
+        "factor": {
+          "id": "kr-ets-sample:diesel:stationary:manufacturing:tier2",
+          "version": "환경부고시 제2025-64호",
+          "source": {
+            "kind": "cited",
+            "title": "배출권거래제 배출량 보고 및 인증 지침 별표 12 (경유 순발열량 35.2 MJ/L, CO2 73,200 kgCO2/TJ), 별표 10 (가스/디젤 오일 CH4 3, N2O 0.6 kg/TJ, 제조업·건설업), 별표 6 '3. 고정연소(액체연료)' (산화계수 Tier 2 0.99)",
+            "url": "https://www.law.go.kr/LSW/flDownload.do?flSeq=151024615&bylClsCd=200201",
+            "checkedOn": "2026-10-01",
+            "locator": "별표 12 PDF flSeq=151024615, 별표 10 PDF flSeq=151024595, 별표 6 PDF flSeq=151024511",
+            "note": "CO2 는 국가 고유 계수, CH4·N2O 는 2006 IPCC 기본 계수다. 이 조합은 지침의 Tier 2 조합이다 (발열량·CO2 계수·산화계수 Tier 2, CH4·N2O 는 Tier 1 뿐. 별표 6 원문 대조 2026-10-02, MARC-TICK-17)."
+          }
+        },
+        "gwpSet": {
+          "id": "ipcc-ar5-100y-kr-nid-2025",
+          "label": "IPCC 제5차 평가보고서 100년 기준 (국가 온실가스 인벤토리 적용값: CH4 28, N2O 265)",
+          "source": {
+            "kind": "cited",
+            "title": "2025 국가 온실가스 인벤토리(1990~2023) 보고서(NID), 온실가스종합정보센터, 표 1-9 온실가스별 지구온난화지수(GWP)",
+            "url": "https://www.gir.go.kr/home/board/read.do?menuId=36&boardId=90&boardMasterId=2",
+            "checkedOn": "2026-10-01",
+            "locator": "첨부 '2025년 국가 온실가스 인벤토리 보고서_국문.pdf' 표 1-9 (1.7장)",
+            "note": "IPCC AR5 원문이 아니라 국가 인벤토리 보고서에 실린 표에서 읽었다."
+          }
+        },
+        "calorificBasis": "net",
+        "oxidationFactor": "0.99",
+        "sector": "manufacturing_construction",
+        "parameterTiers": {
+          "calorific": 2,
+          "co2": 2,
+          "nonCo2": 1,
+          "oxidation": 2
+        },
+        "facilityUse": null,
+        "steps": [
+          {
+            "label": "에너지량",
+            "formula": "1000 L × 35.2 MJ/L (순발열량)",
+            "result": "35200",
+            "unit": "MJ"
+          },
+          {
+            "label": "단위 환산 (CO2 배출계수의 에너지 단위)",
+            "formula": "35200 MJ × 0.000001 TJ/MJ",
+            "result": "0.0352",
+            "unit": "TJ",
+            "conversion": {
+              "from": "MJ",
+              "to": "TJ",
+              "factor": "0.000001",
+              "source": {
+                "kind": "definition",
+                "note": "SI 접두어 T = 10^12, M = 10^6"
+              }
+            }
+          },
+          {
+            "label": "CO2 배출량",
+            "formula": "0.0352 TJ × 73200 kgCO2/TJ × 산화계수 0.99",
+            "result": "2550.8736",
+            "unit": "kgCO2"
+          },
+          {
+            "label": "단위 환산 (CO2 질량)",
+            "formula": "2550.8736 kg × 0.001 t/kg",
+            "result": "2.5508736",
+            "unit": "t",
+            "conversion": {
+              "from": "kg",
+              "to": "t",
+              "factor": "0.001",
+              "source": {
+                "kind": "definition",
+                "note": "1 t = 1000 kg"
+              }
+            }
+          },
+          {
+            "label": "CO2 환산",
+            "formula": "2.5508736 tCO2 × GWP 1 (ipcc-ar5-100y-kr-nid-2025)",
+            "result": "2.5508736",
+            "unit": "tCO2eq"
+          },
+          {
+            "label": "단위 환산 (CH4 배출계수의 에너지 단위)",
+            "formula": "35200 MJ × 0.000001 TJ/MJ",
+            "result": "0.0352",
+            "unit": "TJ",
+            "conversion": {
+              "from": "MJ",
+              "to": "TJ",
+              "factor": "0.000001",
+              "source": {
+                "kind": "definition",
+                "note": "SI 접두어 T = 10^12, M = 10^6"
+              }
+            }
+          },
+          {
+            "label": "CH4 배출량",
+            "formula": "0.0352 TJ × 3 kgCH4/TJ",
+            "result": "0.1056",
+            "unit": "kgCH4"
+          },
+          {
+            "label": "단위 환산 (CH4 질량)",
+            "formula": "0.1056 kg × 0.001 t/kg",
+            "result": "0.0001056",
+            "unit": "t",
+            "conversion": {
+              "from": "kg",
+              "to": "t",
+              "factor": "0.001",
+              "source": {
+                "kind": "definition",
+                "note": "1 t = 1000 kg"
+              }
+            }
+          },
+          {
+            "label": "CH4 환산",
+            "formula": "0.0001056 tCH4 × GWP 28 (ipcc-ar5-100y-kr-nid-2025)",
+            "result": "0.0029568",
+            "unit": "tCO2eq"
+          },
+          {
+            "label": "단위 환산 (N2O 배출계수의 에너지 단위)",
+            "formula": "35200 MJ × 0.000001 TJ/MJ",
+            "result": "0.0352",
+            "unit": "TJ",
+            "conversion": {
+              "from": "MJ",
+              "to": "TJ",
+              "factor": "0.000001",
+              "source": {
+                "kind": "definition",
+                "note": "SI 접두어 T = 10^12, M = 10^6"
+              }
+            }
+          },
+          {
+            "label": "N2O 배출량",
+            "formula": "0.0352 TJ × 0.6 kgN2O/TJ",
+            "result": "0.02112",
+            "unit": "kgN2O"
+          },
+          {
+            "label": "단위 환산 (N2O 질량)",
+            "formula": "0.02112 kg × 0.001 t/kg",
+            "result": "0.00002112",
+            "unit": "t",
+            "conversion": {
+              "from": "kg",
+              "to": "t",
+              "factor": "0.001",
+              "source": {
+                "kind": "definition",
+                "note": "1 t = 1000 kg"
+              }
+            }
+          },
+          {
+            "label": "N2O 환산",
+            "formula": "0.00002112 tN2O × GWP 265 (ipcc-ar5-100y-kr-nid-2025)",
+            "result": "0.0055968",
+            "unit": "tCO2eq"
+          },
+          {
+            "label": "합산",
+            "formula": "2.5508736 (CO2) + 0.0029568 (CH4) + 0.0055968 (N2O)",
+            "result": "2.5594272",
+            "unit": "tCO2eq"
+          }
+        ]
+      }
+    },
+    {
+      "rowId": "H05",
+      "orgUnit": "synthetic-site",
+      "period": "2025",
+      "scope": 1,
+      "sourceType": "stationary_combustion",
+      "status": "ok",
+      "co2e": "26.8871014989612",
+      "unit": "tCO2eq",
+      "energy": {
+        "value": "480246.8742",
+        "unit": "MJ"
+      },
+      "gases": [
+        {
+          "gas": "CO2",
+          "mass": "26.8071403944069",
+          "massUnit": "t",
+          "gwp": "1",
+          "co2e": "26.8071403944069"
+        },
+        {
+          "gas": "CH4",
+          "mass": "0.002401234371",
+          "massUnit": "t",
+          "gwp": "28",
+          "co2e": "0.067234562388"
+        },
+        {
+          "gas": "N2O",
+          "mass": "0.00004802468742",
+          "massUnit": "t",
+          "gwp": "265",
+          "co2e": "0.0127265421663"
+        }
+      ],
+      "evidence": {
+        "factor": {
+          "id": "kr-ets-sample:city-gas-lng:stationary:commercial:tier2",
+          "version": "환경부고시 제2025-64호",
+          "source": {
+            "kind": "cited",
+            "title": "배출권거래제 배출량 보고 및 인증 지침 별표 12 (도시가스(LNG) 순발열량 38.9 MJ/Nm3, CO2 56,100 kgCO2/TJ), 별표 10 (천연가스 CH4 5, N2O 0.1 kg/TJ, 상업·공공), 별표 6 '2. 고정연소(기체연료)' (산화계수 Tier 2 0.995)",
+            "url": "https://www.law.go.kr/LSW/flDownload.do?flSeq=151024615&bylClsCd=200201",
+            "checkedOn": "2026-10-01",
+            "locator": "별표 12 PDF flSeq=151024615, 별표 10 PDF flSeq=151024595, 별표 6 PDF flSeq=151024511",
+            "note": "CO2 는 국가 고유 계수, CH4·N2O 는 2006 IPCC 기본 계수다. 이 조합은 지침의 Tier 2 조합이다 (발열량·CO2 계수·산화계수 Tier 2, CH4·N2O 는 Tier 1 뿐. 별표 6 원문 대조 2026-10-02, MARC-TICK-17)."
+          }
+        },
+        "gwpSet": {
+          "id": "ipcc-ar5-100y-kr-nid-2025",
+          "label": "IPCC 제5차 평가보고서 100년 기준 (국가 온실가스 인벤토리 적용값: CH4 28, N2O 265)",
+          "source": {
+            "kind": "cited",
+            "title": "2025 국가 온실가스 인벤토리(1990~2023) 보고서(NID), 온실가스종합정보센터, 표 1-9 온실가스별 지구온난화지수(GWP)",
+            "url": "https://www.gir.go.kr/home/board/read.do?menuId=36&boardId=90&boardMasterId=2",
+            "checkedOn": "2026-10-01",
+            "locator": "첨부 '2025년 국가 온실가스 인벤토리 보고서_국문.pdf' 표 1-9 (1.7장)",
+            "note": "IPCC AR5 원문이 아니라 국가 인벤토리 보고서에 실린 표에서 읽었다."
+          }
+        },
+        "calorificBasis": "net",
+        "oxidationFactor": "0.995",
+        "sector": "commercial_public",
+        "parameterTiers": {
+          "calorific": 2,
+          "co2": 2,
+          "nonCo2": 1,
+          "oxidation": 2
+        },
+        "facilityUse": null,
+        "steps": [
+          {
+            "label": "단위 환산 (사용량 → 발열량 기준 단위)",
+            "formula": "12.345678 kNm3 × 1000 Nm3/kNm3",
+            "result": "12345.678",
+            "unit": "Nm3",
+            "conversion": {
+              "from": "kNm3",
+              "to": "Nm3",
+              "factor": "1000",
+              "source": {
+                "kind": "definition",
+                "note": "천 Nm3 = 10^3 Nm3"
+              }
+            }
+          },
+          {
+            "label": "에너지량",
+            "formula": "12345.678 Nm3 × 38.9 MJ/Nm3 (순발열량)",
+            "result": "480246.8742",
+            "unit": "MJ"
+          },
+          {
+            "label": "단위 환산 (CO2 배출계수의 에너지 단위)",
+            "formula": "480246.8742 MJ × 0.000001 TJ/MJ",
+            "result": "0.4802468742",
+            "unit": "TJ",
+            "conversion": {
+              "from": "MJ",
+              "to": "TJ",
+              "factor": "0.000001",
+              "source": {
+                "kind": "definition",
+                "note": "SI 접두어 T = 10^12, M = 10^6"
+              }
+            }
+          },
+          {
+            "label": "CO2 배출량",
+            "formula": "0.4802468742 TJ × 56100 kgCO2/TJ × 산화계수 0.995",
+            "result": "26807.1403944069",
+            "unit": "kgCO2"
+          },
+          {
+            "label": "단위 환산 (CO2 질량)",
+            "formula": "26807.1403944069 kg × 0.001 t/kg",
+            "result": "26.8071403944069",
+            "unit": "t",
+            "conversion": {
+              "from": "kg",
+              "to": "t",
+              "factor": "0.001",
+              "source": {
+                "kind": "definition",
+                "note": "1 t = 1000 kg"
+              }
+            }
+          },
+          {
+            "label": "CO2 환산",
+            "formula": "26.8071403944069 tCO2 × GWP 1 (ipcc-ar5-100y-kr-nid-2025)",
+            "result": "26.8071403944069",
+            "unit": "tCO2eq"
+          },
+          {
+            "label": "단위 환산 (CH4 배출계수의 에너지 단위)",
+            "formula": "480246.8742 MJ × 0.000001 TJ/MJ",
+            "result": "0.4802468742",
+            "unit": "TJ",
+            "conversion": {
+              "from": "MJ",
+              "to": "TJ",
+              "factor": "0.000001",
+              "source": {
+                "kind": "definition",
+                "note": "SI 접두어 T = 10^12, M = 10^6"
+              }
+            }
+          },
+          {
+            "label": "CH4 배출량",
+            "formula": "0.4802468742 TJ × 5 kgCH4/TJ",
+            "result": "2.401234371",
+            "unit": "kgCH4"
+          },
+          {
+            "label": "단위 환산 (CH4 질량)",
+            "formula": "2.401234371 kg × 0.001 t/kg",
+            "result": "0.002401234371",
+            "unit": "t",
+            "conversion": {
+              "from": "kg",
+              "to": "t",
+              "factor": "0.001",
+              "source": {
+                "kind": "definition",
+                "note": "1 t = 1000 kg"
+              }
+            }
+          },
+          {
+            "label": "CH4 환산",
+            "formula": "0.002401234371 tCH4 × GWP 28 (ipcc-ar5-100y-kr-nid-2025)",
+            "result": "0.067234562388",
+            "unit": "tCO2eq"
+          },
+          {
+            "label": "단위 환산 (N2O 배출계수의 에너지 단위)",
+            "formula": "480246.8742 MJ × 0.000001 TJ/MJ",
+            "result": "0.4802468742",
+            "unit": "TJ",
+            "conversion": {
+              "from": "MJ",
+              "to": "TJ",
+              "factor": "0.000001",
+              "source": {
+                "kind": "definition",
+                "note": "SI 접두어 T = 10^12, M = 10^6"
+              }
+            }
+          },
+          {
+            "label": "N2O 배출량",
+            "formula": "0.4802468742 TJ × 0.1 kgN2O/TJ",
+            "result": "0.04802468742",
+            "unit": "kgN2O"
+          },
+          {
+            "label": "단위 환산 (N2O 질량)",
+            "formula": "0.04802468742 kg × 0.001 t/kg",
+            "result": "0.00004802468742",
+            "unit": "t",
+            "conversion": {
+              "from": "kg",
+              "to": "t",
+              "factor": "0.001",
+              "source": {
+                "kind": "definition",
+                "note": "1 t = 1000 kg"
+              }
+            }
+          },
+          {
+            "label": "N2O 환산",
+            "formula": "0.00004802468742 tN2O × GWP 265 (ipcc-ar5-100y-kr-nid-2025)",
+            "result": "0.0127265421663",
+            "unit": "tCO2eq"
+          },
+          {
+            "label": "합산",
+            "formula": "26.8071403944069 (CO2) + 0.067234562388 (CH4) + 0.0127265421663 (N2O)",
+            "result": "26.8871014989612",
+            "unit": "tCO2eq"
+          }
+        ]
+      }
+    },
+    {
+      "rowId": "H07",
+      "orgUnit": "synthetic-site",
+      "period": "2025",
+      "scope": 2,
+      "sourceType": "purchased_electricity",
+      "status": "ok",
+      "co2e": "229.52665",
+      "unit": "tCO2eq",
+      "energy": null,
+      "gases": [
+        {
+          "gas": "CO2",
+          "mass": "228.35",
+          "massUnit": "t",
+          "gwp": "1",
+          "co2e": "228.35"
+        },
+        {
+          "gas": "CH4",
+          "mass": "0.0018",
+          "massUnit": "t",
+          "gwp": "28",
+          "co2e": "0.0504"
+        },
+        {
+          "gas": "N2O",
+          "mass": "0.00425",
+          "massUnit": "t",
+          "gwp": "265",
+          "co2e": "1.12625"
+        }
+      ],
+      "evidence": {
+        "factor": {
+          "id": "kr-ets-sample:electricity:2014-2016-avg",
+          "version": "환경부고시 제2025-64호",
+          "source": {
+            "kind": "cited",
+            "title": "배출권거래제 배출량 보고 및 인증 지침 별표 6 '39. 외부에서 공급된 전기 사용' <표-69> 국가 고유 전력배출계수('14~'16년 평균): CO2 0.4567 tCO2/MWh, CH4 0.0036 kgCH4/MWh, N2O 0.0085 kgN2O/MWh",
+            "url": "https://www.law.go.kr/LSW/flDownload.do?flSeq=151024511&bylClsCd=200201",
+            "checkedOn": "2026-10-01",
+            "locator": "별표 6 PDF flSeq=151024511, 39번 배출활동 5. 매개변수별 관리기준 ② 배출계수",
+            "note": "고시에 실린 값이다. 더 최근의 전력배출계수가 공표됐는지는 확인하지 않았다."
+          }
+        },
+        "gwpSet": {
+          "id": "ipcc-ar5-100y-kr-nid-2025",
+          "label": "IPCC 제5차 평가보고서 100년 기준 (국가 온실가스 인벤토리 적용값: CH4 28, N2O 265)",
+          "source": {
+            "kind": "cited",
+            "title": "2025 국가 온실가스 인벤토리(1990~2023) 보고서(NID), 온실가스종합정보센터, 표 1-9 온실가스별 지구온난화지수(GWP)",
+            "url": "https://www.gir.go.kr/home/board/read.do?menuId=36&boardId=90&boardMasterId=2",
+            "checkedOn": "2026-10-01",
+            "locator": "첨부 '2025년 국가 온실가스 인벤토리 보고서_국문.pdf' 표 1-9 (1.7장)",
+            "note": "IPCC AR5 원문이 아니라 국가 인벤토리 보고서에 실린 표에서 읽었다."
+          }
+        },
+        "calorificBasis": null,
+        "oxidationFactor": null,
+        "sector": null,
+        "parameterTiers": null,
+        "facilityUse": null,
+        "steps": [
+          {
+            "label": "단위 환산 (사용량 → 배출계수 기준 단위)",
+            "formula": "500000 kWh × 0.001 MWh/kWh",
+            "result": "500",
+            "unit": "MWh",
+            "conversion": {
+              "from": "kWh",
+              "to": "MWh",
+              "factor": "0.001",
+              "source": {
+                "kind": "definition",
+                "note": "SI 접두어 M = 10^6, k = 10^3"
+              }
+            }
+          },
+          {
+            "label": "CO2 배출량",
+            "formula": "500 MWh × 0.4567 tCO2/MWh",
+            "result": "228.35",
+            "unit": "tCO2"
+          },
+          {
+            "label": "CO2 환산",
+            "formula": "228.35 tCO2 × GWP 1 (ipcc-ar5-100y-kr-nid-2025)",
+            "result": "228.35",
+            "unit": "tCO2eq"
+          },
+          {
+            "label": "CH4 배출량",
+            "formula": "500 MWh × 0.0036 kgCH4/MWh",
+            "result": "1.8",
+            "unit": "kgCH4"
+          },
+          {
+            "label": "단위 환산 (CH4 질량)",
+            "formula": "1.8 kg × 0.001 t/kg",
+            "result": "0.0018",
+            "unit": "t",
+            "conversion": {
+              "from": "kg",
+              "to": "t",
+              "factor": "0.001",
+              "source": {
+                "kind": "definition",
+                "note": "1 t = 1000 kg"
+              }
+            }
+          },
+          {
+            "label": "CH4 환산",
+            "formula": "0.0018 tCH4 × GWP 28 (ipcc-ar5-100y-kr-nid-2025)",
+            "result": "0.0504",
+            "unit": "tCO2eq"
+          },
+          {
+            "label": "N2O 배출량",
+            "formula": "500 MWh × 0.0085 kgN2O/MWh",
+            "result": "4.25",
+            "unit": "kgN2O"
+          },
+          {
+            "label": "단위 환산 (N2O 질량)",
+            "formula": "4.25 kg × 0.001 t/kg",
+            "result": "0.00425",
+            "unit": "t",
+            "conversion": {
+              "from": "kg",
+              "to": "t",
+              "factor": "0.001",
+              "source": {
+                "kind": "definition",
+                "note": "1 t = 1000 kg"
+              }
+            }
+          },
+          {
+            "label": "N2O 환산",
+            "formula": "0.00425 tN2O × GWP 265 (ipcc-ar5-100y-kr-nid-2025)",
+            "result": "1.12625",
+            "unit": "tCO2eq"
+          },
+          {
+            "label": "합산",
+            "formula": "228.35 (CO2) + 0.0504 (CH4) + 1.12625 (N2O)",
+            "result": "229.52665",
+            "unit": "tCO2eq"
+          }
+        ]
+      }
+    }
+  ],
+  "aggregation": {
+    "by": [
+      "scope",
+      "sourceType"
+    ],
+    "groups": [
+      {
+        "key": {
+          "scope": "1",
+          "sourceType": "stationary_combustion"
+        },
+        "co2e": "29.4465286989612",
+        "co2eByGas": {
+          "CO2": "29.3580139944069",
+          "CH4": "0.070191362388",
+          "N2O": "0.0183233421663"
+        },
+        "okRowCount": 2,
+        "failedRowIds": [],
+        "complete": true
+      },
+      {
+        "key": {
+          "scope": "2",
+          "sourceType": "purchased_electricity"
+        },
+        "co2e": "229.52665",
+        "co2eByGas": {
+          "CO2": "228.35",
+          "CH4": "0.0504",
+          "N2O": "1.12625"
+        },
+        "okRowCount": 1,
+        "failedRowIds": [],
+        "complete": true
+      }
+    ],
+    "total": {
+      "co2e": "258.9731786989612",
+      "co2eByGas": {
+        "CO2": "257.7080139944069",
+        "CH4": "0.120591362388",
+        "N2O": "1.1445733421663"
+      },
+      "okRowCount": 3,
+      "failedRowIds": [],
+      "complete": true
+    }
+  }
+}

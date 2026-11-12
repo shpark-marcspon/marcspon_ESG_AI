@@ -1,0 +1,132 @@
+{
+  "schemaVersion": "greenwash.result@2",
+  "source": {
+    "fileName": "made-up-report.pdf",
+    "sha256": "abababababababababababababababababababababababababababababababab",
+    "pageCount": 20
+  },
+  "failures": {
+    "segments": 1,
+    "items": 2
+  },
+  "budgetTrimmed": 0,
+  "segments": [
+    {
+      "key": {
+        "kind": "claims",
+        "span": "bp7-b1-p7-b1",
+        "documentSha256": "abababababababababababababababababababababababababababababababab",
+        "parserVersion": "docparse-0.1.0-l2"
+      },
+      "keySha256": "c068068fc9e44a874cd5a02f602a1d136bb2ac27fb6c4e30fad34f69c6476aa5",
+      "status": "done",
+      "errorCode": null,
+      "items": [
+        {
+          "key": "i1",
+          "stableKey": "00000000000000000000000000000003",
+          "status": "failed",
+          "errorCode": "judge_unparsed",
+          "target": {
+            "kind": "sentence",
+            "text": "가상회사는 친환경 경영을 지향합니다.",
+            "page": 7,
+            "blockIds": [
+              "p7-b1"
+            ]
+          },
+          "verdict": null,
+          "reason": "",
+          "evidence": [],
+          "checks": {
+            "quoteInBlock": "pass",
+            "evidenceInPool": "skipped",
+            "categoryInList": "skipped",
+            "levelRule": "skipped",
+            "truncated": []
+          },
+          "module": {
+            "confirmed": [],
+            "missing": [],
+            "criteriaLines": [],
+            "parts": [
+              "CEO 메시지"
+            ]
+          }
+        },
+        {
+          "key": "i2",
+          "stableKey": "00000000000000000000000000000004",
+          "status": "failed",
+          "errorCode": "evidence_outside_pool",
+          "target": {
+            "kind": "sentence",
+            "text": "가상회사는 2030년까지 모든 사업장의 재생에너지 전환을 완료하였습니다.",
+            "page": 4,
+            "blockIds": [
+              "p4-b2"
+            ]
+          },
+          "verdict": {
+            "level": "Mid",
+            "category": null
+          },
+          "reason": "근거 단락은 국내 사업장의 전환율만 적어 「모든 사업장」 주장의 범위를 받치지 못한다.",
+          "evidence": [
+            {
+              "kind": "document",
+              "passageId": "P12",
+              "blockRanges": [
+                [
+                  "p9-b3",
+                  "p9-b4"
+                ]
+              ],
+              "page": 9
+            },
+            {
+              "kind": "criteria",
+              "lineId": "evidence-boundary"
+            }
+          ],
+          "checks": {
+            "quoteInBlock": "pass",
+            "evidenceInPool": "fail",
+            "categoryInList": "pass",
+            "levelRule": "pass",
+            "truncated": []
+          },
+          "module": {
+            "confirmed": [
+              "국내 사업장 전환율 수치가 있다."
+            ],
+            "missing": [
+              "해외 사업장 범위"
+            ],
+            "criteriaLines": [
+              "evidence-boundary",
+              "mid-1"
+            ],
+            "parts": [
+              "기후/환경 토픽"
+            ]
+          }
+        }
+      ],
+      "unplaced": []
+    },
+    {
+      "key": {
+        "kind": "claims",
+        "span": "bp8-b1-p9-b2",
+        "documentSha256": "abababababababababababababababababababababababababababababababab",
+        "parserVersion": "docparse-0.1.0-l2"
+      },
+      "keySha256": "5ae496aea070dce2cdc1a40ff09539029aac2286d0415e204a860d49bf385f8f",
+      "status": "failed",
+      "errorCode": "step_error",
+      "items": [],
+      "unplaced": []
+    }
+  ]
+}

@@ -1,0 +1,422 @@
+; 의존의 방향을 기계가 지킨다.   확인: uv run lint-imports
+;
+; 계약은 열아홉이다(가~사 일곱 + 그린워싱 축 넷 + 인벤토리 축 다섯 + 실행 층 차 하나 + 업무 모듈끼리 차-2 하나 + 실행 묶음 카 하나). 모듈 여섯의 이름과 `*`(이름 하나)·`**`(그 아래 전부) 로 적어 두어,
+; 뒤 밴드가 자기 모듈에 models·calc/·service/ 를 만들어도 이 파일을 고치지 않는다.
+[importlinter]
+root_package = esgapi
+; django·ninja 같은 바깥 패키지를 import 하는지도 본다
+include_external_packages = True
+
+; 가. core 는 바닥이다. 업무 모듈을 모른다. 실행 층(runs)도 모른다(runs 가 core 를 딛는다).
+[importlinter:contract:core-knows-no-module]
+name = 가. core 는 업무 모듈을 import 하지 않는다
+type = forbidden
+source_modules =
+    esgapi.core
+forbidden_modules =
+    esgapi.organization
+    esgapi.user
+    esgapi.inventory
+    esgapi.reference
+    esgapi.reconcile
+    esgapi.greenwash
+    esgapi.runs
+    esgapi.dataverify
+    esgapi.translation
+    esgapi.materiality
+    esgapi.drafting
+    esgapi.runbundle
+; 이름 붙인 예외(밴드 X1a, 처분 ② 가): core 의 문서 두 파일만 runs 의 일감 표를 직접 읽고 쓴다(문서 응답의 일감들,
+;    올림 확인의 일감 만들기 — 두 표 쓰기). 옛 분해 일감 길은 그대로 둔다(MARC-ENT-349) — 데이터 검증 서버 밴드가
+;    걷는다(sid:MARC-ISSUE-233). 다른 core 파일에 늘리지 않는다.
+ignore_imports =
+    esgapi.core.service.selectors.documents -> esgapi.runs.models
+    esgapi.core.service.services.documents -> esgapi.runs.models
+;    core 의 시험(core/tests)은 문서 시험이 일감 행(JobRow)을 직접 만들고 읽는다 — 시험만, runs.models 한 줄(밴드 X1a
+;    개정 4, 처분 ⑧ 가). 일감 selector·service·명령을 재는 시험은 runs/tests 로 옮겼다(MARC-ISSUE-177, 밴드 X1b-2b —
+;    그 셋의 줄을 걷음). 이 줄은 옛 분해 일감 길과 같이 데이터 검증 서버 밴드가 걷는다(sid:MARC-ISSUE-233).
+;    제품 코드는 위 두 줄 밖으로 그대로 금지(scripts/planted-breaks.sh 의 45).
+    esgapi.core.tests.** -> esgapi.runs.models
+
+; 나. 모듈끼리는 services·selectors 로만 만난다. 남의 models 를 직접 import 하지 않는다.
+;    자기 모듈의 models 는 써도 된다(ignore_imports 의 다섯 줄). core.models(BaseModel)는 금지 목록에 없다.
+;    models.py 가 아직 없는 모듈도 적어 둔다: 없는 이름은 걸리는 것이 없을 뿐이고, 생기면 그때부터 지켜진다.
+[importlinter:contract:no-foreign-models]
+name = 나. 모듈끼리 models 를 직접 import 하지 않는다 (services·selectors 로만)
+type = forbidden
+source_modules =
+    esgapi.organization
+    esgapi.user
+    esgapi.inventory
+    esgapi.reference
+    esgapi.reconcile
+    esgapi.greenwash
+    esgapi.dataverify
+    esgapi.translation
+    esgapi.materiality
+    esgapi.drafting
+    esgapi.runbundle
+forbidden_modules =
+    esgapi.organization.models
+    esgapi.user.models
+    esgapi.inventory.models
+    esgapi.reference.models
+    esgapi.reconcile.models
+    esgapi.greenwash.models
+    esgapi.runs.models
+    esgapi.dataverify.models
+    esgapi.translation.models
+    esgapi.materiality.models
+    esgapi.drafting.models
+; 직접 import 만 본다(남의 services 를 거쳐 닿는 것은 된다).
+allow_indirect_imports = True
+ignore_imports =
+    esgapi.organization.** -> esgapi.organization.models
+    esgapi.user.** -> esgapi.user.models
+    esgapi.inventory.** -> esgapi.inventory.models
+    esgapi.reference.** -> esgapi.reference.models
+    esgapi.reconcile.** -> esgapi.reconcile.models
+    esgapi.greenwash.** -> esgapi.greenwash.models
+    esgapi.dataverify.** -> esgapi.dataverify.models
+    esgapi.translation.** -> esgapi.translation.models
+    esgapi.materiality.** -> esgapi.materiality.models
+    esgapi.drafting.** -> esgapi.drafting.models
+;    reconcile 의 시험(test_tasks_parse)은 일감 행을 직접 만들어 본다 — 시험만(밴드 X1a, critic B1). 제품 코드는 그대로 금지.
+    esgapi.reconcile.tests.** -> esgapi.runs.models
+; 위 여섯 줄 가운데 아직 맞는 import 가 없는 줄(models.py 가 없는 모듈)을 오류로 치지 않는다.
+unmatched_ignore_imports_alerting = none
+
+; 다. 순수 모듈은 틀도 DB 도 모른다. DB 없이 테스트되고, 틀을 바꿔도 그대로 남는다.
+;    esgapi.*.calc 는 모듈마다의 calc 패키지와 그 아래 전부다(지금 있는 것은 core·reference·reconcile 의 calc. 생기면 그때부터 걸린다).
+;    inventory 의 엔진·계약·도구는 calc 가 아니라 engines·contracts·tools 라(밴드 EN1) 아래에 이름으로 적는다.
+;    esgapi.*.service.utils 는 표면(service)의 utils 패키지와 그 아래 전부다(지금 있는 것은 user 의
+;    tokens·exchange·entities 와 organization 의 entities). utils 에 ORM·request·settings 를 숨기지 못한다.
+[importlinter:contract:pure-modules]
+name = 다. 순수 모듈(calc, 표면의 utils, organization·user 의 permissions, core.tenancy.session, core.permissions, config.env, core.llm(setup 제외))은 django·ninja·psycopg 를 import 하지 않는다
+type = forbidden
+source_modules =
+    esgapi.*.calc
+    esgapi.*.service.utils
+    esgapi.organization.service.permissions
+    esgapi.user.service.permissions
+    esgapi.core.tenancy.session
+    esgapi.core.permissions
+    esgapi.core.auth.principal
+    esgapi.core.auth.tokens
+    esgapi.core.flows
+    esgapi.core.contracts
+    esgapi.inventory.flows
+    esgapi.inventory.engines
+    esgapi.inventory.contracts
+    esgapi.inventory.tools
+    esgapi.greenwash.flows
+    esgapi.translation.flows
+    esgapi.greenwash.tools
+    esgapi.greenwash.contracts
+    esgapi.greenwash.outputs
+    esgapi.greenwash.engines
+    esgapi.dataverify.engines
+    esgapi.dataverify.contracts
+    esgapi.dataverify.outputs
+    esgapi.dataverify.flows
+    esgapi.dataverify.tools
+    esgapi.translation.contracts
+    esgapi.translation.engines
+    esgapi.translation.tools
+    esgapi.translation.outputs
+    esgapi.materiality.contracts
+    esgapi.materiality.engines
+    esgapi.materiality.outputs
+    esgapi.materiality.flows
+    esgapi.materiality.tools
+    esgapi.drafting.contracts
+    esgapi.drafting.engines
+    esgapi.drafting.flows
+    esgapi.drafting.tools
+;    관측성의 순수한 둘(문맥 변수와 JSON 포매터) — GO1 이 세웠고 병합 뒤 감독이 넣음(2026-10-13). middleware 는 django 를 안다.
+    esgapi.core.observability.context
+    esgapi.core.observability.jsonlog
+    esgapi.config.env
+    esgapi.config.apps_list
+;    core/llm(setup 제외)·resources.ports.llm·resources.llm — PY3 의 purity.importlinter 에서 옮김(2026-10-08, 감독).
+;    그 파일은 esgapi/core/tests/test_llm_layers.py 가 폴더와 견주므로 남겨 둔다. 둘의 목록은 같아야 한다.
+    esgapi.core.llm.budget
+    esgapi.core.llm.client
+    esgapi.core.llm.config
+    esgapi.core.llm.cost
+    esgapi.core.llm.embedding
+    esgapi.core.llm.embedding_types
+    esgapi.core.llm.errors
+    esgapi.core.llm.log
+    esgapi.core.llm.prompts
+    esgapi.core.llm.retry
+    esgapi.core.llm.schema
+    esgapi.core.llm.throttle
+    esgapi.core.llm.types
+    esgapi.core.llm.providers
+    esgapi.core.llm.sinks
+    esgapi.core.resources.ports.llm
+    esgapi.core.resources.llm
+forbidden_modules =
+    django
+    ninja
+    psycopg
+
+; 라. api.py·service/apis/ 와 tasks.py 는 얇다. 모델을 직접 만지지 않고 services·selectors 를 부른다.
+[importlinter:contract:api-knows-no-models]
+name = 라. api.py·service/apis·tasks.py 는 models 를 직접 import 하지 않는다 (services·selectors·schemas 로만)
+type = forbidden
+source_modules =
+    esgapi.*.api
+    esgapi.*.service.apis
+    esgapi.*.tasks
+forbidden_modules =
+    esgapi.*.models
+allow_indirect_imports = True
+
+; 마. 한 도메인의 두 표면(admin·service)은 서로를 모른다. 같이 쓰는 것은 도메인 뿌리에 둔다.
+;    independence 는 간접 사슬도 문다(admin → 뿌리 파일 → service 도 걸린다). 그래서 두 표면이 같이 쓰는
+;    뿌리 파일(reference 의 jsonl·licenses·models)은 어느 표면도 import 하지 못한다.
+;    admin 표면이 있는 도메인이 reference 하나라 두 모듈을 이름으로 적는다. independence 는 적힌 모듈끼리를 전부
+;    떼어 놓으므로 다른 도메인의 service 를 여기에 더하지 않는다(도메인끼리의 service import 가 걸린다).
+;    둘째 admin 이 생기면 계약을 하나 더 세운다.
+[importlinter:contract:surfaces-apart]
+name = 마. 두 표면(admin·service)은 서로를 import 하지 않는다
+type = independence
+modules =
+    esgapi.reference.admin
+    esgapi.reference.service
+
+; 바. Service·Selector 는 자기 도메인만 안다. 남의 도메인(그 calc·models·service 전부)을 import 하지 않는다.
+;    도메인을 넘는 조립은 service/actions/ 에 둔다(지금 하나: inventory 의 scope3_shortlist).
+;    apis 층은 대상이 아니다(inventory·reference·organization 의 경로가 user 의 인증 바인딩을 들이고, user 의 교환이
+;    organization 의 회사 찾기를 포트로 꽂는다).
+;    ignore_imports 의 다섯 줄은 「자기 도메인 안의 import」를 빼는 것이다. 도메인이 늘면 두 목록에 한 줄씩 더한다.
+;    와일드카드는 맞는 모듈이 없어도 조용히 지나간다 — 줄을 고치면 scripts/planted-breaks.sh 로 잰다.
+;    core 는 금지 목록에 없다(core 의 문서·일감을 부르는 일을 도메인 사이 호출로 칠지는 다음 밴드가 정한다).
+[importlinter:contract:services-stay-home]
+name = 바. Service·Selector 는 남의 도메인을 import 하지 않는다 (도메인을 넘는 조립은 actions 에서)
+type = forbidden
+source_modules =
+    esgapi.*.service.services
+    esgapi.*.service.selectors
+    esgapi.*.admin.services
+    esgapi.*.admin.selectors
+forbidden_modules =
+    esgapi.organization
+    esgapi.user
+    esgapi.inventory
+    esgapi.reference
+    esgapi.reconcile
+    esgapi.greenwash
+    esgapi.dataverify
+    esgapi.translation
+    esgapi.materiality
+    esgapi.drafting
+; 직접 import 만 본다(나·라 와 같다).
+allow_indirect_imports = True
+ignore_imports =
+    esgapi.organization.** -> esgapi.organization.**
+    esgapi.user.** -> esgapi.user.**
+    esgapi.inventory.** -> esgapi.inventory.**
+    esgapi.reference.** -> esgapi.reference.**
+    esgapi.reconcile.** -> esgapi.reconcile.**
+    esgapi.greenwash.** -> esgapi.greenwash.**
+    esgapi.dataverify.** -> esgapi.dataverify.**
+    esgapi.translation.** -> esgapi.translation.**
+    esgapi.materiality.** -> esgapi.materiality.**
+    esgapi.drafting.** -> esgapi.drafting.**
+unmatched_ignore_imports_alerting = none
+
+; 사. 시험 밖 코드는 시험(esgapi.*.tests)을 import 하지 않는다. wheel 은 tests 를 빼므로(scripts/check-wheel.sh)
+;    제품이 tests 를 부르면 개발 트리에서는 돌고 배포에서만 ImportError 가 난다.
+;    source 는 esgapi.** 다 — 조상 esgapi 를 쓰면 grimp 가 tests 를 그 아래로 접어 심어도 KEPT 로 지나간다(IL1 실측).
+;    esgapi.** 에는 tests 자신도 들어가므로 시험끼리의 import(core.tests.resource_fakes 등)는 ignore_imports 한 줄로 뺀다.
+;    와일드카드는 맞는 모듈이 없어도 조용히 지나간다 — 줄을 고치면 scripts/planted-breaks.sh 로 잰다.
+[importlinter:contract:product-knows-no-tests]
+name = 사. 시험 밖 코드는 esgapi.*.tests 를 import 하지 않는다 (wheel 에 tests 가 없다)
+type = forbidden
+source_modules =
+    esgapi.**
+forbidden_modules =
+    esgapi.*.tests
+; 직접 import 만 본다(시험 밖 → 시험 의 한 걸음이 곧 배포의 ImportError 다).
+allow_indirect_imports = True
+ignore_imports =
+    esgapi.*.tests.** -> esgapi.*.tests.**
+unmatched_ignore_imports_alerting = none
+
+; 아. 그린워싱 축(MARC-ENT-267, 밴드 GX1): 엔진은 계약을 모르고, 계약은 엔진을 모르고, 둘을 잇는 것은 흐름뿐이다.
+;    넷 다 직접 import 만 본다(흐름 → 엔진 → … 의 간접 길은 막지 않는다). 표면(service·api) → 엔진은 계약으로 세우지
+;    않았다(밴드 GX1 의 section4 손 검사 10 이 잰다). inventory 가 같은 꼴 넷을 더하면 test_tasks_registered 의 수를 올린다.
+[importlinter:contract:greenwash-engine-not-contracts]
+name = 아. 그린워싱 축: 엔진(engines)은 계약·출력·흐름·표면을 import 하지 않는다
+type = forbidden
+source_modules =
+    esgapi.greenwash.engines
+forbidden_modules =
+    esgapi.greenwash.contracts
+    esgapi.greenwash.outputs
+    esgapi.greenwash.flows
+    esgapi.greenwash.service
+    esgapi.greenwash.api
+allow_indirect_imports = True
+
+[importlinter:contract:greenwash-contracts-not-engine]
+name = 아. 그린워싱 축: 계약(contracts)은 엔진·흐름·출력·표면을 import 하지 않는다
+type = forbidden
+source_modules =
+    esgapi.greenwash.contracts
+forbidden_modules =
+    esgapi.greenwash.engines
+    esgapi.greenwash.flows
+    esgapi.greenwash.outputs
+    esgapi.greenwash.service
+allow_indirect_imports = True
+
+[importlinter:contract:greenwash-tools-know-no-axis]
+name = 아. 그린워싱 축: 도구(tools)는 엔진·계약·출력·흐름을 import 하지 않는다
+type = forbidden
+source_modules =
+    esgapi.greenwash.tools
+forbidden_modules =
+    esgapi.greenwash.engines
+    esgapi.greenwash.contracts
+    esgapi.greenwash.outputs
+    esgapi.greenwash.flows
+allow_indirect_imports = True
+
+[importlinter:contract:greenwash-outputs-not-engine]
+name = 아. 그린워싱 축: 출력(outputs)은 엔진·흐름을 import 하지 않는다 (결과 꼴만 읽는다)
+type = forbidden
+source_modules =
+    esgapi.greenwash.outputs
+forbidden_modules =
+    esgapi.greenwash.engines
+    esgapi.greenwash.flows
+allow_indirect_imports = True
+
+; 자. 인벤토리 축(MARC-ENT-267·MARC-ENT-270, 밴드 EN1): 엔진은 계약을 모르고, 계약은 엔진을 모르고, 둘을 잇는 것은 흐름뿐이다.
+;    엔진은 판마다 폴더(engines/<흐름>/<판>/)이고 흐름 둘(scope12·scope3)의 엔진끼리도 서로 모른다(넷째, independence).
+;    앞 셋은 직접 import 만 본다. independence 는 간접 사슬도 문다(도구 → 엔진, 엔진 → 흐름 → 다른 엔진).
+;    표면(service) → 엔진은 계약으로 세우지 않았다(경로가 엔진을 바로 부른다 — inventory/README.md 「규칙 밖 자리」).
+;    outputs 는 아직 없다(없는 모듈을 금지 목록에 적어도 오류가 아니다). 출력 규칙은 outputs/ 를 세우는 밴드가 더한다.
+[importlinter:contract:inventory-engine-not-contracts]
+name = 자. 인벤토리 축: 엔진(engines)은 계약·출력·흐름·표면·적재기를 import 하지 않는다
+type = forbidden
+source_modules =
+    esgapi.inventory.engines
+forbidden_modules =
+    esgapi.inventory.contracts
+    esgapi.inventory.flows
+    esgapi.inventory.outputs
+    esgapi.inventory.service
+    esgapi.inventory.api
+    esgapi.inventory.data_loader
+allow_indirect_imports = True
+
+[importlinter:contract:inventory-contracts-not-engines]
+name = 자. 인벤토리 축: 계약(contracts)은 엔진·흐름·출력·표면을 import 하지 않는다
+type = forbidden
+source_modules =
+    esgapi.inventory.contracts
+forbidden_modules =
+    esgapi.inventory.engines
+    esgapi.inventory.flows
+    esgapi.inventory.outputs
+    esgapi.inventory.service
+allow_indirect_imports = True
+
+[importlinter:contract:inventory-tools-know-no-axis]
+name = 자. 인벤토리 축: 도구(tools)는 엔진·계약·출력·흐름을 import 하지 않는다
+type = forbidden
+source_modules =
+    esgapi.inventory.tools
+forbidden_modules =
+    esgapi.inventory.engines
+    esgapi.inventory.contracts
+    esgapi.inventory.outputs
+    esgapi.inventory.flows
+allow_indirect_imports = True
+
+[importlinter:contract:inventory-engines-apart]
+name = 자. 인벤토리 축: 엔진의 흐름끼리(scope12·scope3)는 서로를 import 하지 않는다 (간접도)
+type = independence
+modules =
+    esgapi.inventory.engines.scope12
+    esgapi.inventory.engines.scope3
+
+; 자 다섯째. Scope 3 엔진의 판(engines/scope3/<판>/)끼리도 서로 모른다(MARC-ENT-267 판별 복사 — 같은 꼴도 복사한다).
+;    판을 더하면 여기 modules 에 한 줄(inventory/README.md 「다음 판 넣는 법」). 간접 사슬도 문다.
+[importlinter:contract:inventory-scope3-versions-apart]
+name = 자. 인벤토리 축: Scope 3 엔진의 판끼리(llm_first_1·colab_157)는 서로를 import 하지 않는다 (간접도)
+type = independence
+modules =
+    esgapi.inventory.engines.scope3.llm_first_1
+    esgapi.inventory.engines.scope3.colab_157
+
+; 차. 실행 층(runs, MARC-ENT-210 (1))은 흐름을 모르는 공통 자리다. core 처럼 업무 모듈을 import 하지 않는다.
+;    회사 FK 는 core 처럼 글자 참조("organization.Company")로 둔다. runs 는 core 를 딛는다(가 의 금지 목록에 runs 가 있다).
+;    간접도 문다(가 와 같다).
+[importlinter:contract:runs-knows-no-module]
+name = 차. runs 는 업무 모듈을 import 하지 않는다
+type = forbidden
+source_modules =
+    esgapi.runs
+forbidden_modules =
+    esgapi.organization
+    esgapi.user
+    esgapi.inventory
+    esgapi.reference
+    esgapi.reconcile
+    esgapi.greenwash
+    esgapi.dataverify
+    esgapi.translation
+    esgapi.materiality
+    esgapi.drafting
+    esgapi.runbundle
+
+; 차-2. 업무 모듈끼리는 어느 층(tools·flows·actions·engines·outputs·contracts·service 전부)에서도 서로를 import 하지
+;    않는다(MARC-ISSUE-479, 밴드 QC3). 나·바 는 models·service/selector 만 문다 — 그 밖 층의 남의 모듈 import 를 여기서 막는다.
+;    independence 라 간접 사슬도 문다. 바닥 모듈(core·runs·organization·user·reference·config)은 목록 밖이다.
+;    ★ 모듈을 더하면 여기 modules 에 한 줄.
+[importlinter:contract:business-modules-apart]
+name = 차-2. 업무 모듈끼리는 어느 층에서도 서로를 import 하지 않는다 (간접 포함)
+type = independence
+modules =
+    esgapi.greenwash
+    esgapi.translation
+    esgapi.dataverify
+    esgapi.materiality
+    esgapi.drafting
+    esgapi.inventory
+    esgapi.reconcile
+    esgapi.runbundle
+;    이 계약은 제품 코드만 본다: 모듈의 시험은 남의 계약 꼴(contracts.shapes)과 config.api(라우터 전부)를 일부러 엮는다.
+;    시험의 규칙은 사 계약과 별개다. 와일드카드가 헛돌면 조용하다 — 줄을 고치면 scripts/planted-breaks-QC3.sh 로 잰다.
+ignore_imports =
+    esgapi.*.tests.** -> esgapi.**
+unmatched_ignore_imports_alerting = none
+
+; 카. 실행 묶음(runbundle, RX1a — MARC-ENT-440)은 업무 모듈과 남의 models 를 import 하지 않는다. runs·core·organization·
+;    user 는 selectors·services 로만, 모듈은 등록부 CARRIERS(core/flows/carriers.py)로만 닿는다. 간접 길은 연다(True):
+;    services 를 거친 models 간접 길은 정당하다(모듈에는 등록부로만 닿는다).
+[importlinter:contract:runbundle-knows-no-module]
+name = 카. runbundle 은 업무 모듈과 남의 models 를 import 하지 않는다 (selectors·services·등록부로만)
+type = forbidden
+source_modules =
+    esgapi.runbundle
+forbidden_modules =
+    esgapi.greenwash
+    esgapi.translation
+    esgapi.dataverify
+    esgapi.materiality
+    esgapi.drafting
+    esgapi.inventory
+    esgapi.reconcile
+    esgapi.reference
+    esgapi.runs.models
+    esgapi.core.models
+    esgapi.user.models
+    esgapi.organization.models
+allow_indirect_imports = True

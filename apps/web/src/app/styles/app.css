@@ -1,0 +1,50 @@
+/* 띄워 보는 화면(App)의 모양. 뷰어 부품의 것은 src/doc-viewer/ui/viewer.css 에 있다. */
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  font:
+    13px/1.45 system-ui,
+    sans-serif;
+}
+.app-bar {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 6px 12px;
+  border-bottom: 1px solid #d1d5db;
+}
+.app-modes {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.app-main {
+  flex: 1;
+  min-height: 0;
+}
+.app-message {
+  margin: 16px;
+  white-space: pre-wrap;
+}
+
+/* 검토 표를 띄워 보는 화면(src/review-table-demo/TablePage.tsx) */
+.app-main[data-table-state] {
+  display: flex;
+  flex-direction: column;
+}
+.app-notice {
+  margin: 0;
+  padding: 4px 12px;
+  background: #fff8c5;
+}
+.app-fill {
+  flex: 1;
+  min-height: 0;
+}

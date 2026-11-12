@@ -1,0 +1,217 @@
+{
+  "$defs": {
+    "GreenwashAiSettingAppliedDefault": {
+      "additionalProperties": false,
+      "description": "적용 판 없음 = 기본 판.",
+      "properties": {
+        "kind": {
+          "const": "default",
+          "title": "Kind",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "title": "GreenwashAiSettingAppliedDefault",
+      "type": "object"
+    },
+    "GreenwashAiSettingAppliedSaved": {
+      "additionalProperties": false,
+      "description": "저장된 판 하나가 적용됨.",
+      "properties": {
+        "kind": {
+          "const": "saved",
+          "title": "Kind",
+          "type": "string"
+        },
+        "id": {
+          "description": "적용된 판의 id.",
+          "title": "Id",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "kind",
+        "id"
+      ],
+      "title": "GreenwashAiSettingAppliedSaved",
+      "type": "object"
+    },
+    "GreenwashAiSettingAuthor": {
+      "additionalProperties": false,
+      "description": "판을 저장한 운영 관리자.",
+      "properties": {
+        "id": {
+          "description": "사용자 id.",
+          "title": "Id",
+          "type": "integer"
+        },
+        "name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "지금 이름. 못 풀면 null.",
+          "title": "Name"
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ],
+      "title": "GreenwashAiSettingAuthor",
+      "type": "object"
+    },
+    "GreenwashAiSettingDefaultRef": {
+      "additionalProperties": false,
+      "description": "기본 판의 이름과 판정 프롬프트 sha256.",
+      "properties": {
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "title": {
+          "description": "기본 판 이름(DEFAULT_TITLE).",
+          "title": "Title",
+          "type": "string"
+        },
+        "evalPromptSha256": {
+          "title": "Evalpromptsha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "title",
+        "evalPromptSha256"
+      ],
+      "title": "GreenwashAiSettingDefaultRef",
+      "type": "object"
+    },
+    "GreenwashAiSettingSummary": {
+      "additionalProperties": false,
+      "description": "저장된 판 하나의 요약(목록의 줄).",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "integer"
+        },
+        "name": {
+          "description": "판 이름(v1, v2, …).",
+          "title": "Name",
+          "type": "string"
+        },
+        "title": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "판 이름 — 옛 판 null.",
+          "title": "Title"
+        },
+        "status": {
+          "enum": [
+            "applied",
+            "past",
+            "testing"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "createdAt": {
+          "description": "저장한 때(+09:00 ISO 8601).",
+          "title": "Createdat",
+          "type": "string"
+        },
+        "createdBy": {
+          "$ref": "#/$defs/GreenwashAiSettingAuthor"
+        },
+        "memo": {
+          "description": "메모(0~200자).",
+          "title": "Memo",
+          "type": "string"
+        },
+        "evalPromptSha256": {
+          "description": "실제 쓸 판정 프롬프트(저장 글이 있으면 그 EVAL)의 sha256(저장할 때).",
+          "title": "Evalpromptsha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "title",
+        "status",
+        "createdAt",
+        "createdBy",
+        "memo",
+        "evalPromptSha256"
+      ],
+      "title": "GreenwashAiSettingSummary",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "greenwash.ai-settings@2 — 한 회사의 판 목록과 지금 적용 판. schemaVersion 이 첫 키다.",
+  "properties": {
+    "schemaVersion": {
+      "const": "greenwash.ai-settings@2",
+      "title": "Schemaversion",
+      "type": "string"
+    },
+    "companyId": {
+      "description": "대상 고객사의 id.",
+      "title": "Companyid",
+      "type": "integer"
+    },
+    "applied": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/GreenwashAiSettingAppliedDefault"
+        },
+        {
+          "$ref": "#/$defs/GreenwashAiSettingAppliedSaved"
+        }
+      ],
+      "description": "지금 적용 판. 저장된 판이 적용돼 있지 않으면 기본 판.",
+      "title": "Applied"
+    },
+    "default": {
+      "$ref": "#/$defs/GreenwashAiSettingDefaultRef",
+      "description": "기본 판(코드에 고정)."
+    },
+    "items": {
+      "description": "저장된 판(새 것 먼저 — id 내림). limit·offset 의 한 쪽.",
+      "items": {
+        "$ref": "#/$defs/GreenwashAiSettingSummary"
+      },
+      "title": "Items",
+      "type": "array"
+    },
+    "total": {
+      "description": "저장된 판의 전체 수.",
+      "minimum": 0,
+      "title": "Total",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "companyId",
+    "applied",
+    "default",
+    "items",
+    "total"
+  ],
+  "title": "GreenwashAiSettingList",
+  "type": "object"
+}

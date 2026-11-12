@@ -1,0 +1,116 @@
+{
+  "schemaVersion": "greenwash.review@3",
+  "runId": 101,
+  "state": "in_review",
+  "confirmedAt": null,
+  "confirmedBy": null,
+  "marks": [
+    {
+      "itemIndex": 0,
+      "decision": "adopted",
+      "excludeReason": null
+    },
+    {
+      "itemIndex": 2,
+      "decision": "excluded",
+      "excludeReason": "신규 공장의 재생에너지 인증서를 부록에 싣고 있어 근거가 있다고 보았다."
+    }
+  ],
+  "edits": [
+    {
+      "itemIndex": 1,
+      "level": {
+        "value": "Low",
+        "editedAt": "2026-10-21T10:05:00+09:00",
+        "editedBy": {
+          "id": 7,
+          "name": "검토자 가"
+        }
+      },
+      "reasonBullets": null,
+      "fixParagraph": null
+    },
+    {
+      "itemIndex": 2,
+      "level": null,
+      "reasonBullets": {
+        "value": [
+          "재생에너지 계약 비율이 부록 표에 있다.",
+          "공장 전체 전력의 몇 퍼센트인지는 본문에 함께 적는 편이 낫다."
+        ],
+        "editedAt": "2026-10-21T10:07:00+09:00",
+        "editedBy": {
+          "id": 8,
+          "name": "검토자 나"
+        }
+      },
+      "fixParagraph": {
+        "value": "신규 공장 전력 가운데 재생에너지 비율과 조달 방식을 본문에 함께 적어 주세요.",
+        "editedAt": "2026-10-21T10:09:00+09:00",
+        "editedBy": {
+          "id": 7,
+          "name": "검토자 가"
+        }
+      }
+    }
+  ],
+  "evidence": [
+    {
+      "itemIndex": 2,
+      "removed": [
+        1
+      ],
+      "added": [
+        {
+          "text": "지어낸 근거 조각 — 감축 실적의 산정 범위를 적은 글",
+          "page": 6
+        }
+      ],
+      "editedAt": "2026-10-21T10:20:00+09:00",
+      "editedBy": {
+        "id": 7,
+        "name": "검토자 가"
+      }
+    }
+  ],
+  "rejudges": [
+    {
+      "itemIndex": 2,
+      "status": "done",
+      "count": 1,
+      "current": {
+        "runId": 205,
+        "judgedAt": "2026-10-21T10:12:00+09:00",
+        "judgedBy": {
+          "id": 7,
+          "name": "검토자 가"
+        },
+        "outcome": "judged",
+        "level": "High",
+        "riskTags": [
+          "근거 부족"
+        ],
+        "confirmedInEvidence": [
+          "지어낸 확인 사실 하나",
+          "지어낸 확인 사실 둘"
+        ],
+        "missingFields": [
+          "기준연도"
+        ],
+        "reasonBullets": [
+          "지어낸 판정 사유 한 줄."
+        ],
+        "fixParagraph": "지어낸 수정 방향 글입니다. 산정 범위와 기준연도를 함께 밝히는 것이 바람직합니다.",
+        "evidencePages": [
+          6
+        ],
+        "added": [
+          {
+            "text": "지어낸 근거 조각 — 감축 실적의 산정 범위를 적은 글",
+            "page": 6
+          }
+        ]
+      }
+    }
+  ]
+}

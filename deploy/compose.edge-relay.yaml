@@ -1,0 +1,34 @@
+# 둘째 벌(esg-demo2, 데모 고정판 — 밴드 DM1)의 덧붙임. 이 벌은 proxy 를 띄우지 않는다(443 은 첫 벌 Caddy 하나 — up.sh 가
+#   PROXY_ROLE=none 이면 proxy 를 빼고 띄운다). 대신 relay 하나가 공유 네트워크(EDGE_NETWORK, 기본 esg-edge)에 별칭 demo2-edge 로
+#   붙어 첫 벌 proxy 가 넘긴 것을 이 벌의 api-py·storage 로 잇는다(deploy/Caddyfile.relay).
+# api-py·storage 를 공유 네트워크에 바로 붙이지 않는다: compose 가 서비스 이름을 그 네트워크의 별칭으로도 달아 첫 벌 proxy 의
+#   「api-py」 조회가 이 벌로 샐 수 있다(DM1 실측 — deploy/Caddyfile.demo2 머리).
+# 호스트 포트는 열지 않는다. 상대 경로는 첫 파일(compose.yaml) 폴더 기준이다.
+# 무효 조건: 서비스 이름·포트(api-py 8000, storage 7070)가 바뀌면 deploy/Caddyfile.relay 를 다시 잰다.
+
+services:
+  relay:
+    # 첫 벌 proxy 와 같은 이미지(compose.prod.yaml 의 proxy 줄과 같은 다이제스트 — 바꿀 때 같이).
+    image: caddy:2.11.7@sha256:504a44d7d74bd2bc28a66afc4774912fc21223ca8a67734af1c54ab2f999b489
+    # 본문 버퍼는 앞 proxy 가 쥔다(request_buffers). 여기는 흘려보내기만 한다 — 64m(DM1 리허설 실측은 보고).
+    mem_limit: 64m
+    restart: unless-stopped
+    volumes:
+      - ./deploy/Caddyfile.relay:/etc/caddy/Caddyfile:ro
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:2019/config/"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    depends_on:
+      api-py: { condition: service_healthy }
+      storage: { condition: service_healthy }
+    networks:
+      default: {}
+      edge:
+        aliases: [demo2-edge]
+
+networks:
+  edge:
+    external: true
+    name: ${EDGE_NETWORK:-esg-edge}

@@ -1,0 +1,489 @@
+{
+ "node": "v22.23.1",
+ "unicode": "17.0",
+ "samples": [
+  {
+   "text": "A4 용지 80g",
+   "normalized": "a4용지80g",
+   "unitDim": "unknown",
+   "tokens": [
+    "a4",
+    "용지",
+    "#용지",
+    "80g"
+   ],
+   "tokensNoBigrams": [
+    "a4",
+    "용지",
+    "80g"
+   ],
+   "v1Matched": [
+    "a4",
+    "용지",
+    "80g",
+    "#용지"
+   ]
+  },
+  {
+   "text": "Ａ４ 용지　８０ｇ",
+   "normalized": "a4용지80g",
+   "unitDim": "unknown",
+   "tokens": [
+    "a4",
+    "용지",
+    "#용지",
+    "80g"
+   ],
+   "tokensNoBigrams": [
+    "a4",
+    "용지",
+    "80g"
+   ],
+   "v1Matched": [
+    "a4",
+    "용지",
+    "80g",
+    "#용지"
+   ]
+  },
+  {
+   "text": "볼트 M8×1.25",
+   "normalized": "볼트m8x1.25",
+   "unitDim": "unknown",
+   "tokens": [
+    "볼트",
+    "#볼트",
+    "m8",
+    "25"
+   ],
+   "tokensNoBigrams": [
+    "볼트",
+    "m8",
+    "25"
+   ],
+   "v1Matched": [
+    "볼트",
+    "m8",
+    "25",
+    "#볼트"
+   ]
+  },
+  {
+   "text": "필름 ٠.٥ T",
+   "normalized": "필름٠٥t",
+   "unitDim": "unknown",
+   "tokens": [
+    "필름",
+    "#필름"
+   ],
+   "tokensNoBigrams": [
+    "필름"
+   ],
+   "v1Matched": [
+    "필름",
+    "#필름"
+   ]
+  },
+  {
+   "text": "İstanbul ISTANBUL ΟΔΟΣ",
+   "normalized": "istanbulistanbulοδος",
+   "unitDim": "unknown",
+   "tokens": [
+    "stanbul",
+    "istanbul",
+    "οδος"
+   ],
+   "tokensNoBigrams": [
+    "stanbul",
+    "istanbul",
+    "οδος"
+   ],
+   "v1Matched": [
+    "stanbul",
+    "istanbul",
+    "οδος"
+   ]
+  },
+  {
+   "text": "𠮷 강재 𠮷野家",
+   "normalized": "𠮷강재𠮷野家",
+   "unitDim": "unknown",
+   "tokens": [
+    "𠮷",
+    "강재",
+    "#강재",
+    "𠮷野家"
+   ],
+   "tokensNoBigrams": [
+    "𠮷",
+    "강재",
+    "𠮷野家"
+   ],
+   "v1Matched": [
+    "𠮷",
+    "강재",
+    "𠮷野家",
+    "#강재"
+   ]
+  },
+  {
+   "text": "𝒮heet 𝟙𝟚 ①② ㈜",
+   "normalized": "sheet1212주",
+   "unitDim": "unknown",
+   "tokens": [
+    "sheet",
+    "12",
+    "12"
+   ],
+   "tokensNoBigrams": [
+    "sheet",
+    "12",
+    "12"
+   ],
+   "v1Matched": [
+    "sheet",
+    "12"
+   ]
+  },
+  {
+   "text": "㎥ ㎡ m³ m² ㎏",
+   "normalized": "m3m2m3m2kg",
+   "unitDim": "unknown",
+   "tokens": [
+    "m3",
+    "m2",
+    "m3",
+    "m2",
+    "kg"
+   ],
+   "tokensNoBigrams": [
+    "m3",
+    "m2",
+    "m3",
+    "m2",
+    "kg"
+   ],
+   "v1Matched": [
+    "m3",
+    "m2",
+    "kg"
+   ]
+  },
+  {
+   "text": "café café é",
+   "normalized": "cafécaféé",
+   "unitDim": "unknown",
+   "tokens": [
+    "café",
+    "café"
+   ],
+   "tokensNoBigrams": [
+    "café",
+    "café"
+   ],
+   "v1Matched": [
+    "café"
+   ]
+  },
+  {
+   "text": "가́나 한글조합 각",
+   "normalized": "가나한글조합각",
+   "unitDim": "unknown",
+   "tokens": [
+    "한글조합",
+    "#한글",
+    "#글조",
+    "#조합"
+   ],
+   "tokensNoBigrams": [
+    "한글조합"
+   ],
+   "v1Matched": [
+    "한글조합",
+    "#한글",
+    "#글조",
+    "#조합"
+   ]
+  },
+  {
+   "text": "services batteries glass bus analysis class cars gas its",
+   "normalized": "servicesbatteriesglassbusanalysisclasscarsgasits",
+   "unitDim": "unknown",
+   "tokens": [
+    "service",
+    "battery",
+    "glass",
+    "bus",
+    "analysis",
+    "class",
+    "car",
+    "gas",
+    "its"
+   ],
+   "tokensNoBigrams": [
+    "service",
+    "battery",
+    "glass",
+    "bus",
+    "analysis",
+    "class",
+    "car",
+    "gas",
+    "its"
+   ],
+   "v1Matched": [
+    "services",
+    "batteries",
+    "glass",
+    "bus",
+    "analysis",
+    "class",
+    "cars",
+    "gas",
+    "its"
+   ]
+  },
+  {
+   "text": "under_score snake_case __x__",
+   "normalized": "underscoresnakecasex",
+   "unitDim": "unknown",
+   "tokens": [
+    "under",
+    "score",
+    "snake",
+    "case"
+   ],
+   "tokensNoBigrams": [
+    "under",
+    "score",
+    "snake",
+    "case"
+   ],
+   "v1Matched": [
+    "under",
+    "score",
+    "snake",
+    "case"
+   ]
+  },
+  {
+   "text": "ﬁne ﬂow ǅ ß ẞ",
+   "normalized": "fineflowdžßß",
+   "unitDim": "unknown",
+   "tokens": [
+    "fine",
+    "flow",
+    "dž"
+   ],
+   "tokensNoBigrams": [
+    "fine",
+    "flow",
+    "dž"
+   ],
+   "v1Matched": [
+    "fine",
+    "flow",
+    "dž"
+   ]
+  },
+  {
+   "text": "ｶﾞｷﾞ ｸﾞ カタカナ",
+   "normalized": "ガギグカタカナ",
+   "unitDim": "unknown",
+   "tokens": [
+    "ガギ",
+    "カタカナ"
+   ],
+   "tokensNoBigrams": [
+    "ガギ",
+    "カタカナ"
+   ],
+   "v1Matched": [
+    "ガギ",
+    "カタカナ"
+   ]
+  },
+  {
+   "text": "x​y a­b c⁠d",
+   "normalized": "xyabcd",
+   "unitDim": "unknown",
+   "tokens": [],
+   "tokensNoBigrams": [],
+   "v1Matched": []
+  },
+  {
+   "text": "½ ⅓ Ⅳ ⅷ",
+   "normalized": "1213ivviii",
+   "unitDim": "unknown",
+   "tokens": [
+    "iv",
+    "viii"
+   ],
+   "tokensNoBigrams": [
+    "iv",
+    "viii"
+   ],
+   "v1Matched": [
+    "iv",
+    "viii"
+   ]
+  },
+  {
+   "text": "😀 emoji 👍🏽 ok",
+   "normalized": "emojiok",
+   "unitDim": "unknown",
+   "tokens": [
+    "emoji",
+    "ok"
+   ],
+   "tokensNoBigrams": [
+    "emoji",
+    "ok"
+   ],
+   "v1Matched": [
+    "emoji",
+    "ok"
+   ]
+  },
+  {
+   "text": "tonne.km Tonne.KM ｔｏｎｎｅ．ｋｍ",
+   "normalized": "tonnekmtonnekmtonnekm",
+   "unitDim": "unknown",
+   "tokens": [
+    "tonne",
+    "km",
+    "tonne",
+    "km",
+    "tonne",
+    "km"
+   ],
+   "tokensNoBigrams": [
+    "tonne",
+    "km",
+    "tonne",
+    "km",
+    "tonne",
+    "km"
+   ],
+   "v1Matched": [
+    "tonne",
+    "km"
+   ]
+  },
+  {
+   "text": " kg　",
+   "normalized": "kg",
+   "unitDim": "kg",
+   "tokens": [
+    "kg"
+   ],
+   "tokensNoBigrams": [
+    "kg"
+   ],
+   "v1Matched": [
+    "kg"
+   ]
+  },
+  {
+   "text": "﻿Room per night ",
+   "normalized": "roompernight",
+   "unitDim": "room_night",
+   "tokens": [
+    "room",
+    "per",
+    "night"
+   ],
+   "tokensNoBigrams": [
+    "room",
+    "per",
+    "night"
+   ],
+   "v1Matched": [
+    "room",
+    "per",
+    "night"
+   ]
+  },
+  {
+   "text": "per FTE Working Hour",
+   "normalized": "perfteworkinghour",
+   "unitDim": "fte_hour",
+   "tokens": [
+    "per",
+    "fte",
+    "working",
+    "hour"
+   ],
+   "tokensNoBigrams": [
+    "per",
+    "fte",
+    "working",
+    "hour"
+   ],
+   "v1Matched": [
+    "per",
+    "fte",
+    "working",
+    "hour"
+   ]
+  },
+  {
+   "text": "인·km",
+   "normalized": "인km",
+   "unitDim": "passenger_km",
+   "tokens": [
+    "km"
+   ],
+   "tokensNoBigrams": [
+    "km"
+   ],
+   "v1Matched": [
+    "km"
+   ]
+  },
+  {
+   "text": "１０ ㎞ km",
+   "normalized": "10kmkm",
+   "unitDim": "unknown",
+   "tokens": [
+    "10",
+    "km",
+    "km"
+   ],
+   "tokensNoBigrams": [
+    "10",
+    "km",
+    "km"
+   ],
+   "v1Matched": [
+    "10",
+    "km"
+   ]
+  },
+  {
+   "text": "ǆ Ǆ ŉ ſ K (Kelvin sign) Å",
+   "normalized": "dždžʼnskkelvinsignå",
+   "unitDim": "unknown",
+   "tokens": [
+    "dž",
+    "dž",
+    "ʼn",
+    "kelvin",
+    "sign"
+   ],
+   "tokensNoBigrams": [
+    "dž",
+    "dž",
+    "ʼn",
+    "kelvin",
+    "sign"
+   ],
+   "v1Matched": [
+    "dž",
+    "ʼn",
+    "kelvin",
+    "sign"
+   ]
+  }
+ ]
+}

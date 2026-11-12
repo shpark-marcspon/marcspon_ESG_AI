@@ -1,0 +1,184 @@
+{
+ "documents": {
+  "kb_2025_kor": {
+   "inputs": {
+    "document.json": "0ad1a66097f70d98b9a861571de8a4129051db84de358bfeca3771da7e5f82e2"
+   },
+   "sections": {
+    "facts": {
+     "count": 2938,
+     "sha256": "2e97528f4ade65a0fe8e35437010e29cdd26af0e4a82a71a4f0b91ffd52c9342"
+    },
+    "nonValues": {
+     "count": 1659,
+     "sha256": "0e53fec1b1a585b210b723946752aff2e2311c8a0dff3a05184d1d4400e288c8"
+    },
+    "grids": {
+     "count": 144,
+     "sha256": "a56cb902f96fcae1bf80c2288179c02f173ecc2728ddbd2603d792c700fd44e0"
+    },
+    "failed": {
+     "count": 3,
+     "sha256": "6c7d56fde353cf3f002456e7c8cb49fda4143f218e46e8c52804c90170b5362a"
+    },
+    "kinds": {
+     "count": 2938,
+     "sha256": "bdde5380a36669c2225a9d061fdeff2d79efdb28fbf0372cbeb51f5a885f4bb9"
+    },
+    "count": {
+     "count": 2938,
+     "sha256": "63f7f644e182336a3e93a5a4c12985ecd63c4b839cf3a3493b8bbb8e53881108"
+    },
+    "masks": {
+     "count": 7372,
+     "sha256": "33e94e3aad2f5df2538e33d80dbf799fb6e773f31b44d67ab9202d870790fdb3"
+    }
+   }
+  },
+  "kb_2025_databook_kor": {
+   "inputs": {
+    "document.json": "c60c514dd92c5fec1ad0e82bee676fd59ea1256218b70f6c3839b190c22b6a96"
+   },
+   "sections": {
+    "facts": {
+     "count": 1292,
+     "sha256": "afac3cab1d5440d737c8df5ee2fcf64fa4a6ca0a8f29f2ffd8845595a16eaf3d"
+    },
+    "nonValues": {
+     "count": 1678,
+     "sha256": "e1771ad4d60433bc8537dfcfd1e7d51e23b737231cd051ba4c0acb2436b8b1dd"
+    },
+    "grids": {
+     "count": 203,
+     "sha256": "38b47f8cb689299e3c33493681ecba65acf03a7fd8999bdf68a56ec58f800d4c"
+    },
+    "failed": {
+     "count": 1,
+     "sha256": "21214ef8136e2d8f8bb8477b3cb28422cd160a411e374fd6b554d9505f373d5e"
+    },
+    "kinds": {
+     "count": 1292,
+     "sha256": "983d14516812c333ed6394240817524a2cdc37253d5e514df74a4fe39de25790"
+    },
+    "count": {
+     "count": 1292,
+     "sha256": "1634d9579da680b614989dfd28e20d36d42c27e181bee1a05e998ec29068408d"
+    },
+    "masks": {
+     "count": 7153,
+     "sha256": "8b6153511b72c76ba7e718ca764c29be47208b140c1a3e1dce2e1fd57ab44836"
+    }
+   }
+  },
+  "samsung_2026_kor": {
+   "inputs": {
+    "document.json": "3c00c599a78175fa9ba84cae8574333ee125191543fb69e89ff94c4fd9932bd5"
+   },
+   "sections": {
+    "facts": {
+     "count": 2049,
+     "sha256": "27ed1221de70e7a538e98aa42ad1035c34103b20fbf9abd61aef0b91858a1d22"
+    },
+    "nonValues": {
+     "count": 2082,
+     "sha256": "066c120e323b05ed0c4af39c103960dc3953d5cfe0442727125aa0a4037ed653"
+    },
+    "grids": {
+     "count": 140,
+     "sha256": "9cc3eb01eaafb79657ba3c8f891b052076b1a9022fc4c51c673891e6bf2ef271"
+    },
+    "failed": {
+     "count": 1,
+     "sha256": "c5f68c99789a0de3a41dc55ec4ae11ddc89f2a0ef806424e330b91b357342216"
+    },
+    "kinds": {
+     "count": 2049,
+     "sha256": "4b043bd22b6f343487da9be38c7f5b2d64fabe78c6f716cd7fc3b16521e86fb6"
+    },
+    "count": {
+     "count": 2049,
+     "sha256": "ba5addf7555e9540041c2bbd86c6a30b4448e0b554fd8413162ce7c38139165f"
+    },
+    "masks": {
+     "count": 6084,
+     "sha256": "37600559889873c5d4b33bfaf3bf9c761be9b1d41cd27ce157deda7a5fcece95"
+    }
+   }
+  },
+  "cosmax_2025_kor": {
+   "inputs": {
+    "document.json": "c11972565872e82faa43e366b3335254538423a05fcff525e9e0c68b6ce05736"
+   },
+   "sections": {
+    "facts": {
+     "count": 2476,
+     "sha256": "60be5e78fc985241421c049bb3f24d44a2784d40116d1d838c73c20e86b5105c"
+    },
+    "nonValues": {
+     "count": 2881,
+     "sha256": "80d5c5dc223732c904d750b28c186c5b564d8b2285ea68fd01ffe943b4b16387"
+    },
+    "grids": {
+     "count": 228,
+     "sha256": "5330c508ddd2ec02896f34ef3c918d937ea8b7a230a2c1f7ee8ff533cc62ac91"
+    },
+    "failed": {
+     "count": 1,
+     "sha256": "0ab9479b890dcea7517451136422ed6ce6f157e1c118718c3557d0ee95ec4440"
+    },
+    "kinds": {
+     "count": 2476,
+     "sha256": "23f1bfc3fe83901f8e96bdfdf06d127daf486d37c666f5854e60dd54277b3632"
+    },
+    "count": {
+     "count": 2476,
+     "sha256": "4f5bc2465296c5dfdd58df6b61390133edcb940aa6460852add3405b8ecc192f"
+    },
+    "masks": {
+     "count": 10821,
+     "sha256": "b713b0f6a87e537b96a6e342da7f6ca05d07060d27de9b7d2536f30704f59448"
+    }
+   }
+  }
+ },
+ "synthetic": {
+  "sections": {
+   "facts": {
+    "count": 99,
+    "sha256": "577e9b8998ec4368e57c0b987439627ac0bc6a7c4875973b29aaf41ce1c4ec6c"
+   },
+   "nonValues": {
+    "count": 62,
+    "sha256": "d363aaa051cf02b0de595018225e4f59fafe77b06278869b265275081c3ebb4d"
+   },
+   "grids": {
+    "count": 4,
+    "sha256": "4ad667dddafc78fb869afb2b62321d43e9564c95d0b60d9ce20d2564ab3369f2"
+   },
+   "failed": {
+    "count": 2,
+    "sha256": "201bbe45a34a1a7bd28bce1256da91a71bf1ca7c8f9c4a083e73475217fead3f"
+   },
+   "kinds": {
+    "count": 99,
+    "sha256": "005d3dbe36798200c06d0cb5c3fc5104ecb151aff180459ee941abe3faaa00dd"
+   },
+   "count": {
+    "count": 99,
+    "sha256": "c51e71da81f01c542462b5104b933709b73e0d8be137b0ec1bcaf162c022322a"
+   },
+   "masks": {
+    "count": 128,
+    "sha256": "ca267fb934526b236f07521b393399fe15bdef7c48e8573468baed2b54e41212"
+   },
+   "dec": {
+    "count": 34,
+    "sha256": "06c69bd318b5af540159a234a6cac1c34da51c49bb9f4462657dc3f3a6f2d261"
+   },
+   "notation": {
+    "count": 400,
+    "sha256": "9feedad0f44b5ad50435e71a630e36022713d51ff5cdf567a8b510ac7e08a1e2"
+   }
+  }
+ }
+}

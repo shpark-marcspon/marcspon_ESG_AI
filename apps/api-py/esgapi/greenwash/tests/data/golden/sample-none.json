@@ -1,0 +1,187 @@
+{
+  "schema_version": "0.1",
+  "source": {
+    "file_name": "synthetic-sample.pdf",
+    "sha256": "4af601d5862d847bb4066c2fd98f40bcff02b703d3952b766dece84d9904a8d6",
+    "page_count": 4
+  },
+  "config": {
+    "checker": {
+      "max_candidates_per_page": 3,
+      "max_chars_page_text": 2500,
+      "evidence_k": 2,
+      "max_chars_per_chunk": 450,
+      "use_evidence_failopen": false,
+      "max_chars_evidence_total": 1600,
+      "report_levels": [
+        "High",
+        "Mid",
+        "Low"
+      ],
+      "debug": true,
+      "debug_pages": 2,
+      "batch_eval": false,
+      "prompt_version": "2026-01-15-v1"
+    },
+    "chunking": {
+      "chunk_size": 800,
+      "chunk_overlap": 150,
+      "separators": [
+        "\n\n",
+        "\n",
+        " "
+      ],
+      "normalize": true,
+      "embedding_batch_size": 50
+    },
+    "chat": {
+      "temperature": 0.0,
+      "max_tokens": 1300
+    }
+  },
+  "models": {
+    "chat": "gpt-4.1-mini",
+    "embedding": "text-embedding-3-small"
+  },
+  "prompt_version": "2026-01-15-v1",
+  "provider": "mock",
+  "synthetic": true,
+  "parts": [
+    {
+      "name": "CEO 메시지",
+      "pages": []
+    },
+    {
+      "name": "회사소개",
+      "pages": []
+    },
+    {
+      "name": "기후/환경 토픽",
+      "pages": []
+    }
+  ],
+  "pages": [],
+  "items": [],
+  "candidate_stats": {
+    "raw": 0,
+    "hard_dropped": 0,
+    "non_env_dropped": 0,
+    "promo_dropped": 0,
+    "table_dropped": 0,
+    "kept": 0,
+    "failed_pages": []
+  },
+  "word_counts": {
+    "total": [
+      {
+        "term": "저탄소",
+        "count": 20
+      },
+      {
+        "term": "친환경",
+        "count": 2
+      },
+      {
+        "term": "탄소중립",
+        "count": 2
+      },
+      {
+        "term": "지속가능",
+        "count": 1
+      },
+      {
+        "term": "eco프리",
+        "count": 1
+      },
+      {
+        "term": "무공해",
+        "count": 1
+      },
+      {
+        "term": "그린",
+        "count": 1
+      },
+      {
+        "term": "zero",
+        "count": 1
+      },
+      {
+        "term": "청정에너지",
+        "count": 1
+      }
+    ],
+    "pages": [
+      {
+        "page": 1,
+        "counts": [
+          {
+            "term": "친환경",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "page": 2,
+        "counts": [
+          {
+            "term": "탄소중립",
+            "count": 1
+          },
+          {
+            "term": "지속가능",
+            "count": 1
+          },
+          {
+            "term": "eco프리",
+            "count": 1
+          },
+          {
+            "term": "무공해",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "page": 3,
+        "counts": [
+          {
+            "term": "친환경",
+            "count": 1
+          },
+          {
+            "term": "탄소중립",
+            "count": 1
+          },
+          {
+            "term": "그린",
+            "count": 1
+          },
+          {
+            "term": "zero",
+            "count": 1
+          },
+          {
+            "term": "청정에너지",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "page": 4,
+        "counts": [
+          {
+            "term": "저탄소",
+            "count": 20
+          }
+        ]
+      }
+    ]
+  },
+  "calls": {
+    "chat": {},
+    "embedding_document_requests": 0,
+    "embedding_query_requests": 0
+  },
+  "messages": [],
+  "_made_by": "esg-lab 2a237d229210cbbc67fdc17f32db1472491f93bc (driver make_golden.py) · cd <esg-lab>/py && PYTHONPATH=. uv run --frozen --group greenwash python <G1a.out>/gw1-driver/make_golden.py mock-text-none <출력>"
+}

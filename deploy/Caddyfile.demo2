@@ -1,0 +1,15 @@
+# 둘째 벌(데모 고정판 esg-demo2, 밴드 DM1)의 두 이름. 첫 벌 proxy 의 deploy/Caddyfile 이 import 로 읽는다 —
+#   deploy/compose.edge-proxy.yaml 이 /etc/caddy/sites.d/demo2.caddy 로 묶을 때만(첫 벌 .env 에 DEMO2_* 두 칸이 있을 때).
+#   DEMO2_SITE_DOMAIN   둘째 벌 웹 주소의 호스트 이름 → 둘째 벌 relay → 그 벌의 api-py
+#   DEMO2_FILES_DOMAIN  둘째 벌 저장소 주소의 호스트 이름 → 둘째 벌 relay → 그 벌의 storage(같은 거르기 — snippet files)
+# upstream 은 공유 네트워크(EDGE_NETWORK, 기본 esg-edge)의 별칭 demo2-edge 하나다. 둘째 벌 api-py·storage 를 그 네트워크에
+#   바로 붙이지 않는 까닭: compose 가 서비스 이름(api-py·storage)을 붙는 네트워크마다 별칭으로 달아, 첫 벌 proxy 의
+#   api-py 조회가 둘째 벌로 샐 수 있다(DM1 실측 — 두 네트워크에 같은 별칭이면 도커 DNS 는 한쪽 것만 낸다).
+# 둘째 벌이 내려가 있으면 demo2-edge 가 안 풀려 이 두 이름만 502 다(Caddy 는 요청 때 푼다 — 기동은 된다, DM1 실측).
+{$DEMO2_SITE_DOMAIN} {
+	import site demo2-edge:8000
+}
+
+{$DEMO2_FILES_DOMAIN} {
+	import files demo2-edge:7070
+}

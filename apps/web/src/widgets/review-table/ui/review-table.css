@@ -1,0 +1,140 @@
+/* 검토 표의 모양. 읽을 수 있을 만큼만. 디자인이 정해지면 이 파일과 ui/ 를 통째로 바꾼다. */
+.rt {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  font-size: 13px;
+}
+.rt-toolbar {
+  padding: 6px 8px;
+  border-bottom: 1px solid #d0d7de;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.rt-toolbar-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.rt-summary span,
+.rt-summary strong {
+  white-space: nowrap;
+}
+
+.rt-head,
+.rt-cells {
+  display: grid;
+  align-items: center;
+  column-gap: 8px;
+  padding: 0 8px;
+}
+.rt-head {
+  height: 32px;
+  font-weight: 600;
+  background: #f6f8fa;
+  border-bottom: 1px solid #d0d7de;
+}
+.rt-sort {
+  all: unset;
+  cursor: pointer;
+}
+.rt-sort:focus-visible {
+  outline: 2px solid #0969da;
+}
+
+/* grid: 머리글 줄과 스크롤 상자를 감싼다(헤드리스의 RowStack 이 header 를 받으면 만든다). 남은 높이를 다 쓰고, 안에서 스크롤 상자가 머리글 아래를 채운다. */
+.rt-grid {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+/* 스크롤 상자: overflow-y 는 헤드리스의 RowStack 이 스스로 갖는다. 여기서는 높이를 묶는다(어디서도 안 묶이면 행을 전부 그린다). */
+.rt-scroll {
+  flex: 1;
+  min-height: 0;
+  outline: none;
+}
+.rt-row {
+  border-bottom: 1px solid #eaeef2;
+}
+.rt-row[aria-selected='true'] {
+  background: #f1f8ff;
+}
+.rt-row[data-active] {
+  box-shadow: inset 3px 0 0 #0969da;
+}
+/* 접힌 행의 높이 = 칸 35px + 아래 테두리 1px = 36px. ReviewTable.tsx 의 ROW_HEIGHT 와 같아야 한다.
+   어긋나면 스크롤 길이의 어림이 틀려, 맨 끝으로 한 번에 갔을 때 마지막 행이 조금 잘린다(브라우저 테스트가 잡는다). */
+.rt-cells {
+  height: 35px;
+  box-sizing: border-box;
+}
+.rt-cells > span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.rt-right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.rt-expand {
+  all: unset;
+  cursor: pointer;
+  width: 24px;
+  text-align: center;
+}
+
+.rt-detail {
+  padding: 6px 8px 10px 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: #fbfcfd;
+}
+.rt-detail-line {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.rt-edited {
+  color: #9a6700;
+}
+.rt-candidates {
+  margin: 0;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.rt-candidates li {
+  display: flex;
+  flex-direction: column;
+}
+.rt-candidate-facts,
+.rt-note {
+  color: #57606a;
+}
+.rt-tag {
+  font-size: 11px;
+  border: 1px solid #8c959f;
+  border-radius: 3px;
+  padding: 0 3px;
+}
+.rt-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+.rt-reject {
+  display: inline-flex;
+  gap: 4px;
+}
+.rt-error {
+  color: #cf222e;
+}

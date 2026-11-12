@@ -1,0 +1,95 @@
+{
+  "$comment": "패키지 자료만으로 계산되는 검산 사례",
+  "gwpSetId": "kr-ets-decree-annex2",
+  "activities": [
+    {
+      "id": "H01",
+      "orgUnit": "synthetic-site",
+      "period": "2025",
+      "sourceType": "stationary_combustion",
+      "fuel": "diesel",
+      "sector": "manufacturing_construction",
+      "parameterTiers": {
+        "calorific": 2,
+        "co2": 2,
+        "nonCo2": 1,
+        "oxidation": 2
+      },
+      "amount": "1000",
+      "unit": "L"
+    },
+    {
+      "id": "H03",
+      "orgUnit": "synthetic-site",
+      "period": "2025",
+      "sourceType": "stationary_combustion",
+      "fuel": "diesel",
+      "sector": "manufacturing_construction",
+      "parameterTiers": {
+        "calorific": 2,
+        "co2": 2,
+        "nonCo2": 1,
+        "oxidation": 2
+      },
+      "amount": "2.5",
+      "unit": "kL"
+    },
+    {
+      "id": "H04",
+      "orgUnit": "synthetic-site",
+      "period": "2025",
+      "sourceType": "stationary_combustion",
+      "fuel": "city-gas-lng",
+      "sector": "commercial_public",
+      "parameterTiers": {
+        "calorific": 2,
+        "co2": 2,
+        "nonCo2": 1,
+        "oxidation": 2
+      },
+      "amount": "12345.678",
+      "unit": "Nm3"
+    },
+    {
+      "id": "H06",
+      "orgUnit": "synthetic-site",
+      "period": "2025",
+      "sourceType": "purchased_electricity",
+      "factorId": "kr-ets-sample:electricity:2014-2016-avg",
+      "amount": "1234.567",
+      "unit": "MWh"
+    },
+    {
+      "id": "H12",
+      "orgUnit": "synthetic-site",
+      "period": "2025",
+      "sourceType": "stationary_combustion",
+      "fuel": "diesel",
+      "sector": "manufacturing_construction",
+      "parameterTiers": {
+        "calorific": 2,
+        "co2": 2,
+        "nonCo2": 1,
+        "oxidation": 2
+      },
+      "amount": "35.2",
+      "unit": "GJ"
+    },
+    {
+      "id": "H13",
+      "orgUnit": "synthetic-site",
+      "period": "2025",
+      "sourceType": "stationary_combustion",
+      "fuel": "diesel",
+      "sector": "manufacturing_construction",
+      "parameterTiers": {
+        "calorific": 2,
+        "co2": 2,
+        "nonCo2": 1,
+        "oxidation": 2
+      },
+      "amount": "0",
+      "unit": "L"
+    }
+  ]
+}

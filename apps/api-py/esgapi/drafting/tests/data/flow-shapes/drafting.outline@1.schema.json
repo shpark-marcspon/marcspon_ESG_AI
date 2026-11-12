@@ -1,0 +1,73 @@
+{
+  "$defs": {
+    "DraftingOutline": {
+      "additionalProperties": false,
+      "description": "drafting.outline@1 — 목차 통째. 마디를 앞차례로 나열한다(부모 → 자식, 형제는 목록 차례).",
+      "properties": {
+        "nodes": {
+          "description": "마디 1~300(잎 1~150). 잎 = 자식이 없는 마디.",
+          "items": {
+            "$ref": "#/$defs/DraftingOutlineNode"
+          },
+          "title": "Nodes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "nodes"
+      ],
+      "title": "DraftingOutline",
+      "type": "object"
+    },
+    "DraftingOutlineNode": {
+      "additionalProperties": false,
+      "description": "목차 마디 하나(대·중·소·소소 = depth 1~4).",
+      "properties": {
+        "key": {
+          "description": "마디 열쇠(목차 안에서 하나, `^[a-z0-9][a-z0-9-]{0,39}$`). 결과의 잎 key 가 이것이다.",
+          "title": "Key",
+          "type": "string"
+        },
+        "parentKey": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "부모 마디의 key. 첫 층(depth 1)은 null. 부모는 목록에서 앞에 온다.",
+          "title": "Parentkey"
+        },
+        "depth": {
+          "description": "층(1 = 대, 2 = 중, 3 = 소, 4 = 소소). 부모 depth + 1.",
+          "title": "Depth",
+          "type": "integer"
+        },
+        "title": {
+          "description": "마디 제목(앞뒤 공백을 뺀 1~200자).",
+          "title": "Title",
+          "type": "string"
+        },
+        "requirement": {
+          "description": "그 마디에 쓸 요구 내용(0~2,000자). 잎만 S3 재료에 실린다.",
+          "title": "Requirement",
+          "type": "string"
+        }
+      },
+      "required": [
+        "key",
+        "parentKey",
+        "depth",
+        "title",
+        "requirement"
+      ],
+      "title": "DraftingOutlineNode",
+      "type": "object"
+    }
+  },
+  "$ref": "#/$defs/DraftingOutline",
+  "description": "원고작성의 목차(대·중·소·소소).",
+  "title": "drafting.outline@1"
+}

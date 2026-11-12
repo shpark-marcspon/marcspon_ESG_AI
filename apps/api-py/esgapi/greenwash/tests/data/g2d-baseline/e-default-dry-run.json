@@ -1,0 +1,362 @@
+{
+ "branch": "e-default-dry-run",
+ "versions": {
+  "aiSetting": "colab-2026-01-15-v1",
+  "evalPromptSha256": "1eb626446da6942b93aca4991f4057de2e15a5b66adf167ea226c8399ab49b0f",
+  "aiSettingId": null,
+  "modelSettingsSha256": "6392cbf83b77fcbd9c5032a1050d075165094e756d53b6204395cf46bac041ec"
+ },
+ "result": {
+  "schemaVersion": "greenwash.result@1",
+  "source": {
+   "fileName": "synthetic-sample.pdf",
+   "sha256": "4af601d5862d847bb4066c2fd98f40bcff02b703d3952b766dece84d9904a8d6",
+   "pageCount": 4
+  },
+  "config": {
+   "checker": {
+    "maxCandidatesPerPage": 3,
+    "maxCharsPageText": 2500,
+    "evidenceK": 2,
+    "maxCharsPerChunk": 450,
+    "useEvidenceFailopen": false,
+    "maxCharsEvidenceTotal": 1600,
+    "reportLevels": [
+     "High",
+     "Mid",
+     "Low"
+    ],
+    "debug": true,
+    "debugPages": 2,
+    "batchEval": false,
+    "promptVersion": "2026-01-15-v1"
+   },
+   "chunking": {
+    "chunkSize": 800,
+    "chunkOverlap": 150,
+    "separators": [
+     "\n\n",
+     "\n",
+     " "
+    ],
+    "normalize": true,
+    "embeddingBatchSize": 50
+   },
+   "chat": {
+    "temperature": 0.0,
+    "maxTokens": 1300
+   }
+  },
+  "models": {
+   "chat": "gpt-4.1-mini",
+   "embedding": "text-embedding-3-small"
+  },
+  "promptVersion": "2026-01-15-v1",
+  "parts": [
+   {
+    "name": "CEO 메시지",
+    "pages": [
+     1
+    ]
+   },
+   {
+    "name": "회사소개",
+    "pages": [
+     2
+    ]
+   },
+   {
+    "name": "기후/환경 토픽",
+    "pages": [
+     3,
+     4
+    ]
+   }
+  ],
+  "pages": [
+   1,
+   2,
+   3,
+   4
+  ],
+  "extraTerms": [],
+  "items": [],
+  "candidateStats": null,
+  "counts": null,
+  "wordCounts": {
+   "total": [
+    {
+     "term": "저탄소",
+     "count": 20
+    },
+    {
+     "term": "친환경",
+     "count": 2
+    },
+    {
+     "term": "탄소중립",
+     "count": 2
+    },
+    {
+     "term": "지속가능",
+     "count": 1
+    },
+    {
+     "term": "eco프리",
+     "count": 1
+    },
+    {
+     "term": "무공해",
+     "count": 1
+    },
+    {
+     "term": "그린",
+     "count": 1
+    },
+    {
+     "term": "zero",
+     "count": 1
+    },
+    {
+     "term": "청정에너지",
+     "count": 1
+    }
+   ],
+   "pages": [
+    {
+     "page": 1,
+     "counts": [
+      {
+       "term": "친환경",
+       "count": 1
+      }
+     ]
+    },
+    {
+     "page": 2,
+     "counts": [
+      {
+       "term": "탄소중립",
+       "count": 1
+      },
+      {
+       "term": "지속가능",
+       "count": 1
+      },
+      {
+       "term": "eco프리",
+       "count": 1
+      },
+      {
+       "term": "무공해",
+       "count": 1
+      }
+     ]
+    },
+    {
+     "page": 3,
+     "counts": [
+      {
+       "term": "친환경",
+       "count": 1
+      },
+      {
+       "term": "탄소중립",
+       "count": 1
+      },
+      {
+       "term": "그린",
+       "count": 1
+      },
+      {
+       "term": "zero",
+       "count": 1
+      },
+      {
+       "term": "청정에너지",
+       "count": 1
+      }
+     ]
+    },
+    {
+     "page": 4,
+     "counts": [
+      {
+       "term": "저탄소",
+       "count": 20
+      }
+     ]
+    }
+   ]
+  },
+  "dryRun": {
+   "pagesChecked": 4,
+   "pagesWithText": 4,
+   "pagesTruncated": 1,
+   "chunks": 9,
+   "embeddingIndex": {
+    "requests": 1,
+    "inputChars": 5401,
+    "inputTokens": {
+     "status": "measured",
+     "encoding": "cl100k_base",
+     "value": 5401
+    }
+   },
+   "ruleCandidates": 9,
+   "lower": {
+    "chat": {
+     "requests": 8,
+     "inputChars": 9758,
+     "inputTokens": {
+      "status": "measured",
+      "encoding": "o200k_base",
+      "value": 9758
+     }
+    },
+    "chatByKind": {
+     "detect": {
+      "requests": 4,
+      "inputChars": 5403,
+      "inputTokens": {
+       "status": "measured",
+       "encoding": "o200k_base",
+       "value": 5403
+      }
+     },
+     "eval": {
+      "requests": 1,
+      "inputChars": 1949,
+      "inputTokens": {
+       "status": "measured",
+       "encoding": "o200k_base",
+       "value": 1949
+      }
+     },
+     "lowOnly": {
+      "requests": 3,
+      "inputChars": 2406,
+      "inputTokens": {
+       "status": "measured",
+       "encoding": "o200k_base",
+       "value": 2406
+      }
+     },
+     "repair": {
+      "requests": 0,
+      "inputChars": 0,
+      "inputTokens": {
+       "status": "measured",
+       "encoding": "o200k_base",
+       "value": 0
+      }
+     }
+    },
+    "embeddingQueries": {
+     "requests": 4,
+     "inputChars": 142,
+     "inputTokens": {
+      "status": "measured",
+      "encoding": "cl100k_base",
+      "value": 142
+     }
+    },
+    "judged": 4
+   },
+   "upper": {
+    "chat": {
+     "requests": 32,
+     "inputChars": 65180,
+     "inputTokens": {
+      "status": "measured",
+      "encoding": "o200k_base",
+      "value": 65180
+     }
+    },
+    "chatByKind": {
+     "detect": {
+      "requests": 4,
+      "inputChars": 5403,
+      "inputTokens": {
+       "status": "measured",
+       "encoding": "o200k_base",
+       "value": 5403
+      }
+     },
+     "eval": {
+      "requests": 12,
+      "inputChars": 34593,
+      "inputTokens": {
+       "status": "measured",
+       "encoding": "o200k_base",
+       "value": 34593
+      }
+     },
+     "lowOnly": {
+      "requests": 4,
+      "inputChars": 7031,
+      "inputTokens": {
+       "status": "measured",
+       "encoding": "o200k_base",
+       "value": 7031
+      }
+     },
+     "repair": {
+      "requests": 12,
+      "inputChars": 18153,
+      "inputTokens": {
+       "status": "measured",
+       "encoding": "o200k_base",
+       "value": 18153
+      }
+     }
+    },
+    "embeddingQueries": {
+     "requests": 16,
+     "inputChars": 1132,
+     "inputTokens": {
+      "status": "measured",
+      "encoding": "cl100k_base",
+      "value": 1132
+     }
+    },
+    "outputTokensMax": 41600,
+    "evidenceChars": 922,
+    "evidenceCapReached": false
+   },
+   "perPage": [
+    {
+     "page": 1,
+     "textChars": 273,
+     "truncated": false,
+     "ruleCandidates": 3,
+     "lowerJudged": 2
+    },
+    {
+     "page": 2,
+     "textChars": 251,
+     "truncated": false,
+     "ruleCandidates": 0,
+     "lowerJudged": 0
+    },
+    {
+     "page": 3,
+     "textChars": 397,
+     "truncated": false,
+     "ruleCandidates": 3,
+     "lowerJudged": 1
+    },
+    {
+     "page": 4,
+     "textChars": 3739,
+     "truncated": true,
+     "ruleCandidates": 3,
+     "lowerJudged": 1
+    }
+   ]
+  },
+  "report": null
+ },
+ "messages": [],
+ "workbook": null
+}

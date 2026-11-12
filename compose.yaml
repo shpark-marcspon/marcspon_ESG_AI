@@ -1,0 +1,241 @@
+# 로컬에서 프로덕션에 가깝게 띄우는 구성.   띄우기: docker compose up -d --build --wait
+#   (내리기: docker compose down, 데이터까지 지우려면 docker compose down -v)
+#
+#   호스트 ──▶ api-py ──▶ postgres           api-py · worker-py · migrate-py 는 같은 이미지다.
+#     │         └────▶ queue ◀── worker-py ──▶ parser
+#     └────────▶ storage ◀──────────────────────┘ (파서가 서명된 주소로 원본을 읽는다)
+#
+# 서비스 이름(postgres, queue, storage, parser)이 컨테이너끼리의 호스트 이름이 된다.
+
+# 프로젝트 이름을 고정한다. 컨테이너·볼륨·네트워크·이미지 이름 앞에 붙어 다른 프로젝트의 것과 섞이지 않는다.
+# 같은 저장소를 git 워크트리로 여러 벌 띄울 때만 .env 의 COMPOSE_PROJECT_NAME 으로 바꾼다(scripts/worktree-env.sh).
+name: ${COMPOSE_PROJECT_NAME:-esg-app}
+
+# 메모리 한도(mem_limit): Python 통합 1회 동안 docker stats 로 잰 서비스별 최고의 3배 이상을 256m 단위로 올린 값이다
+#   (parser·worker-py 는 큰 PDF 를 다뤄 최소 1g, postgres 는 최소 512m. 잰 값은 band-reports/IN1-infra-low.md).
+# 다시 띄움(restart: unless-stopped)은 storage·queue·api-py 에만 단다. worker-py 는 통합 시험이 SIGKILL·SIGTERM 하고
+#   내려간 꼴을 기다리고 parser 는 멈춰 세운 사이를 재며(tests_integration/test_worker_flow.py), migrate-py 는 한 번 돌고 끝나는 일이라 달지 않는다.
+
+services:
+  # ── 우리가 만든 것 ──────────────────────────────────────────────────
+
+  parser:
+    build: { context: ., dockerfile: docker/parser.Dockerfile }
+    image: ${COMPOSE_PROJECT_NAME:-esg-app}/parser:local
+    mem_limit: 1g
+    # 호스트에 포트를 열지 않는다. worker-py 만 부른다.
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/healthz', timeout=2)"]
+      interval: 5s
+      timeout: 4s
+      retries: 10
+
+  # ── Python API 뼈대 (apps/api-py, 연습용) ───────────────────────────
+  # 이 구성의 입구다. 같은 postgres 서버의 별도 DB(${POSTGRES_DB}_py)를 쓴다.
+
+  api-py:
+    # build 는 여기 한 곳에만 있다. migrate-py 는 아래 image 이름으로 같은 이미지를 쓴다.
+    build: { context: ., dockerfile: docker/api-py.Dockerfile }
+    image: ${COMPOSE_PROJECT_NAME:-esg-app}/api-py:local
+    mem_limit: 1g
+    restart: unless-stopped
+    environment: &api-py-env
+      # 앱 역할(esg_app)의 주소. 주인 역할의 주소는 이 컨테이너에 주지 않는다.
+      DATABASE_URL_PY: postgres://esg_app:${APP_DB_PASSWORD}@postgres:5432/${POSTGRES_DB}_py
+      # EDK 토큰을 검증하는 상수 셋. 토큰이 아니라 여기서만 온다. (기본값은 .env.example 과 같은 가짜 값)
+      EDK_JWT_PUBLIC_KEY: ${EDK_JWT_PUBLIC_KEY:------BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAqyY5FBj1BS9O0U2oFV2A\nYYQoS9P3xXJinZxADavrYKvh1hD93PkQz1AUC0yCJuT8P3CAM7DDvoxQ27bQy3u5\ng7obF/M1xH/BcNCrVSPNIkUHP6vJ5dNCzh2hETFLEzUltpkCnhOqMItY86N/1GI8\nZxKqw7sk1DVAQTmqCex/UU7/qnuy8Qt+3JNCpzknjH/OOllzJkF+WV1iS9Yo/1BO\njehyjARPRYCTOfT02HJPdJ3JCBvSHiE5wppvRZGBVhPeHBM6Q8G6zIE7ophy/TGB\nz9JxhDP+clTwLRta8wnI2pFUdF4aEWXOVjBm4eeU8Zgb0s7XKy3rtpH8gZJOltK3\nIwIDAQAB\n-----END PUBLIC KEY-----\n}
+      EDK_JWT_AUDIENCE: ${EDK_JWT_AUDIENCE:-esg-api}
+      EDK_JWT_ISSUER: ${EDK_JWT_ISSUER:-https://edk.local.invalid}
+      # 로그인 토큰(access·refresh)과 옛 쿠키 세션을 서명하는 비밀(기본값 없음 — .env 에서 받는다. 없으면 compose 가 멈춘다)과 옛 쿠키 세션의 수명(초)
+      SESSION_SECRET: ${SESSION_SECRET:?SESSION_SECRET 이 없다 — .env 에 적는다(.env.example 참고)}
+      SESSION_TTL_SECONDS: ${SESSION_TTL_SECONDS:-3600}
+      # LLM 호출 층(esgapi/core/llm). 전부 선택이고 기본은 빈 값이다(빈 값 = 없음). 설명은 .env.example.
+      LLM_OPENAI_API_KEY: ${LLM_OPENAI_API_KEY:-}
+      LLM_ANTHROPIC_API_KEY: ${LLM_ANTHROPIC_API_KEY:-}
+      LLM_GEMINI_API_KEY: ${LLM_GEMINI_API_KEY:-}
+      LLM_MODELS_FILE: ${LLM_MODELS_FILE:-}
+      LLM_LOG_SINK: ${LLM_LOG_SINK:-}
+      LLM_JSONL_PATH: ${LLM_JSONL_PATH:-}
+      LLM_RPM: ${LLM_RPM:-}
+      LLM_RUN_MODE: ${LLM_RUN_MODE:-}
+      LLM_RUN_MAX_USD: ${LLM_RUN_MAX_USD:-}
+      TRANSLATION_RUN_MAX_USD: ${TRANSLATION_RUN_MAX_USD:-}
+      DRAFTING_RUN_MAX_USD: ${DRAFTING_RUN_MAX_USD:-}
+      # 문서 파서의 주소와 기다리는 최대 시간(ms). 파서를 부르는 것은 워커(worker-py)의 태스크다. 경로는 부르지 않는다
+      # (그래서 api-py 의 depends_on 에 parser 가 없다).
+      PARSER_URL: ${PARSER_URL:-http://parser:8000}
+      PARSER_TIMEOUT_MS: ${PARSER_TIMEOUT_MS:-210000}
+      # 원본 파일 저장소(esgapi/core/adapters/storage.py).
+      S3_BUCKET: ${S3_BUCKET}
+      S3_REGION: ${S3_REGION}
+      # 서버가 저장소에 닿는 주소(안쪽 이름)와, 클라이언트(내 컴퓨터의 curl)가 닿는 주소(서명에 이 이름이 들어간다).
+      S3_ENDPOINT: http://storage:7070
+      S3_PUBLIC_ENDPOINT: http://localhost:${STORAGE_PORT:-19000}
+      S3_FORCE_PATH_STYLE: "true"
+      AWS_ACCESS_KEY_ID: ${STORAGE_ACCESS_KEY}
+      AWS_SECRET_ACCESS_KEY: ${STORAGE_SECRET_KEY}
+      # 서명한 올리기 주소의 수명(초)과 올릴 수 있는 파일의 상한(바이트). 설명은 .env.example.
+      UPLOAD_URL_TTL_SECONDS: ${UPLOAD_URL_TTL_SECONDS:-300}
+      MAX_UPLOAD_BYTES: ${MAX_UPLOAD_BYTES:-52428800}
+      # 작업 큐(Celery)의 브로커. 로컬은 아래 queue(SQS 흉내)다. 자격 증명은 위 AWS_ACCESS_KEY_ID 둘을 같이 쓴다
+      # (흉내는 서명을 검사하지 않는다. 아예 없으면 boto3 가 「자격 증명이 없다」로 멈춘다).
+      # ★ 주소 셋은 ${…} 가 아니라 글자다. 브로커 주소에는 늘 호스트가 있어야 한다: 끝점은 이 호스트에서만 오고,
+      #   호스트 없는 sqs:// 로는 큐 주소가 로컬이어도 진짜 AWS 를 부른다(esgapi/config/env.py 가 그 꼴을 막는다).
+      CELERY_BROKER_URL: sqs://queue:9324
+      CELERY_QUEUE_URL: http://queue:9324/000000000000/esg-jobs
+      CELERY_BROKER_SECURE: "false"
+      CELERY_BROKER_REGION: ${S3_REGION}
+      CELERY_QUEUE_NAME: esg-jobs
+      # 큐의 visibility(초. 로컬은 docker/elasticmq.conf 가 정한다. 여기 값은 앱이 아는 값이다), 태스크의 시간 제한 둘(초),
+      # 일감의 임대(초)·시도 상한·다시 해 보기까지(초), 긴 폴링(초, 1~20). 빈 값이면 기본값(120·60·75·90·3·5·10.
+      # 긴 폴링 10 은 Celery 문서의 기본값, 나머지는 어림)이다. 전량 게이트는 긴 폴링·다시 해 보기를 짧게 준다(scripts/verify.sh).
+      CELERY_VISIBILITY_TIMEOUT_SECONDS: ${CELERY_VISIBILITY_TIMEOUT_SECONDS:-}
+      CELERY_TASK_SOFT_TIME_LIMIT_SECONDS: ${CELERY_TASK_SOFT_TIME_LIMIT_SECONDS:-}
+      CELERY_TASK_TIME_LIMIT_SECONDS: ${CELERY_TASK_TIME_LIMIT_SECONDS:-}
+      JOB_LEASE_SECONDS: ${JOB_LEASE_SECONDS:-}
+      JOB_MAX_ATTEMPTS: ${JOB_MAX_ATTEMPTS:-}
+      JOB_RETRY_DELAY_SECONDS: ${JOB_RETRY_DELAY_SECONDS:-}
+      CELERY_WAIT_TIME_SECONDS: ${CELERY_WAIT_TIME_SECONDS:-}
+      PORT: "8000"
+    ports:
+      - "127.0.0.1:${API_PY_PORT:-18081}:8000"
+    depends_on:
+      postgres: { condition: service_healthy }
+      storage: { condition: service_healthy }
+      queue: { condition: service_healthy }
+      migrate-py: { condition: service_completed_successfully }
+      storage-cors: { condition: service_completed_successfully }
+    healthcheck:
+      # 이미지에 curl 이 없어 python 으로 /api/readyz 를 부른다(200 이 아니면 urlopen 이 예외를 낸다. 접두 없는 /readyz 는 404).
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/readyz', timeout=3)"]
+      interval: 5s
+      timeout: 4s
+      retries: 10
+    # gunicorn 이 받던 요청을 마칠 시간(gunicorn.conf.py 의 graceful_timeout 10초)보다 길어야 한다.
+    stop_grace_period: 15s
+
+  migrate-py:
+    image: ${COMPOSE_PROJECT_NAME:-esg-app}/api-py:local # api-py 가 빌드한 이미지를 그대로 쓴다
+    pull_policy: never
+    mem_limit: 512m
+    # 한 번 돌고 끝나는 컨테이너. api-py 는 이것이 성공한 뒤에 뜬다.
+    command: ["python", "manage.py", "migrate", "--no-input"]
+    environment:
+      # 마이그레이션 전용 설정: 주인 역할의 주소 하나만 읽는다. api-py 에는 이 주소를 주지 않는다.
+      DJANGO_SETTINGS_MODULE: esgapi.config.settings.migrate
+      DATABASE_URL_PY_OWNER: postgres://${POSTGRES_OWNER_USER}:${POSTGRES_OWNER_PASSWORD}@postgres:5432/${POSTGRES_DB}_py
+    depends_on:
+      postgres: { condition: service_healthy }
+
+  worker-py:
+    # 요청 밖에서 도는 일(지금은 문서 분해 하나)을 큐에서 받아 돌린다. api-py 와 같은 이미지, 다른 명령이다.
+    image: ${COMPOSE_PROJECT_NAME:-esg-app}/api-py:local
+    pull_policy: never
+    mem_limit: 1g
+    # prefork 2: gunicorn 의 일꾼 수와 같게 둔 어림이다. gossip·mingle·heartbeat 는 SQS 에서 쓰이지 않아 끈다.
+    command: ["celery", "-A", "esgapi.config.celery", "worker", "--loglevel", "INFO", "--pool", "prefork", "--concurrency", "2", "-Q", "esg-jobs", "--without-gossip", "--without-mingle", "--without-heartbeat"]
+    # api-py 의 환경을 그대로 받는다(키가 두 군데로 갈라져 어긋나지 않게). 앱 역할의 주소뿐이고 주인 역할의 주소는 없다.
+    # 무효 조건: 워커가 쓰지 않는 세션 비밀·EDK 공개키·LLM 키·PORT 도 같이 받는다(최소 권한이 아니다).
+    environment:
+      <<: *api-py-env
+    depends_on:
+      postgres: { condition: service_healthy }
+      storage: { condition: service_healthy }
+      parser: { condition: service_healthy }
+      queue: { condition: service_healthy }
+      migrate-py: { condition: service_completed_successfully }
+    # healthcheck 가 없다: SQS 는 원격 제어 명령을 지원하지 않아 `celery inspect ping` 이 되지 않는다.
+    # 그래서 `up --wait` 는 이 컨테이너가 「떠 있음」만 본다(뜬 뒤 죽었는지는 logs 로 본다).
+    # 도는 태스크를 마칠 시간: 하드 시간 제한(기본 75초)보다 길어야 한다.
+    stop_grace_period: 90s
+
+  # ── 빌려 쓰는 것 (프로덕션에서는 AWS 의 관리형 서비스로 바뀐다) ─────
+  # 이미지는 <이름>:<태그>@sha256:<다중 아키텍처 인덱스 다이제스트> 로 고정한다(태그는 읽는 사람용, 받는 것은 다이제스트).
+  # 다이제스트는 docker buildx imagetools inspect <이름>:<태그> 의 맨 위 Digest 다. docker/*.Dockerfile 의 python 도 같다.
+
+  postgres:
+    image: postgres:17.11-bookworm@sha256:3645570cccdfa447589da9f57dd740faa29b30938e861289a5574b6ca6b03826
+    mem_limit: 512m
+    # restart 를 달지 않는다: init 실패를 가린다 — IN1 실측(다시 뜨면 데이터 폴더가 차 있어 initdb.d 를 건너뛰고 esg_app 없이 healthy)
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_OWNER_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_OWNER_PASSWORD}
+      APP_DB_PASSWORD: ${APP_DB_PASSWORD}
+    volumes:
+      # 데이터는 볼륨에 둔다. 컨테이너를 지워도 남고, `down -v` 로 볼륨까지 지워야 사라진다.
+      - postgres-data:/var/lib/postgresql/data
+      # 데이터 폴더가 비어 있을 때 한 번 도는 스크립트: 앱 역할(esg_app)을 만든다.
+      - ./docker/postgres-init.sh:/docker-entrypoint-initdb.d/10-app-role.sh:ro
+    ports:
+      - "127.0.0.1:${POSTGRES_PORT:-15432}:5432" # 내 컴퓨터에서 psql 로 들여다보기 위해. 앱은 이 포트를 쓰지 않는다.
+    healthcheck:
+      # -h 127.0.0.1: 처음 세울 때 잠깐 뜨는 준비용 서버(소켓으로만 듣는다)를 "준비됐다"로 착각하지 않게.
+      test: ["CMD-SHELL", "pg_isready -h 127.0.0.1 -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  storage:
+    # S3 와 같은 API 로 말하는 로컬 저장소(Versity S3 Gateway). 폴더 하나를 S3 처럼 보이게 한다.
+    image: versity/versitygw:v1.8.0@sha256:30292fc2eeacc67a36993b01f7a7a5e3361a19cced0e80c1d71cfa2a4b0a2499
+    mem_limit: 256m
+    restart: unless-stopped
+    environment:
+      ROOT_ACCESS_KEY: ${STORAGE_ACCESS_KEY}
+      ROOT_SECRET_KEY: ${STORAGE_SECRET_KEY}
+      VGW_REGION: ${S3_REGION}
+      VGW_HEALTH: /health
+      S3_BUCKET: ${S3_BUCKET}
+    # 버킷을 미리 만든다(이 저장소에서는 /data 아래의 폴더 하나가 버킷 하나다). 프로덕션에서는 인프라 쪽이 버킷을 만든다.
+    entrypoint: ["/bin/sh", "-c", "mkdir -p /data/$$S3_BUCKET && exec versitygw posix /data"]
+    volumes:
+      - storage-data:/data
+    ports:
+      - "127.0.0.1:${STORAGE_PORT:-19000}:7070" # 클라이언트가 서명된 주소로 직접 올리므로 호스트에 연다
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:7070/health"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  storage-cors:
+    # 버킷에 CORS 규칙을 쓰고 끝나는 한 번짜리(운영은 infra/terraform/modules/storage 의 aws_s3_bucket_cors_configuration).
+    # 허락 출처는 웹 출처뿐이다: vite(WEB_PORT)와 api-py 가 내는 빌드한 웹(API_PY_PORT) × localhost·127.0.0.1.
+    # .env 의 STORAGE_CORS_ORIGINS(쉼표 목록)가 이긴다(빈 값이면 위 넷). 쉼표뿐이거나 * ·경로가 있으면 이 컨테이너가 실패하고 api-py 가 뜨지 않는다.
+    # ★ api-py 와 migrate-py 사이에 두지 않는다: 저장소 키 시험(test_env.py 의 _api_py_block)이 그 사이를 api-py 로 센다.
+    image: ${COMPOSE_PROJECT_NAME:-esg-app}/api-py:local
+    pull_policy: never
+    mem_limit: 256m
+    command: ["python", "/opt/storage_cors.py"]
+    volumes:
+      - ./docker/storage_cors.py:/opt/storage_cors.py:ro
+    environment:
+      S3_ENDPOINT: http://storage:7070
+      S3_BUCKET: ${S3_BUCKET}
+      S3_REGION: ${S3_REGION}
+      AWS_ACCESS_KEY_ID: ${STORAGE_ACCESS_KEY}
+      AWS_SECRET_ACCESS_KEY: ${STORAGE_SECRET_KEY}
+      STORAGE_CORS_ORIGINS: ${STORAGE_CORS_ORIGINS:-http://localhost:${WEB_PORT:-15173},http://127.0.0.1:${WEB_PORT:-15173},http://localhost:${API_PY_PORT:-18081},http://127.0.0.1:${API_PY_PORT:-18081}}
+    depends_on:
+      storage: { condition: service_healthy }
+
+  queue:
+    # SQS 와 같은 API 로 말하는 로컬 큐(ElasticMQ). api-py·worker-py 의 작업 큐다.
+    # 메모리에만 담는다: 컨테이너가 다시 뜨면 큐가 빈다(정본은 DB 의 core_jobs 이고 큐는 다시 채울 수 있다).
+    # 호스트에 포트를 열지 않는다(쪽지를 넣고 받는 것은 컨테이너뿐이다).
+    image: softwaremill/elasticmq-native:1.7.1@sha256:e4580ab9ad1bd5cd37b4ba04911bc5ccc8cd2d9ab4de56ece65acee71c24e05c
+    mem_limit: 256m
+    restart: unless-stopped
+    volumes:
+      # 큐를 미리 만든다(esg-jobs). 프로덕션에서는 인프라 쪽이 큐를 만든다. 앱은 큐를 만들지 않는다.
+      - ./docker/elasticmq.conf:/opt/elasticmq.conf:ro
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:9324/health"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+volumes:
+  postgres-data:
+  storage-data:

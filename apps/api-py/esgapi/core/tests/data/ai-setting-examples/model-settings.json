@@ -1,0 +1,11 @@
+{
+  "steps": [
+    {
+      "key": "judge",
+      "route": "standard-openai-41",
+      "temperature": 0.3,
+      "webSearch": false,
+      "maxOutputTokens": 2000
+    }
+  ]
+}

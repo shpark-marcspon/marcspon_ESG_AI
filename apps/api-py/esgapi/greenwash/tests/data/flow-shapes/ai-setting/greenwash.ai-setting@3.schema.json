@@ -1,0 +1,324 @@
+{
+  "$defs": {
+    "GreenwashAiSettingAuthor": {
+      "additionalProperties": false,
+      "description": "판을 저장한 운영 관리자.",
+      "properties": {
+        "id": {
+          "description": "사용자 id.",
+          "title": "Id",
+          "type": "integer"
+        },
+        "name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "지금 이름. 못 풀면 null.",
+          "title": "Name"
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ],
+      "title": "GreenwashAiSettingAuthor",
+      "type": "object"
+    },
+    "GreenwashCriteria": {
+      "additionalProperties": false,
+      "description": "greenwash.criteria@1 — 판정 기준표 한 벌. schemaVersion 이 첫 키다.",
+      "properties": {
+        "schemaVersion": {
+          "const": "greenwash.criteria@1",
+          "title": "Schemaversion",
+          "type": "string"
+        },
+        "version": {
+          "description": "이 기준표가 든 AI 설정 판의 이름(1~64자, 영문·숫자로 시작하고 영문·숫자·`.`·`_`·`-`). 기본 판\n`colab-2026-01-15-v1`.",
+          "maxLength": 64,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$",
+          "title": "Version",
+          "type": "string"
+        },
+        "rows": {
+          "description": "늘 15줄, GreenwashCriterionId 의 차례 그대로.",
+          "items": {
+            "$ref": "#/$defs/GreenwashCriterionRow"
+          },
+          "maxItems": 15,
+          "minItems": 15,
+          "title": "Rows",
+          "type": "array"
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "version",
+        "rows"
+      ],
+      "title": "GreenwashCriteria",
+      "type": "object"
+    },
+    "GreenwashCriterionGuideline": {
+      "additionalProperties": false,
+      "description": "근거 가이드라인(기관·조항). 화면 기록용 — 프롬프트에 들어가지 않는다.",
+      "properties": {
+        "text": {
+          "description": "가이드라인 글(1~200자, 한 줄).",
+          "maxLength": 200,
+          "minLength": 1,
+          "pattern": "^[^\r\n]*$",
+          "title": "Text",
+          "type": "string"
+        },
+        "status": {
+          "description": "초안 · 확인됨.",
+          "enum": [
+            "draft",
+            "confirmed"
+          ],
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "text",
+        "status"
+      ],
+      "title": "GreenwashCriterionGuideline",
+      "type": "object"
+    },
+    "GreenwashCriterionRow": {
+      "additionalProperties": false,
+      "description": "기준표의 한 줄.",
+      "properties": {
+        "id": {
+          "description": "줄 id(고칠 수 없음).",
+          "enum": [
+            "keyword-ghg",
+            "keyword-exclusion",
+            "evidence-quantity",
+            "evidence-baseline",
+            "evidence-boundary",
+            "evidence-offset",
+            "high-1",
+            "high-2",
+            "high-3",
+            "high-4",
+            "mid-1",
+            "exception-1",
+            "exception-2",
+            "exception-3",
+            "exception-4"
+          ],
+          "title": "Id",
+          "type": "string"
+        },
+        "category": {
+          "description": "구분(고칠 수 없음).",
+          "enum": [
+            "targetKeyword",
+            "coreEvidence",
+            "high",
+            "mid",
+            "exception"
+          ],
+          "title": "Category",
+          "type": "string"
+        },
+        "order": {
+          "description": "1..15, id 차례와 같다(웹 정렬용, 고칠 수 없음).",
+          "title": "Order",
+          "type": "integer"
+        },
+        "enabled": {
+          "description": "사용. 끈 줄은 프롬프트에서 줄째 빠진다.",
+          "title": "Enabled",
+          "type": "boolean"
+        },
+        "text": {
+          "description": "기준 글(1~300자, 한 줄). targetKeyword 는 묶음 이름(고칠 수 없음).",
+          "maxLength": 300,
+          "minLength": 1,
+          "pattern": "^[^\r\n]*$",
+          "title": "Text",
+          "type": "string"
+        },
+        "terms": {
+          "anyOf": [
+            {
+              "items": {
+                "maxLength": 30,
+                "minLength": 1,
+                "pattern": "^[^\r\n]*$",
+                "type": "string"
+              },
+              "maxItems": 30,
+              "minItems": 1,
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "targetKeyword 만 낱말 목록(1~30개, 낱말마다 1~30자·쉼표 없음·한 줄·같은 묶음 안 중복 없음), 그 밖은 null.",
+          "title": "Terms"
+        },
+        "verdict": {
+          "description": "판정 결과. category 로 정해짐(고칠 수 없음).",
+          "enum": [
+            "coreEvidenceApplies",
+            "highIfMissing",
+            "High",
+            "Mid",
+            "NonRisk"
+          ],
+          "title": "Verdict",
+          "type": "string"
+        },
+        "guideline": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/GreenwashCriterionGuideline"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "근거 가이드라인. 없으면 null. 프롬프트 밖."
+        }
+      },
+      "required": [
+        "id",
+        "category",
+        "order",
+        "enabled",
+        "text",
+        "terms",
+        "verdict",
+        "guideline"
+      ],
+      "title": "GreenwashCriterionRow",
+      "type": "object"
+    },
+    "GreenwashTerm": {
+      "additionalProperties": false,
+      "description": "판의 대상 단어 하나(받기를 거친 정규형 — 받은 차례 그대로). 빈도 목록(의심 낱말)만 바꾼다 — 판정할 문장을 고르는\n환경 신호는 코드 고정(MARC-ENT-394).",
+      "properties": {
+        "text": {
+          "description": "낱말(앞뒤 공백을 뺀 1~30자).",
+          "title": "Text",
+          "type": "string"
+        },
+        "enabled": {
+          "description": "사용. 켠 낱말만 판 차례대로 센다.",
+          "title": "Enabled",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "text",
+        "enabled"
+      ],
+      "title": "GreenwashTerm",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "greenwash.ai-setting@3 — 저장된 판 하나(요약 + 기준표 + 대상 단어). schemaVersion 이 첫 키다.",
+  "properties": {
+    "schemaVersion": {
+      "const": "greenwash.ai-setting@3",
+      "title": "Schemaversion",
+      "type": "string"
+    },
+    "id": {
+      "title": "Id",
+      "type": "integer"
+    },
+    "name": {
+      "description": "판 이름(v1, v2, …). criteria.version 과 같다.",
+      "title": "Name",
+      "type": "string"
+    },
+    "title": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "판 이름 — 옛 판 null.",
+      "title": "Title"
+    },
+    "status": {
+      "enum": [
+        "applied",
+        "past",
+        "testing"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "createdAt": {
+      "description": "저장한 때(+09:00 ISO 8601).",
+      "title": "Createdat",
+      "type": "string"
+    },
+    "createdBy": {
+      "$ref": "#/$defs/GreenwashAiSettingAuthor"
+    },
+    "memo": {
+      "description": "메모(0~200자).",
+      "title": "Memo",
+      "type": "string"
+    },
+    "evalPromptSha256": {
+      "description": "실제 쓸 판정 프롬프트(저장 글이 있으면 그 EVAL)의 sha256(저장할 때).",
+      "title": "Evalpromptsha256",
+      "type": "string"
+    },
+    "criteria": {
+      "$ref": "#/$defs/GreenwashCriteria",
+      "description": "판정 기준표(greenwash.criteria@1, version = 판 이름)."
+    },
+    "terms": {
+      "anyOf": [
+        {
+          "items": {
+            "$ref": "#/$defs/GreenwashTerm"
+          },
+          "type": "array"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "대상 단어(받은 차례). null = 코드 기본 목록(옛 판·terms 없이 저장한 판).",
+      "title": "Terms"
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "id",
+    "name",
+    "title",
+    "status",
+    "createdAt",
+    "createdBy",
+    "memo",
+    "evalPromptSha256",
+    "criteria",
+    "terms"
+  ],
+  "title": "GreenwashAiSetting",
+  "type": "object"
+}

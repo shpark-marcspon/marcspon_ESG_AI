@@ -1,0 +1,471 @@
+{
+  "$defs": {
+    "AiFixedGroup": {
+      "additionalProperties": false,
+      "description": "읽기 전용 코드 값 묶음 하나(판과 무관, 편집 0).",
+      "properties": {
+        "key": {
+          "title": "Key",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "items": {
+          "items": {
+            "$ref": "#/$defs/AiFixedItem"
+          },
+          "title": "Items",
+          "type": "array"
+        }
+      },
+      "required": [
+        "key",
+        "label",
+        "items"
+      ],
+      "title": "AiFixedGroup",
+      "type": "object"
+    },
+    "AiFixedItem": {
+      "additionalProperties": false,
+      "description": "읽기 전용 코드 값 하나.",
+      "properties": {
+        "key": {
+          "title": "Key",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "string"
+            },
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "값. null = 이름만(값 없는 항목).",
+          "title": "Value"
+        }
+      },
+      "required": [
+        "key",
+        "label",
+        "value"
+      ],
+      "title": "AiFixedItem",
+      "type": "object"
+    },
+    "AiModelRef": {
+      "additionalProperties": false,
+      "description": "경로가 푼 모델 하나.",
+      "properties": {
+        "key": {
+          "description": "설정 파일의 모델 이름.",
+          "title": "Key",
+          "type": "string"
+        },
+        "label": {
+          "description": "보이는 이름.",
+          "title": "Label",
+          "type": "string"
+        },
+        "provider": {
+          "description": "공급사.",
+          "title": "Provider",
+          "type": "string"
+        }
+      },
+      "required": [
+        "key",
+        "label",
+        "provider"
+      ],
+      "title": "AiModelRef",
+      "type": "object"
+    },
+    "AiModelSetting": {
+      "additionalProperties": false,
+      "description": "한 단계의 모델 설정(풀린 값).",
+      "properties": {
+        "route": {
+          "description": "경로 이름.",
+          "title": "Route",
+          "type": "string"
+        },
+        "models": {
+          "description": "경로의 모델(첫째가 주, 나머지가 대체 차례).",
+          "items": {
+            "$ref": "#/$defs/AiModelRef"
+          },
+          "minItems": 1,
+          "title": "Models",
+          "type": "array"
+        },
+        "temperature": {
+          "anyOf": [
+            {
+              "maximum": 2.0,
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "null = 싣지 않음.",
+          "title": "Temperature"
+        },
+        "webSearch": {
+          "title": "Websearch",
+          "type": "boolean"
+        },
+        "maxOutputTokens": {
+          "description": "답의 출력 상한(토큰).",
+          "minimum": 1,
+          "title": "Maxoutputtokens",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "route",
+        "models",
+        "temperature",
+        "webSearch",
+        "maxOutputTokens"
+      ],
+      "title": "AiModelSetting",
+      "type": "object"
+    },
+    "AiModelSlot": {
+      "additionalProperties": false,
+      "description": "모델 칸 하나: 모델 설정 · 지금 고를 수 있는 경로 · 지금 쓸 수 없는 경로.",
+      "properties": {
+        "key": {
+          "title": "Key",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "model": {
+          "$ref": "#/$defs/AiModelSetting"
+        },
+        "routeChoices": {
+          "description": "지금 쓸 수 있는 경로만(명세 차례).",
+          "items": {
+            "$ref": "#/$defs/AiRouteChoice"
+          },
+          "minItems": 1,
+          "title": "Routechoices",
+          "type": "array"
+        },
+        "unavailableRoutes": {
+          "description": "명세가 허용했지만 지금 설정으로는 쓸 수 없는 경로 이름(명세 차례). 없으면 [].",
+          "items": {
+            "type": "string"
+          },
+          "title": "Unavailableroutes",
+          "type": "array"
+        }
+      },
+      "required": [
+        "key",
+        "label",
+        "model",
+        "routeChoices",
+        "unavailableRoutes"
+      ],
+      "title": "AiModelSlot",
+      "type": "object"
+    },
+    "AiPromptEntry": {
+      "additionalProperties": false,
+      "description": "프롬프트 칸 하나: 판의 글·메모와 그 칸의 엔진 기본 글.",
+      "properties": {
+        "key": {
+          "title": "Key",
+          "type": "string"
+        },
+        "label": {
+          "description": "칸 이름(서버 글 — 웹은 글 표를 따로 두지 않는다).",
+          "title": "Label",
+          "type": "string"
+        },
+        "promptId": {
+          "title": "Promptid",
+          "type": "string"
+        },
+        "promptVersion": {
+          "title": "Promptversion",
+          "type": "string"
+        },
+        "sha256": {
+          "description": "text 의 UTF-8 sha256.",
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "text": {
+          "description": "전문.",
+          "title": "Text",
+          "type": "string"
+        },
+        "memo": {
+          "description": "판의 칸 메모(저장 글 없는 판은 모듈 기본 메모).",
+          "title": "Memo",
+          "type": "string"
+        },
+        "defaultText": {
+          "description": "그 칸의 엔진 기본 글(기준표로 지은 글이 아니다). 웹은 이 글을 보내 되돌린다.",
+          "title": "Defaulttext",
+          "type": "string"
+        },
+        "isDefault": {
+          "description": "text == defaultText(바이트).",
+          "title": "Isdefault",
+          "type": "boolean"
+        },
+        "outputSection": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "defaultText 의 출력 형식 절. 없으면 null.",
+          "title": "Outputsection"
+        },
+        "outputKept": {
+          "description": "text 안에 outputSection 이 바이트 그대로 있다(null 이면 true). false 는 화면 경고, 저장은 안 막는다.",
+          "title": "Outputkept",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "key",
+        "label",
+        "promptId",
+        "promptVersion",
+        "sha256",
+        "text",
+        "memo",
+        "defaultText",
+        "isDefault",
+        "outputSection",
+        "outputKept"
+      ],
+      "title": "AiPromptEntry",
+      "type": "object"
+    },
+    "AiPromptGroup": {
+      "additionalProperties": false,
+      "description": "프롬프트 묶음 하나: 그 묶음의 칸과 그 글을 받는 모델 칸.",
+      "properties": {
+        "key": {
+          "title": "Key",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "modelSlots": {
+          "description": "이 묶음의 글을 받는 모델 칸 key(화면 안내 — 실행 규칙 아님). 없으면 [].",
+          "items": {
+            "type": "string"
+          },
+          "title": "Modelslots",
+          "type": "array"
+        },
+        "prompts": {
+          "items": {
+            "$ref": "#/$defs/AiPromptEntry"
+          },
+          "minItems": 1,
+          "title": "Prompts",
+          "type": "array"
+        }
+      },
+      "required": [
+        "key",
+        "label",
+        "modelSlots",
+        "prompts"
+      ],
+      "title": "AiPromptGroup",
+      "type": "object"
+    },
+    "AiPromptLimits": {
+      "additionalProperties": false,
+      "description": "프롬프트 받기 상한(contracts/ai_setting_shapes.py 의 상수 — calc 가 import).",
+      "properties": {
+        "textMax": {
+          "description": "글 하나의 글자 수 상한.",
+          "title": "Textmax",
+          "type": "integer"
+        },
+        "memoMax": {
+          "description": "메모 하나의 글자 수 상한(앞뒤 공백을 뺀 값).",
+          "title": "Memomax",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "textMax",
+        "memoMax"
+      ],
+      "title": "AiPromptLimits",
+      "type": "object"
+    },
+    "AiPromptModelEditable": {
+      "additionalProperties": false,
+      "description": "이 모듈이 새 판에 넣을 수 있는 것(모듈 능력).",
+      "properties": {
+        "prompts": {
+          "title": "Prompts",
+          "type": "boolean"
+        },
+        "model": {
+          "title": "Model",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "prompts",
+        "model"
+      ],
+      "title": "AiPromptModelEditable",
+      "type": "object"
+    },
+    "AiRouteChoice": {
+      "additionalProperties": false,
+      "description": "그 단계에 고를 수 있는 경로 하나와 그 능력.",
+      "properties": {
+        "route": {
+          "title": "Route",
+          "type": "string"
+        },
+        "models": {
+          "items": {
+            "$ref": "#/$defs/AiModelRef"
+          },
+          "minItems": 1,
+          "title": "Models",
+          "type": "array"
+        },
+        "acceptsTemperature": {
+          "description": "경로 모델 전부가 temperature 를 받는다.",
+          "title": "Acceptstemperature",
+          "type": "boolean"
+        },
+        "webSearchAvailable": {
+          "description": "그 단계가 도구 고리를 지나고 경로가 web_search 를 실을 수 있다.",
+          "title": "Websearchavailable",
+          "type": "boolean"
+        },
+        "maxOutputTokensMax": {
+          "description": "경로 모델 출력 상한의 최솟값.",
+          "minimum": 1,
+          "title": "Maxoutputtokensmax",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "route",
+        "models",
+        "acceptsTemperature",
+        "webSearchAvailable",
+        "maxOutputTokensMax"
+      ],
+      "title": "AiRouteChoice",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "ai.prompt-model@3 — 한 판의 모델 칸·프롬프트 묶음, 받기 상한, 읽기 전용 코드 값. schemaVersion 이 첫 키다.",
+  "properties": {
+    "schemaVersion": {
+      "const": "ai.prompt-model@3",
+      "title": "Schemaversion",
+      "type": "string"
+    },
+    "module": {
+      "title": "Module",
+      "type": "string"
+    },
+    "settingName": {
+      "description": "판 이름.",
+      "title": "Settingname",
+      "type": "string"
+    },
+    "editable": {
+      "$ref": "#/$defs/AiPromptModelEditable"
+    },
+    "modelSettingsSha256": {
+      "description": "실행 versions 에 실릴 값과 같은 셈.",
+      "pattern": "^[0-9a-f]{64}$",
+      "title": "Modelsettingssha256",
+      "type": "string"
+    },
+    "models": {
+      "description": "모델 칸(차례 고정 = 입력 ai.model-settings@1 의 steps 차례).",
+      "items": {
+        "$ref": "#/$defs/AiModelSlot"
+      },
+      "minItems": 1,
+      "title": "Models",
+      "type": "array"
+    },
+    "promptGroups": {
+      "description": "프롬프트 묶음(차례 고정 = 입력 ai.prompts@1 의 steps 차례).",
+      "items": {
+        "$ref": "#/$defs/AiPromptGroup"
+      },
+      "minItems": 1,
+      "title": "Promptgroups",
+      "type": "array"
+    },
+    "limits": {
+      "$ref": "#/$defs/AiPromptLimits"
+    },
+    "fixed": {
+      "description": "판과 무관한 읽기 전용 코드 값. 없으면 [].",
+      "items": {
+        "$ref": "#/$defs/AiFixedGroup"
+      },
+      "title": "Fixed",
+      "type": "array"
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "module",
+    "settingName",
+    "editable",
+    "modelSettingsSha256",
+    "models",
+    "promptGroups",
+    "limits",
+    "fixed"
+  ],
+  "title": "AiPromptModel3",
+  "type": "object"
+}

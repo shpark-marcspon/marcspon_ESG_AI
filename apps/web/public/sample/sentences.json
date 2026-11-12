@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "notice": "★ 가짜 자료다. 「의심 문장」을 찾아낸 것이 아니라, 문장 몇 개를 손으로 골라 강조만 해 본 것이다. 검출 로직은 없다.\n넷째 항목은 두 줄에 걸친 문장이다. 줄마다 상자가 하나씩이고, 둘이 한 강조다.",
+  "documents": [
+    {
+      "id": "a",
+      "title": "예시 보고서 A",
+      "url": "sample/sample-a.pdf",
+      "pages": [
+        { "width": 595, "height": 842 },
+        { "width": 595, "height": 842 },
+        { "width": 842, "height": 595 }
+      ]
+    }
+  ],
+  "kinds": [{ "kind": "sentence", "label": "강조한 문장(가짜)", "color": "#d97706" }],
+  "highlights": [
+    { "id": "s1", "documentId": "a", "page": 1, "box": [70, 116, 523, 134], "kind": "sentence", "text": "Total emissions in 2024 were 1,234 tCO2e, down from 1,300 in 2023." },
+    { "id": "s2", "documentId": "a", "page": 2, "box": [70, 296, 523, 314], "kind": "sentence", "text": "We will be carbon neutral across all sites by 2030." },
+    { "id": "s3", "documentId": "a", "page": 2, "box": [70, 326, 523, 344], "kind": "sentence", "text": "All suppliers were audited last year." },
+    { "id": "s4", "documentId": "a", "page": 2, "box": [72, 418.7, 472.2, 450.1], "innerBoxes": [[234.1, 418.7, 463.5, 432.1], [72, 436.7, 294.1, 450.1]], "kind": "sentence", "text": "Recycled water now covers 41.5 percent of process demand at the two largest plants." }
+  ],
+  "items": [
+    { "id": "s1", "title": "1쪽 · 수치가 든 문장", "detail": "Total emissions in 2024 were 1,234 tCO2e, down from 1,300 in 2023.", "highlightIds": ["s1"], "review": { "status": "pending" } },
+    { "id": "s2", "title": "2쪽 · 단정하는 문장", "detail": "We will be carbon neutral across all sites by 2030.", "highlightIds": ["s2"], "review": { "status": "pending" } },
+    { "id": "s3", "title": "2쪽 · 범위를 다 말하는 문장", "detail": "All suppliers were audited last year.", "highlightIds": ["s3"], "review": { "status": "pending" } },
+    { "id": "s4", "title": "2쪽 · 두 줄에 걸친 문장", "detail": "Recycled water now covers 41.5 percent of process demand at the two largest plants.", "highlightIds": ["s4"], "review": { "status": "pending" } }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "name": "@marcspon/tailwind-config",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check:tokens": "node scripts/validate-theme-tokens.mjs"
+  },
+  "exports": {
+    ".": "./tailwind.config.ts",
+    "./preflight-scoped.css": "./preflight-scoped.css",
+    "./theme-tokens": "./theme-tokens.ts"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.15",
+    "@marcspon/typescript-config": "workspace:*",
+    "tailwindcss": "^3.4.1",
+    "tailwindcss-animate": "^1.0.7"
+  }
+}

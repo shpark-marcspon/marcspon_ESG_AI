@@ -1,0 +1,51 @@
+{
+  "$defs": {
+    "MaterialityDigest": {
+      "additionalProperties": false,
+      "description": "materiality.digest@1 — 중대성평가 IRO 실행 하나의 요약.",
+      "properties": {
+        "schemaVersion": {
+          "const": "materiality.digest@1",
+          "title": "Schemaversion",
+          "type": "string"
+        },
+        "impactRows": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "환경·사회 영향 줄 수 — 서브토픽마다 impact 가 done 인 것의 rows 를 더한 수(최종 엑셀 「2-1. 환경사회 영향\n식별」 시트의 데이터 줄 수). 2부를 돌리지 않았으면(part2 not_run) null.",
+          "title": "Impactrows"
+        },
+        "pathwayRows": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "재무 영향 경로 줄 수 — 서브토픽마다 pathway 가 done 인 것의 rows 를 더한 수(최종 엑셀 「2-2. 재무 영향 식별」\n시트의 데이터 줄 수). 2부를 돌리지 않았으면 null.",
+          "title": "Pathwayrows"
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "impactRows",
+        "pathwayRows"
+      ],
+      "title": "MaterialityDigest",
+      "type": "object"
+    }
+  },
+  "$ref": "#/$defs/MaterialityDigest",
+  "description": "중대성평가 IRO 한 건의 요약.",
+  "title": "materiality.digest@1"
+}

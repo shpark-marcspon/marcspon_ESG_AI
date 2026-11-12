@@ -1,0 +1,636 @@
+{
+  "gwpSetId": "synthetic-gwp",
+  "rows": [
+    {
+      "rowId": "o0",
+      "orgUnit": "￥-site",
+      "period": "2025-01",
+      "scope": 2,
+      "sourceType": "purchased_heat",
+      "status": "ok",
+      "co2e": "0.0567895",
+      "unit": "tCO2eq",
+      "energy": null,
+      "gases": [
+        {
+          "gas": "CO2e",
+          "mass": "0.0567895",
+          "massUnit": "t",
+          "gwp": null,
+          "co2e": "0.0567895"
+        }
+      ],
+      "evidence": {
+        "factor": {
+          "id": "synthetic:heat",
+          "version": "synthetic-1",
+          "source": {
+            "kind": "synthetic",
+            "note": "가상 열(스팀) 계수. 이미 CO2eq 로 환산된 계수 하나만 있는 경우."
+          }
+        },
+        "gwpSet": {
+          "id": "synthetic-gwp",
+          "label": "synthetic GWP (가상 값)",
+          "source": {
+            "kind": "synthetic",
+            "note": "테스트용 가상 값. 어느 IPCC 보고서의 값도 아니다."
+          }
+        },
+        "calorificBasis": null,
+        "oxidationFactor": null,
+        "sector": null,
+        "parameterTiers": null,
+        "facilityUse": null,
+        "steps": [
+          {
+            "label": "단위 환산 (사용량 → 배출계수 기준 단위)",
+            "formula": "1 GJ × 0.001 TJ/GJ",
+            "result": "0.001",
+            "unit": "TJ",
+            "conversion": {
+              "from": "GJ",
+              "to": "TJ",
+              "factor": "0.001",
+              "source": {
+                "kind": "definition",
+                "note": "SI 접두어 T = 10^12, G = 10^9"
+              }
+            }
+          },
+          {
+            "label": "CO2e 배출량",
+            "formula": "0.001 TJ × 56789.5 kgCO2e/TJ",
+            "result": "56.7895",
+            "unit": "kgCO2e"
+          },
+          {
+            "label": "단위 환산 (CO2e 질량)",
+            "formula": "56.7895 kg × 0.001 t/kg",
+            "result": "0.0567895",
+            "unit": "t",
+            "conversion": {
+              "from": "kg",
+              "to": "t",
+              "factor": "0.001",
+              "source": {
+                "kind": "definition",
+                "note": "1 t = 1000 kg"
+              }
+            }
+          },
+          {
+            "label": "합산",
+            "formula": "0.0567895 (CO2e)",
+            "result": "0.0567895",
+            "unit": "tCO2eq"
+          }
+        ]
+      }
+    },
+    {
+      "rowId": "o1",
+      "orgUnit": "😀-site",
+      "period": "2025-01",
+      "scope": 2,
+      "sourceType": "purchased_heat",
+      "status": "ok",
+      "co2e": "0.113579",
+      "unit": "tCO2eq",
+      "energy": null,
+      "gases": [
+        {
+          "gas": "CO2e",
+          "mass": "0.113579",
+          "massUnit": "t",
+          "gwp": null,
+          "co2e": "0.113579"
+        }
+      ],
+      "evidence": {
+        "factor": {
+          "id": "synthetic:heat",
+          "version": "synthetic-1",
+          "source": {
+            "kind": "synthetic",
+            "note": "가상 열(스팀) 계수. 이미 CO2eq 로 환산된 계수 하나만 있는 경우."
+          }
+        },
+        "gwpSet": {
+          "id": "synthetic-gwp",
+          "label": "synthetic GWP (가상 값)",
+          "source": {
+            "kind": "synthetic",
+            "note": "테스트용 가상 값. 어느 IPCC 보고서의 값도 아니다."
+          }
+        },
+        "calorificBasis": null,
+        "oxidationFactor": null,
+        "sector": null,
+        "parameterTiers": null,
+        "facilityUse": null,
+        "steps": [
+          {
+            "label": "단위 환산 (사용량 → 배출계수 기준 단위)",
+            "formula": "2 GJ × 0.001 TJ/GJ",
+            "result": "0.002",
+            "unit": "TJ",
+            "conversion": {
+              "from": "GJ",
+              "to": "TJ",
+              "factor": "0.001",
+              "source": {
+                "kind": "definition",
+                "note": "SI 접두어 T = 10^12, G = 10^9"
+              }
+            }
+          },
+          {
+            "label": "CO2e 배출량",
+            "formula": "0.002 TJ × 56789.5 kgCO2e/TJ",
+            "result": "113.579",
+            "unit": "kgCO2e"
+          },
+          {
+            "label": "단위 환산 (CO2e 질량)",
+            "formula": "113.579 kg × 0.001 t/kg",
+            "result": "0.113579",
+            "unit": "t",
+            "conversion": {
+              "from": "kg",
+              "to": "t",
+              "factor": "0.001",
+              "source": {
+                "kind": "definition",
+                "note": "1 t = 1000 kg"
+              }
+            }
+          },
+          {
+            "label": "합산",
+            "formula": "0.113579 (CO2e)",
+            "result": "0.113579",
+            "unit": "tCO2eq"
+          }
+        ]
+      }
+    },
+    {
+      "rowId": "o2",
+      "orgUnit": "가-site",
+      "period": "2025-01",
+      "scope": 2,
+      "sourceType": "purchased_heat",
+      "status": "ok",
+      "co2e": "0.1703685",
+      "unit": "tCO2eq",
+      "energy": null,
+      "gases": [
+        {
+          "gas": "CO2e",
+          "mass": "0.1703685",
+          "massUnit": "t",
+          "gwp": null,
+          "co2e": "0.1703685"
+        }
+      ],
+      "evidence": {
+        "factor": {
+          "id": "synthetic:heat",
+          "version": "synthetic-1",
+          "source": {
+            "kind": "synthetic",
+            "note": "가상 열(스팀) 계수. 이미 CO2eq 로 환산된 계수 하나만 있는 경우."
+          }
+        },
+        "gwpSet": {
+          "id": "synthetic-gwp",
+          "label": "synthetic GWP (가상 값)",
+          "source": {
+            "kind": "synthetic",
+            "note": "테스트용 가상 값. 어느 IPCC 보고서의 값도 아니다."
+          }
+        },
+        "calorificBasis": null,
+        "oxidationFactor": null,
+        "sector": null,
+        "parameterTiers": null,
+        "facilityUse": null,
+        "steps": [
+          {
+            "label": "단위 환산 (사용량 → 배출계수 기준 단위)",
+            "formula": "3 GJ × 0.001 TJ/GJ",
+            "result": "0.003",
+            "unit": "TJ",
+            "conversion": {
+              "from": "GJ",
+              "to": "TJ",
+              "factor": "0.001",
+              "source": {
+                "kind": "definition",
+                "note": "SI 접두어 T = 10^12, G = 10^9"
+              }
+            }
+          },
+          {
+            "label": "CO2e 배출량",
+            "formula": "0.003 TJ × 56789.5 kgCO2e/TJ",
+            "result": "170.3685",
+            "unit": "kgCO2e"
+          },
+          {
+            "label": "단위 환산 (CO2e 질량)",
+            "formula": "170.3685 kg × 0.001 t/kg",
+            "result": "0.1703685",
+            "unit": "t",
+            "conversion": {
+              "from": "kg",
+              "to": "t",
+              "factor": "0.001",
+              "source": {
+                "kind": "definition",
+                "note": "1 t = 1000 kg"
+              }
+            }
+          },
+          {
+            "label": "합산",
+            "formula": "0.1703685 (CO2e)",
+            "result": "0.1703685",
+            "unit": "tCO2eq"
+          }
+        ]
+      }
+    },
+    {
+      "rowId": "o3",
+      "orgUnit": "a\"site",
+      "period": "2025-01",
+      "scope": 2,
+      "sourceType": "purchased_heat",
+      "status": "ok",
+      "co2e": "0.227158",
+      "unit": "tCO2eq",
+      "energy": null,
+      "gases": [
+        {
+          "gas": "CO2e",
+          "mass": "0.227158",
+          "massUnit": "t",
+          "gwp": null,
+          "co2e": "0.227158"
+        }
+      ],
+      "evidence": {
+        "factor": {
+          "id": "synthetic:heat",
+          "version": "synthetic-1",
+          "source": {
+            "kind": "synthetic",
+            "note": "가상 열(스팀) 계수. 이미 CO2eq 로 환산된 계수 하나만 있는 경우."
+          }
+        },
+        "gwpSet": {
+          "id": "synthetic-gwp",
+          "label": "synthetic GWP (가상 값)",
+          "source": {
+            "kind": "synthetic",
+            "note": "테스트용 가상 값. 어느 IPCC 보고서의 값도 아니다."
+          }
+        },
+        "calorificBasis": null,
+        "oxidationFactor": null,
+        "sector": null,
+        "parameterTiers": null,
+        "facilityUse": null,
+        "steps": [
+          {
+            "label": "단위 환산 (사용량 → 배출계수 기준 단위)",
+            "formula": "4 GJ × 0.001 TJ/GJ",
+            "result": "0.004",
+            "unit": "TJ",
+            "conversion": {
+              "from": "GJ",
+              "to": "TJ",
+              "factor": "0.001",
+              "source": {
+                "kind": "definition",
+                "note": "SI 접두어 T = 10^12, G = 10^9"
+              }
+            }
+          },
+          {
+            "label": "CO2e 배출량",
+            "formula": "0.004 TJ × 56789.5 kgCO2e/TJ",
+            "result": "227.158",
+            "unit": "kgCO2e"
+          },
+          {
+            "label": "단위 환산 (CO2e 질량)",
+            "formula": "227.158 kg × 0.001 t/kg",
+            "result": "0.227158",
+            "unit": "t",
+            "conversion": {
+              "from": "kg",
+              "to": "t",
+              "factor": "0.001",
+              "source": {
+                "kind": "definition",
+                "note": "1 t = 1000 kg"
+              }
+            }
+          },
+          {
+            "label": "합산",
+            "formula": "0.227158 (CO2e)",
+            "result": "0.227158",
+            "unit": "tCO2eq"
+          }
+        ]
+      }
+    },
+    {
+      "rowId": "o4",
+      "orgUnit": "Z-site",
+      "period": "2025-01",
+      "scope": 2,
+      "sourceType": "purchased_heat",
+      "status": "ok",
+      "co2e": "0.2839475",
+      "unit": "tCO2eq",
+      "energy": null,
+      "gases": [
+        {
+          "gas": "CO2e",
+          "mass": "0.2839475",
+          "massUnit": "t",
+          "gwp": null,
+          "co2e": "0.2839475"
+        }
+      ],
+      "evidence": {
+        "factor": {
+          "id": "synthetic:heat",
+          "version": "synthetic-1",
+          "source": {
+            "kind": "synthetic",
+            "note": "가상 열(스팀) 계수. 이미 CO2eq 로 환산된 계수 하나만 있는 경우."
+          }
+        },
+        "gwpSet": {
+          "id": "synthetic-gwp",
+          "label": "synthetic GWP (가상 값)",
+          "source": {
+            "kind": "synthetic",
+            "note": "테스트용 가상 값. 어느 IPCC 보고서의 값도 아니다."
+          }
+        },
+        "calorificBasis": null,
+        "oxidationFactor": null,
+        "sector": null,
+        "parameterTiers": null,
+        "facilityUse": null,
+        "steps": [
+          {
+            "label": "단위 환산 (사용량 → 배출계수 기준 단위)",
+            "formula": "5 GJ × 0.001 TJ/GJ",
+            "result": "0.005",
+            "unit": "TJ",
+            "conversion": {
+              "from": "GJ",
+              "to": "TJ",
+              "factor": "0.001",
+              "source": {
+                "kind": "definition",
+                "note": "SI 접두어 T = 10^12, G = 10^9"
+              }
+            }
+          },
+          {
+            "label": "CO2e 배출량",
+            "formula": "0.005 TJ × 56789.5 kgCO2e/TJ",
+            "result": "283.9475",
+            "unit": "kgCO2e"
+          },
+          {
+            "label": "단위 환산 (CO2e 질량)",
+            "formula": "283.9475 kg × 0.001 t/kg",
+            "result": "0.2839475",
+            "unit": "t",
+            "conversion": {
+              "from": "kg",
+              "to": "t",
+              "factor": "0.001",
+              "source": {
+                "kind": "definition",
+                "note": "1 t = 1000 kg"
+              }
+            }
+          },
+          {
+            "label": "합산",
+            "formula": "0.2839475 (CO2e)",
+            "result": "0.2839475",
+            "unit": "tCO2eq"
+          }
+        ]
+      }
+    },
+    {
+      "rowId": "o5",
+      "orgUnit": "a-site",
+      "period": "2025-01",
+      "scope": 2,
+      "sourceType": "purchased_heat",
+      "status": "ok",
+      "co2e": "0.340737",
+      "unit": "tCO2eq",
+      "energy": null,
+      "gases": [
+        {
+          "gas": "CO2e",
+          "mass": "0.340737",
+          "massUnit": "t",
+          "gwp": null,
+          "co2e": "0.340737"
+        }
+      ],
+      "evidence": {
+        "factor": {
+          "id": "synthetic:heat",
+          "version": "synthetic-1",
+          "source": {
+            "kind": "synthetic",
+            "note": "가상 열(스팀) 계수. 이미 CO2eq 로 환산된 계수 하나만 있는 경우."
+          }
+        },
+        "gwpSet": {
+          "id": "synthetic-gwp",
+          "label": "synthetic GWP (가상 값)",
+          "source": {
+            "kind": "synthetic",
+            "note": "테스트용 가상 값. 어느 IPCC 보고서의 값도 아니다."
+          }
+        },
+        "calorificBasis": null,
+        "oxidationFactor": null,
+        "sector": null,
+        "parameterTiers": null,
+        "facilityUse": null,
+        "steps": [
+          {
+            "label": "단위 환산 (사용량 → 배출계수 기준 단위)",
+            "formula": "6 GJ × 0.001 TJ/GJ",
+            "result": "0.006",
+            "unit": "TJ",
+            "conversion": {
+              "from": "GJ",
+              "to": "TJ",
+              "factor": "0.001",
+              "source": {
+                "kind": "definition",
+                "note": "SI 접두어 T = 10^12, G = 10^9"
+              }
+            }
+          },
+          {
+            "label": "CO2e 배출량",
+            "formula": "0.006 TJ × 56789.5 kgCO2e/TJ",
+            "result": "340.737",
+            "unit": "kgCO2e"
+          },
+          {
+            "label": "단위 환산 (CO2e 질량)",
+            "formula": "340.737 kg × 0.001 t/kg",
+            "result": "0.340737",
+            "unit": "t",
+            "conversion": {
+              "from": "kg",
+              "to": "t",
+              "factor": "0.001",
+              "source": {
+                "kind": "definition",
+                "note": "1 t = 1000 kg"
+              }
+            }
+          },
+          {
+            "label": "합산",
+            "formula": "0.340737 (CO2e)",
+            "result": "0.340737",
+            "unit": "tCO2eq"
+          }
+        ]
+      }
+    }
+  ],
+  "aggregation": {
+    "by": [
+      "orgUnit",
+      "period",
+      "scope",
+      "sourceType"
+    ],
+    "groups": [
+      {
+        "key": {
+          "orgUnit": "Z-site",
+          "period": "2025-01",
+          "scope": "2",
+          "sourceType": "purchased_heat"
+        },
+        "co2e": "0.2839475",
+        "co2eByGas": {
+          "CO2e": "0.2839475"
+        },
+        "okRowCount": 1,
+        "failedRowIds": [],
+        "complete": true
+      },
+      {
+        "key": {
+          "orgUnit": "a-site",
+          "period": "2025-01",
+          "scope": "2",
+          "sourceType": "purchased_heat"
+        },
+        "co2e": "0.340737",
+        "co2eByGas": {
+          "CO2e": "0.340737"
+        },
+        "okRowCount": 1,
+        "failedRowIds": [],
+        "complete": true
+      },
+      {
+        "key": {
+          "orgUnit": "a\"site",
+          "period": "2025-01",
+          "scope": "2",
+          "sourceType": "purchased_heat"
+        },
+        "co2e": "0.227158",
+        "co2eByGas": {
+          "CO2e": "0.227158"
+        },
+        "okRowCount": 1,
+        "failedRowIds": [],
+        "complete": true
+      },
+      {
+        "key": {
+          "orgUnit": "가-site",
+          "period": "2025-01",
+          "scope": "2",
+          "sourceType": "purchased_heat"
+        },
+        "co2e": "0.1703685",
+        "co2eByGas": {
+          "CO2e": "0.1703685"
+        },
+        "okRowCount": 1,
+        "failedRowIds": [],
+        "complete": true
+      },
+      {
+        "key": {
+          "orgUnit": "😀-site",
+          "period": "2025-01",
+          "scope": "2",
+          "sourceType": "purchased_heat"
+        },
+        "co2e": "0.113579",
+        "co2eByGas": {
+          "CO2e": "0.113579"
+        },
+        "okRowCount": 1,
+        "failedRowIds": [],
+        "complete": true
+      },
+      {
+        "key": {
+          "orgUnit": "￥-site",
+          "period": "2025-01",
+          "scope": "2",
+          "sourceType": "purchased_heat"
+        },
+        "co2e": "0.0567895",
+        "co2eByGas": {
+          "CO2e": "0.0567895"
+        },
+        "okRowCount": 1,
+        "failedRowIds": [],
+        "complete": true
+      }
+    ],
+    "total": {
+      "co2e": "1.1925795",
+      "co2eByGas": {
+        "CO2e": "1.1925795"
+      },
+      "okRowCount": 6,
+      "failedRowIds": [],
+      "complete": true
+    }
+  }
+}

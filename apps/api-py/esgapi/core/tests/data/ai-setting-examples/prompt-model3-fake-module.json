@@ -1,0 +1,397 @@
+{
+  "schemaVersion": "ai.prompt-model@3",
+  "module": "fake-tr",
+  "settingName": "v3",
+  "editable": {
+    "prompts": true,
+    "model": true
+  },
+  "modelSettingsSha256": "16c28c9dcb4248c6edcdb927a65de7b6979d3cd75cf0b2ba25d908ba32008b8b",
+  "models": [
+    {
+      "key": "translate_ceo",
+      "label": "가상 대표 인사말 번역",
+      "model": {
+        "route": "standard-openai-41",
+        "models": [
+          {
+            "key": "gpt-4.1",
+            "label": "OpenAI GPT-4.1",
+            "provider": "openai"
+          }
+        ],
+        "temperature": 0.2,
+        "webSearch": false,
+        "maxOutputTokens": 4000
+      },
+      "routeChoices": [
+        {
+          "route": "standard-openai-41",
+          "models": [
+            {
+              "key": "gpt-4.1",
+              "label": "OpenAI GPT-4.1",
+              "provider": "openai"
+            }
+          ],
+          "acceptsTemperature": true,
+          "webSearchAvailable": false,
+          "maxOutputTokensMax": 32768
+        },
+        {
+          "route": "light-openai-41",
+          "models": [
+            {
+              "key": "gpt-4.1-mini",
+              "label": "OpenAI GPT-4.1 Mini",
+              "provider": "openai"
+            }
+          ],
+          "acceptsTemperature": true,
+          "webSearchAvailable": false,
+          "maxOutputTokensMax": 32768
+        }
+      ],
+      "unavailableRoutes": []
+    },
+    {
+      "key": "translate",
+      "label": "가상 본문 번역",
+      "model": {
+        "route": "light-openai-41",
+        "models": [
+          {
+            "key": "gpt-4.1-mini",
+            "label": "OpenAI GPT-4.1 Mini",
+            "provider": "openai"
+          }
+        ],
+        "temperature": 0.0,
+        "webSearch": false,
+        "maxOutputTokens": 8000
+      },
+      "routeChoices": [
+        {
+          "route": "light-openai-41",
+          "models": [
+            {
+              "key": "gpt-4.1-mini",
+              "label": "OpenAI GPT-4.1 Mini",
+              "provider": "openai"
+            }
+          ],
+          "acceptsTemperature": true,
+          "webSearchAvailable": false,
+          "maxOutputTokensMax": 32768
+        },
+        {
+          "route": "standard-openai-41",
+          "models": [
+            {
+              "key": "gpt-4.1",
+              "label": "OpenAI GPT-4.1",
+              "provider": "openai"
+            }
+          ],
+          "acceptsTemperature": true,
+          "webSearchAvailable": false,
+          "maxOutputTokensMax": 32768
+        }
+      ],
+      "unavailableRoutes": []
+    },
+    {
+      "key": "review",
+      "label": "가상 검토",
+      "model": {
+        "route": "light-openai",
+        "models": [
+          {
+            "key": "gpt-6-luna",
+            "label": "OpenAI GPT-6 Luna",
+            "provider": "openai"
+          }
+        ],
+        "temperature": null,
+        "webSearch": false,
+        "maxOutputTokens": 2000
+      },
+      "routeChoices": [
+        {
+          "route": "light-openai",
+          "models": [
+            {
+              "key": "gpt-6-luna",
+              "label": "OpenAI GPT-6 Luna",
+              "provider": "openai"
+            }
+          ],
+          "acceptsTemperature": false,
+          "webSearchAvailable": false,
+          "maxOutputTokensMax": 128000
+        },
+        {
+          "route": "light-openai-41",
+          "models": [
+            {
+              "key": "gpt-4.1-mini",
+              "label": "OpenAI GPT-4.1 Mini",
+              "provider": "openai"
+            }
+          ],
+          "acceptsTemperature": true,
+          "webSearchAvailable": false,
+          "maxOutputTokensMax": 32768
+        }
+      ],
+      "unavailableRoutes": []
+    }
+  ],
+  "promptGroups": [
+    {
+      "key": "translate",
+      "label": "가상 번역",
+      "modelSlots": [
+        "translate_ceo",
+        "translate"
+      ],
+      "prompts": [
+        {
+          "key": "t1",
+          "label": "가상 칸 t1",
+          "promptId": "fake-tr.translate.t1",
+          "promptVersion": "fake-tr-v1",
+          "sha256": "c41f5605da7d262c7c6d15a8b9a19a84390d97825c21133abb170da9aee0c827",
+          "text": "가상 translate 지시 t1: 지어낸 보고서 문장을 옮긴다.\n[출력]\n가상 형식",
+          "memo": "",
+          "defaultText": "가상 translate 지시 t1: 지어낸 보고서 문장을 옮긴다.\n[출력]\n가상 형식",
+          "isDefault": true,
+          "outputSection": "[출력]\n가상 형식",
+          "outputKept": true
+        },
+        {
+          "key": "t2",
+          "label": "가상 칸 t2",
+          "promptId": "fake-tr.translate.t2",
+          "promptVersion": "fake-tr-v1",
+          "sha256": "af3255983a9e205fcc2c14827227ae7535800163e643bf06e0688a19523c3f5c",
+          "text": "가상 translate 지시 t2: 지어낸 보고서 문장을 옮긴다.\n[출력]\n가상 형식",
+          "memo": "",
+          "defaultText": "가상 translate 지시 t2: 지어낸 보고서 문장을 옮긴다.\n[출력]\n가상 형식",
+          "isDefault": true,
+          "outputSection": "[출력]\n가상 형식",
+          "outputKept": true
+        },
+        {
+          "key": "t3",
+          "label": "가상 칸 t3",
+          "promptId": "fake-tr.translate.t3",
+          "promptVersion": "fake-tr-v1",
+          "sha256": "4c418011b04c8a04c42d28b36e8aea9e8089e6dc3076a23579f702295b144a0f",
+          "text": "가상 translate 지시 t3: 지어낸 보고서 문장을 옮긴다.\n[출력]\n가상 형식",
+          "memo": "",
+          "defaultText": "가상 translate 지시 t3: 지어낸 보고서 문장을 옮긴다.\n[출력]\n가상 형식",
+          "isDefault": true,
+          "outputSection": "[출력]\n가상 형식",
+          "outputKept": true
+        },
+        {
+          "key": "t4",
+          "label": "가상 칸 t4",
+          "promptId": "fake-tr.translate.t4",
+          "promptVersion": "fake-tr-v1",
+          "sha256": "4ec508f0d8604da1ca306133420794f10d1d54378e8664849bcdba82f4bc771c",
+          "text": "가상 translate 지시 t4: 지어낸 보고서 문장을 옮긴다.\n[출력]\n가상 형식",
+          "memo": "",
+          "defaultText": "가상 translate 지시 t4: 지어낸 보고서 문장을 옮긴다.\n[출력]\n가상 형식",
+          "isDefault": true,
+          "outputSection": "[출력]\n가상 형식",
+          "outputKept": true
+        },
+        {
+          "key": "t5",
+          "label": "가상 칸 t5",
+          "promptId": "fake-tr.translate.t5",
+          "promptVersion": "fake-tr-v1",
+          "sha256": "3e8014d7837741f0fc9f066909e5a4921f1d5cb1f7d384bafbef12a11e87bfea",
+          "text": "가상 translate 지시 t5: 지어낸 보고서 문장을 옮긴다.\n[출력]\n가상 형식",
+          "memo": "",
+          "defaultText": "가상 translate 지시 t5: 지어낸 보고서 문장을 옮긴다.\n[출력]\n가상 형식",
+          "isDefault": true,
+          "outputSection": "[출력]\n가상 형식",
+          "outputKept": true
+        },
+        {
+          "key": "t6",
+          "label": "가상 칸 t6",
+          "promptId": "fake-tr.translate.t6",
+          "promptVersion": "fake-tr-v1",
+          "sha256": "f758232fd21a25349a7efe19ec1997e938100ba8b3a800187739a3cb8b677b0e",
+          "text": "가상 translate 지시 t6: 지어낸 보고서 문장을 옮긴다.\n[출력]\n가상 형식",
+          "memo": "",
+          "defaultText": "가상 translate 지시 t6: 지어낸 보고서 문장을 옮긴다.\n[출력]\n가상 형식",
+          "isDefault": true,
+          "outputSection": "[출력]\n가상 형식",
+          "outputKept": true
+        },
+        {
+          "key": "t7",
+          "label": "가상 칸 t7",
+          "promptId": "fake-tr.translate.t7",
+          "promptVersion": "fake-tr-v1",
+          "sha256": "3eaa78ceb8d7f9ed89cf24061de97ffb48c164610b3eb25471544469789d93dd",
+          "text": "가상 translate 지시 t7: 지어낸 보고서 문장을 옮긴다.\n[출력]\n가상 형식",
+          "memo": "",
+          "defaultText": "가상 translate 지시 t7: 지어낸 보고서 문장을 옮긴다.\n[출력]\n가상 형식",
+          "isDefault": true,
+          "outputSection": "[출력]\n가상 형식",
+          "outputKept": true
+        },
+        {
+          "key": "t8",
+          "label": "가상 칸 t8",
+          "promptId": "fake-tr.translate.t8",
+          "promptVersion": "fake-tr-v1",
+          "sha256": "9abccb1f2dfae46f56b5bcab043c0913c3a6b2f33c0c35ebaad0e2633fe22690",
+          "text": "가상 translate 지시 t8: 지어낸 보고서 문장을 옮긴다.\n[출력]\n가상 형식",
+          "memo": "",
+          "defaultText": "가상 translate 지시 t8: 지어낸 보고서 문장을 옮긴다.\n[출력]\n가상 형식",
+          "isDefault": true,
+          "outputSection": "[출력]\n가상 형식",
+          "outputKept": true
+        },
+        {
+          "key": "t9",
+          "label": "가상 칸 t9",
+          "promptId": "fake-tr.translate.t9",
+          "promptVersion": "fake-tr-v1",
+          "sha256": "1d75aa2a0c63984f4d41ebbbf2851438b5dcfc4e082a62041c31e419dcb36393",
+          "text": "가상 translate 지시 t9: 지어낸 보고서 문장을 옮긴다.\n[출력]\n가상 형식",
+          "memo": "",
+          "defaultText": "가상 translate 지시 t9: 지어낸 보고서 문장을 옮긴다.\n[출력]\n가상 형식",
+          "isDefault": true,
+          "outputSection": "[출력]\n가상 형식",
+          "outputKept": true
+        }
+      ]
+    },
+    {
+      "key": "polish",
+      "label": "가상 다듬기",
+      "modelSlots": [
+        "translate"
+      ],
+      "prompts": [
+        {
+          "key": "p1",
+          "label": "가상 칸 p1",
+          "promptId": "fake-tr.polish.p1",
+          "promptVersion": "fake-tr-v1",
+          "sha256": "8d2bb309ef0b6fd87b37b997425e5f343b508b4bb1d95f2cc9800812dc3ecf8e",
+          "text": "가상 polish 지시 p1: 지어낸 보고서 문장을 옮긴다.\n[출력]\n가상 형식",
+          "memo": "",
+          "defaultText": "가상 polish 지시 p1: 지어낸 보고서 문장을 옮긴다.\n[출력]\n가상 형식",
+          "isDefault": true,
+          "outputSection": "[출력]\n가상 형식",
+          "outputKept": true
+        }
+      ]
+    },
+    {
+      "key": "editorial_qa",
+      "label": "가상 편집 점검",
+      "modelSlots": [
+        "review"
+      ],
+      "prompts": [
+        {
+          "key": "q1",
+          "label": "가상 칸 q1",
+          "promptId": "fake-tr.editorial_qa.q1",
+          "promptVersion": "fake-tr-v1",
+          "sha256": "329336d9a017d1856624ce555b09173d0be476e32640abe1b522faac29769ad6",
+          "text": "가상 editorial_qa 지시 q1: 지어낸 보고서 문장을 옮긴다.\n[출력]\n가상 형식",
+          "memo": "",
+          "defaultText": "가상 editorial_qa 지시 q1: 지어낸 보고서 문장을 옮긴다.\n[출력]\n가상 형식",
+          "isDefault": true,
+          "outputSection": "[출력]\n가상 형식",
+          "outputKept": true
+        }
+      ]
+    },
+    {
+      "key": "review",
+      "label": "가상 검토",
+      "modelSlots": [
+        "review"
+      ],
+      "prompts": [
+        {
+          "key": "r1",
+          "label": "가상 칸 r1",
+          "promptId": "fake-tr.review.r1",
+          "promptVersion": "fake-tr-v1",
+          "sha256": "7f2c62a2c074935e9211c167a91e819525f10076936388eeef579da261a29638",
+          "text": "가상 review 지시 r1: 지어낸 보고서 문장을 옮긴다.\n[출력]\n가상 형식",
+          "memo": "",
+          "defaultText": "가상 review 지시 r1: 지어낸 보고서 문장을 옮긴다.\n[출력]\n가상 형식",
+          "isDefault": true,
+          "outputSection": "[출력]\n가상 형식",
+          "outputKept": true
+        }
+      ]
+    },
+    {
+      "key": "autofix",
+      "label": "가상 자동 고침",
+      "modelSlots": [
+        "translate"
+      ],
+      "prompts": [
+        {
+          "key": "f1",
+          "label": "가상 칸 f1",
+          "promptId": "fake-tr.autofix.f1",
+          "promptVersion": "fake-tr-v1",
+          "sha256": "3fcbf4d04b859788dfc0f5790cb1b76eb34858c18ef1a4a603c395293af5de35",
+          "text": "가상 autofix 지시 f1: 지어낸 보고서 문장을 옮긴다.\n[출력]\n가상 형식",
+          "memo": "",
+          "defaultText": "가상 autofix 지시 f1: 지어낸 보고서 문장을 옮긴다.\n[출력]\n가상 형식",
+          "isDefault": true,
+          "outputSection": "[출력]\n가상 형식",
+          "outputKept": true
+        },
+        {
+          "key": "f2",
+          "label": "가상 칸 f2",
+          "promptId": "fake-tr.autofix.f2",
+          "promptVersion": "fake-tr-v1",
+          "sha256": "c5f1aa6d6c0d3d1b1e2b5351b1db529b7a28c63a386bc4381bdb4e90c599560f",
+          "text": "가상 autofix 지시 f2: 지어낸 보고서 문장을 옮긴다.\n[출력]\n가상 형식",
+          "memo": "",
+          "defaultText": "가상 autofix 지시 f2: 지어낸 보고서 문장을 옮긴다.\n[출력]\n가상 형식",
+          "isDefault": true,
+          "outputSection": "[출력]\n가상 형식",
+          "outputKept": true
+        }
+      ]
+    }
+  ],
+  "limits": {
+    "textMax": 8000,
+    "memoMax": 500
+  },
+  "fixed": [
+    {
+      "key": "glossary",
+      "label": "가상 용어집",
+      "items": [
+        {
+          "key": "terms",
+          "label": "가상 용어 수",
+          "value": 12
+        }
+      ]
+    }
+  ]
+}

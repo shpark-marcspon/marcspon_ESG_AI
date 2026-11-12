@@ -1,0 +1,2469 @@
+{
+  "schema_version": "0.1",
+  "guideline": {
+    "name": "온실가스 배출권거래제의 배출량 보고 및 인증에 관한 지침",
+    "version": "환경부고시 제2025-64호 (2025-04-11 시행)",
+    "url": "https://www.law.go.kr/LSW/admRulLsInfoP.do?admRulSeq=2100000257748"
+  },
+  "sources": {
+    "kr-ets-byl05": {
+      "name": "온실가스 배출권거래제의 배출량 보고 및 인증에 관한 지침 [별표 5] 배출활동별, 시설규모별 산정등급(Tier) 최소적용기준",
+      "publisher": "환경부",
+      "url": "https://www.law.go.kr/LSW/admRulLsInfoP.do?admRulSeq=2100000257748",
+      "version": "환경부고시 제2025-64호 (2025-04-11 시행)",
+      "retrieved": "2026-10-02",
+      "file_name": "ets-byl05-tier-minimum.pdf",
+      "file_sha256": "8b05a3d8bb17e74d6c2d5f393a1992854b707cb2692cc72171bdd2a928dc2acb"
+    },
+    "kr-ets-byl06": {
+      "name": "온실가스 배출권거래제의 배출량 보고 및 인증에 관한 지침 [별표 6] 배출활동별 온실가스 배출량 등의 세부산정방법 및 기준",
+      "publisher": "환경부",
+      "url": "https://www.law.go.kr/LSW/admRulLsInfoP.do?admRulSeq=2100000257748",
+      "version": "환경부고시 제2025-64호 (2025-04-11 시행)",
+      "retrieved": "2026-10-02",
+      "file_name": "ets-byl06-methods.pdf",
+      "file_sha256": "8f265fd4677028b27cc6fe85f5994fce0e5155dc33320f08305db4f0c000f24b"
+    },
+    "kr-ets-byl10": {
+      "name": "온실가스 배출권거래제의 배출량 보고 및 인증에 관한 지침 [별표 10] 2006 IPCC 국가 인벤토리 가이드라인 기본 배출계수",
+      "publisher": "환경부",
+      "url": "https://www.law.go.kr/LSW/admRulLsInfoP.do?admRulSeq=2100000257748",
+      "version": "환경부고시 제2025-64호 (2025-04-11 시행)",
+      "retrieved": "2026-10-01",
+      "file_name": "ets-byl10-ipcc-default-ef.pdf",
+      "file_sha256": "12cb63b71ea9e0aee60cbc8caa6954245fbaaa45af292c79040e09eecdde7531"
+    },
+    "kr-ets-byl11": {
+      "name": "온실가스 배출권거래제의 배출량 보고 및 인증에 관한 지침 [별표 11] 2006 IPCC 국가 인벤토리 가이드라인 연료별 기본 발열량",
+      "publisher": "환경부",
+      "url": "https://www.law.go.kr/LSW/admRulLsInfoP.do?admRulSeq=2100000257748",
+      "version": "환경부고시 제2025-64호 (2025-04-11 시행)",
+      "retrieved": "2026-10-01",
+      "file_name": "ets-byl11-ipcc-default-ncv.pdf",
+      "file_sha256": "d91cb3601f62849593277a0dc556a8d473232b1fd5e5307f3e3c85dc6d06bc28"
+    },
+    "kr-ets-byl12": {
+      "name": "온실가스 배출권거래제의 배출량 보고 및 인증에 관한 지침 [별표 12] 연료별 국가 고유 발열량 및 배출계수",
+      "publisher": "환경부",
+      "url": "https://www.law.go.kr/LSW/admRulLsInfoP.do?admRulSeq=2100000257748",
+      "version": "환경부고시 제2025-64호 (2025-04-11 시행)",
+      "retrieved": "2026-10-01",
+      "file_name": "ets-byl12-kr-cv-ef.pdf",
+      "file_sha256": "dbbd8a0c3c2b61de8e9a0f9a09f727598bf5e2fbbfcada2d2f2b980fe96a65e0"
+    }
+  },
+  "sectors": [
+    {
+      "key": "energy_industries",
+      "label": "에너지산업",
+      "ksic_divisions": [
+        "35"
+      ],
+      "ch4_condition": "에너지산업",
+      "n2o_condition": "에너지산업제조업건설업",
+      "codes_raw": "35",
+      "source_id": "kr-ets-byl10",
+      "locator": "PDF 4쪽 ① 에너지산업"
+    },
+    {
+      "key": "manufacturing_construction",
+      "label": "제조업ㆍ건설업",
+      "ksic_divisions": [
+        "05",
+        "06",
+        "07",
+        "08",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18",
+        "19",
+        "20",
+        "21",
+        "22",
+        "23",
+        "24",
+        "25",
+        "26",
+        "27",
+        "28",
+        "29",
+        "30",
+        "31",
+        "32",
+        "33",
+        "38",
+        "41",
+        "42",
+        "58",
+        "59"
+      ],
+      "ch4_condition": "제조업건설업",
+      "n2o_condition": "에너지산업제조업건설업",
+      "codes_raw": "05∼08,10∼33,38*,41∼42,58∼59",
+      "source_id": "kr-ets-byl10",
+      "locator": "PDF 4쪽 ② 제조업ㆍ건설업"
+    },
+    {
+      "key": "commercial_public",
+      "label": "상업ㆍ공공",
+      "ksic_divisions": [
+        "36",
+        "37",
+        "38",
+        "39",
+        "45",
+        "46",
+        "47",
+        "49",
+        "50",
+        "51",
+        "52",
+        "55",
+        "56",
+        "58",
+        "59",
+        "60",
+        "61",
+        "62",
+        "63",
+        "64",
+        "65",
+        "66",
+        "68",
+        "69",
+        "70",
+        "71",
+        "72",
+        "73",
+        "74",
+        "75",
+        "84",
+        "85",
+        "86",
+        "87",
+        "90",
+        "91",
+        "94",
+        "95",
+        "96",
+        "97",
+        "99"
+      ],
+      "ch4_condition": "상업공공",
+      "n2o_condition": "상업공공가정기타",
+      "codes_raw": "36∼37,38,39,45∼47,49∼52,55∼56,58∼59**,60∼66,68∼75,84∼87,90∼91,94∼97,99",
+      "source_id": "kr-ets-byl10",
+      "locator": "PDF 4쪽 ③ 상업ㆍ공공"
+    },
+    {
+      "key": "residential_other",
+      "label": "가정ㆍ기타",
+      "ksic_divisions": [
+        "01",
+        "02",
+        "03",
+        "98"
+      ],
+      "ch4_condition": "가정기타",
+      "n2o_condition": "상업공공가정기타",
+      "codes_raw": "01∼03,98",
+      "source_id": "kr-ets-byl10",
+      "locator": "PDF 4쪽 ④ 가정ㆍ기타"
+    }
+  ],
+  "sector_overlaps": [
+    {
+      "division": "38",
+      "sectors": [
+        "manufacturing_construction",
+        "commercial_public"
+      ],
+      "exceptions": [
+        {
+          "code_prefix": "383",
+          "sector": "manufacturing_construction",
+          "raw": "(383)은제조업ㆍ건설업계수를적용한다"
+        }
+      ],
+      "source_id": "kr-ets-byl10",
+      "locator": "PDF 4쪽 부문 정의 아래 주석 (*, **)"
+    },
+    {
+      "division": "58",
+      "sectors": [
+        "manufacturing_construction",
+        "commercial_public"
+      ],
+      "exceptions": [
+        {
+          "code_prefix": "5821",
+          "sector": "commercial_public",
+          "raw": "(5821)은상업ㆍ공공배출계수를적용한다"
+        }
+      ],
+      "source_id": "kr-ets-byl10",
+      "locator": "PDF 4쪽 부문 정의 아래 주석 (*, **)"
+    },
+    {
+      "division": "59",
+      "sectors": [
+        "manufacturing_construction",
+        "commercial_public"
+      ],
+      "exceptions": [
+        {
+          "code_prefix": "5912",
+          "sector": "commercial_public",
+          "raw": "(5912)은상업ㆍ공공배출계수를적용한다"
+        }
+      ],
+      "source_id": "kr-ets-byl10",
+      "locator": "PDF 4쪽 부문 정의 아래 주석 (*, **)"
+    }
+  ],
+  "fuel_names": [
+    {
+      "table": "kr-ets-byl10",
+      "ipcc_name": "원유",
+      "domestic_names": [
+        "원유"
+      ],
+      "domestic_raw": "원유",
+      "basis": "guideline",
+      "note": null,
+      "source_id": "kr-ets-byl10",
+      "locator": "PDF 1쪽 표0 3행 국내에너지원 기준"
+    },
+    {
+      "table": "kr-ets-byl10",
+      "ipcc_name": "자동차용 가솔린",
+      "domestic_names": [
+        "휘발유"
+      ],
+      "domestic_raw": "휘발유",
+      "basis": "guideline",
+      "note": null,
+      "source_id": "kr-ets-byl10",
+      "locator": "PDF 1쪽 표0 6행 국내에너지원 기준"
+    },
+    {
+      "table": "kr-ets-byl10",
+      "ipcc_name": "제트용 등유",
+      "domestic_names": [
+        "JET A-1",
+        "JP-8"
+      ],
+      "domestic_raw": "JET A-1,\nJP-8",
+      "basis": "guideline",
+      "note": null,
+      "source_id": "kr-ets-byl10",
+      "locator": "PDF 1쪽 표0 9행 국내에너지원 기준"
+    },
+    {
+      "table": "kr-ets-byl10",
+      "ipcc_name": "기타 등유",
+      "domestic_names": [
+        "등유"
+      ],
+      "domestic_raw": "등유",
+      "basis": "guideline",
+      "note": null,
+      "source_id": "kr-ets-byl10",
+      "locator": "PDF 1쪽 표0 10행 국내에너지원 기준"
+    },
+    {
+      "table": "kr-ets-byl10",
+      "ipcc_name": "가스/디젤 오일",
+      "domestic_names": [
+        "경유"
+      ],
+      "domestic_raw": "경유",
+      "basis": "guideline",
+      "note": null,
+      "source_id": "kr-ets-byl10",
+      "locator": "PDF 1쪽 표0 12행 국내에너지원 기준"
+    },
+    {
+      "table": "kr-ets-byl10",
+      "ipcc_name": "잔여 연료유",
+      "domestic_names": [
+        "B-C유"
+      ],
+      "domestic_raw": "B-C유",
+      "basis": "guideline",
+      "note": null,
+      "source_id": "kr-ets-byl10",
+      "locator": "PDF 1쪽 표0 13행 국내에너지원 기준"
+    },
+    {
+      "table": "kr-ets-byl10",
+      "ipcc_name": "액화석유가스",
+      "domestic_names": [
+        "LPG"
+      ],
+      "domestic_raw": "LPG",
+      "basis": "guideline",
+      "note": null,
+      "source_id": "kr-ets-byl10",
+      "locator": "PDF 1쪽 표0 14행 국내에너지원 기준"
+    },
+    {
+      "table": "kr-ets-byl10",
+      "ipcc_name": "나프타",
+      "domestic_names": [
+        "납사"
+      ],
+      "domestic_raw": "납사",
+      "basis": "guideline",
+      "note": null,
+      "source_id": "kr-ets-byl10",
+      "locator": "PDF 1쪽 표0 16행 국내에너지원 기준"
+    },
+    {
+      "table": "kr-ets-byl10",
+      "ipcc_name": "역청(아스팔트)",
+      "domestic_names": [
+        "아스팔트"
+      ],
+      "domestic_raw": "아스팔트",
+      "basis": "guideline",
+      "note": null,
+      "source_id": "kr-ets-byl10",
+      "locator": "PDF 1쪽 표0 17행 국내에너지원 기준"
+    },
+    {
+      "table": "kr-ets-byl10",
+      "ipcc_name": "윤활유",
+      "domestic_names": [
+        "윤활유"
+      ],
+      "domestic_raw": "윤활유",
+      "basis": "guideline",
+      "note": null,
+      "source_id": "kr-ets-byl10",
+      "locator": "PDF 1쪽 표0 18행 국내에너지원 기준"
+    },
+    {
+      "table": "kr-ets-byl10",
+      "ipcc_name": "석유 코크스",
+      "domestic_names": [
+        "석유코크스(고체)"
+      ],
+      "domestic_raw": "석유코크스(고체)",
+      "basis": "guideline",
+      "note": null,
+      "source_id": "kr-ets-byl10",
+      "locator": "PDF 1쪽 표0 19행 국내에너지원 기준"
+    },
+    {
+      "table": "kr-ets-byl10",
+      "ipcc_name": "정제 원료",
+      "domestic_names": [
+        "정제 원료"
+      ],
+      "domestic_raw": "정제 원료",
+      "basis": "guideline",
+      "note": null,
+      "source_id": "kr-ets-byl10",
+      "locator": "PDF 1쪽 표0 20행 국내에너지원 기준"
+    },
+    {
+      "table": "kr-ets-byl10",
+      "ipcc_name": "정제가스",
+      "domestic_names": [
+        "정제가스"
+      ],
+      "domestic_raw": "정제가스",
+      "basis": "guideline",
+      "note": null,
+      "source_id": "kr-ets-byl10",
+      "locator": "PDF 1쪽 표0 21행 국내에너지원 기준"
+    },
+    {
+      "table": "kr-ets-byl10",
+      "ipcc_name": "접착제(파라핀왁스)",
+      "domestic_names": [
+        "파라핀왁스"
+      ],
+      "domestic_raw": "파라핀왁스",
+      "basis": "guideline",
+      "note": null,
+      "source_id": "kr-ets-byl10",
+      "locator": "PDF 1쪽 표0 22행 국내에너지원 기준"
+    },
+    {
+      "table": "kr-ets-byl10",
+      "ipcc_name": "백유",
+      "domestic_names": [
+        "용제"
+      ],
+      "domestic_raw": "용제",
+      "basis": "guideline",
+      "note": null,
+      "source_id": "kr-ets-byl10",
+      "locator": "PDF 1쪽 표0 23행 국내에너지원 기준"
+    },
+    {
+      "table": "kr-ets-byl10",
+      "ipcc_name": "기타석유제품",
+      "domestic_names": [
+        "재생유(WDF)"
+      ],
+      "domestic_raw": "재생유(WDF)",
+      "basis": "guideline",
+      "note": null,
+      "source_id": "kr-ets-byl10",
+      "locator": "PDF 1쪽 표0 24행 국내에너지원 기준"
+    },
+    {
+      "table": "kr-ets-byl10",
+      "ipcc_name": "무연탄",
+      "domestic_names": [
+        "국내 무연탄",
+        "수입 무연탄"
+      ],
+      "domestic_raw": "국내 무연탄\n수입 무연탄",
+      "basis": "guideline",
+      "note": "두 이름으로 갈랐다. (1) 같은 고시의 hwp 원본(ets-byl10.hwp)에서 이 칸은 문단 둘(「국내 무연탄」, 「수입 무연탄」)이다. 칸 폭 때문에 꺾인 한 문단이 아니다. (2) 별표 12 가 국내무연탄과 수입무연탄을 다른 행(다른 발열량·배출계수)으로 둔다. (3) 「국내 무연탄 수입 무연탄」 이라는 한 연료는 어느 별표에도 없다.",
+      "source_id": "kr-ets-byl10",
+      "locator": "PDF 2쪽 표0 2행 국내에너지원 기준"
+    },
+    {
+      "table": "kr-ets-byl10",
+      "ipcc_name": "점결탄",
+      "domestic_names": [
+        "원료용 유연탄"
+      ],
+      "domestic_raw": "원료용 유연탄",
+      "basis": "guideline",
+      "note": null,
+      "source_id": "kr-ets-byl10",
+      "locator": "PDF 2쪽 표0 3행 국내에너지원 기준"
+    },
+    {
+      "table": "kr-ets-byl10",
+      "ipcc_name": "기타 역청탄",
+      "domestic_names": [
+        "연료용 유연탄"
+      ],
+      "domestic_raw": "연료용 유연탄",
+      "basis": "guideline",
+      "note": null,
+      "source_id": "kr-ets-byl10",
+      "locator": "PDF 2쪽 표0 4행 국내에너지원 기준"
+    },
+    {
+      "table": "kr-ets-byl10",
+      "ipcc_name": "하위 유연탄",
+      "domestic_names": [
+        "아역청탄"
+      ],
+      "domestic_raw": "아역청탄",
+      "basis": "guideline",
+      "note": null,
+      "source_id": "kr-ets-byl10",
+      "locator": "PDF 2쪽 표0 5행 국내에너지원 기준"
+    },
+    {
+      "table": "kr-ets-byl10",
+      "ipcc_name": "갈탄",
+      "domestic_names": [
+        "갈탄"
+      ],
+      "domestic_raw": "갈탄",
+      "basis": "guideline",
+      "note": null,
+      "source_id": "kr-ets-byl10",
+      "locator": "PDF 2쪽 표0 6행 국내에너지원 기준"
+    },
+    {
+      "table": "kr-ets-byl10",
+      "ipcc_name": "코크스로 코크스",
+      "domestic_names": [
+        "코크스(석탄)"
+      ],
+      "domestic_raw": "코크스(석탄)",
+      "basis": "guideline",
+      "note": null,
+      "source_id": "kr-ets-byl10",
+      "locator": "PDF 2쪽 표0 10행 국내에너지원 기준"
+    },
+    {
+      "table": "kr-ets-byl10",
+      "ipcc_name": "가스 코크스",
+      "domestic_names": [
+        "가스공장 코크스"
+      ],
+      "domestic_raw": "가스공장\n코크스",
+      "basis": "guideline",
+      "note": "꺾인 한 이름으로 읽었다. (1) hwp 원본에서 이 칸은 문단 하나(「가스공장 코크스」)이고 PDF 의 줄바꿈은 칸 폭 때문이다. (2) 별표 10 의 [참고] 연료 정의가 「가스 코크스(가스공장 코크스)(Gas Coke)」 라고 한 이름으로 적는다. (3) 「가스공장」 만으로는 연료가 아니다. 별표 12 에는 이 연료가 없어 조립에는 쓰이지 않는다.",
+      "source_id": "kr-ets-byl10",
+      "locator": "PDF 2쪽 표0 11행 국내에너지원 기준"
+    },
+    {
+      "table": "kr-ets-byl10",
+      "ipcc_name": "코크스로 가스",
+      "domestic_names": [
+        "코크스가스"
+      ],
+      "domestic_raw": "코크스가스",
+      "basis": "guideline",
+      "note": null,
+      "source_id": "kr-ets-byl10",
+      "locator": "PDF 2쪽 표0 15행 국내에너지원 기준"
+    },
+    {
+      "table": "kr-ets-byl10",
+      "ipcc_name": "고로 가스",
+      "domestic_names": [
+        "고로가스"
+      ],
+      "domestic_raw": "고로가스",
+      "basis": "guideline",
+      "note": null,
+      "source_id": "kr-ets-byl10",
+      "locator": "PDF 2쪽 표0 16행 국내에너지원 기준"
+    },
+    {
+      "table": "kr-ets-byl10",
+      "ipcc_name": "산소 강철로가스",
+      "domestic_names": [
+        "전로가스"
+      ],
+      "domestic_raw": "전로가스",
+      "basis": "guideline",
+      "note": null,
+      "source_id": "kr-ets-byl10",
+      "locator": "PDF 2쪽 표0 17행 국내에너지원 기준"
+    },
+    {
+      "table": "kr-ets-byl10",
+      "ipcc_name": "천연가스",
+      "domestic_names": [
+        "천연가스(LNG)"
+      ],
+      "domestic_raw": "천연가스(LNG)",
+      "basis": "guideline",
+      "note": null,
+      "source_id": "kr-ets-byl10",
+      "locator": "PDF 2쪽 표0 18행 국내에너지원 기준"
+    },
+    {
+      "table": "kr-ets-byl10",
+      "ipcc_name": "토탄",
+      "domestic_names": [
+        "이탄"
+      ],
+      "domestic_raw": "이탄",
+      "basis": "guideline",
+      "note": null,
+      "source_id": "kr-ets-byl10",
+      "locator": "PDF 2쪽 표0 23행 국내에너지원 기준"
+    },
+    {
+      "table": "kr-ets-byl10",
+      "ipcc_name": "B-A유",
+      "domestic_names": [
+        "B-A유"
+      ],
+      "domestic_raw": null,
+      "basis": "guideline",
+      "note": "이 표(주2 아래의 B-A유·B-B유 표)에는 「국내에너지원 기준」 열이 없고 행 이름이 별표 12 의 국내 이름과 글자까지 같다. 값은 주2 의 혼합비 규칙으로 고시가 계산해 실은 것이다.",
+      "source_id": "kr-ets-byl10",
+      "locator": "PDF 3쪽 표1 2행 연료명"
+    },
+    {
+      "table": "kr-ets-byl10",
+      "ipcc_name": "B-B유",
+      "domestic_names": [
+        "B-B유"
+      ],
+      "domestic_raw": null,
+      "basis": "guideline",
+      "note": "이 표(주2 아래의 B-A유·B-B유 표)에는 「국내에너지원 기준」 열이 없고 행 이름이 별표 12 의 국내 이름과 글자까지 같다. 값은 주2 의 혼합비 규칙으로 고시가 계산해 실은 것이다.",
+      "source_id": "kr-ets-byl10",
+      "locator": "PDF 3쪽 표1 3행 연료명"
+    },
+    {
+      "table": "kr-ets-byl10",
+      "ipcc_name": "천연가스",
+      "domestic_names": [
+        "도시가스(LNG)"
+      ],
+      "domestic_raw": null,
+      "basis": "assumed",
+      "note": "별표 10·11 의 「국내에너지원 기준」 열에는 천연가스(LNG) 만 있고 도시가스(LNG) 는 없다. 별표 12 의 배출계수 표에서 도시가스(LNG) 가 천연가스(LNG) 와 CO2 계수 칸을 같이 쓰는 것(병합 셀)을 근거로 같은 IPCC 연료(천연가스)로 보았다. 지침의 문장으로 확인한 대응이 아니다.",
+      "source_id": "kr-ets-byl10",
+      "locator": "PDF 2쪽 표0 18행"
+    },
+    {
+      "table": "kr-ets-byl10",
+      "ipcc_name": "액화석유가스",
+      "domestic_names": [
+        "프로판(LPG1호)"
+      ],
+      "domestic_raw": null,
+      "basis": "assumed",
+      "note": "별표 10·11 의 국내에너지원 기준은 「LPG」 하나이고 프로판·부탄으로 가르지 않는다. 별표 12 의 이름이 「프로판(LPG1호)」 이고, 별표 12 [참고] 3) 이 LPG 의 고정연소에 프로판의 발열량을 쓰라고 한다(LPG 와 프로판을 잇는 문장). 프로판을 LPG 로 본 것은 추정이다.",
+      "source_id": "kr-ets-byl10",
+      "locator": "PDF 1쪽 표0 14행",
+      "evidence": [
+        {
+          "source_id": "kr-ets-byl12",
+          "locator": "PDF 3쪽",
+          "quote": "LPG 사용에 따른 고정연소 배출활동의 경우, 프로판에 따른 발열량을 활용하여"
+        },
+        {
+          "source_id": "kr-ets-byl10",
+          "locator": "PDF 1쪽",
+          "quote": "액화석유가스 LPG"
+        }
+      ]
+    },
+    {
+      "table": "kr-ets-byl10",
+      "ipcc_name": "액화석유가스",
+      "domestic_names": [
+        "부탄(LPG3호)"
+      ],
+      "domestic_raw": null,
+      "basis": "assumed",
+      "note": "별표 12 의 이름이 「부탄(LPG3호)」 이고 [참고] 4) 가 LPG 의 이동연소에 부탄의 발열량을 쓰라고 한다. 고정연소의 부탄을 별표 10·11 의 LPG(액화석유가스)로 본 것은 추정이다.",
+      "source_id": "kr-ets-byl10",
+      "locator": "PDF 1쪽 표0 14행",
+      "evidence": [
+        {
+          "source_id": "kr-ets-byl12",
+          "locator": "PDF 3쪽",
+          "quote": "LPG 사용에 따른 이동연소(도로) 배출활동의 경우, 부탄에 따른 발열량을 활용하여"
+        },
+        {
+          "source_id": "kr-ets-byl10",
+          "locator": "PDF 1쪽",
+          "quote": "액화석유가스 LPG"
+        }
+      ]
+    },
+    {
+      "table": "kr-ets-byl10",
+      "ipcc_name": "나프타",
+      "domestic_names": [
+        "나프타"
+      ],
+      "domestic_raw": null,
+      "basis": "assumed",
+      "note": "별표 10·11 의 그 행은 연료명이 「나프타」, 국내에너지원 기준이 「납사」 다. 별표 12 는 「나프타」 라고 적는다. 같은 행의 IPCC 연료명이 글자까지 같지만 국내에너지원 기준 열의 이름은 아니어서 추정으로 둔다.",
+      "source_id": "kr-ets-byl10",
+      "locator": "PDF 1쪽 표0 16행",
+      "evidence": [
+        {
+          "source_id": "kr-ets-byl10",
+          "locator": "PDF 1쪽",
+          "quote": "나프타 납사"
+        },
+        {
+          "source_id": "kr-ets-byl11",
+          "locator": "PDF 1쪽",
+          "quote": "나프타 납사"
+        }
+      ]
+    },
+    {
+      "table": "kr-ets-byl10",
+      "ipcc_name": "제트용 등유",
+      "domestic_names": [
+        "항공유"
+      ],
+      "domestic_raw": null,
+      "basis": "assumed",
+      "note": "별표 12 의 발열량 표는 「항공유」, 배출계수 표는 「항공유(JET-A1)」 이고, 별표 10·11 의 제트용 등유 행의 국내에너지원 기준이 「JET A-1, JP-8」 이다. 괄호의 JET-A1 을 JET A-1 로 보아 이었다. 항공유가 JP-8 등을 포함하는지는 지침이 말하지 않는다.",
+      "source_id": "kr-ets-byl10",
+      "locator": "PDF 1쪽 표0 9행",
+      "evidence": [
+        {
+          "source_id": "kr-ets-byl12",
+          "locator": "PDF 3쪽",
+          "quote": "항공유(JET-A1)"
+        },
+        {
+          "source_id": "kr-ets-byl10",
+          "locator": "PDF 1쪽",
+          "quote": "JET A-1, JP-8"
+        }
+      ]
+    },
+    {
+      "table": "kr-ets-byl10",
+      "ipcc_name": "석유 코크스",
+      "domestic_names": [
+        "석유코크스"
+      ],
+      "domestic_raw": null,
+      "basis": "assumed",
+      "note": "별표 10 의 국내에너지원 기준은 「석유코크스(고체)」, 별표 11 은 「석유코크」 로 별표 12 의 「석유코크스」 와 글자가 다르다. 같은 연료로 보았다.",
+      "source_id": "kr-ets-byl10",
+      "locator": "PDF 1쪽 표0 19행",
+      "evidence": [
+        {
+          "source_id": "kr-ets-byl10",
+          "locator": "PDF 1쪽",
+          "quote": "석유 코크스 석유코크스(고체)"
+        },
+        {
+          "source_id": "kr-ets-byl11",
+          "locator": "PDF 1쪽",
+          "quote": "석유 코크스 석유코크"
+        }
+      ]
+    },
+    {
+      "table": "kr-ets-byl10",
+      "ipcc_name": "무연탄",
+      "domestic_names": [
+        "국내무연탄"
+      ],
+      "domestic_raw": null,
+      "basis": "assumed",
+      "note": "별표 10·11 의 무연탄 칸의 「국내 무연탄」(LINE_BREAK_CELLS 의 판단)과 별표 12 의 「국내무연탄」 은 띄어쓰기만 다르다.",
+      "source_id": "kr-ets-byl10",
+      "locator": "PDF 2쪽 표0 2행",
+      "evidence": [
+        {
+          "source_id": "kr-ets-byl10",
+          "locator": "PDF 2쪽",
+          "quote": "국내 무연탄"
+        },
+        {
+          "source_id": "kr-ets-byl11",
+          "locator": "PDF 1쪽",
+          "quote": "국내 무연탄"
+        }
+      ]
+    },
+    {
+      "table": "kr-ets-byl10",
+      "ipcc_name": "무연탄",
+      "domestic_names": [
+        "연료용 수입무연탄"
+      ],
+      "domestic_raw": null,
+      "basis": "assumed",
+      "note": "별표 10·11 은 「수입 무연탄」 하나이고 연료용·원료용을 가르지 않는다. 별표 12 의 연료용 수입무연탄을 그 수입 무연탄으로 보았다.",
+      "source_id": "kr-ets-byl10",
+      "locator": "PDF 2쪽 표0 2행",
+      "evidence": [
+        {
+          "source_id": "kr-ets-byl10",
+          "locator": "PDF 2쪽",
+          "quote": "수입 무연탄"
+        },
+        {
+          "source_id": "kr-ets-byl11",
+          "locator": "PDF 1쪽",
+          "quote": "수입 무연탄"
+        }
+      ]
+    },
+    {
+      "table": "kr-ets-byl10",
+      "ipcc_name": "무연탄",
+      "domestic_names": [
+        "원료용 수입무연탄"
+      ],
+      "domestic_raw": null,
+      "basis": "assumed",
+      "note": "별표 10·11 은 「수입 무연탄」 하나이고 연료용·원료용을 가르지 않는다. 별표 12 의 원료용 수입무연탄을 그 수입 무연탄으로 보았다.",
+      "source_id": "kr-ets-byl10",
+      "locator": "PDF 2쪽 표0 2행",
+      "evidence": [
+        {
+          "source_id": "kr-ets-byl10",
+          "locator": "PDF 2쪽",
+          "quote": "수입 무연탄"
+        },
+        {
+          "source_id": "kr-ets-byl11",
+          "locator": "PDF 1쪽",
+          "quote": "수입 무연탄"
+        }
+      ]
+    },
+    {
+      "table": "kr-ets-byl10",
+      "ipcc_name": "기타 역청탄",
+      "domestic_names": [
+        "연료용 유연탄(역청탄)"
+      ],
+      "domestic_raw": null,
+      "basis": "assumed",
+      "note": "별표 10·11 의 국내에너지원 기준은 「연료용 유연탄」, 별표 12 는 「연료용 유연탄(역청탄)」 이다. 괄호만 다르다.",
+      "source_id": "kr-ets-byl10",
+      "locator": "PDF 2쪽 표0 4행",
+      "evidence": [
+        {
+          "source_id": "kr-ets-byl10",
+          "locator": "PDF 2쪽",
+          "quote": "기타 역청탄 연료용 유연탄"
+        },
+        {
+          "source_id": "kr-ets-byl11",
+          "locator": "PDF 1쪽",
+          "quote": "기타 역청탄 연료용 유연탄"
+        }
+      ]
+    },
+    {
+      "table": "kr-ets-byl10",
+      "ipcc_name": "점결탄",
+      "domestic_names": [
+        "원료용 유연탄(역청탄)"
+      ],
+      "domestic_raw": null,
+      "basis": "assumed",
+      "note": "별표 10·11 의 국내에너지원 기준은 「원료용 유연탄」, 별표 12 는 「원료용 유연탄(역청탄)」 이다 (별표 12 원본에서 「(역청탄)」 은 같은 칸의 둘째 문단이고 PDF 에서는 다음 쪽으로 넘어간다).",
+      "source_id": "kr-ets-byl10",
+      "locator": "PDF 2쪽 표0 3행",
+      "evidence": [
+        {
+          "source_id": "kr-ets-byl10",
+          "locator": "PDF 2쪽",
+          "quote": "점결탄 원료용 유연탄"
+        },
+        {
+          "source_id": "kr-ets-byl11",
+          "locator": "PDF 1쪽",
+          "quote": "원료용 유연탄"
+        }
+      ]
+    },
+    {
+      "table": "kr-ets-byl10",
+      "ipcc_name": "코크스로 코크스",
+      "domestic_names": [
+        "코크스"
+      ],
+      "domestic_raw": null,
+      "basis": "assumed",
+      "note": "별표 10 의 국내에너지원 기준은 「코크스(석탄)」 이고 별표 12 는 「코크스」 다. 별표 11 은 같은 IPCC 연료(코크스로 코크스)의 국내 이름을 「코크스」 로 적어 그쪽은 지침의 대응이다. 별표 10 에서 같은 「코크스」 묶음의 가스 코크스(가스공장 코크스)가 아니라 코크스로 코크스로 본 것은 별표 11 을 따른 추정이다.",
+      "source_id": "kr-ets-byl10",
+      "locator": "PDF 2쪽 표0 10행",
+      "evidence": [
+        {
+          "source_id": "kr-ets-byl10",
+          "locator": "PDF 2쪽",
+          "quote": "코크스로 코크스 코크스(석탄)"
+        },
+        {
+          "source_id": "kr-ets-byl11",
+          "locator": "PDF 1쪽",
+          "quote": "코크스로 코크스 코크스"
+        }
+      ]
+    },
+    {
+      "table": "kr-ets-byl10",
+      "ipcc_name": "기타 등유",
+      "domestic_names": [
+        "부생연료유1호"
+      ],
+      "domestic_raw": null,
+      "basis": "assumed",
+      "note": "별표 10 주3 「‘부생연료 1호’의 CO2 배출계수는 기타등유의 IPCC 기본 배출계수를 적용」과 별표 12 [참고] 1) 「산정등급 1(Tier 1) CO2 배출계수는 등유 계수를 활용」 의 규칙이다. CO2 에만 쓴다 (CH4·N2O 는 두 문장 모두 말하지 않는다). 추정인 것은 이름이다: 주3·참고는 「부생연료 1호」, 별표 12 발열량 표는 「부생연료유1호」 라고 적는다.",
+      "source_id": "kr-ets-byl10",
+      "locator": "PDF 1쪽 표0 10행",
+      "parameters": [
+        "CO2"
+      ],
+      "evidence": [
+        {
+          "source_id": "kr-ets-byl10",
+          "locator": "PDF 3쪽",
+          "quote": "‘부생연료 1호’의 CO2 배출계수는 기타등유의 IPCC 기본 배출계수를 적용하여 활용한다."
+        },
+        {
+          "source_id": "kr-ets-byl12",
+          "locator": "PDF 2쪽",
+          "quote": "산정등급 1(Tier 1) CO2 배출계수는 등유 계수를 활용하여"
+        }
+      ]
+    },
+    {
+      "table": "kr-ets-byl10",
+      "ipcc_name": "잔여 연료유",
+      "domestic_names": [
+        "부생연료유2호"
+      ],
+      "domestic_raw": null,
+      "basis": "assumed",
+      "note": "별표 10 주4 「‘부생연료 2호’의 CO2 배출계수는 B-C유의 IPCC 기본 배출계수를 적용」과 별표 12 [참고] 2) 의 규칙이다. 별표 10 에서 B-C유 의 행은 잔여 연료유다. CO2 에만 쓴다. 추정인 것은 이름이다 (주4·참고 「부생연료 2호」, 발열량 표 「부생연료유2호」).",
+      "source_id": "kr-ets-byl10",
+      "locator": "PDF 1쪽 표0 13행",
+      "parameters": [
+        "CO2"
+      ],
+      "evidence": [
+        {
+          "source_id": "kr-ets-byl10",
+          "locator": "PDF 3쪽",
+          "quote": "‘부생연료 2호’의 CO2 배출계수는 B-C유의 IPCC 기본 배출계수를 적용하여 활용한다."
+        },
+        {
+          "source_id": "kr-ets-byl12",
+          "locator": "PDF 2쪽",
+          "quote": "산정등급 1(Tier 1) CO2 배출 계수는 B-C유 계수를 활용하여"
+        },
+        {
+          "source_id": "kr-ets-byl10",
+          "locator": "PDF 1쪽",
+          "quote": "잔여 연료유 B-C유"
+        }
+      ]
+    },
+    {
+      "table": "kr-ets-byl11",
+      "ipcc_name": "원유",
+      "domestic_names": [
+        "원유"
+      ],
+      "domestic_raw": "원유",
+      "basis": "guideline",
+      "note": null,
+      "source_id": "kr-ets-byl11",
+      "locator": "PDF 1쪽 표0 2행 국내에너지원 기준"
+    },
+    {
+      "table": "kr-ets-byl11",
+      "ipcc_name": "자동차용 가솔린",
+      "domestic_names": [
+        "휘발유"
+      ],
+      "domestic_raw": "휘발유",
+      "basis": "guideline",
+      "note": null,
+      "source_id": "kr-ets-byl11",
+      "locator": "PDF 1쪽 표0 5행 국내에너지원 기준"
+    },
+    {
+      "table": "kr-ets-byl11",
+      "ipcc_name": "제트용 등유",
+      "domestic_names": [
+        "JET A-1",
+        "JP-8"
+      ],
+      "domestic_raw": "JET A-1, JP-8",
+      "basis": "guideline",
+      "note": null,
+      "source_id": "kr-ets-byl11",
+      "locator": "PDF 1쪽 표0 8행 국내에너지원 기준"
+    },
+    {
+      "table": "kr-ets-byl11",
+      "ipcc_name": "기타 등유",
+      "domestic_names": [
+        "등유"
+      ],
+      "domestic_raw": "등유",
+      "basis": "guideline",
+      "note": null,
+      "source_id": "kr-ets-byl11",
+      "locator": "PDF 1쪽 표0 9행 국내에너지원 기준"
+    },
+    {
+      "table": "kr-ets-byl11",
+      "ipcc_name": "가스/디젤 오일",
+      "domestic_names": [
+        "경유"
+      ],
+      "domestic_raw": "경유",
+      "basis": "guideline",
+      "note": null,
+      "source_id": "kr-ets-byl11",
+      "locator": "PDF 1쪽 표0 11행 국내에너지원 기준"
+    },
+    {
+      "table": "kr-ets-byl11",
+      "ipcc_name": "잔여 연료유",
+      "domestic_names": [
+        "B-C유"
+      ],
+      "domestic_raw": "B-C유",
+      "basis": "guideline",
+      "note": null,
+      "source_id": "kr-ets-byl11",
+      "locator": "PDF 1쪽 표0 12행 국내에너지원 기준"
+    },
+    {
+      "table": "kr-ets-byl11",
+      "ipcc_name": "액화석유가스",
+      "domestic_names": [
+        "LPG"
+      ],
+      "domestic_raw": "LPG",
+      "basis": "guideline",
+      "note": null,
+      "source_id": "kr-ets-byl11",
+      "locator": "PDF 1쪽 표0 13행 국내에너지원 기준"
+    },
+    {
+      "table": "kr-ets-byl11",
+      "ipcc_name": "나프타",
+      "domestic_names": [
+        "납사"
+      ],
+      "domestic_raw": "납사",
+      "basis": "guideline",
+      "note": null,
+      "source_id": "kr-ets-byl11",
+      "locator": "PDF 1쪽 표0 15행 국내에너지원 기준"
+    },
+    {
+      "table": "kr-ets-byl11",
+      "ipcc_name": "역청(아스팔트)",
+      "domestic_names": [
+        "아스팔트"
+      ],
+      "domestic_raw": "아스팔트",
+      "basis": "guideline",
+      "note": null,
+      "source_id": "kr-ets-byl11",
+      "locator": "PDF 1쪽 표0 16행 국내에너지원 기준"
+    },
+    {
+      "table": "kr-ets-byl11",
+      "ipcc_name": "윤활유",
+      "domestic_names": [
+        "윤활유"
+      ],
+      "domestic_raw": "윤활유",
+      "basis": "guideline",
+      "note": null,
+      "source_id": "kr-ets-byl11",
+      "locator": "PDF 1쪽 표0 17행 국내에너지원 기준"
+    },
+    {
+      "table": "kr-ets-byl11",
+      "ipcc_name": "석유 코크스",
+      "domestic_names": [
+        "석유코크"
+      ],
+      "domestic_raw": "석유코크",
+      "basis": "guideline",
+      "note": null,
+      "source_id": "kr-ets-byl11",
+      "locator": "PDF 1쪽 표0 18행 국내에너지원 기준"
+    },
+    {
+      "table": "kr-ets-byl11",
+      "ipcc_name": "정제 원료",
+      "domestic_names": [
+        "정제 원료"
+      ],
+      "domestic_raw": "정제 원료",
+      "basis": "guideline",
+      "note": null,
+      "source_id": "kr-ets-byl11",
+      "locator": "PDF 1쪽 표0 19행 국내에너지원 기준"
+    },
+    {
+      "table": "kr-ets-byl11",
+      "ipcc_name": "정제가스",
+      "domestic_names": [
+        "정제가스"
+      ],
+      "domestic_raw": "정제가스",
+      "basis": "guideline",
+      "note": null,
+      "source_id": "kr-ets-byl11",
+      "locator": "PDF 1쪽 표0 20행 국내에너지원 기준"
+    },
+    {
+      "table": "kr-ets-byl11",
+      "ipcc_name": "접착제(파라핀왁스)",
+      "domestic_names": [
+        "파라핀왁스"
+      ],
+      "domestic_raw": "파라핀왁스",
+      "basis": "guideline",
+      "note": null,
+      "source_id": "kr-ets-byl11",
+      "locator": "PDF 1쪽 표0 21행 국내에너지원 기준"
+    },
+    {
+      "table": "kr-ets-byl11",
+      "ipcc_name": "백유",
+      "domestic_names": [
+        "용제"
+      ],
+      "domestic_raw": "용제",
+      "basis": "guideline",
+      "note": null,
+      "source_id": "kr-ets-byl11",
+      "locator": "PDF 1쪽 표0 22행 국내에너지원 기준"
+    },
+    {
+      "table": "kr-ets-byl11",
+      "ipcc_name": "기타석유제품",
+      "domestic_names": [
+        "재생유(WDF)"
+      ],
+      "domestic_raw": "재생유(WDF)",
+      "basis": "guideline",
+      "note": null,
+      "source_id": "kr-ets-byl11",
+      "locator": "PDF 1쪽 표0 23행 국내에너지원 기준"
+    },
+    {
+      "table": "kr-ets-byl11",
+      "ipcc_name": "무연탄",
+      "domestic_names": [
+        "국내 무연탄",
+        "수입 무연탄"
+      ],
+      "domestic_raw": "국내 무연탄\n수입 무연탄",
+      "basis": "guideline",
+      "note": "별표 10 의 무연탄 칸과 같은 판단. hwp 원본(ets-byl11.hwp)에서도 문단 둘이다.",
+      "source_id": "kr-ets-byl11",
+      "locator": "PDF 1쪽 표0 25행 국내에너지원 기준"
+    },
+    {
+      "table": "kr-ets-byl11",
+      "ipcc_name": "점결탄(Coking coal)",
+      "domestic_names": [
+        "원료용 유연탄"
+      ],
+      "domestic_raw": "원료용 유연탄",
+      "basis": "guideline",
+      "note": null,
+      "source_id": "kr-ets-byl11",
+      "locator": "PDF 1쪽 표0 26행 국내에너지원 기준"
+    },
+    {
+      "table": "kr-ets-byl11",
+      "ipcc_name": "기타 역청탄",
+      "domestic_names": [
+        "연료용 유연탄"
+      ],
+      "domestic_raw": "연료용 유연탄",
+      "basis": "guideline",
+      "note": null,
+      "source_id": "kr-ets-byl11",
+      "locator": "PDF 1쪽 표0 27행 국내에너지원 기준"
+    },
+    {
+      "table": "kr-ets-byl11",
+      "ipcc_name": "하위 유연탄",
+      "domestic_names": [
+        "아역청탄"
+      ],
+      "domestic_raw": "아역청탄",
+      "basis": "guideline",
+      "note": null,
+      "source_id": "kr-ets-byl11",
+      "locator": "PDF 1쪽 표0 28행 국내에너지원 기준"
+    },
+    {
+      "table": "kr-ets-byl11",
+      "ipcc_name": "갈탄",
+      "domestic_names": [
+        "갈탄"
+      ],
+      "domestic_raw": "갈탄",
+      "basis": "guideline",
+      "note": null,
+      "source_id": "kr-ets-byl11",
+      "locator": "PDF 1쪽 표0 29행 국내에너지원 기준"
+    },
+    {
+      "table": "kr-ets-byl11",
+      "ipcc_name": "코크스로 코크스",
+      "domestic_names": [
+        "코크스"
+      ],
+      "domestic_raw": "코크스",
+      "basis": "guideline",
+      "note": null,
+      "source_id": "kr-ets-byl11",
+      "locator": "PDF 1쪽 표0 33행 국내에너지원 기준"
+    },
+    {
+      "table": "kr-ets-byl11",
+      "ipcc_name": "코크스로 가스",
+      "domestic_names": [
+        "코크스가스"
+      ],
+      "domestic_raw": "코크스가스",
+      "basis": "guideline",
+      "note": null,
+      "source_id": "kr-ets-byl11",
+      "locator": "PDF 2쪽 표0 1행 국내에너지원 기준"
+    },
+    {
+      "table": "kr-ets-byl11",
+      "ipcc_name": "고로 가스",
+      "domestic_names": [
+        "고로가스"
+      ],
+      "domestic_raw": "고로가스",
+      "basis": "guideline",
+      "note": null,
+      "source_id": "kr-ets-byl11",
+      "locator": "PDF 2쪽 표0 2행 국내에너지원 기준"
+    },
+    {
+      "table": "kr-ets-byl11",
+      "ipcc_name": "산소 강철로 가스",
+      "domestic_names": [
+        "전로가스"
+      ],
+      "domestic_raw": "전로가스",
+      "basis": "guideline",
+      "note": null,
+      "source_id": "kr-ets-byl11",
+      "locator": "PDF 2쪽 표0 3행 국내에너지원 기준"
+    },
+    {
+      "table": "kr-ets-byl11",
+      "ipcc_name": "천연가스",
+      "domestic_names": [
+        "천연가스(LNG)"
+      ],
+      "domestic_raw": "천연가스(LNG)",
+      "basis": "guideline",
+      "note": null,
+      "source_id": "kr-ets-byl11",
+      "locator": "PDF 2쪽 표0 4행 국내에너지원 기준"
+    },
+    {
+      "table": "kr-ets-byl11",
+      "ipcc_name": "토탄",
+      "domestic_names": [
+        "이탄"
+      ],
+      "domestic_raw": "이탄",
+      "basis": "guideline",
+      "note": null,
+      "source_id": "kr-ets-byl11",
+      "locator": "PDF 2쪽 표0 9행 국내에너지원 기준"
+    },
+    {
+      "table": "kr-ets-byl11",
+      "ipcc_name": "B-A유",
+      "domestic_names": [
+        "B-A유"
+      ],
+      "domestic_raw": null,
+      "basis": "guideline",
+      "note": "이 표(주2 아래의 B-A유·B-B유 표)에는 「국내에너지원 기준」 열이 없고 행 이름이 별표 12 의 국내 이름과 글자까지 같다. 값은 주2 의 혼합비 규칙으로 고시가 계산해 실은 것이다.",
+      "source_id": "kr-ets-byl11",
+      "locator": "PDF 2쪽 표2 1행 연료명"
+    },
+    {
+      "table": "kr-ets-byl11",
+      "ipcc_name": "B-B유",
+      "domestic_names": [
+        "B-B유"
+      ],
+      "domestic_raw": null,
+      "basis": "guideline",
+      "note": "이 표(주2 아래의 B-A유·B-B유 표)에는 「국내에너지원 기준」 열이 없고 행 이름이 별표 12 의 국내 이름과 글자까지 같다. 값은 주2 의 혼합비 규칙으로 고시가 계산해 실은 것이다.",
+      "source_id": "kr-ets-byl11",
+      "locator": "PDF 2쪽 표2 2행 연료명"
+    },
+    {
+      "table": "kr-ets-byl11",
+      "ipcc_name": "천연가스",
+      "domestic_names": [
+        "도시가스(LNG)"
+      ],
+      "domestic_raw": null,
+      "basis": "assumed",
+      "note": "별표 10·11 의 「국내에너지원 기준」 열에는 천연가스(LNG) 만 있고 도시가스(LNG) 는 없다. 별표 12 의 배출계수 표에서 도시가스(LNG) 가 천연가스(LNG) 와 CO2 계수 칸을 같이 쓰는 것(병합 셀)을 근거로 같은 IPCC 연료(천연가스)로 보았다. 지침의 문장으로 확인한 대응이 아니다.",
+      "source_id": "kr-ets-byl11",
+      "locator": "PDF 2쪽 표0 4행"
+    },
+    {
+      "table": "kr-ets-byl11",
+      "ipcc_name": "액화석유가스",
+      "domestic_names": [
+        "프로판(LPG1호)"
+      ],
+      "domestic_raw": null,
+      "basis": "assumed",
+      "note": "별표 10·11 의 국내에너지원 기준은 「LPG」 하나이고 프로판·부탄으로 가르지 않는다. 별표 12 의 이름이 「프로판(LPG1호)」 이고, 별표 12 [참고] 3) 이 LPG 의 고정연소에 프로판의 발열량을 쓰라고 한다(LPG 와 프로판을 잇는 문장). 프로판을 LPG 로 본 것은 추정이다.",
+      "source_id": "kr-ets-byl11",
+      "locator": "PDF 1쪽 표0 13행",
+      "evidence": [
+        {
+          "source_id": "kr-ets-byl12",
+          "locator": "PDF 3쪽",
+          "quote": "LPG 사용에 따른 고정연소 배출활동의 경우, 프로판에 따른 발열량을 활용하여"
+        },
+        {
+          "source_id": "kr-ets-byl10",
+          "locator": "PDF 1쪽",
+          "quote": "액화석유가스 LPG"
+        }
+      ]
+    },
+    {
+      "table": "kr-ets-byl11",
+      "ipcc_name": "액화석유가스",
+      "domestic_names": [
+        "부탄(LPG3호)"
+      ],
+      "domestic_raw": null,
+      "basis": "assumed",
+      "note": "별표 12 의 이름이 「부탄(LPG3호)」 이고 [참고] 4) 가 LPG 의 이동연소에 부탄의 발열량을 쓰라고 한다. 고정연소의 부탄을 별표 10·11 의 LPG(액화석유가스)로 본 것은 추정이다.",
+      "source_id": "kr-ets-byl11",
+      "locator": "PDF 1쪽 표0 13행",
+      "evidence": [
+        {
+          "source_id": "kr-ets-byl12",
+          "locator": "PDF 3쪽",
+          "quote": "LPG 사용에 따른 이동연소(도로) 배출활동의 경우, 부탄에 따른 발열량을 활용하여"
+        },
+        {
+          "source_id": "kr-ets-byl10",
+          "locator": "PDF 1쪽",
+          "quote": "액화석유가스 LPG"
+        }
+      ]
+    },
+    {
+      "table": "kr-ets-byl11",
+      "ipcc_name": "나프타",
+      "domestic_names": [
+        "나프타"
+      ],
+      "domestic_raw": null,
+      "basis": "assumed",
+      "note": "별표 10·11 의 그 행은 연료명이 「나프타」, 국내에너지원 기준이 「납사」 다. 별표 12 는 「나프타」 라고 적는다. 같은 행의 IPCC 연료명이 글자까지 같지만 국내에너지원 기준 열의 이름은 아니어서 추정으로 둔다.",
+      "source_id": "kr-ets-byl11",
+      "locator": "PDF 1쪽 표0 15행",
+      "evidence": [
+        {
+          "source_id": "kr-ets-byl10",
+          "locator": "PDF 1쪽",
+          "quote": "나프타 납사"
+        },
+        {
+          "source_id": "kr-ets-byl11",
+          "locator": "PDF 1쪽",
+          "quote": "나프타 납사"
+        }
+      ]
+    },
+    {
+      "table": "kr-ets-byl11",
+      "ipcc_name": "제트용 등유",
+      "domestic_names": [
+        "항공유"
+      ],
+      "domestic_raw": null,
+      "basis": "assumed",
+      "note": "별표 12 의 발열량 표는 「항공유」, 배출계수 표는 「항공유(JET-A1)」 이고, 별표 10·11 의 제트용 등유 행의 국내에너지원 기준이 「JET A-1, JP-8」 이다. 괄호의 JET-A1 을 JET A-1 로 보아 이었다. 항공유가 JP-8 등을 포함하는지는 지침이 말하지 않는다.",
+      "source_id": "kr-ets-byl11",
+      "locator": "PDF 1쪽 표0 8행",
+      "evidence": [
+        {
+          "source_id": "kr-ets-byl12",
+          "locator": "PDF 3쪽",
+          "quote": "항공유(JET-A1)"
+        },
+        {
+          "source_id": "kr-ets-byl10",
+          "locator": "PDF 1쪽",
+          "quote": "JET A-1, JP-8"
+        }
+      ]
+    },
+    {
+      "table": "kr-ets-byl11",
+      "ipcc_name": "석유 코크스",
+      "domestic_names": [
+        "석유코크스"
+      ],
+      "domestic_raw": null,
+      "basis": "assumed",
+      "note": "별표 10 의 국내에너지원 기준은 「석유코크스(고체)」, 별표 11 은 「석유코크」 로 별표 12 의 「석유코크스」 와 글자가 다르다. 같은 연료로 보았다.",
+      "source_id": "kr-ets-byl11",
+      "locator": "PDF 1쪽 표0 18행",
+      "evidence": [
+        {
+          "source_id": "kr-ets-byl10",
+          "locator": "PDF 1쪽",
+          "quote": "석유 코크스 석유코크스(고체)"
+        },
+        {
+          "source_id": "kr-ets-byl11",
+          "locator": "PDF 1쪽",
+          "quote": "석유 코크스 석유코크"
+        }
+      ]
+    },
+    {
+      "table": "kr-ets-byl11",
+      "ipcc_name": "무연탄",
+      "domestic_names": [
+        "국내무연탄"
+      ],
+      "domestic_raw": null,
+      "basis": "assumed",
+      "note": "별표 10·11 의 무연탄 칸의 「국내 무연탄」(LINE_BREAK_CELLS 의 판단)과 별표 12 의 「국내무연탄」 은 띄어쓰기만 다르다.",
+      "source_id": "kr-ets-byl11",
+      "locator": "PDF 1쪽 표0 25행",
+      "evidence": [
+        {
+          "source_id": "kr-ets-byl10",
+          "locator": "PDF 2쪽",
+          "quote": "국내 무연탄"
+        },
+        {
+          "source_id": "kr-ets-byl11",
+          "locator": "PDF 1쪽",
+          "quote": "국내 무연탄"
+        }
+      ]
+    },
+    {
+      "table": "kr-ets-byl11",
+      "ipcc_name": "무연탄",
+      "domestic_names": [
+        "연료용 수입무연탄"
+      ],
+      "domestic_raw": null,
+      "basis": "assumed",
+      "note": "별표 10·11 은 「수입 무연탄」 하나이고 연료용·원료용을 가르지 않는다. 별표 12 의 연료용 수입무연탄을 그 수입 무연탄으로 보았다.",
+      "source_id": "kr-ets-byl11",
+      "locator": "PDF 1쪽 표0 25행",
+      "evidence": [
+        {
+          "source_id": "kr-ets-byl10",
+          "locator": "PDF 2쪽",
+          "quote": "수입 무연탄"
+        },
+        {
+          "source_id": "kr-ets-byl11",
+          "locator": "PDF 1쪽",
+          "quote": "수입 무연탄"
+        }
+      ]
+    },
+    {
+      "table": "kr-ets-byl11",
+      "ipcc_name": "무연탄",
+      "domestic_names": [
+        "원료용 수입무연탄"
+      ],
+      "domestic_raw": null,
+      "basis": "assumed",
+      "note": "별표 10·11 은 「수입 무연탄」 하나이고 연료용·원료용을 가르지 않는다. 별표 12 의 원료용 수입무연탄을 그 수입 무연탄으로 보았다.",
+      "source_id": "kr-ets-byl11",
+      "locator": "PDF 1쪽 표0 25행",
+      "evidence": [
+        {
+          "source_id": "kr-ets-byl10",
+          "locator": "PDF 2쪽",
+          "quote": "수입 무연탄"
+        },
+        {
+          "source_id": "kr-ets-byl11",
+          "locator": "PDF 1쪽",
+          "quote": "수입 무연탄"
+        }
+      ]
+    },
+    {
+      "table": "kr-ets-byl11",
+      "ipcc_name": "기타 역청탄",
+      "domestic_names": [
+        "연료용 유연탄(역청탄)"
+      ],
+      "domestic_raw": null,
+      "basis": "assumed",
+      "note": "별표 10·11 의 국내에너지원 기준은 「연료용 유연탄」, 별표 12 는 「연료용 유연탄(역청탄)」 이다. 괄호만 다르다.",
+      "source_id": "kr-ets-byl11",
+      "locator": "PDF 1쪽 표0 27행",
+      "evidence": [
+        {
+          "source_id": "kr-ets-byl10",
+          "locator": "PDF 2쪽",
+          "quote": "기타 역청탄 연료용 유연탄"
+        },
+        {
+          "source_id": "kr-ets-byl11",
+          "locator": "PDF 1쪽",
+          "quote": "기타 역청탄 연료용 유연탄"
+        }
+      ]
+    },
+    {
+      "table": "kr-ets-byl11",
+      "ipcc_name": "점결탄(Coking coal)",
+      "domestic_names": [
+        "원료용 유연탄(역청탄)"
+      ],
+      "domestic_raw": null,
+      "basis": "assumed",
+      "note": "별표 10·11 의 국내에너지원 기준은 「원료용 유연탄」, 별표 12 는 「원료용 유연탄(역청탄)」 이다 (별표 12 원본에서 「(역청탄)」 은 같은 칸의 둘째 문단이고 PDF 에서는 다음 쪽으로 넘어간다).",
+      "source_id": "kr-ets-byl11",
+      "locator": "PDF 1쪽 표0 26행",
+      "evidence": [
+        {
+          "source_id": "kr-ets-byl10",
+          "locator": "PDF 2쪽",
+          "quote": "점결탄 원료용 유연탄"
+        },
+        {
+          "source_id": "kr-ets-byl11",
+          "locator": "PDF 1쪽",
+          "quote": "원료용 유연탄"
+        }
+      ]
+    }
+  ],
+  "national_ef_names": [
+    {
+      "fuel": "항공유",
+      "ef_name": "항공유(JET-A1)",
+      "basis": "assumed",
+      "note": "발열량 표는 「항공유」, 배출계수 표는 「항공유(JET-A1)」 다. 두 표에 항공유는 이것 하나씩이다.",
+      "source_id": "kr-ets-byl12",
+      "locator": "PDF 3쪽 배출계수 표 9행"
+    },
+    {
+      "fuel": "부탄(LPG3호)",
+      "ef_name": "부탄(LPP3호)",
+      "basis": "assumed",
+      "note": "배출계수 표의 「부탄(LPP3호)」 는 발열량 표의 「부탄(LPG3호)」 의 오자로 보인다 (hwp 원본도 LPP3호). 원문 표기는 고치지 않고 대응으로 잇는다.",
+      "source_id": "kr-ets-byl12",
+      "locator": "PDF 3쪽 배출계수 표 16행"
+    },
+    {
+      "fuel": "부생연료유1호",
+      "ef_name": "부생연료 1호",
+      "basis": "assumed",
+      "note": "발열량 표는 「부생연료유1호」, 배출계수 표와 [참고] 1) 은 「부생연료 1호」 다.",
+      "source_id": "kr-ets-byl12",
+      "locator": "PDF 3쪽 배출계수 표 13행"
+    },
+    {
+      "fuel": "부생연료유2호",
+      "ef_name": "부생연료 2호",
+      "basis": "assumed",
+      "note": "발열량 표는 「부생연료유2호」, 배출계수 표와 [참고] 2) 는 「부생연료 2호」 다.",
+      "source_id": "kr-ets-byl12",
+      "locator": "PDF 3쪽 배출계수 표 14행"
+    },
+    {
+      "fuel": "연료용 수입무연탄",
+      "ef_name": "수입무연탄(연료용)",
+      "basis": "assumed",
+      "note": "발열량 표는 용도를 앞에, 배출계수 표는 괄호 안에 적는다.",
+      "source_id": "kr-ets-byl12",
+      "locator": "PDF 3쪽 배출계수 표 21행"
+    },
+    {
+      "fuel": "원료용 수입무연탄",
+      "ef_name": "수입무연탄(원료용)",
+      "basis": "assumed",
+      "note": "발열량 표는 용도를 앞에, 배출계수 표는 괄호 안에 적는다.",
+      "source_id": "kr-ets-byl12",
+      "locator": "PDF 3쪽 배출계수 표 22행"
+    },
+    {
+      "fuel": "연료용 유연탄(역청탄)",
+      "ef_name": "유연탄(연료용)",
+      "basis": "assumed",
+      "note": "발열량 표는 「연료용 유연탄(역청탄)」, 배출계수 표는 「유연탄(연료용)」 이다.",
+      "source_id": "kr-ets-byl12",
+      "locator": "PDF 3쪽 배출계수 표 23행"
+    },
+    {
+      "fuel": "원료용 유연탄(역청탄)",
+      "ef_name": "유연탄(원료용)",
+      "basis": "assumed",
+      "note": "발열량 표는 「원료용 유연탄(역청탄)」, 배출계수 표는 「유연탄(원료용)」 이다.",
+      "source_id": "kr-ets-byl12",
+      "locator": "PDF 3쪽 배출계수 표 24행"
+    }
+  ],
+  "fuel_states": [
+    {
+      "fuel": "무연탄",
+      "state": "고체",
+      "basis": "guideline",
+      "quote": "무연탄, 유연탄, 갈탄, 코크스와 같은 고체 화석연료",
+      "note": null,
+      "source_id": "kr-ets-byl06",
+      "locator": "PDF 2쪽 「1. 고정연소 (고체연료)」 1. 배출활동 개요"
+    },
+    {
+      "fuel": "유연탄",
+      "state": "고체",
+      "basis": "guideline",
+      "quote": "무연탄, 유연탄, 갈탄, 코크스와 같은 고체 화석연료",
+      "note": null,
+      "source_id": "kr-ets-byl06",
+      "locator": "PDF 2쪽 「1. 고정연소 (고체연료)」 1. 배출활동 개요"
+    },
+    {
+      "fuel": "갈탄",
+      "state": "고체",
+      "basis": "guideline",
+      "quote": "무연탄, 유연탄, 갈탄, 코크스와 같은 고체 화석연료",
+      "note": null,
+      "source_id": "kr-ets-byl06",
+      "locator": "PDF 2쪽 「1. 고정연소 (고체연료)」 1. 배출활동 개요"
+    },
+    {
+      "fuel": "코크스",
+      "state": "고체",
+      "basis": "guideline",
+      "quote": "무연탄, 유연탄, 갈탄, 코크스와 같은 고체 화석연료",
+      "note": null,
+      "source_id": "kr-ets-byl06",
+      "locator": "PDF 2쪽 「1. 고정연소 (고체연료)」 1. 배출활동 개요"
+    },
+    {
+      "fuel": "LNG",
+      "state": "기체",
+      "basis": "guideline",
+      "quote": "LNG, LPG, 프로판, 부탄 및 기타 부생가스 등 기체연료",
+      "note": null,
+      "source_id": "kr-ets-byl06",
+      "locator": "PDF 10쪽 「2. 고정연소 (기체연료)」 1. 배출활동 개요"
+    },
+    {
+      "fuel": "LPG",
+      "state": "기체",
+      "basis": "guideline",
+      "quote": "LNG, LPG, 프로판, 부탄 및 기타 부생가스 등 기체연료",
+      "note": null,
+      "source_id": "kr-ets-byl06",
+      "locator": "PDF 10쪽 「2. 고정연소 (기체연료)」 1. 배출활동 개요"
+    },
+    {
+      "fuel": "프로판",
+      "state": "기체",
+      "basis": "guideline",
+      "quote": "LNG, LPG, 프로판, 부탄 및 기타 부생가스 등 기체연료",
+      "note": null,
+      "source_id": "kr-ets-byl06",
+      "locator": "PDF 10쪽 「2. 고정연소 (기체연료)」 1. 배출활동 개요"
+    },
+    {
+      "fuel": "부탄",
+      "state": "기체",
+      "basis": "guideline",
+      "quote": "LNG, LPG, 프로판, 부탄 및 기타 부생가스 등 기체연료",
+      "note": null,
+      "source_id": "kr-ets-byl06",
+      "locator": "PDF 10쪽 「2. 고정연소 (기체연료)」 1. 배출활동 개요"
+    },
+    {
+      "fuel": "원유",
+      "state": "액체",
+      "basis": "guideline",
+      "quote": "원유, 휘발유, 등유, 경유, B-A/B/C와 같은 액체 화석연료",
+      "note": null,
+      "source_id": "kr-ets-byl06",
+      "locator": "PDF 15쪽 「3. 고정연소 (액체연료)」 1. 배출활동 개요"
+    },
+    {
+      "fuel": "휘발유",
+      "state": "액체",
+      "basis": "guideline",
+      "quote": "원유, 휘발유, 등유, 경유, B-A/B/C와 같은 액체 화석연료",
+      "note": null,
+      "source_id": "kr-ets-byl06",
+      "locator": "PDF 15쪽 「3. 고정연소 (액체연료)」 1. 배출활동 개요"
+    },
+    {
+      "fuel": "등유",
+      "state": "액체",
+      "basis": "guideline",
+      "quote": "원유, 휘발유, 등유, 경유, B-A/B/C와 같은 액체 화석연료",
+      "note": null,
+      "source_id": "kr-ets-byl06",
+      "locator": "PDF 15쪽 「3. 고정연소 (액체연료)」 1. 배출활동 개요"
+    },
+    {
+      "fuel": "경유",
+      "state": "액체",
+      "basis": "guideline",
+      "quote": "원유, 휘발유, 등유, 경유, B-A/B/C와 같은 액체 화석연료",
+      "note": null,
+      "source_id": "kr-ets-byl06",
+      "locator": "PDF 15쪽 「3. 고정연소 (액체연료)」 1. 배출활동 개요"
+    },
+    {
+      "fuel": "도시가스(LNG)",
+      "state": "기체",
+      "basis": "assumed",
+      "quote": "LNG, LPG, 프로판, 부탄 및 기타 부생가스 등 기체연료",
+      "note": "별표 6 의 문장은 LNG 를 기체연료로 들 뿐 「도시가스(LNG)」 라는 이름을 적지 않는다. LNG 로 만든 도시가스라는 이름 풀이에 기댄 추정이다.",
+      "source_id": "kr-ets-byl06",
+      "locator": "PDF 10쪽 「2. 고정연소 (기체연료)」 1. 배출활동 개요"
+    },
+    {
+      "fuel": "B-A유",
+      "state": "액체",
+      "basis": "assumed",
+      "quote": "원유, 휘발유, 등유, 경유, B-A/B/C와 같은 액체 화석연료",
+      "note": "별표 6 액체연료 문장의 「B-A/B/C」 를 B-A유·B-B유·B-C유로 풀었다. 별표 12 도 석유(16)로 분류한다.",
+      "source_id": "kr-ets-byl06",
+      "locator": "PDF 15쪽 「3. 고정연소 (액체연료)」 1. 배출활동 개요",
+      "evidence": [
+        {
+          "source_id": "kr-ets-byl12",
+          "locator": "PDF 3쪽",
+          "quote": "석유(16)"
+        }
+      ]
+    },
+    {
+      "fuel": "B-B유",
+      "state": "액체",
+      "basis": "assumed",
+      "quote": "원유, 휘발유, 등유, 경유, B-A/B/C와 같은 액체 화석연료",
+      "note": "별표 6 액체연료 문장의 「B-A/B/C」 를 B-A유·B-B유·B-C유로 풀었다. 별표 12 도 석유(16)로 분류한다.",
+      "source_id": "kr-ets-byl06",
+      "locator": "PDF 15쪽 「3. 고정연소 (액체연료)」 1. 배출활동 개요",
+      "evidence": [
+        {
+          "source_id": "kr-ets-byl12",
+          "locator": "PDF 3쪽",
+          "quote": "석유(16)"
+        }
+      ]
+    },
+    {
+      "fuel": "B-C유",
+      "state": "액체",
+      "basis": "assumed",
+      "quote": "원유, 휘발유, 등유, 경유, B-A/B/C와 같은 액체 화석연료",
+      "note": "별표 6 액체연료 문장의 「B-A/B/C」 를 B-A유·B-B유·B-C유로 풀었다. 별표 12 도 석유(16)로 분류한다.",
+      "source_id": "kr-ets-byl06",
+      "locator": "PDF 15쪽 「3. 고정연소 (액체연료)」 1. 배출활동 개요",
+      "evidence": [
+        {
+          "source_id": "kr-ets-byl12",
+          "locator": "PDF 3쪽",
+          "quote": "석유(16)"
+        }
+      ]
+    },
+    {
+      "fuel": "나프타",
+      "state": "액체",
+      "basis": "assumed",
+      "quote": "원유, 휘발유, 등유, 경유, B-A/B/C와 같은 액체 화석연료",
+      "note": "별표 12 배출계수 표가 석유(16)로 분류하고, 별표 6 의 기체연료 문장(LNG, LPG, 프로판, 부탄)에도 고체연료 문장에도 이름이 없어 액체연료 절로 보았다.",
+      "source_id": "kr-ets-byl06",
+      "locator": "PDF 15쪽 「3. 고정연소 (액체연료)」 1. 배출활동 개요",
+      "evidence": [
+        {
+          "source_id": "kr-ets-byl12",
+          "locator": "PDF 3쪽",
+          "quote": "석유(16)"
+        }
+      ]
+    },
+    {
+      "fuel": "용제",
+      "state": "액체",
+      "basis": "assumed",
+      "quote": "원유, 휘발유, 등유, 경유, B-A/B/C와 같은 액체 화석연료",
+      "note": "별표 12 배출계수 표가 석유(16)로 분류하고, 별표 6 의 기체연료 문장(LNG, LPG, 프로판, 부탄)에도 고체연료 문장에도 이름이 없어 액체연료 절로 보았다.",
+      "source_id": "kr-ets-byl06",
+      "locator": "PDF 15쪽 「3. 고정연소 (액체연료)」 1. 배출활동 개요",
+      "evidence": [
+        {
+          "source_id": "kr-ets-byl12",
+          "locator": "PDF 3쪽",
+          "quote": "석유(16)"
+        }
+      ]
+    },
+    {
+      "fuel": "항공유",
+      "state": "액체",
+      "basis": "assumed",
+      "quote": "원유, 휘발유, 등유, 경유, B-A/B/C와 같은 액체 화석연료",
+      "note": "별표 12 배출계수 표가 석유(16)로 분류하고, 별표 6 의 기체연료 문장(LNG, LPG, 프로판, 부탄)에도 고체연료 문장에도 이름이 없어 액체연료 절로 보았다.",
+      "source_id": "kr-ets-byl06",
+      "locator": "PDF 15쪽 「3. 고정연소 (액체연료)」 1. 배출활동 개요",
+      "evidence": [
+        {
+          "source_id": "kr-ets-byl12",
+          "locator": "PDF 3쪽",
+          "quote": "석유(16)"
+        }
+      ]
+    },
+    {
+      "fuel": "아스팔트",
+      "state": "액체",
+      "basis": "assumed",
+      "quote": "원유, 휘발유, 등유, 경유, B-A/B/C와 같은 액체 화석연료",
+      "note": "별표 12 배출계수 표가 석유(16)로 분류하고, 별표 6 의 기체연료 문장(LNG, LPG, 프로판, 부탄)에도 고체연료 문장에도 이름이 없어 액체연료 절로 보았다. 다만 별표 12 의 단위는 MJ/kg 로 질량 기준이다.",
+      "source_id": "kr-ets-byl06",
+      "locator": "PDF 15쪽 「3. 고정연소 (액체연료)」 1. 배출활동 개요",
+      "evidence": [
+        {
+          "source_id": "kr-ets-byl12",
+          "locator": "PDF 3쪽",
+          "quote": "석유(16)"
+        }
+      ]
+    },
+    {
+      "fuel": "윤활유",
+      "state": "액체",
+      "basis": "assumed",
+      "quote": "원유, 휘발유, 등유, 경유, B-A/B/C와 같은 액체 화석연료",
+      "note": "별표 12 배출계수 표가 석유(16)로 분류하고, 별표 6 의 기체연료 문장(LNG, LPG, 프로판, 부탄)에도 고체연료 문장에도 이름이 없어 액체연료 절로 보았다.",
+      "source_id": "kr-ets-byl06",
+      "locator": "PDF 15쪽 「3. 고정연소 (액체연료)」 1. 배출활동 개요",
+      "evidence": [
+        {
+          "source_id": "kr-ets-byl12",
+          "locator": "PDF 3쪽",
+          "quote": "석유(16)"
+        }
+      ]
+    },
+    {
+      "fuel": "부생연료유1호",
+      "state": "액체",
+      "basis": "assumed",
+      "quote": "원유, 휘발유, 등유, 경유, B-A/B/C와 같은 액체 화석연료",
+      "note": "별표 12 배출계수 표가 석유(16)로 분류하고, 별표 6 의 기체연료 문장(LNG, LPG, 프로판, 부탄)에도 고체연료 문장에도 이름이 없어 액체연료 절로 보았다. 별표 12 [참고] 1) 은 「등유 성상에 해당하는 제품」 이라고 쓴다.",
+      "source_id": "kr-ets-byl06",
+      "locator": "PDF 15쪽 「3. 고정연소 (액체연료)」 1. 배출활동 개요",
+      "evidence": [
+        {
+          "source_id": "kr-ets-byl12",
+          "locator": "PDF 3쪽",
+          "quote": "석유(16)"
+        }
+      ]
+    },
+    {
+      "fuel": "부생연료유2호",
+      "state": "액체",
+      "basis": "assumed",
+      "quote": "원유, 휘발유, 등유, 경유, B-A/B/C와 같은 액체 화석연료",
+      "note": "별표 12 배출계수 표가 석유(16)로 분류하고, 별표 6 의 기체연료 문장(LNG, LPG, 프로판, 부탄)에도 고체연료 문장에도 이름이 없어 액체연료 절로 보았다. 별표 12 [참고] 2) 는 「등유ㆍ중유 성상에 해당하는 제품」 이라고 쓴다.",
+      "source_id": "kr-ets-byl06",
+      "locator": "PDF 15쪽 「3. 고정연소 (액체연료)」 1. 배출활동 개요",
+      "evidence": [
+        {
+          "source_id": "kr-ets-byl12",
+          "locator": "PDF 3쪽",
+          "quote": "석유(16)"
+        }
+      ]
+    },
+    {
+      "fuel": "프로판(LPG1호)",
+      "state": "기체",
+      "basis": "assumed",
+      "quote": "LNG, LPG, 프로판, 부탄 및 기타 부생가스 등 기체연료",
+      "note": "별표 6 기체연료 문장이 「프로판」 을 기체연료로 든다. 별표 12 는 석유(16)로 분류해 두 근거가 어긋나며, 별표 6 의 문장을 따랐다.",
+      "source_id": "kr-ets-byl06",
+      "locator": "PDF 10쪽 「2. 고정연소 (기체연료)」 1. 배출활동 개요",
+      "evidence": [
+        {
+          "source_id": "kr-ets-byl12",
+          "locator": "PDF 3쪽",
+          "quote": "석유(16)"
+        }
+      ]
+    },
+    {
+      "fuel": "부탄(LPG3호)",
+      "state": "기체",
+      "basis": "assumed",
+      "quote": "LNG, LPG, 프로판, 부탄 및 기타 부생가스 등 기체연료",
+      "note": "별표 6 기체연료 문장이 「부탄」 을 기체연료로 든다. 별표 12 는 석유(16)로 분류해 두 근거가 어긋나며, 별표 6 의 문장을 따랐다.",
+      "source_id": "kr-ets-byl06",
+      "locator": "PDF 10쪽 「2. 고정연소 (기체연료)」 1. 배출활동 개요",
+      "evidence": [
+        {
+          "source_id": "kr-ets-byl12",
+          "locator": "PDF 3쪽",
+          "quote": "석유(16)"
+        }
+      ]
+    },
+    {
+      "fuel": "천연가스(LNG)",
+      "state": "기체",
+      "basis": "assumed",
+      "quote": "LNG, LPG, 프로판, 부탄 및 기타 부생가스 등 기체연료",
+      "note": "별표 6 기체연료 문장의 「LNG」 와 별표 12 의 가스(3) 분류가 같다. 이름(천연가스(LNG))이 문장에 그대로 있지는 않다.",
+      "source_id": "kr-ets-byl06",
+      "locator": "PDF 10쪽 「2. 고정연소 (기체연료)」 1. 배출활동 개요",
+      "evidence": [
+        {
+          "source_id": "kr-ets-byl12",
+          "locator": "PDF 3쪽",
+          "quote": "가스(3)"
+        }
+      ]
+    },
+    {
+      "fuel": "도시가스(LPG)",
+      "state": "기체",
+      "basis": "assumed",
+      "quote": "LNG, LPG, 프로판, 부탄 및 기타 부생가스 등 기체연료",
+      "note": "별표 6 기체연료 문장의 「LPG」 와 별표 12 의 가스(3) 분류가 같다. 이름(도시가스(LPG))이 문장에 그대로 있지는 않다.",
+      "source_id": "kr-ets-byl06",
+      "locator": "PDF 10쪽 「2. 고정연소 (기체연료)」 1. 배출활동 개요",
+      "evidence": [
+        {
+          "source_id": "kr-ets-byl12",
+          "locator": "PDF 3쪽",
+          "quote": "가스(3)"
+        }
+      ]
+    },
+    {
+      "fuel": "국내무연탄",
+      "state": "고체",
+      "basis": "assumed",
+      "quote": "무연탄, 유연탄, 갈탄, 코크스와 같은 고체 화석연료",
+      "note": "별표 6 고체연료 문장의 「무연탄」 과 별표 12 의 석탄(6) 분류가 같다.",
+      "source_id": "kr-ets-byl06",
+      "locator": "PDF 2쪽 「1. 고정연소 (고체연료)」 1. 배출활동 개요",
+      "evidence": [
+        {
+          "source_id": "kr-ets-byl12",
+          "locator": "PDF 3쪽",
+          "quote": "석탄(6)"
+        }
+      ]
+    },
+    {
+      "fuel": "연료용 수입무연탄",
+      "state": "고체",
+      "basis": "assumed",
+      "quote": "무연탄, 유연탄, 갈탄, 코크스와 같은 고체 화석연료",
+      "note": "별표 6 고체연료 문장의 「무연탄」 과 별표 12 의 석탄(6) 분류가 같다.",
+      "source_id": "kr-ets-byl06",
+      "locator": "PDF 2쪽 「1. 고정연소 (고체연료)」 1. 배출활동 개요",
+      "evidence": [
+        {
+          "source_id": "kr-ets-byl12",
+          "locator": "PDF 3쪽",
+          "quote": "석탄(6)"
+        }
+      ]
+    },
+    {
+      "fuel": "원료용 수입무연탄",
+      "state": "고체",
+      "basis": "assumed",
+      "quote": "무연탄, 유연탄, 갈탄, 코크스와 같은 고체 화석연료",
+      "note": "별표 6 고체연료 문장의 「무연탄」 과 별표 12 의 석탄(6) 분류가 같다.",
+      "source_id": "kr-ets-byl06",
+      "locator": "PDF 2쪽 「1. 고정연소 (고체연료)」 1. 배출활동 개요",
+      "evidence": [
+        {
+          "source_id": "kr-ets-byl12",
+          "locator": "PDF 3쪽",
+          "quote": "석탄(6)"
+        }
+      ]
+    },
+    {
+      "fuel": "연료용 유연탄(역청탄)",
+      "state": "고체",
+      "basis": "assumed",
+      "quote": "무연탄, 유연탄, 갈탄, 코크스와 같은 고체 화석연료",
+      "note": "별표 6 고체연료 문장의 「유연탄」 과 별표 12 의 석탄(6) 분류가 같다.",
+      "source_id": "kr-ets-byl06",
+      "locator": "PDF 2쪽 「1. 고정연소 (고체연료)」 1. 배출활동 개요",
+      "evidence": [
+        {
+          "source_id": "kr-ets-byl12",
+          "locator": "PDF 3쪽",
+          "quote": "석탄(6)"
+        }
+      ]
+    },
+    {
+      "fuel": "원료용 유연탄(역청탄)",
+      "state": "고체",
+      "basis": "assumed",
+      "quote": "무연탄, 유연탄, 갈탄, 코크스와 같은 고체 화석연료",
+      "note": "별표 6 고체연료 문장의 「유연탄」 과 별표 12 의 석탄(6) 분류가 같다.",
+      "source_id": "kr-ets-byl06",
+      "locator": "PDF 2쪽 「1. 고정연소 (고체연료)」 1. 배출활동 개요",
+      "evidence": [
+        {
+          "source_id": "kr-ets-byl12",
+          "locator": "PDF 3쪽",
+          "quote": "석탄(6)"
+        }
+      ]
+    },
+    {
+      "fuel": "아역청탄",
+      "state": "고체",
+      "basis": "assumed",
+      "quote": "무연탄, 유연탄, 갈탄, 코크스와 같은 고체 화석연료",
+      "note": "별표 12 가 석탄(6)으로 분류한다. 별표 6 고체연료 문장은 무연탄·유연탄·갈탄·코크스를 들 뿐 아역청탄을 적지 않는다.",
+      "source_id": "kr-ets-byl06",
+      "locator": "PDF 2쪽 「1. 고정연소 (고체연료)」 1. 배출활동 개요",
+      "evidence": [
+        {
+          "source_id": "kr-ets-byl12",
+          "locator": "PDF 3쪽",
+          "quote": "석탄(6)"
+        }
+      ]
+    },
+    {
+      "fuel": "석유코크스",
+      "state": "고체",
+      "basis": "assumed",
+      "quote": "무연탄, 유연탄, 갈탄, 코크스와 같은 고체 화석연료",
+      "note": "근거가 어긋난다. 별표 12 는 석유(16)로 분류하지만 별표 10 의 국내에너지원 기준이 「석유코크스(고체)」 이고 별표 10 [참고] 의 정의가 「흑색 고체」 라고 쓴다. 별표 6 의 문장에는 이름이 없다. 석유(16)는 원료에 따른 분류이고(프로판·부탄도 석유(16)이지만 별표 6 은 기체연료로 든다) 상태를 직접 적은 쪽은 별표 10 이라 고체로 보았다.",
+      "source_id": "kr-ets-byl06",
+      "locator": "PDF 2쪽 「1. 고정연소 (고체연료)」 1. 배출활동 개요",
+      "evidence": [
+        {
+          "source_id": "kr-ets-byl12",
+          "locator": "PDF 3쪽",
+          "quote": "석유(16)"
+        },
+        {
+          "source_id": "kr-ets-byl10",
+          "locator": "PDF 1쪽",
+          "quote": "석유코크스(고체)"
+        },
+        {
+          "source_id": "kr-ets-byl10",
+          "locator": "PDF 6쪽",
+          "quote": "흑색 고체"
+        }
+      ]
+    }
+  ],
+  "tier_minimums": [
+    {
+      "activity": "고정연소",
+      "fuel_state": "고체",
+      "parameter": "산정방법론",
+      "group": "A",
+      "tier": 1,
+      "source_id": "kr-ets-byl05",
+      "locator": "PDF 4쪽 「연소시설에서 에너지 이용에 따른 온실가스 배출」 표 1. 고정연소 고체연료 산정방법론 A"
+    },
+    {
+      "activity": "고정연소",
+      "fuel_state": "고체",
+      "parameter": "산정방법론",
+      "group": "B",
+      "tier": 2,
+      "source_id": "kr-ets-byl05",
+      "locator": "PDF 4쪽 「연소시설에서 에너지 이용에 따른 온실가스 배출」 표 1. 고정연소 고체연료 산정방법론 B"
+    },
+    {
+      "activity": "고정연소",
+      "fuel_state": "고체",
+      "parameter": "산정방법론",
+      "group": "C",
+      "tier": 3,
+      "source_id": "kr-ets-byl05",
+      "locator": "PDF 4쪽 「연소시설에서 에너지 이용에 따른 온실가스 배출」 표 1. 고정연소 고체연료 산정방법론 C"
+    },
+    {
+      "activity": "고정연소",
+      "fuel_state": "고체",
+      "parameter": "연료사용량",
+      "group": "A",
+      "tier": 1,
+      "source_id": "kr-ets-byl05",
+      "locator": "PDF 4쪽 「연소시설에서 에너지 이용에 따른 온실가스 배출」 표 1. 고정연소 고체연료 연료사용량 A"
+    },
+    {
+      "activity": "고정연소",
+      "fuel_state": "고체",
+      "parameter": "연료사용량",
+      "group": "B",
+      "tier": 2,
+      "source_id": "kr-ets-byl05",
+      "locator": "PDF 4쪽 「연소시설에서 에너지 이용에 따른 온실가스 배출」 표 1. 고정연소 고체연료 연료사용량 B"
+    },
+    {
+      "activity": "고정연소",
+      "fuel_state": "고체",
+      "parameter": "연료사용량",
+      "group": "C",
+      "tier": 3,
+      "source_id": "kr-ets-byl05",
+      "locator": "PDF 4쪽 「연소시설에서 에너지 이용에 따른 온실가스 배출」 표 1. 고정연소 고체연료 연료사용량 C"
+    },
+    {
+      "activity": "고정연소",
+      "fuel_state": "고체",
+      "parameter": "순발열량",
+      "group": "A",
+      "tier": 2,
+      "source_id": "kr-ets-byl05",
+      "locator": "PDF 4쪽 「연소시설에서 에너지 이용에 따른 온실가스 배출」 표 1. 고정연소 고체연료 순발열량 A"
+    },
+    {
+      "activity": "고정연소",
+      "fuel_state": "고체",
+      "parameter": "순발열량",
+      "group": "B",
+      "tier": 2,
+      "source_id": "kr-ets-byl05",
+      "locator": "PDF 4쪽 「연소시설에서 에너지 이용에 따른 온실가스 배출」 표 1. 고정연소 고체연료 순발열량 B"
+    },
+    {
+      "activity": "고정연소",
+      "fuel_state": "고체",
+      "parameter": "순발열량",
+      "group": "C",
+      "tier": 3,
+      "source_id": "kr-ets-byl05",
+      "locator": "PDF 4쪽 「연소시설에서 에너지 이용에 따른 온실가스 배출」 표 1. 고정연소 고체연료 순발열량 C"
+    },
+    {
+      "activity": "고정연소",
+      "fuel_state": "고체",
+      "parameter": "배출계수",
+      "group": "A",
+      "tier": 1,
+      "source_id": "kr-ets-byl05",
+      "locator": "PDF 4쪽 「연소시설에서 에너지 이용에 따른 온실가스 배출」 표 1. 고정연소 고체연료 배출계수 A"
+    },
+    {
+      "activity": "고정연소",
+      "fuel_state": "고체",
+      "parameter": "배출계수",
+      "group": "B",
+      "tier": 2,
+      "source_id": "kr-ets-byl05",
+      "locator": "PDF 4쪽 「연소시설에서 에너지 이용에 따른 온실가스 배출」 표 1. 고정연소 고체연료 배출계수 B"
+    },
+    {
+      "activity": "고정연소",
+      "fuel_state": "고체",
+      "parameter": "배출계수",
+      "group": "C",
+      "tier": 3,
+      "source_id": "kr-ets-byl05",
+      "locator": "PDF 4쪽 「연소시설에서 에너지 이용에 따른 온실가스 배출」 표 1. 고정연소 고체연료 배출계수 C"
+    },
+    {
+      "activity": "고정연소",
+      "fuel_state": "고체",
+      "parameter": "산화계수",
+      "group": "A",
+      "tier": 1,
+      "source_id": "kr-ets-byl05",
+      "locator": "PDF 4쪽 「연소시설에서 에너지 이용에 따른 온실가스 배출」 표 1. 고정연소 고체연료 산화계수 A"
+    },
+    {
+      "activity": "고정연소",
+      "fuel_state": "고체",
+      "parameter": "산화계수",
+      "group": "B",
+      "tier": 2,
+      "source_id": "kr-ets-byl05",
+      "locator": "PDF 4쪽 「연소시설에서 에너지 이용에 따른 온실가스 배출」 표 1. 고정연소 고체연료 산화계수 B"
+    },
+    {
+      "activity": "고정연소",
+      "fuel_state": "고체",
+      "parameter": "산화계수",
+      "group": "C",
+      "tier": 3,
+      "source_id": "kr-ets-byl05",
+      "locator": "PDF 4쪽 「연소시설에서 에너지 이용에 따른 온실가스 배출」 표 1. 고정연소 고체연료 산화계수 C"
+    },
+    {
+      "activity": "고정연소",
+      "fuel_state": "기체",
+      "parameter": "산정방법론",
+      "group": "A",
+      "tier": 1,
+      "source_id": "kr-ets-byl05",
+      "locator": "PDF 4쪽 「연소시설에서 에너지 이용에 따른 온실가스 배출」 표 1. 고정연소 기체연료 산정방법론 A"
+    },
+    {
+      "activity": "고정연소",
+      "fuel_state": "기체",
+      "parameter": "산정방법론",
+      "group": "B",
+      "tier": 2,
+      "source_id": "kr-ets-byl05",
+      "locator": "PDF 4쪽 「연소시설에서 에너지 이용에 따른 온실가스 배출」 표 1. 고정연소 기체연료 산정방법론 B"
+    },
+    {
+      "activity": "고정연소",
+      "fuel_state": "기체",
+      "parameter": "산정방법론",
+      "group": "C",
+      "tier": 3,
+      "source_id": "kr-ets-byl05",
+      "locator": "PDF 4쪽 「연소시설에서 에너지 이용에 따른 온실가스 배출」 표 1. 고정연소 기체연료 산정방법론 C"
+    },
+    {
+      "activity": "고정연소",
+      "fuel_state": "기체",
+      "parameter": "연료사용량",
+      "group": "A",
+      "tier": 1,
+      "source_id": "kr-ets-byl05",
+      "locator": "PDF 4쪽 「연소시설에서 에너지 이용에 따른 온실가스 배출」 표 1. 고정연소 기체연료 연료사용량 A"
+    },
+    {
+      "activity": "고정연소",
+      "fuel_state": "기체",
+      "parameter": "연료사용량",
+      "group": "B",
+      "tier": 2,
+      "source_id": "kr-ets-byl05",
+      "locator": "PDF 4쪽 「연소시설에서 에너지 이용에 따른 온실가스 배출」 표 1. 고정연소 기체연료 연료사용량 B"
+    },
+    {
+      "activity": "고정연소",
+      "fuel_state": "기체",
+      "parameter": "연료사용량",
+      "group": "C",
+      "tier": 3,
+      "source_id": "kr-ets-byl05",
+      "locator": "PDF 4쪽 「연소시설에서 에너지 이용에 따른 온실가스 배출」 표 1. 고정연소 기체연료 연료사용량 C"
+    },
+    {
+      "activity": "고정연소",
+      "fuel_state": "기체",
+      "parameter": "순발열량",
+      "group": "A",
+      "tier": 2,
+      "source_id": "kr-ets-byl05",
+      "locator": "PDF 4쪽 「연소시설에서 에너지 이용에 따른 온실가스 배출」 표 1. 고정연소 기체연료 순발열량 A"
+    },
+    {
+      "activity": "고정연소",
+      "fuel_state": "기체",
+      "parameter": "순발열량",
+      "group": "B",
+      "tier": 2,
+      "source_id": "kr-ets-byl05",
+      "locator": "PDF 4쪽 「연소시설에서 에너지 이용에 따른 온실가스 배출」 표 1. 고정연소 기체연료 순발열량 B"
+    },
+    {
+      "activity": "고정연소",
+      "fuel_state": "기체",
+      "parameter": "순발열량",
+      "group": "C",
+      "tier": 3,
+      "source_id": "kr-ets-byl05",
+      "locator": "PDF 4쪽 「연소시설에서 에너지 이용에 따른 온실가스 배출」 표 1. 고정연소 기체연료 순발열량 C"
+    },
+    {
+      "activity": "고정연소",
+      "fuel_state": "기체",
+      "parameter": "배출계수",
+      "group": "A",
+      "tier": 1,
+      "source_id": "kr-ets-byl05",
+      "locator": "PDF 4쪽 「연소시설에서 에너지 이용에 따른 온실가스 배출」 표 1. 고정연소 기체연료 배출계수 A"
+    },
+    {
+      "activity": "고정연소",
+      "fuel_state": "기체",
+      "parameter": "배출계수",
+      "group": "B",
+      "tier": 2,
+      "source_id": "kr-ets-byl05",
+      "locator": "PDF 4쪽 「연소시설에서 에너지 이용에 따른 온실가스 배출」 표 1. 고정연소 기체연료 배출계수 B"
+    },
+    {
+      "activity": "고정연소",
+      "fuel_state": "기체",
+      "parameter": "배출계수",
+      "group": "C",
+      "tier": 3,
+      "source_id": "kr-ets-byl05",
+      "locator": "PDF 4쪽 「연소시설에서 에너지 이용에 따른 온실가스 배출」 표 1. 고정연소 기체연료 배출계수 C"
+    },
+    {
+      "activity": "고정연소",
+      "fuel_state": "기체",
+      "parameter": "산화계수",
+      "group": "A",
+      "tier": 1,
+      "source_id": "kr-ets-byl05",
+      "locator": "PDF 4쪽 「연소시설에서 에너지 이용에 따른 온실가스 배출」 표 1. 고정연소 기체연료 산화계수 A"
+    },
+    {
+      "activity": "고정연소",
+      "fuel_state": "기체",
+      "parameter": "산화계수",
+      "group": "B",
+      "tier": 2,
+      "source_id": "kr-ets-byl05",
+      "locator": "PDF 4쪽 「연소시설에서 에너지 이용에 따른 온실가스 배출」 표 1. 고정연소 기체연료 산화계수 B"
+    },
+    {
+      "activity": "고정연소",
+      "fuel_state": "기체",
+      "parameter": "산화계수",
+      "group": "C",
+      "tier": 3,
+      "source_id": "kr-ets-byl05",
+      "locator": "PDF 4쪽 「연소시설에서 에너지 이용에 따른 온실가스 배출」 표 1. 고정연소 기체연료 산화계수 C"
+    },
+    {
+      "activity": "고정연소",
+      "fuel_state": "액체",
+      "parameter": "산정방법론",
+      "group": "A",
+      "tier": 1,
+      "source_id": "kr-ets-byl05",
+      "locator": "PDF 4쪽 「연소시설에서 에너지 이용에 따른 온실가스 배출」 표 1. 고정연소 액체연료 산정방법론 A"
+    },
+    {
+      "activity": "고정연소",
+      "fuel_state": "액체",
+      "parameter": "산정방법론",
+      "group": "B",
+      "tier": 2,
+      "source_id": "kr-ets-byl05",
+      "locator": "PDF 4쪽 「연소시설에서 에너지 이용에 따른 온실가스 배출」 표 1. 고정연소 액체연료 산정방법론 B"
+    },
+    {
+      "activity": "고정연소",
+      "fuel_state": "액체",
+      "parameter": "산정방법론",
+      "group": "C",
+      "tier": 3,
+      "source_id": "kr-ets-byl05",
+      "locator": "PDF 4쪽 「연소시설에서 에너지 이용에 따른 온실가스 배출」 표 1. 고정연소 액체연료 산정방법론 C"
+    },
+    {
+      "activity": "고정연소",
+      "fuel_state": "액체",
+      "parameter": "연료사용량",
+      "group": "A",
+      "tier": 1,
+      "source_id": "kr-ets-byl05",
+      "locator": "PDF 4쪽 「연소시설에서 에너지 이용에 따른 온실가스 배출」 표 1. 고정연소 액체연료 연료사용량 A"
+    },
+    {
+      "activity": "고정연소",
+      "fuel_state": "액체",
+      "parameter": "연료사용량",
+      "group": "B",
+      "tier": 2,
+      "source_id": "kr-ets-byl05",
+      "locator": "PDF 4쪽 「연소시설에서 에너지 이용에 따른 온실가스 배출」 표 1. 고정연소 액체연료 연료사용량 B"
+    },
+    {
+      "activity": "고정연소",
+      "fuel_state": "액체",
+      "parameter": "연료사용량",
+      "group": "C",
+      "tier": 3,
+      "source_id": "kr-ets-byl05",
+      "locator": "PDF 4쪽 「연소시설에서 에너지 이용에 따른 온실가스 배출」 표 1. 고정연소 액체연료 연료사용량 C"
+    },
+    {
+      "activity": "고정연소",
+      "fuel_state": "액체",
+      "parameter": "순발열량",
+      "group": "A",
+      "tier": 2,
+      "source_id": "kr-ets-byl05",
+      "locator": "PDF 4쪽 「연소시설에서 에너지 이용에 따른 온실가스 배출」 표 1. 고정연소 액체연료 순발열량 A"
+    },
+    {
+      "activity": "고정연소",
+      "fuel_state": "액체",
+      "parameter": "순발열량",
+      "group": "B",
+      "tier": 2,
+      "source_id": "kr-ets-byl05",
+      "locator": "PDF 4쪽 「연소시설에서 에너지 이용에 따른 온실가스 배출」 표 1. 고정연소 액체연료 순발열량 B"
+    },
+    {
+      "activity": "고정연소",
+      "fuel_state": "액체",
+      "parameter": "순발열량",
+      "group": "C",
+      "tier": 3,
+      "source_id": "kr-ets-byl05",
+      "locator": "PDF 4쪽 「연소시설에서 에너지 이용에 따른 온실가스 배출」 표 1. 고정연소 액체연료 순발열량 C"
+    },
+    {
+      "activity": "고정연소",
+      "fuel_state": "액체",
+      "parameter": "배출계수",
+      "group": "A",
+      "tier": 1,
+      "source_id": "kr-ets-byl05",
+      "locator": "PDF 4쪽 「연소시설에서 에너지 이용에 따른 온실가스 배출」 표 1. 고정연소 액체연료 배출계수 A"
+    },
+    {
+      "activity": "고정연소",
+      "fuel_state": "액체",
+      "parameter": "배출계수",
+      "group": "B",
+      "tier": 2,
+      "source_id": "kr-ets-byl05",
+      "locator": "PDF 4쪽 「연소시설에서 에너지 이용에 따른 온실가스 배출」 표 1. 고정연소 액체연료 배출계수 B"
+    },
+    {
+      "activity": "고정연소",
+      "fuel_state": "액체",
+      "parameter": "배출계수",
+      "group": "C",
+      "tier": 3,
+      "source_id": "kr-ets-byl05",
+      "locator": "PDF 4쪽 「연소시설에서 에너지 이용에 따른 온실가스 배출」 표 1. 고정연소 액체연료 배출계수 C"
+    },
+    {
+      "activity": "고정연소",
+      "fuel_state": "액체",
+      "parameter": "산화계수",
+      "group": "A",
+      "tier": 1,
+      "source_id": "kr-ets-byl05",
+      "locator": "PDF 4쪽 「연소시설에서 에너지 이용에 따른 온실가스 배출」 표 1. 고정연소 액체연료 산화계수 A"
+    },
+    {
+      "activity": "고정연소",
+      "fuel_state": "액체",
+      "parameter": "산화계수",
+      "group": "B",
+      "tier": 2,
+      "source_id": "kr-ets-byl05",
+      "locator": "PDF 4쪽 「연소시설에서 에너지 이용에 따른 온실가스 배출」 표 1. 고정연소 액체연료 산화계수 B"
+    },
+    {
+      "activity": "고정연소",
+      "fuel_state": "액체",
+      "parameter": "산화계수",
+      "group": "C",
+      "tier": 3,
+      "source_id": "kr-ets-byl05",
+      "locator": "PDF 4쪽 「연소시설에서 에너지 이용에 따른 온실가스 배출」 표 1. 고정연소 액체연료 산화계수 C"
+    }
+  ]
+}

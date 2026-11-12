@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# 커밋 트레일러(Ticket:/Affects:/Rejected: 등)를 maricom 그래프로 포착한다. 실패해도 커밋을 막지 않는다.
+# 출처: maricom 레포 scripts/git-hooks/semantic-trailers-post-commit.sh (lefthook 없이 core.hooksPath 로 배선).
+root="$(git rev-parse --show-toplevel 2>/dev/null)" || exit 0
+bash "$root/scripts/git-hooks/semantic-trailers-post-commit.sh" || true
+exit 0

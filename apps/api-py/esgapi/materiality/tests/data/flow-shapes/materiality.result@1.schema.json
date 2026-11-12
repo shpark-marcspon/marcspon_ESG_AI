@@ -1,0 +1,941 @@
+{
+  "$defs": {
+    "JsonValue": {},
+    "MaterialityCompany": {
+      "additionalProperties": false,
+      "description": "기업 정보(코랩 셀 44 의 company). 1부 프롬프트에는 실리지 않는다.",
+      "properties": {
+        "name": {
+          "description": "기업명.",
+          "title": "Name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "MaterialityCompany",
+      "type": "object"
+    },
+    "MaterialityControversyDone": {
+      "additionalProperties": false,
+      "description": "컨트로버시 조사(코랩 셀 22)의 답을 JSON 객체로 읽었다.",
+      "properties": {
+        "status": {
+          "const": "done",
+          "title": "Status",
+          "type": "string"
+        },
+        "parsed": {
+          "additionalProperties": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "description": "모델의 JSON 객체(받은 그대로). 답의 topic_name 이 입력 토픽명과 다르면 코랩대로 topic_name_expected 가 더해져\n있다.",
+          "title": "Parsed",
+          "type": "object"
+        },
+        "items": {
+          "description": "parsed 에서 셀 33 규칙으로 뽑은 항목(dict 가 아닌 원소는 빼고 경고 items_skipped).",
+          "items": {
+            "$ref": "#/$defs/MaterialityControversyItem"
+          },
+          "title": "Items",
+          "type": "array"
+        },
+        "selfCheck": {
+          "anyOf": [
+            {
+              "additionalProperties": {
+                "$ref": "#/$defs/JsonValue"
+              },
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "parsed 의 self_check(객체일 때만, 아니면 null).",
+          "title": "Selfcheck"
+        },
+        "topicNameMismatch": {
+          "description": "답의 topic_name 이 입력 토픽명과 달랐는지(코랩 셀 22 의 견줌).",
+          "title": "Topicnamemismatch",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "status",
+        "parsed",
+        "items",
+        "selfCheck",
+        "topicNameMismatch"
+      ],
+      "title": "MaterialityControversyDone",
+      "type": "object"
+    },
+    "MaterialityControversyItem": {
+      "additionalProperties": false,
+      "description": "컨트로버시 하나(코랩 셀 22 의 ControversyItem 에서 셀 33 의 표시 칸 차례). 모델 JSON 의 얇은 보기다.",
+      "properties": {
+        "title": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Title"
+        },
+        "date": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Date"
+        },
+        "summary": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Summary"
+        },
+        "severity": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Severity"
+        },
+        "status": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Status"
+        },
+        "url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Url"
+        },
+        "region": {
+          "description": "규제 항목과 칸을 맞춘 자리. 컨트로버시는 늘 null.",
+          "title": "Region",
+          "type": "null"
+        }
+      },
+      "required": [
+        "title",
+        "date",
+        "summary",
+        "severity",
+        "status",
+        "url",
+        "region"
+      ],
+      "title": "MaterialityControversyItem",
+      "type": "object"
+    },
+    "MaterialityFailure": {
+      "additionalProperties": false,
+      "description": "호출이나 답 읽기가 실패한 까닭.",
+      "properties": {
+        "kind": {
+          "description": "unparsable = 모델의 답을 읽지 못함(빈 답·`{` 없음·JSON 아님·꼴이 다름). 그 밖은 모델 호출의 실패 갈래(core.llm 의\n이름 그대로).",
+          "enum": [
+            "unparsable",
+            "budget_exceeded",
+            "truncated",
+            "refusal",
+            "provider_error",
+            "timeout",
+            "tool_executor_raised",
+            "schema_mismatch"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "message": {
+          "description": "실패 갈래의 설명(모델 글·공급사 메시지·고객 데이터는 싣지 않는다).",
+          "title": "Message",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "message"
+      ],
+      "title": "MaterialityFailure",
+      "type": "object"
+    },
+    "MaterialityKeywordsDone": {
+      "additionalProperties": false,
+      "description": "키워드 도출(코랩 셀 20)을 마쳤다.",
+      "properties": {
+        "status": {
+          "const": "done",
+          "title": "Status",
+          "type": "string"
+        },
+        "byTopic": {
+          "description": "모델이 낸 차례. 같은 토픽이 둘이면 코랩처럼 한 줄(첫 자리, 뒤 것의 키워드)만 남는다.",
+          "items": {
+            "$ref": "#/$defs/MaterialityTopicKeywords"
+          },
+          "title": "Bytopic",
+          "type": "array"
+        },
+        "raw": {
+          "description": "모델의 답 원문.",
+          "title": "Raw",
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "byTopic",
+        "raw"
+      ],
+      "title": "MaterialityKeywordsDone",
+      "type": "object"
+    },
+    "MaterialityKeywordsFailed": {
+      "additionalProperties": false,
+      "description": "키워드 도출이 실패했다. 컨트로버시 조사는 키워드 없이 계속한다(코랩대로).",
+      "properties": {
+        "status": {
+          "const": "failed",
+          "title": "Status",
+          "type": "string"
+        },
+        "raw": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "읽지 못한 답의 원문(unparsable). 호출이 실패했으면 null.",
+          "title": "Raw"
+        },
+        "failure": {
+          "$ref": "#/$defs/MaterialityFailure"
+        }
+      },
+      "required": [
+        "status",
+        "raw",
+        "failure"
+      ],
+      "title": "MaterialityKeywordsFailed",
+      "type": "object"
+    },
+    "MaterialityKeywordsNotRun": {
+      "additionalProperties": false,
+      "description": "키워드 도출을 돌리지 않았다.",
+      "properties": {
+        "status": {
+          "const": "not_run",
+          "title": "Status",
+          "type": "string"
+        },
+        "message": {
+          "title": "Message",
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "message"
+      ],
+      "title": "MaterialityKeywordsNotRun",
+      "type": "object"
+    },
+    "MaterialityOutcomeFailed": {
+      "additionalProperties": false,
+      "description": "호출이 실패했거나 답을 JSON 객체로 읽지 못했다.",
+      "properties": {
+        "status": {
+          "const": "failed",
+          "title": "Status",
+          "type": "string"
+        },
+        "raw": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "코랩 묶음의 원문 칸 그대로(utm 지운 답. 코랩대로 호출 실패면 빈 글). 원문이 없으면 null.",
+          "title": "Raw"
+        },
+        "parseError": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "코랩 묶음의 parse_error 그대로 — 규제는 str(예외), 컨트로버시는 repr(예외) 이고 호출 실패면 no_result\n(코랩대로).",
+          "title": "Parseerror"
+        },
+        "failure": {
+          "$ref": "#/$defs/MaterialityFailure"
+        }
+      },
+      "required": [
+        "status",
+        "raw",
+        "parseError",
+        "failure"
+      ],
+      "title": "MaterialityOutcomeFailed",
+      "type": "object"
+    },
+    "MaterialityOutcomeNotRun": {
+      "additionalProperties": false,
+      "description": "돌리지 않았다.",
+      "properties": {
+        "status": {
+          "const": "not_run",
+          "title": "Status",
+          "type": "string"
+        },
+        "message": {
+          "title": "Message",
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "message"
+      ],
+      "title": "MaterialityOutcomeNotRun",
+      "type": "object"
+    },
+    "MaterialityPart1": {
+      "additionalProperties": false,
+      "description": "1부 — 웹 리서치(규제·정책·컨트로버시).",
+      "properties": {
+        "keywords": {
+          "discriminator": {
+            "mapping": {
+              "done": "#/$defs/MaterialityKeywordsDone",
+              "failed": "#/$defs/MaterialityKeywordsFailed",
+              "not_run": "#/$defs/MaterialityKeywordsNotRun"
+            },
+            "propertyName": "status"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/MaterialityKeywordsDone"
+            },
+            {
+              "$ref": "#/$defs/MaterialityKeywordsFailed"
+            },
+            {
+              "$ref": "#/$defs/MaterialityKeywordsNotRun"
+            }
+          ],
+          "title": "Keywords"
+        },
+        "topics": {
+          "items": {
+            "$ref": "#/$defs/MaterialityTopicResult"
+          },
+          "title": "Topics",
+          "type": "array"
+        }
+      },
+      "required": [
+        "keywords",
+        "topics"
+      ],
+      "title": "MaterialityPart1",
+      "type": "object"
+    },
+    "MaterialityPart2NotRun": {
+      "additionalProperties": false,
+      "description": "2부 — IRO 분석. 이 판에서는 돌리지 않는다(칸은 다음 판).",
+      "properties": {
+        "status": {
+          "const": "not_run",
+          "title": "Status",
+          "type": "string"
+        },
+        "message": {
+          "title": "Message",
+          "type": "string"
+        }
+      },
+      "required": [
+        "status",
+        "message"
+      ],
+      "title": "MaterialityPart2NotRun",
+      "type": "object"
+    },
+    "MaterialityPromptIds": {
+      "additionalProperties": false,
+      "description": "호출마다 쓴 프롬프트 id(core.llm 의 `모듈/이름@판`). 돌리지 않았거나 아직 없으면 null.",
+      "properties": {
+        "regulation": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Regulation"
+        },
+        "keywords": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Keywords"
+        },
+        "controversy": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Controversy"
+        }
+      },
+      "required": [
+        "regulation",
+        "keywords",
+        "controversy"
+      ],
+      "title": "MaterialityPromptIds",
+      "type": "object"
+    },
+    "MaterialityRegulationDone": {
+      "additionalProperties": false,
+      "description": "규제·정책 조사(코랩 셀 17)의 답을 JSON 객체로 읽었다.",
+      "properties": {
+        "status": {
+          "const": "done",
+          "title": "Status",
+          "type": "string"
+        },
+        "parsed": {
+          "additionalProperties": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "description": "모델의 JSON 객체(받은 그대로).",
+          "title": "Parsed",
+          "type": "object"
+        },
+        "items": {
+          "description": "parsed 에서 셀 33 규칙으로 뽑은 항목(dict 가 아닌 원소는 빼고 경고 items_skipped).",
+          "items": {
+            "$ref": "#/$defs/MaterialityRegulationItem"
+          },
+          "title": "Items",
+          "type": "array"
+        },
+        "selfCheck": {
+          "anyOf": [
+            {
+              "additionalProperties": {
+                "$ref": "#/$defs/JsonValue"
+              },
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "parsed 의 self_check(객체일 때만, 아니면 null).",
+          "title": "Selfcheck"
+        },
+        "topicNameMismatch": {
+          "const": false,
+          "description": "코랩 셀 17 은 답의 topic_name 을 견주지 않는다 — 늘 false.",
+          "title": "Topicnamemismatch",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "status",
+        "parsed",
+        "items",
+        "selfCheck",
+        "topicNameMismatch"
+      ],
+      "title": "MaterialityRegulationDone",
+      "type": "object"
+    },
+    "MaterialityRegulationItem": {
+      "additionalProperties": false,
+      "description": "규제·정책 업데이트 하나(코랩 셀 17 의 UpdateItem 에서 셀 33 의 표시 칸 차례). 모델 JSON 의 얇은 보기다.",
+      "properties": {
+        "title": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Title"
+        },
+        "summary": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Summary"
+        },
+        "jurisdiction": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Jurisdiction"
+        },
+        "authority": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Authority"
+        },
+        "event_date": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Event Date"
+        },
+        "publish_date": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Publish Date"
+        },
+        "status": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Status"
+        },
+        "primary_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Primary Url"
+        },
+        "region": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "그 항목이 들어 있던 results 의 키(예: KR·EU·US). results 가 dict 가 아니었으면 null. 엑셀 F 열 글에는 안\n넣는다.",
+          "title": "Region"
+        }
+      },
+      "required": [
+        "title",
+        "summary",
+        "jurisdiction",
+        "authority",
+        "event_date",
+        "publish_date",
+        "status",
+        "primary_url",
+        "region"
+      ],
+      "title": "MaterialityRegulationItem",
+      "type": "object"
+    },
+    "MaterialityResult": {
+      "additionalProperties": false,
+      "description": "materiality.result@1 — 중대성평가 IRO 한 건의 결과. schemaVersion 이 첫 키다. 사용량·비용은 싣지 않는다(실행기의\n기록이 진실이다).",
+      "properties": {
+        "schemaVersion": {
+          "const": "materiality.result@1",
+          "title": "Schemaversion",
+          "type": "string"
+        },
+        "company": {
+          "$ref": "#/$defs/MaterialityCompany",
+          "description": "입력의 company 그대로."
+        },
+        "scope": {
+          "$ref": "#/$defs/MaterialityScope"
+        },
+        "settings": {
+          "$ref": "#/$defs/MaterialitySettings"
+        },
+        "part1": {
+          "$ref": "#/$defs/MaterialityPart1"
+        },
+        "part2": {
+          "$ref": "#/$defs/MaterialityPart2NotRun"
+        },
+        "warnings": {
+          "items": {
+            "$ref": "#/$defs/MaterialityWarning"
+          },
+          "title": "Warnings",
+          "type": "array"
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "company",
+        "scope",
+        "settings",
+        "part1",
+        "part2",
+        "warnings"
+      ],
+      "title": "MaterialityResult",
+      "type": "object"
+    },
+    "MaterialityScope": {
+      "additionalProperties": false,
+      "description": "무엇을 어떤 조건으로 조사했는지(입력에서 옮김).",
+      "properties": {
+        "topicCount": {
+          "description": "입력 토픽 수.",
+          "minimum": 0,
+          "title": "Topiccount",
+          "type": "integer"
+        },
+        "sector": {
+          "enum": [
+            "financial",
+            "non_financial"
+          ],
+          "title": "Sector",
+          "type": "string"
+        },
+        "whitelist": {
+          "enum": [
+            "cell71",
+            "cell73"
+          ],
+          "title": "Whitelist",
+          "type": "string"
+        },
+        "dateRange": {
+          "description": "입력의 조사 기간. 코랩대로 키워드 호출에만 갔다 — 규제·컨트로버시 조사 호출에는 안 갔다.",
+          "title": "Daterange",
+          "type": "string"
+        },
+        "geoScope": {
+          "title": "Geoscope",
+          "type": "string"
+        },
+        "userLocation": {
+          "title": "Userlocation",
+          "type": "string"
+        },
+        "mainLanguage": {
+          "title": "Mainlanguage",
+          "type": "string"
+        },
+        "latestEventMode": {
+          "title": "Latesteventmode",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "topicCount",
+        "sector",
+        "whitelist",
+        "dateRange",
+        "geoScope",
+        "userLocation",
+        "mainLanguage",
+        "latestEventMode"
+      ],
+      "title": "MaterialityScope",
+      "type": "object"
+    },
+    "MaterialitySettings": {
+      "additionalProperties": false,
+      "description": "실행 설정(코랩 셀 8·11 의 상수). 실제로 불린 모델·사용량은 실행기의 기록이 진실이다. 모두 글자거나 null.",
+      "properties": {
+        "model": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "모델 이름(코랩 model).",
+          "title": "Model"
+        },
+        "temperature": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "temperature(repr(float) 글자. 코랩 0.1).",
+          "title": "Temperature"
+        },
+        "searchContextSize": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "웹 검색 도구의 search_context_size(코랩 low).",
+          "title": "Searchcontextsize"
+        },
+        "promptIds": {
+          "$ref": "#/$defs/MaterialityPromptIds"
+        }
+      },
+      "required": [
+        "model",
+        "temperature",
+        "searchContextSize",
+        "promptIds"
+      ],
+      "title": "MaterialitySettings",
+      "type": "object"
+    },
+    "MaterialityTopicKeywords": {
+      "additionalProperties": false,
+      "description": "토픽 하나의 검색 키워드(코랩 topic_to_keywords 의 한 쌍).",
+      "properties": {
+        "topic": {
+          "description": "모델이 낸 토픽명(입력 토픽명과 다를 수 있다 — 다르면 그 입력 토픽은 「(키워드 없음)」으로 조사된다).",
+          "title": "Topic",
+          "type": "string"
+        },
+        "keywords": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Keywords",
+          "type": "array"
+        }
+      },
+      "required": [
+        "topic",
+        "keywords"
+      ],
+      "title": "MaterialityTopicKeywords",
+      "type": "object"
+    },
+    "MaterialityTopicResult": {
+      "additionalProperties": false,
+      "description": "토픽 하나의 1부 결과(입력 차례).",
+      "properties": {
+        "topic": {
+          "title": "Topic",
+          "type": "string"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "keywordStr": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "컨트로버시 프롬프트에 실은 키워드 글 그대로(「, 」로 이음, 없으면 「(키워드 없음)」). 조사를 돌리지 않았으면\nnull.",
+          "title": "Keywordstr"
+        },
+        "regulation": {
+          "discriminator": {
+            "mapping": {
+              "done": "#/$defs/MaterialityRegulationDone",
+              "failed": "#/$defs/MaterialityOutcomeFailed",
+              "not_run": "#/$defs/MaterialityOutcomeNotRun"
+            },
+            "propertyName": "status"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/MaterialityRegulationDone"
+            },
+            {
+              "$ref": "#/$defs/MaterialityOutcomeFailed"
+            },
+            {
+              "$ref": "#/$defs/MaterialityOutcomeNotRun"
+            }
+          ],
+          "title": "Regulation"
+        },
+        "controversy": {
+          "discriminator": {
+            "mapping": {
+              "done": "#/$defs/MaterialityControversyDone",
+              "failed": "#/$defs/MaterialityOutcomeFailed",
+              "not_run": "#/$defs/MaterialityOutcomeNotRun"
+            },
+            "propertyName": "status"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/MaterialityControversyDone"
+            },
+            {
+              "$ref": "#/$defs/MaterialityOutcomeFailed"
+            },
+            {
+              "$ref": "#/$defs/MaterialityOutcomeNotRun"
+            }
+          ],
+          "title": "Controversy"
+        }
+      },
+      "required": [
+        "topic",
+        "description",
+        "keywordStr",
+        "regulation",
+        "controversy"
+      ],
+      "title": "MaterialityTopicResult",
+      "type": "object"
+    },
+    "MaterialityWarning": {
+      "additionalProperties": false,
+      "description": "경고 한 줄.",
+      "properties": {
+        "code": {
+          "description": "subtopic_autofilled = 서브토픽이 없어 토픽 설명으로 하나 지어 넣음, subtopic_key_unmatched = 서브토픽 키가 어느\n토픽명과도 맞지 않음(코랩은 조용히 버린다), keywords_missing_for_topic = 그 토픽의 키워드가 없어\n「(키워드 없음)」으로 조사함, keywords_duplicate_topic = 키워드 답에 같은 토픽이 둘 이상(뒤 것이 남음),\ntopic_name_mismatch = 컨트로버시 답의 topic_name 이 입력 토픽명과 다름, items_skipped = 항목 목록에 객체가\n아닌 원소가 있어 보기에서 뺌, items_unrecognized = 답(done)에서 항목 목록 자리를 알아보지 못해 보기가 빔.",
+          "enum": [
+            "subtopic_autofilled",
+            "subtopic_key_unmatched",
+            "keywords_missing_for_topic",
+            "keywords_duplicate_topic",
+            "topic_name_mismatch",
+            "items_skipped",
+            "items_unrecognized"
+          ],
+          "title": "Code",
+          "type": "string"
+        },
+        "message": {
+          "title": "Message",
+          "type": "string"
+        },
+        "topic": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "그 경고의 토픽(입력 토픽명). 토픽에 매이지 않으면 null.",
+          "title": "Topic"
+        }
+      },
+      "required": [
+        "code",
+        "message",
+        "topic"
+      ],
+      "title": "MaterialityWarning",
+      "type": "object"
+    }
+  },
+  "$ref": "#/$defs/MaterialityResult",
+  "description": "중대성평가 IRO 한 건의 결과.",
+  "title": "materiality.result@1"
+}

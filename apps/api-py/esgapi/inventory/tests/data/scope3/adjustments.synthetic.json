@@ -1,0 +1,14 @@
+{
+  "synthetic": true,
+  "note": "G1 골든용 가상 보정 계수다. 실제 환율·물가지수가 아니며 계산하기 쉬운 숫자로 지어냈다.",
+  "adjustments": [
+    {
+      "currency": "KRW",
+      "targetCurrency": "USD",
+      "targetPriceYear": 2022,
+      "multiplier": "0.001",
+      "synthetic": true,
+      "source": null
+    }
+  ]
+}

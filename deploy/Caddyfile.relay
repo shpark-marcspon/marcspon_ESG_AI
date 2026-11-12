@@ -1,0 +1,19 @@
+# 둘째 벌(esg-demo2, 밴드 DM1)의 중계. 첫 벌 proxy 가 TLS·거르기·본문 버퍼를 다 한 뒤 http 로 넘긴 것을 그 벌 안으로 잇는다.
+#   :8000 → api-py:8000   :7070 → storage:7070      (deploy/compose.edge-relay.yaml 의 relay 가 읽는다)
+# 거르기를 여기서 다시 하지 않는다 — 공유 네트워크(EDGE_NETWORK)에는 첫 벌 proxy 와 이것뿐이고 호스트 포트는 열지 않는다.
+# Host 는 받은 그대로 넘긴다(Caddy 기본 — 저장소 서명 대조). X-Forwarded-* 는 앞 proxy 가 단 것을 이어 간다(trusted_proxies).
+{
+	auto_https off
+	servers {
+		protocols h1
+		trusted_proxies static private_ranges
+	}
+}
+
+:8000 {
+	reverse_proxy api-py:8000
+}
+
+:7070 {
+	reverse_proxy storage:7070
+}

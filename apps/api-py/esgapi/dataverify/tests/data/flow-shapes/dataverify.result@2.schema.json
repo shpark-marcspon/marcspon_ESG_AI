@@ -1,0 +1,1371 @@
+{
+  "$defs": {
+    "ByNameItems": {
+      "additionalProperties": false,
+      "description": "이름형 도구(*_by_name·*_by_names)가 받은 항목(모델이 준 JSON 값 그대로 — 보통 [대분류, 중분류, 소분류, 단위]\n배열, addends 는 그 배열의 목록). 도구마다 쓰는 열쇠만 있다: sum_check_by_name = total·a·b,\nsum_n_check_by_names = addends·target, ratio_check_by_name = numerator·denominator·expected.",
+      "properties": {
+        "total": {
+          "$ref": "#/$defs/JsonValue"
+        },
+        "a": {
+          "$ref": "#/$defs/JsonValue"
+        },
+        "b": {
+          "$ref": "#/$defs/JsonValue"
+        },
+        "addends": {
+          "$ref": "#/$defs/JsonValue"
+        },
+        "target": {
+          "$ref": "#/$defs/JsonValue"
+        },
+        "numerator": {
+          "$ref": "#/$defs/JsonValue"
+        },
+        "denominator": {
+          "$ref": "#/$defs/JsonValue"
+        },
+        "expected": {
+          "$ref": "#/$defs/JsonValue"
+        }
+      },
+      "title": "ByNameItems",
+      "type": "object"
+    },
+    "CheckItems": {
+      "additionalProperties": false,
+      "description": "검사에 쓴 항목. 어느 쪽인지는 tool 로 가른다 — 이름형 도구는 byName, 단건 도구는 raw 이고 다른 쪽은 null.",
+      "properties": {
+        "byName": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ByNameItems"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "raw": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/RawItems"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "byName",
+        "raw"
+      ],
+      "title": "CheckItems",
+      "type": "object"
+    },
+    "Company": {
+      "additionalProperties": false,
+      "description": "기업 정보(코랩 셀 10·18 USER 의 「기업 정보」 네 줄).",
+      "properties": {
+        "name": {
+          "description": "기업명.",
+          "title": "Name",
+          "type": "string"
+        },
+        "sasbIndustry": {
+          "description": "SASB 산업분류.",
+          "title": "Sasbindustry",
+          "type": "string"
+        },
+        "materialTopics": {
+          "description": "주요 중대토픽. 프롬프트에는 「, 」로 이어 한 줄로 싣는다(코랩대로).",
+          "items": {
+            "type": "string"
+          },
+          "title": "Materialtopics",
+          "type": "array"
+        },
+        "reportingYear": {
+          "description": "보고연도(YYYY).",
+          "pattern": "^[0-9]{4}$",
+          "title": "Reportingyear",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "sasbIndustry",
+        "materialTopics",
+        "reportingYear"
+      ],
+      "title": "Company",
+      "type": "object"
+    },
+    "DataverifyResult": {
+      "additionalProperties": false,
+      "description": "dataverify.result@2 — 데이터 검증 한 건의 결과. schemaVersion 이 첫 키다. 사용량·비용은 싣지 않는다(실행기의\n기록이 진실이다).",
+      "properties": {
+        "schemaVersion": {
+          "const": "dataverify.result@2",
+          "title": "Schemaversion",
+          "type": "string"
+        },
+        "company": {
+          "$ref": "#/$defs/Company",
+          "description": "입력의 company 그대로."
+        },
+        "scope": {
+          "$ref": "#/$defs/Scope"
+        },
+        "settings": {
+          "$ref": "#/$defs/DataverifySettings"
+        },
+        "plan": {
+          "discriminator": {
+            "mapping": {
+              "done": "#/$defs/PlanDone",
+              "failed": "#/$defs/PlanFailed",
+              "not_run": "#/$defs/PlanNotRun"
+            },
+            "propertyName": "status"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/PlanDone"
+            },
+            {
+              "$ref": "#/$defs/PlanFailed"
+            },
+            {
+              "$ref": "#/$defs/PlanNotRun"
+            }
+          ],
+          "title": "Plan"
+        },
+        "review": {
+          "discriminator": {
+            "mapping": {
+              "done": "#/$defs/DataverifyReviewDone",
+              "failed": "#/$defs/ReviewFailed",
+              "not_run": "#/$defs/ReviewNotRun"
+            },
+            "propertyName": "status"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/DataverifyReviewDone"
+            },
+            {
+              "$ref": "#/$defs/ReviewFailed"
+            },
+            {
+              "$ref": "#/$defs/ReviewNotRun"
+            }
+          ],
+          "title": "Review"
+        },
+        "insight": {
+          "discriminator": {
+            "mapping": {
+              "done": "#/$defs/InsightDone",
+              "failed": "#/$defs/InsightFailed",
+              "not_run": "#/$defs/InsightNotRun"
+            },
+            "propertyName": "status"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/InsightDone"
+            },
+            {
+              "$ref": "#/$defs/InsightFailed"
+            },
+            {
+              "$ref": "#/$defs/InsightNotRun"
+            }
+          ],
+          "title": "Insight"
+        },
+        "warnings": {
+          "items": {
+            "$ref": "#/$defs/DataverifyWarning"
+          },
+          "title": "Warnings",
+          "type": "array"
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "company",
+        "scope",
+        "settings",
+        "plan",
+        "review",
+        "insight",
+        "warnings"
+      ],
+      "title": "DataverifyResult",
+      "type": "object"
+    },
+    "DataverifyReviewDone": {
+      "additionalProperties": false,
+      "description": "계산 검토(코랩2번)를 마쳤다.",
+      "properties": {
+        "status": {
+          "const": "done",
+          "title": "Status",
+          "type": "string"
+        },
+        "partial": {
+          "description": "true = 최대 횟수에 닿아 남은 도구 호출을 버리고 마지막 답을 썼다, false = 고리가 끝까지 돌았다.",
+          "title": "Partial",
+          "type": "boolean"
+        },
+        "report": {
+          "description": "검토 리포트 원문(모델의 글).",
+          "title": "Report",
+          "type": "string"
+        },
+        "checks": {
+          "description": "도구 호출 기록(호출 차례).",
+          "items": {
+            "discriminator": {
+              "mapping": {
+                "check": "#/$defs/RuleCheck",
+                "error": "#/$defs/ErrorCheck",
+                "search": "#/$defs/SearchCheck",
+                "value": "#/$defs/ValueCheck"
+              },
+              "propertyName": "kind"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/ValueCheck"
+              },
+              {
+                "$ref": "#/$defs/RuleCheck"
+              },
+              {
+                "$ref": "#/$defs/SearchCheck"
+              },
+              {
+                "$ref": "#/$defs/ErrorCheck"
+              }
+            ]
+          },
+          "title": "Checks",
+          "type": "array"
+        },
+        "failure": {
+          "title": "Failure",
+          "type": "null"
+        }
+      },
+      "required": [
+        "status",
+        "partial",
+        "report",
+        "checks",
+        "failure"
+      ],
+      "title": "DataverifyReviewDone",
+      "type": "object"
+    },
+    "DataverifySettings": {
+      "additionalProperties": false,
+      "description": "실행 설정(코랩 셀 10·14·18 의 상수). 실제로 불린 모델·사용량은 실행기의 기록이 진실이다.",
+      "properties": {
+        "model": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "모델 이름(코랩 설정). 모델을 부르지 않았으면 null.",
+          "title": "Model"
+        },
+        "tolerance": {
+          "description": "검사 도구의 허용 오차(repr(float) 글자. 코랩 1.1).",
+          "title": "Tolerance",
+          "type": "string"
+        },
+        "temperature": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "모델의 temperature(repr(float) 글자). 모델을 부르지 않았으면 null.",
+          "title": "Temperature"
+        },
+        "maxSteps": {
+          "$ref": "#/$defs/MaxSteps"
+        },
+        "promptIds": {
+          "$ref": "#/$defs/PromptIds"
+        }
+      },
+      "required": [
+        "model",
+        "tolerance",
+        "temperature",
+        "maxSteps",
+        "promptIds"
+      ],
+      "title": "DataverifySettings",
+      "type": "object"
+    },
+    "DataverifyWarning": {
+      "additionalProperties": false,
+      "description": "경고 한 줄.",
+      "properties": {
+        "code": {
+          "description": "경고의 종류(예: no_target_theme = 입력에 테마 「환경」이 없다).",
+          "title": "Code",
+          "type": "string"
+        },
+        "message": {
+          "title": "Message",
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ],
+      "title": "DataverifyWarning",
+      "type": "object"
+    },
+    "ErrorCheck": {
+      "additionalProperties": false,
+      "description": "도구가 오류를 돌려준 호출(모르는 도구·인자 틀림·도구 안의 예외). 또는 도구 출력이 이 꼴에 맞지 않은 호출 —\n엔진의 결함일 때만이고 메시지가 「shape mismatch: 」로 시작한다.",
+      "properties": {
+        "seq": {
+          "description": "검토 단계의 도구 호출 차례(1부터).",
+          "minimum": 1,
+          "title": "Seq",
+          "type": "integer"
+        },
+        "tool": {
+          "title": "Tool",
+          "type": "string"
+        },
+        "kind": {
+          "const": "error",
+          "title": "Kind",
+          "type": "string"
+        },
+        "message": {
+          "description": "오류 글(도구의 error 글 그대로, 꼴이 맞지 않으면 그 까닭).",
+          "title": "Message",
+          "type": "string"
+        },
+        "args": {
+          "$ref": "#/$defs/JsonValue",
+          "description": "모델이 준 인자 그대로(보통 객체, 객체가 아니어도 그대로)."
+        }
+      },
+      "required": [
+        "seq",
+        "tool",
+        "kind",
+        "message",
+        "args"
+      ],
+      "title": "ErrorCheck",
+      "type": "object"
+    },
+    "Failure": {
+      "additionalProperties": false,
+      "description": "단계가 실패한 까닭.",
+      "properties": {
+        "kind": {
+          "description": "unparsable = 모델의 답을 읽지 못함(계산 Plan 이 python list 가 아님). 그 밖은 모델 호출의 실패 갈래(core.llm 의\n이름 그대로): budget_exceeded = 비용 상한, truncated = 출력이 잘림, refusal = 모델이 거절, provider_error = 공급사\n오류, timeout = 시간 한도, tool_executor_raised = 도구 실행이 예외를 던짐, schema_mismatch = 답이 스키마에 맞지\n않음.",
+          "enum": [
+            "unparsable",
+            "budget_exceeded",
+            "truncated",
+            "refusal",
+            "provider_error",
+            "timeout",
+            "tool_executor_raised",
+            "schema_mismatch"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "budgetSource": {
+          "anyOf": [
+            {
+              "enum": [
+                "guard",
+                "loop"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "budget_exceeded 일 때만 값: guard = 기존 비용 상한(BudgetLimit), loop = 단계 고리 한 번의 상한(max_cost_usd).\n그 밖의 갈래는 null.",
+          "title": "Budgetsource"
+        },
+        "message": {
+          "description": "실패 갈래와 상한의 자리·공급사 상태 번호·도구 이름까지(모델 글·공급사 메시지·고객 데이터는 싣지 않는다).",
+          "title": "Message",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "budgetSource",
+        "message"
+      ],
+      "title": "Failure",
+      "type": "object"
+    },
+    "InsightDone": {
+      "additionalProperties": false,
+      "description": "인사이트(코랩3번)를 마쳤다.",
+      "properties": {
+        "status": {
+          "const": "done",
+          "title": "Status",
+          "type": "string"
+        },
+        "partial": {
+          "description": "true = 최대 횟수에 닿아 남은 도구 호출을 버리고 마지막 답을 썼다, false = 고리가 끝까지 돌았다.",
+          "title": "Partial",
+          "type": "boolean"
+        },
+        "report": {
+          "description": "인사이트 리포트 원문(모델의 글).",
+          "title": "Report",
+          "type": "string"
+        },
+        "rows": {
+          "items": {
+            "$ref": "#/$defs/InsightRow"
+          },
+          "title": "Rows",
+          "type": "array"
+        },
+        "rowsParsed": {
+          "enum": [
+            "parsed",
+            "unparsed",
+            "none"
+          ],
+          "title": "Rowsparsed",
+          "type": "string"
+        },
+        "sources": {
+          "items": {
+            "$ref": "#/$defs/WebSource"
+          },
+          "title": "Sources",
+          "type": "array"
+        },
+        "failure": {
+          "title": "Failure",
+          "type": "null"
+        }
+      },
+      "required": [
+        "status",
+        "partial",
+        "report",
+        "rows",
+        "rowsParsed",
+        "sources",
+        "failure"
+      ],
+      "title": "InsightDone",
+      "type": "object"
+    },
+    "InsightFailed": {
+      "additionalProperties": false,
+      "description": "인사이트가 실패했다.",
+      "properties": {
+        "status": {
+          "const": "failed",
+          "title": "Status",
+          "type": "string"
+        },
+        "partial": {
+          "title": "Partial",
+          "type": "null"
+        },
+        "report": {
+          "title": "Report",
+          "type": "null"
+        },
+        "rows": {
+          "items": {
+            "$ref": "#/$defs/InsightRow"
+          },
+          "maxItems": 0,
+          "title": "Rows",
+          "type": "array"
+        },
+        "rowsParsed": {
+          "const": "none",
+          "title": "Rowsparsed",
+          "type": "string"
+        },
+        "sources": {
+          "items": {
+            "$ref": "#/$defs/WebSource"
+          },
+          "maxItems": 0,
+          "title": "Sources",
+          "type": "array"
+        },
+        "failure": {
+          "$ref": "#/$defs/Failure"
+        },
+        "partialText": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "잘린 답의 부분 원문(모델의 글 — failure.kind 가 truncated 일 때만, 그 밖은 null). failure.message·warnings 에는\n싣지 않는다.",
+          "title": "Partialtext"
+        }
+      },
+      "required": [
+        "status",
+        "partial",
+        "report",
+        "rows",
+        "rowsParsed",
+        "sources",
+        "failure",
+        "partialText"
+      ],
+      "title": "InsightFailed",
+      "type": "object"
+    },
+    "InsightNotRun": {
+      "additionalProperties": false,
+      "description": "인사이트를 돌리지 않았다.",
+      "properties": {
+        "status": {
+          "const": "not_run",
+          "title": "Status",
+          "type": "string"
+        },
+        "partial": {
+          "title": "Partial",
+          "type": "null"
+        },
+        "report": {
+          "title": "Report",
+          "type": "null"
+        },
+        "rows": {
+          "items": {
+            "$ref": "#/$defs/InsightRow"
+          },
+          "maxItems": 0,
+          "title": "Rows",
+          "type": "array"
+        },
+        "rowsParsed": {
+          "const": "none",
+          "title": "Rowsparsed",
+          "type": "string"
+        },
+        "sources": {
+          "items": {
+            "$ref": "#/$defs/WebSource"
+          },
+          "maxItems": 0,
+          "title": "Sources",
+          "type": "array"
+        },
+        "failure": {
+          "title": "Failure",
+          "type": "null"
+        }
+      },
+      "required": [
+        "status",
+        "partial",
+        "report",
+        "rows",
+        "rowsParsed",
+        "sources",
+        "failure"
+      ],
+      "title": "InsightNotRun",
+      "type": "object"
+    },
+    "InsightRow": {
+      "additionalProperties": false,
+      "description": "인사이트 표의 한 줄(코랩 셀 18 출력 형식의 다섯 열).",
+      "properties": {
+        "area": {
+          "description": "영역(환경/사회/지배구조).",
+          "title": "Area",
+          "type": "string"
+        },
+        "indicator": {
+          "description": "지표(소분류).",
+          "title": "Indicator",
+          "type": "string"
+        },
+        "observation": {
+          "description": "관찰 내용 및 스토리.",
+          "title": "Observation",
+          "type": "string"
+        },
+        "risk": {
+          "description": "잠재 리스크(데이터 품질·정보·해석).",
+          "title": "Risk",
+          "type": "string"
+        },
+        "interpretation": {
+          "description": "해석·가설.",
+          "title": "Interpretation",
+          "type": "string"
+        }
+      },
+      "required": [
+        "area",
+        "indicator",
+        "observation",
+        "risk",
+        "interpretation"
+      ],
+      "title": "InsightRow",
+      "type": "object"
+    },
+    "JsonValue": {},
+    "MaxSteps": {
+      "additionalProperties": false,
+      "description": "단계마다 모델 호출의 최대 횟수(코랩 SET_MAX_STEPS). 그 단계를 돌리지 않았으면 null.",
+      "properties": {
+        "plan": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Plan"
+        },
+        "review": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Review"
+        },
+        "insight": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Insight"
+        }
+      },
+      "required": [
+        "plan",
+        "review",
+        "insight"
+      ],
+      "title": "MaxSteps",
+      "type": "object"
+    },
+    "PlanDone": {
+      "additionalProperties": false,
+      "description": "계산 Plan(코랩1번)을 마쳤다.",
+      "properties": {
+        "status": {
+          "const": "done",
+          "title": "Status",
+          "type": "string"
+        },
+        "partial": {
+          "description": "true = 최대 횟수에 닿아 남은 도구 호출을 버리고 마지막 답을 썼다, false = 고리가 끝까지 돌았다.",
+          "title": "Partial",
+          "type": "boolean"
+        },
+        "formulas": {
+          "description": "검증 산식(모델이 낸 python list 의 원소, 그 차례).",
+          "items": {
+            "type": "string"
+          },
+          "title": "Formulas",
+          "type": "array"
+        },
+        "raw": {
+          "description": "모델의 답 원문.",
+          "title": "Raw",
+          "type": "string"
+        },
+        "failure": {
+          "title": "Failure",
+          "type": "null"
+        }
+      },
+      "required": [
+        "status",
+        "partial",
+        "formulas",
+        "raw",
+        "failure"
+      ],
+      "title": "PlanDone",
+      "type": "object"
+    },
+    "PlanFailed": {
+      "additionalProperties": false,
+      "description": "계산 Plan 이 실패했다. partial 은 null 이다.",
+      "properties": {
+        "status": {
+          "const": "failed",
+          "title": "Status",
+          "type": "string"
+        },
+        "partial": {
+          "title": "Partial",
+          "type": "null"
+        },
+        "formulas": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 0,
+          "title": "Formulas",
+          "type": "array"
+        },
+        "raw": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "읽지 못한 답의 원문(unparsable). 호출이 실패했으면 null.",
+          "title": "Raw"
+        },
+        "failure": {
+          "$ref": "#/$defs/Failure"
+        }
+      },
+      "required": [
+        "status",
+        "partial",
+        "formulas",
+        "raw",
+        "failure"
+      ],
+      "title": "PlanFailed",
+      "type": "object"
+    },
+    "PlanNotRun": {
+      "additionalProperties": false,
+      "description": "계산 Plan 을 돌리지 않았다.",
+      "properties": {
+        "status": {
+          "const": "not_run",
+          "title": "Status",
+          "type": "string"
+        },
+        "partial": {
+          "title": "Partial",
+          "type": "null"
+        },
+        "formulas": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 0,
+          "title": "Formulas",
+          "type": "array"
+        },
+        "raw": {
+          "title": "Raw",
+          "type": "null"
+        },
+        "failure": {
+          "title": "Failure",
+          "type": "null"
+        }
+      },
+      "required": [
+        "status",
+        "partial",
+        "formulas",
+        "raw",
+        "failure"
+      ],
+      "title": "PlanNotRun",
+      "type": "object"
+    },
+    "PromptIds": {
+      "additionalProperties": false,
+      "description": "단계마다 쓴 프롬프트 id(core.llm 의 `모듈/이름@판`). 그 단계를 돌리지 않았으면 null.",
+      "properties": {
+        "plan": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Plan"
+        },
+        "review": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Review"
+        },
+        "insight": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Insight"
+        }
+      },
+      "required": [
+        "plan",
+        "review",
+        "insight"
+      ],
+      "title": "PromptIds",
+      "type": "object"
+    },
+    "RawItems": {
+      "additionalProperties": false,
+      "description": "단건 도구(sum_check·sum_n_check·ratio_check)가 받은 인자(모델이 준 JSON 값 그대로). 도구마다 쓰는 열쇠만 있다:\nsum_check = a·b·c, sum_n_check = addends·target, ratio_check = d·e·f.",
+      "properties": {
+        "a": {
+          "$ref": "#/$defs/JsonValue"
+        },
+        "b": {
+          "$ref": "#/$defs/JsonValue"
+        },
+        "c": {
+          "$ref": "#/$defs/JsonValue"
+        },
+        "d": {
+          "$ref": "#/$defs/JsonValue"
+        },
+        "e": {
+          "$ref": "#/$defs/JsonValue"
+        },
+        "f": {
+          "$ref": "#/$defs/JsonValue"
+        },
+        "addends": {
+          "$ref": "#/$defs/JsonValue"
+        },
+        "target": {
+          "$ref": "#/$defs/JsonValue"
+        }
+      },
+      "title": "RawItems",
+      "type": "object"
+    },
+    "ReviewFailed": {
+      "additionalProperties": false,
+      "description": "계산 검토가 실패했다. checks 는 실패 전까지의 호출이다.",
+      "properties": {
+        "status": {
+          "const": "failed",
+          "title": "Status",
+          "type": "string"
+        },
+        "partial": {
+          "title": "Partial",
+          "type": "null"
+        },
+        "report": {
+          "title": "Report",
+          "type": "null"
+        },
+        "checks": {
+          "items": {
+            "discriminator": {
+              "mapping": {
+                "check": "#/$defs/RuleCheck",
+                "error": "#/$defs/ErrorCheck",
+                "search": "#/$defs/SearchCheck",
+                "value": "#/$defs/ValueCheck"
+              },
+              "propertyName": "kind"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/ValueCheck"
+              },
+              {
+                "$ref": "#/$defs/RuleCheck"
+              },
+              {
+                "$ref": "#/$defs/SearchCheck"
+              },
+              {
+                "$ref": "#/$defs/ErrorCheck"
+              }
+            ]
+          },
+          "title": "Checks",
+          "type": "array"
+        },
+        "failure": {
+          "$ref": "#/$defs/Failure"
+        }
+      },
+      "required": [
+        "status",
+        "partial",
+        "report",
+        "checks",
+        "failure"
+      ],
+      "title": "ReviewFailed",
+      "type": "object"
+    },
+    "ReviewNotRun": {
+      "additionalProperties": false,
+      "description": "계산 검토를 돌리지 않았다.",
+      "properties": {
+        "status": {
+          "const": "not_run",
+          "title": "Status",
+          "type": "string"
+        },
+        "partial": {
+          "title": "Partial",
+          "type": "null"
+        },
+        "report": {
+          "title": "Report",
+          "type": "null"
+        },
+        "checks": {
+          "items": {
+            "discriminator": {
+              "mapping": {
+                "check": "#/$defs/RuleCheck",
+                "error": "#/$defs/ErrorCheck",
+                "search": "#/$defs/SearchCheck",
+                "value": "#/$defs/ValueCheck"
+              },
+              "propertyName": "kind"
+            },
+            "oneOf": [
+              {
+                "$ref": "#/$defs/ValueCheck"
+              },
+              {
+                "$ref": "#/$defs/RuleCheck"
+              },
+              {
+                "$ref": "#/$defs/SearchCheck"
+              },
+              {
+                "$ref": "#/$defs/ErrorCheck"
+              }
+            ]
+          },
+          "maxItems": 0,
+          "title": "Checks",
+          "type": "array"
+        },
+        "failure": {
+          "title": "Failure",
+          "type": "null"
+        }
+      },
+      "required": [
+        "status",
+        "partial",
+        "report",
+        "checks",
+        "failure"
+      ],
+      "title": "ReviewNotRun",
+      "type": "object"
+    },
+    "RuleCheck": {
+      "additionalProperties": false,
+      "description": "합계·부분합·비율 검사 한 번.",
+      "properties": {
+        "seq": {
+          "description": "검토 단계의 도구 호출 차례(1부터).",
+          "minimum": 1,
+          "title": "Seq",
+          "type": "integer"
+        },
+        "tool": {
+          "description": "부른 도구의 이름(sum_check 와 sum_check_by_name 을 가른다).",
+          "title": "Tool",
+          "type": "string"
+        },
+        "kind": {
+          "const": "check",
+          "title": "Kind",
+          "type": "string"
+        },
+        "rule": {
+          "description": "sum = a + b ≈ 합계, sum_n = 더하는 항목들의 합 ≈ 대상, ratio = 분자 / 분모 × 100 ≈ 기대값(%).",
+          "enum": [
+            "sum",
+            "sum_n",
+            "ratio"
+          ],
+          "title": "Rule",
+          "type": "string"
+        },
+        "items": {
+          "$ref": "#/$defs/CheckItems"
+        },
+        "tolerance": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "도구가 비교에 쓴 허용 오차(repr(float) 글자 — bool 은 도구처럼 1·0 으로). 수가 아니면 null 인데, 그때는 도구가\n허용 오차를 쓰지 않은 것이다(계산하지 못한 해뿐이거나 years 가 빔 — 썼다면 도구가 bad arguments 를 냈다).",
+          "title": "Tolerance"
+        },
+        "years": {
+          "description": "해마다의 판정(모델이 준 years 의 차례).",
+          "items": {
+            "$ref": "#/$defs/YearResult"
+          },
+          "title": "Years",
+          "type": "array"
+        }
+      },
+      "required": [
+        "seq",
+        "tool",
+        "kind",
+        "rule",
+        "items",
+        "tolerance",
+        "years"
+      ],
+      "title": "RuleCheck",
+      "type": "object"
+    },
+    "Scope": {
+      "additionalProperties": false,
+      "description": "무엇을 봤는지.",
+      "properties": {
+        "themes": {
+          "description": "검증한 테마(코랩대로 「환경」 하나). 입력에 그 테마가 없으면 빈 목록이다.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Themes",
+          "type": "array"
+        },
+        "itemCount": {
+          "description": "검증한 테마의 항목 수.",
+          "minimum": 0,
+          "title": "Itemcount",
+          "type": "integer"
+        },
+        "keyItemCount": {
+          "description": "그 가운데 핵심데이터가 「Y」인 항목 수.",
+          "minimum": 0,
+          "title": "Keyitemcount",
+          "type": "integer"
+        },
+        "years": {
+          "description": "그 항목들의 values 에 나온 연도 글자(겹침 없이, 오름차순).",
+          "items": {
+            "type": "string"
+          },
+          "title": "Years",
+          "type": "array"
+        }
+      },
+      "required": [
+        "themes",
+        "itemCount",
+        "keyItemCount",
+        "years"
+      ],
+      "title": "Scope",
+      "type": "object"
+    },
+    "SearchCheck": {
+      "additionalProperties": false,
+      "description": "항목 검색(search_items) 한 번.",
+      "properties": {
+        "seq": {
+          "description": "검토 단계의 도구 호출 차례(1부터).",
+          "minimum": 1,
+          "title": "Seq",
+          "type": "integer"
+        },
+        "tool": {
+          "title": "Tool",
+          "type": "string"
+        },
+        "kind": {
+          "const": "search",
+          "title": "Kind",
+          "type": "string"
+        },
+        "filter": {
+          "$ref": "#/$defs/SearchFilter"
+        },
+        "total": {
+          "description": "거름에 맞은 항목 수(쪽 나눔 전).",
+          "minimum": 0,
+          "title": "Total",
+          "type": "integer"
+        },
+        "limit": {
+          "$ref": "#/$defs/JsonValue",
+          "description": "쪽 크기(모델이 준 그대로, 주지 않았으면 분배기 기본 200)."
+        },
+        "offset": {
+          "$ref": "#/$defs/JsonValue",
+          "description": "건너뛴 수(모델이 준 그대로, 주지 않았으면 0)."
+        },
+        "returned": {
+          "description": "이번에 돌려준 항목 수.",
+          "minimum": 0,
+          "title": "Returned",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "seq",
+        "tool",
+        "kind",
+        "filter",
+        "total",
+        "limit",
+        "offset",
+        "returned"
+      ],
+      "title": "SearchCheck",
+      "type": "object"
+    },
+    "SearchFilter": {
+      "additionalProperties": false,
+      "description": "검색 거름(모델이 준 것만, 준 그대로 있다).",
+      "properties": {
+        "대분류": {
+          "$ref": "#/$defs/JsonValue"
+        },
+        "중분류": {
+          "$ref": "#/$defs/JsonValue"
+        },
+        "소분류_contains": {
+          "$ref": "#/$defs/JsonValue"
+        }
+      },
+      "title": "SearchFilter",
+      "type": "object"
+    },
+    "ValueCheck": {
+      "additionalProperties": false,
+      "description": "값 조회(value_of_by_name) 한 번. value 와 na 는 늘 맞물린다 — 값이 있으면 na false, 「N/A」면 value null·na\ntrue(contracts/wire.to_check 가 na 를 value 에서 지어 보장하고 시험이 못박는다). 꼴의 갈래로 가르지 않은 까닭:\nkind 안에서 na 로 한 번 더 가르면 JSON 스키마의 discriminator mapping 이 OpenAPI 꼴(글자 → $ref)을 벗어난다.",
+      "properties": {
+        "seq": {
+          "description": "검토 단계의 도구 호출 차례(1부터).",
+          "minimum": 1,
+          "title": "Seq",
+          "type": "integer"
+        },
+        "tool": {
+          "description": "부른 도구의 이름.",
+          "title": "Tool",
+          "type": "string"
+        },
+        "kind": {
+          "const": "value",
+          "title": "Kind",
+          "type": "string"
+        },
+        "item": {
+          "items": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "maxItems": 4,
+          "minItems": 4,
+          "title": "Item",
+          "type": "array"
+        },
+        "year": {
+          "$ref": "#/$defs/JsonValue",
+          "description": "연도(모델이 준 인자 그대로)."
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "찾은 값(repr(float) 글자). 도구가 「N/A」를 돌려줬으면 null 이고 na 가 true 다.",
+          "title": "Value"
+        },
+        "na": {
+          "description": "도구가 「N/A」를 돌려줬는지(항목 없음·값 빔·수로 못 읽음).",
+          "title": "Na",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "seq",
+        "tool",
+        "kind",
+        "item",
+        "year",
+        "value",
+        "na"
+      ],
+      "title": "ValueCheck",
+      "type": "object"
+    },
+    "WebSource": {
+      "additionalProperties": false,
+      "description": "웹 검색 출처.",
+      "properties": {
+        "title": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Title"
+        },
+        "url": {
+          "title": "Url",
+          "type": "string"
+        }
+      },
+      "required": [
+        "title",
+        "url"
+      ],
+      "title": "WebSource",
+      "type": "object"
+    },
+    "YearResult": {
+      "additionalProperties": false,
+      "description": "검사 한 해(단건 도구는 원소 하나, year 는 null).",
+      "properties": {
+        "year": {
+          "$ref": "#/$defs/JsonValue",
+          "description": "연도(모델이 준 인자 그대로). 단건 도구는 null."
+        },
+        "ok": {
+          "title": "Ok",
+          "type": "boolean"
+        },
+        "status": {
+          "enum": [
+            "OK",
+            "FAIL"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "diff": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "차이(repr(float) 글자. 합계·부분합은 (더한 값) − 대상, 비율은 퍼센트 포인트). 계산하지 못했으면 null.",
+          "title": "Diff"
+        },
+        "note": {
+          "anyOf": [
+            {
+              "enum": [
+                "non-numeric",
+                "division by zero"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "계산하지 못한 까닭(코랩의 note). 계산했으면 null.",
+          "title": "Note"
+        },
+        "explanation": {
+          "description": "도구가 쓴 설명 한 줄(영어, 코랩 그대로).",
+          "title": "Explanation",
+          "type": "string"
+        }
+      },
+      "required": [
+        "year",
+        "ok",
+        "status",
+        "diff",
+        "note",
+        "explanation"
+      ],
+      "title": "YearResult",
+      "type": "object"
+    }
+  },
+  "$ref": "#/$defs/DataverifyResult",
+  "description": "데이터 검증 한 건의 결과.",
+  "title": "dataverify.result@2"
+}

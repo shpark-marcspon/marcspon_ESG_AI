@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "drafting.bullets@3",
+  "basis": {"artifactId": 41, "parser": {"name": "docparse", "version": "0.1.0", "layout": 2}, "epoch": 1, "pagesSha256": "3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f"},
+  "base": {"runId": 58, "outlineId": 11, "matched": true, "reason": null},
+  "projectId": 7,
+  "outlineId": 12,
+  "outlineSha256": "0d6e6b1b0f3f5f2a8a4c1f7f3b3e9e8d6c5b4a39281706f5e4d3c2b1a0918273",
+  "status": {"status": "done"},
+  "document": {"documentId": 31, "fileName": "가상산업-2025-지속가능경영보고서.pdf", "pageCount": 5, "textPages": 4, "pages": [{"page": 1, "width": 595.0, "height": 842.0}, {"page": 2, "width": 595.0, "height": 842.0}, {"page": 3, "width": 595.0, "height": 842.0}, {"page": 4, "width": 595.0, "height": 842.0}, {"page": 5, "width": 595.0, "height": 842.0}]},
+  "leaves": [
+    {
+      "key": "env-climate-ghg",
+      "titlePath": ["환경", "기후변화 대응", "온실가스 배출 관리"],
+      "pages": [2, 3],
+      "reusedFrom": {"runId": 52, "outlineId": 11},
+      "outcome": {
+        "status": "done",
+        "bullets": [
+          {"text": "2025년 Scope 1·2 배출량 1,200 tCO2eq, 전년 대비 3.5% 감축", "sources": [{"documentId": 31, "blockId": "p2-b4", "page": 2, "blockBox": [56.0, 120.5, 538.0, 168.0], "sentence": {"index": 1, "boxes": [[210.4, 120.5, 538.0, 134.0], [56.0, 136.0, 301.2, 149.5]]}}, {"documentId": 31, "blockId": "p2-t1", "page": 2, "blockBox": [56.0, 300.0, 538.0, 420.0], "sentence": {"index": 2, "boxes": [[56.0, 340.0, 538.0, 356.0]]}}, {"documentId": 31, "blockId": "p3-b1", "page": 3, "blockBox": [56.0, 80.0, 538.0, 96.0], "sentence": null}], "unsupported": false},
+          {"text": "사업장 전체 고효율 설비 교체 추진", "sources": [], "unsupported": true}
+        ]
+      }
+    },
+    {
+      "key": "env-climate-energy",
+      "titlePath": ["환경", "기후변화 대응", "에너지 사용"],
+      "pages": [3],
+      "reusedFrom": null,
+      "outcome": {"status": "failed", "failure": {"kind": "timeout", "message": "모델 호출이 시간 안에 끝나지 않았다."}}
+    },
+    {
+      "key": "soc-safety",
+      "titlePath": ["사회", "안전보건"],
+      "pages": [],
+      "reusedFrom": null,
+      "outcome": {"status": "no_material"}
+    }
+  ],
+  "mapping": {"batches": 1, "failedBatches": []},
+  "settings": {"routes": {"map": "light-openai-41", "draft": "light-openai-41"}, "promptIds": {"map": "drafting/map@1", "draft": "drafting/draft@2"}},
+  "warnings": [
+    {"code": "source_not_given", "message": "이 잎에 주지 않은 블록을 근거로 댔다(뺌).", "key": "env-climate-ghg", "page": null},
+    {"code": "sentence_out_of_range", "message": "근거 블록에 없는 문장 번호를 댔다(블록만 남김).", "key": "env-climate-ghg", "page": 3},
+    {"code": "unsupported_bullet", "message": "근거 블록이 남지 않은 bullet 이다.", "key": "env-climate-ghg", "page": null},
+    {"code": "mapping_incomplete", "message": "어느 쪽에도 달리지 않은 잎이 있다.", "key": "soc-safety", "page": null}
+  ]
+}

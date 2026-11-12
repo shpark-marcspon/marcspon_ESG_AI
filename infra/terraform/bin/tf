@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+# Terraform 을 이 기계에 깔지 않고 돌리는 얇은 스크립트.
+#
+#   infra/terraform/bin/tf fmt -check -recursive
+#   infra/terraform/bin/tf -chdir=envs/practice init -backend=false
+#   infra/terraform/bin/tf -chdir=envs/practice test
+#
+# 하는 일은 하나다: 버전을 고정한 공식 이미지(hashicorp/terraform)를 컨테이너로 띄워, 받은 인자를 그대로 넘긴다.
+# 일하는 폴더는 infra/terraform 이다(어디서 부르든 같다).
+#
+# 일부러 막아 둔 것 두 가지:
+#   1. 컨테이너에는 저장소 폴더만 붙인다. 내 컴퓨터의 ~/.aws 와 환경 변수(AWS_ACCESS_KEY_ID 등)가 들어가지 않는다.
+#      → 이 스크립트로는 실수로라도 실제 AWS 계정에 닿을 수 없다.
+#   2. 플러그인·모듈을 받는 명령(init, providers, get) 말고는 네트워크를 끊고 돌린다(--network none).
+#      → fmt, validate, test 는 인터넷 없이 돈다는 것을 매번 확인하는 셈이다.
+#
+# 실제로 적용(plan, apply)할 때는 이 스크립트가 아니라 직접 깐 terraform 을 쓴다. 까는 법과 차례는 infra/README.md.
+set -euo pipefail
+
+# 고정한 버전. 올릴 때는 태그와 다이제스트를 같이 바꾼다(다이제스트: docker pull 뒤 docker image inspect 의 RepoDigests).
+# 다이제스트까지 적는 까닭: 태그는 나중에 다른 이미지를 가리키게 바뀔 수 있지만 다이제스트는 내용 그 자체다.
+TF_VERSION="1.16.5"
+TF_IMAGE="hashicorp/terraform:${TF_VERSION}@sha256:c7926feace05d0f7e73542842bf3945924e955a1f782cf000ccbb8d18fa42d77"
+
+here="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+tf_root="$(cd "$here/.." && pwd)"          # infra/terraform
+repo_root="$(cd "$tf_root/../.." && pwd)"  # 저장소 루트. 테스트가 .env.example 과 compose.yaml 을 읽으므로 루트를 붙인다.
+
+# 받은 공급자 플러그인을 두는 곳(git 밖). .terraform/ 을 지우고 다시 init 해도 다시 받지 않는다.
+mkdir -p "$repo_root/.tools/terraform-plugin-cache"
+
+# 첫 번째 "명령"(-chdir=… 같은 옵션이 아닌 첫 인자)을 찾는다.
+subcommand=""
+for arg in "$@"; do
+  case "$arg" in
+    -*) ;;
+    *) subcommand="$arg"; break ;;
+  esac
+done
+
+case "$subcommand" in
+  init | providers | get) network=() ;;        # 레지스트리에서 플러그인·모듈을 받아야 한다
+  *) network=(--network none) ;;               # 나머지는 네트워크 없이
+esac
+
+# 터미널에서 부르면 색과 입력을 살린다.
+tty=()
+if [ -t 0 ] && [ -t 1 ]; then tty=(-it); fi
+
+# ${배열[@]+"${배열[@]}"}: macOS 의 옛 bash(3.2)는 빈 배열을 "없는 변수"로 보고 멈춘다. 비어 있으면 아무것도 넣지 않게 한다.
+exec docker run --rm ${tty[@]+"${tty[@]}"} ${network[@]+"${network[@]}"} \
+  -v "$repo_root:/repo" \
+  -w /repo/infra/terraform \
+  -e TF_PLUGIN_CACHE_DIR=/repo/.tools/terraform-plugin-cache \
+  -e TF_IN_AUTOMATION=1 \
+  -e CHECKPOINT_DISABLE=1 \
+  "$TF_IMAGE" "$@"

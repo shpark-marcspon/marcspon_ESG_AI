@@ -1,0 +1,286 @@
+{
+  "schemaVersion": "greenwash.result@1",
+  "source": {
+    "fileName": "example-report.pdf",
+    "sha256": "fd6e0e2cc160874470890cc98ede97c0190fc86d0d6376cacee1f2c8c4836c1f",
+    "pageCount": 8
+  },
+  "config": {
+    "checker": {
+      "maxCandidatesPerPage": 3,
+      "maxCharsPageText": 2500,
+      "evidenceK": 2,
+      "maxCharsPerChunk": 450,
+      "useEvidenceFailopen": false,
+      "maxCharsEvidenceTotal": 1600,
+      "reportLevels": [
+        "High",
+        "Mid",
+        "Low"
+      ],
+      "debug": true,
+      "debugPages": 2,
+      "batchEval": false,
+      "promptVersion": "2026-01-15-v1"
+    },
+    "chunking": {
+      "chunkSize": 800,
+      "chunkOverlap": 150,
+      "separators": [
+        "\n\n",
+        "\n",
+        " "
+      ],
+      "normalize": true,
+      "embeddingBatchSize": 50
+    },
+    "chat": {
+      "temperature": 0.0,
+      "maxTokens": 1300
+    }
+  },
+  "models": {
+    "chat": "gpt-4.1-mini",
+    "embedding": "text-embedding-3-small"
+  },
+  "promptVersion": "2026-01-15-v1",
+  "parts": [
+    {
+      "name": "CEO 메시지",
+      "pages": [
+        2
+      ]
+    },
+    {
+      "name": "회사소개",
+      "pages": [
+        3,
+        4
+      ]
+    },
+    {
+      "name": "기후/환경 토픽",
+      "pages": [
+        4,
+        5
+      ]
+    }
+  ],
+  "pages": [
+    2,
+    3,
+    4,
+    5
+  ],
+  "extraTerms": [],
+  "items": [],
+  "candidateStats": null,
+  "counts": null,
+  "wordCounts": {
+    "total": [
+      {
+        "term": "친환경",
+        "count": 3
+      },
+      {
+        "term": "탄소중립",
+        "count": 2
+      }
+    ],
+    "pages": [
+      {
+        "page": 2,
+        "counts": [
+          {
+            "term": "친환경",
+            "count": 1
+          },
+          {
+            "term": "탄소중립",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "page": 4,
+        "counts": [
+          {
+            "term": "친환경",
+            "count": 2
+          },
+          {
+            "term": "탄소중립",
+            "count": 1
+          }
+        ]
+      }
+    ]
+  },
+  "dryRun": {
+    "pagesChecked": 4,
+    "pagesWithText": 4,
+    "pagesTruncated": 1,
+    "chunks": 14,
+    "embeddingIndex": {
+      "requests": 1,
+      "inputChars": 9800,
+      "inputTokens": {
+        "status": "measured",
+        "encoding": "cl100k_base",
+        "value": 4100
+      }
+    },
+    "ruleCandidates": 9,
+    "lower": {
+      "chat": {
+        "requests": 10,
+        "inputChars": 43300,
+        "inputTokens": {
+          "status": "measured",
+          "encoding": "o200k_base",
+          "value": 16900
+        }
+      },
+      "chatByKind": {
+        "detect": {
+          "requests": 4,
+          "inputChars": 18400,
+          "inputTokens": {
+            "status": "measured",
+            "encoding": "o200k_base",
+            "value": 7300
+          }
+        },
+        "eval": {
+          "requests": 5,
+          "inputChars": 21000,
+          "inputTokens": {
+            "status": "measured",
+            "encoding": "o200k_base",
+            "value": 8100
+          }
+        },
+        "lowOnly": {
+          "requests": 1,
+          "inputChars": 3900,
+          "inputTokens": {
+            "status": "measured",
+            "encoding": "o200k_base",
+            "value": 1500
+          }
+        },
+        "repair": {
+          "requests": 0,
+          "inputChars": 0,
+          "inputTokens": {
+            "status": "measured",
+            "encoding": "o200k_base",
+            "value": 0
+          }
+        }
+      },
+      "embeddingQueries": {
+        "requests": 0,
+        "inputChars": 0,
+        "inputTokens": {
+          "status": "unmeasured",
+          "encoding": "cl100k_base",
+          "reason": "가상의 사유: 부호화 파일 없음"
+        }
+      },
+      "judged": 6
+    },
+    "upper": {
+      "chat": {
+        "requests": 32,
+        "inputChars": 135000,
+        "inputTokens": {
+          "status": "measured",
+          "encoding": "o200k_base",
+          "value": 52200
+        }
+      },
+      "chatByKind": {
+        "detect": {
+          "requests": 4,
+          "inputChars": 18400,
+          "inputTokens": {
+            "status": "measured",
+            "encoding": "o200k_base",
+            "value": 7300
+          }
+        },
+        "eval": {
+          "requests": 12,
+          "inputChars": 50400,
+          "inputTokens": {
+            "status": "measured",
+            "encoding": "o200k_base",
+            "value": 19400
+          }
+        },
+        "lowOnly": {
+          "requests": 4,
+          "inputChars": 15600,
+          "inputTokens": {
+            "status": "measured",
+            "encoding": "o200k_base",
+            "value": 6000
+          }
+        },
+        "repair": {
+          "requests": 12,
+          "inputChars": 50600,
+          "inputTokens": {
+            "status": "measured",
+            "encoding": "o200k_base",
+            "value": 19500
+          }
+        }
+      },
+      "embeddingQueries": {
+        "requests": 16,
+        "inputChars": 2400,
+        "inputTokens": {
+          "status": "measured",
+          "encoding": "cl100k_base",
+          "value": 900
+        }
+      },
+      "outputTokensMax": 41600,
+      "evidenceChars": 1600,
+      "evidenceCapReached": true
+    },
+    "perPage": [
+      {
+        "page": 2,
+        "textChars": 1800,
+        "truncated": false,
+        "ruleCandidates": 3,
+        "lowerJudged": 2
+      },
+      {
+        "page": 3,
+        "textChars": 900,
+        "truncated": false,
+        "ruleCandidates": 1,
+        "lowerJudged": 1
+      },
+      {
+        "page": 4,
+        "textChars": 3100,
+        "truncated": true,
+        "ruleCandidates": 3,
+        "lowerJudged": 2
+      },
+      {
+        "page": 5,
+        "textChars": 1200,
+        "truncated": false,
+        "ruleCandidates": 2,
+        "lowerJudged": 1
+      }
+    ]
+  },
+  "report": null
+}

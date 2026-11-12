@@ -1,0 +1,91 @@
+{
+ "_comment": [
+  "번역 판 layout=2(밴드 TRD1, MARC-TICK-364)의 고정값. 쓰는 곳: tests/test_layout2.py. 판 이름 = <짓개 판>@<분해 판>.",
+  "짓개: layout2·layout2_extra = tests/layout2_doc.py, synthetic·synthetic_toc = tests/baseline_doc.py(PB1 과 같은 PDF). layout2@1 은 번역 판 짓개를 기본 판으로 분해한 것.",
+  "뽑은 명령(services/parser 에서): uv run --frozen python scripts/parser_baseline.py build <판>.pdf [--toc | --doc layout2 [--extra]] → uv run --frozen python -m docparse parse <판>.pdf --out <폴더> --places --layout <1|2> → uv run --frozen python scripts/parser_baseline.py hash <폴더>.",
+  "정규화·직렬화는 PB1(synthetic.sha256.json)과 같다. 바꾸는 규칙도 같다: 번역 판 산출을 일부러 바꾸는 커밋만 같은 커밋에서 고치고 base_commit 도 고친다. 기본 판 고정값(synthetic.sha256.json)은 이 파일과 무관하게 그대로다."
+ ],
+ "base_commit": "989cc43fe9ec7f16941bd3b384f0a3fa9fb11f8d",
+ "variants": {
+  "layout2@1": {
+   "pdf_sha256": "140d7ae097196a4fb95a7af934cecebb78f083ef2099a47c5a4d84f329264aa9",
+   "all": "bf10ab463f06144db8b7b564f01a7ce265a2b20971734e0c6471f1feab6d3186",
+   "char-places": "c3c411a4a3ca54175e605a2f6903901229b11eaba7d8307d3829cc32bd843468",
+   "document": "e2e8a2e1d6ed0514e3ca8bf0ecf7f5573347283eac7e71d154b539325f76c3aa",
+   "parts": {
+    "char-places.containers": "5e9ad368a918a1b5b6fd5d0e2781888f53f9fe8e2fdd3c20665547d47db1d23c",
+    "char-places.rest": "41759dd265f688a9e0b8554c9397d4aaf617287baab82991ab80913e8a3f1e82",
+    "char-places.unlinked": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "document.blocks": "47c46b89a059d9b6b15cb804ef3e2d7dccb959c89bdd147d3b5bbf0ef4f0ca43",
+    "document.pages": "cc5ad55c2c527a41a41f9c381c50c1c5fd8c5483ec5b7d785e4d1fee62800bb5",
+    "document.rest": "3fec3ad798de6015d3462b86876e2d72aa630c773aa2cfeddc5c683b1a5c0d97",
+    "document.sections": "c2ad915f22e634d5bd12acffef4a40840a401c9294c6155ae6296c450e866641",
+    "document.tables": "0a640488c7a004bb0cc609316ea7a97bcf04479669bf8dc6dc22544d8362e2a2"
+   }
+  },
+  "layout2@2": {
+   "pdf_sha256": "140d7ae097196a4fb95a7af934cecebb78f083ef2099a47c5a4d84f329264aa9",
+   "all": "2b3e2141d1c2981bc0e7b9317912d93103f6700e3c9c4f7014898c17649af126",
+   "char-places": "edf0e5b68194b6d7f6ddcb513501f3760b9b55484bcfcce2f04fc48cbe4b3f5f",
+   "document": "d994b9fcf8aa13cd10296ed21a85c0fb4d8f4138097e6e8fd1c6b7595a873127",
+   "parts": {
+    "char-places.containers": "f3583bc012e45926c46ca72dc4580835090245387ab5939f486ff0dc43b4b03c",
+    "char-places.rest": "1ff3079a342001e2722ff8f931852e8b7d9e5f25e579e7d99a5f253c7fe81680",
+    "char-places.unlinked": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "document.blocks": "c96c193d7854c271e1e32ca5c13ffc406b46e0458662317a84b201e98b5b3f33",
+    "document.pages": "d2774ce6112b59111848206d73581c23956f2a9b140e10f4b3e01fb0b6e369d7",
+    "document.rest": "4df4a8226481f05af20ec3a1a8b1bf5dad34dca2d27d76615384d2adf75928e1",
+    "document.sections": "c2ad915f22e634d5bd12acffef4a40840a401c9294c6155ae6296c450e866641",
+    "document.tables": "5fe43b0cd072d19bfe0c136afc450ee9647a4d7384a0dcc2c1a4418b86cf68dc"
+   }
+  },
+  "layout2_extra@2": {
+   "pdf_sha256": "87e9a4b2f805f0868dfbabb40cd3d9de6d75173d3b2ef545cf20c1a31369214c",
+   "all": "189daaffb568672dd1385d8834e713c7eb1934135a5f3b2d57ee08e191e69364",
+   "char-places": "f8be85475d320290f258a8f53124a17c555a92ac319b87252bd54ffb6c69c974",
+   "document": "2ec5a31af3cdb0082b3e8cbbf743af4939a0c0af3eb756cfbf64e1cf7b65dd4a",
+   "parts": {
+    "char-places.containers": "9b031dbe591fbdc03587c16e693a33561d02e61e57f253416854bb2ef866c054",
+    "char-places.rest": "aa75f35e0c3cc4cdb5adc1cf92da3aaf99db78d12ee26e452acc0cb3389f414c",
+    "char-places.unlinked": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "document.blocks": "499444a5aae622e6116210431714992cb8b6aab9330971fc31f25a504eecc7b4",
+    "document.pages": "6500712a8b252c7844338a93c9ea1165b7f5d5d92f807174d9e61260995eb2bc",
+    "document.rest": "b299501a0bf2d1518ae70ac94fc8183131af149e55fdd030f26cf7f1dcbe5f97",
+    "document.sections": "c2ad915f22e634d5bd12acffef4a40840a401c9294c6155ae6296c450e866641",
+    "document.tables": "5fe43b0cd072d19bfe0c136afc450ee9647a4d7384a0dcc2c1a4418b86cf68dc"
+   }
+  },
+  "synthetic@2": {
+   "pdf_sha256": "c28880f8ed4fc0704d5bca674092815452c03ba1685dc5d0fcd8cb312cb0d777",
+   "all": "84c1b0072c949925d158280d4724f04ee9f7bc7788808d2553e996a880130c33",
+   "char-places": "d66c0d313ef3a68df13e1fdcf4a2ef75369014481ba1fea427fcfd798076db1c",
+   "document": "71262cfff5795099b61fc510b5eae24b0b3397ecb9152d008352c6bbadb3aba3",
+   "parts": {
+    "char-places.containers": "dd899426e93426a364ace61f5d2ffbb868d4d53155d5e572ce92427b78c517bc",
+    "char-places.rest": "fcbf3e1b9098751395b51cd6c8ade2177b05cc3b44f03ee9b872a3fccb659924",
+    "char-places.unlinked": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "document.blocks": "74f6b72e037f7be1aa3f43cdffb8a4645790922fcedf95e009b51d104e157844",
+    "document.pages": "f4b90757fb0ac8a4f5af6e85f8cb393215b2f043c02b9a1ab11126f20a60f820",
+    "document.rest": "9058ac0ea414c5e6f1d290585825269c92a2c04eb0c58bdb4c22cf113d6d52dd",
+    "document.sections": "9c1a926ef4d8e86a900ab7f7fd5b63dfc445c228b0b5129dfb310f7bfe40f1dd",
+    "document.tables": "f4fb680a9696da3bebe31ab76d9a54949c26badd443bfd24b525624236346d07"
+   }
+  },
+  "synthetic_toc@2": {
+   "pdf_sha256": "3633bbb23a52d2271af23b87bd07012ea774359c814db4f7fbd3a06984dbf9d0",
+   "all": "52875e0f100c7edb9d5d7571301db88a4a1355ba1954d7940dba48f35704ce0b",
+   "char-places": "d94702f7483c1747f1982f82751c4bffeb9bd1d1842dda6cd5b14c58268982a0",
+   "document": "77c43dafdf7ad4ae7b5da07f08995859cdb802896b105a6b3914c155c3ad048e",
+   "parts": {
+    "char-places.containers": "dd899426e93426a364ace61f5d2ffbb868d4d53155d5e572ce92427b78c517bc",
+    "char-places.rest": "9ee7414e0f0bc2955a7501660f029646c68dea3496c1d7712d4009acdc0a868d",
+    "char-places.unlinked": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "document.blocks": "edcfa1113bd8febcc1315d3de1e9bbebd5ebbf7560d937790d5f3b216b48c2e3",
+    "document.pages": "f4b90757fb0ac8a4f5af6e85f8cb393215b2f043c02b9a1ab11126f20a60f820",
+    "document.rest": "87e215700896e8ef3be063b64dd83105726217d36fbbd89149e29c67b06d6679",
+    "document.sections": "622e9b3ba6e47321013f512551d783ba60f161cf30209183e4d1f3beb7410073",
+    "document.tables": "f4fb680a9696da3bebe31ab76d9a54949c26badd443bfd24b525624236346d07"
+   }
+  }
+ }
+}

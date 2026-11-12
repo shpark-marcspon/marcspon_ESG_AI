@@ -1,0 +1,14 @@
+{
+  "schemaVersion": "greenwash.result@2",
+  "source": {
+    "fileName": "made-up-report.pdf",
+    "sha256": "abababababababababababababababababababababababababababababababab",
+    "pageCount": 3
+  },
+  "failures": {
+    "segments": 0,
+    "items": 0
+  },
+  "budgetTrimmed": 0,
+  "segments": []
+}

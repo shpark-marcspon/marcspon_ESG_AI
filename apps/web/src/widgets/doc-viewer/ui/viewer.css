@@ -1,0 +1,294 @@
+/* 뷰어 부품의 모양. 읽을 수 있을 만큼만 있다. 색과 글꼴은 정한 것이 아니다.
+   여기에는 「모양을 내는 것」만 있다(색, 선, 채움, 글꼴, 그리고 이 화면의 칸 배치).
+   상자와 쪽을 제자리에 놓는 것(position, top·left·width·height, 쌓는 판의 높이, 스크롤 상자의 overflow)은
+   헤드리스 컴포넌트가 인라인 style 로 스스로 갖는다(headless/PageStack.tsx, HighlightOverlay.tsx, PageCanvas.tsx).
+   이 파일을 통째로 빼도 상자는 제자리에 놓이고 눌린다. */
+
+.dv-root {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  height: 100%;
+  min-height: 0;
+  font:
+    13px/1.45 system-ui,
+    sans-serif;
+  color: #1f2937;
+  outline: none;
+}
+
+/* ── 왼쪽: 항목 목록 ── */
+.dv-side {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  border-right: 1px solid #d1d5db;
+  background: #f9fafb;
+}
+.dv-notice {
+  margin: 0;
+  padding: 8px 12px;
+  background: #fef3c7;
+  border-bottom: 1px solid #f59e0b;
+  white-space: pre-wrap;
+}
+.dv-legend,
+.dv-toggle,
+.dv-help {
+  margin: 0;
+  padding: 6px 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  align-items: center;
+  border-bottom: 1px solid #e5e7eb;
+}
+/* 범례의 종류 하나. 누르면 그 종류의 상자가 숨는다. */
+.dv-kind {
+  padding: 1px 6px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  background: #fff;
+  font: inherit;
+  cursor: pointer;
+}
+.dv-kind[aria-pressed='false'] {
+  background: none;
+  border-style: dashed;
+  color: #9ca3af;
+  text-decoration: line-through;
+}
+.dv-kind[aria-pressed='false'] .dv-dot {
+  opacity: 0.3;
+}
+.dv-mode-note {
+  margin: 0;
+  padding: 6px 12px;
+  border-bottom: 1px solid #e5e7eb;
+  border-left: 4px solid #6366f1;
+  background: #eef2ff;
+  font-weight: 600;
+}
+.dv-dot {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  margin-right: 5px;
+  border-radius: 50%;
+}
+.dv-items {
+  flex: 1;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  list-style: none;
+}
+.dv-item {
+  border-bottom: 1px solid #e5e7eb;
+}
+.dv-item[data-selected='true'] {
+  background: #e0e7ff;
+}
+/* 마우스를 올린 항목. 그 항목의 상자가 문서에서 진해진다. */
+.dv-item:hover:not([data-selected='true']) {
+  background: #eef2ff;
+}
+/* 범례에서 꺼 둔 종류의 항목. 고른 항목은 흐리게 하지 않는다(그 상자는 보이고 있다). */
+.dv-item[data-kind-hidden='true']:not([data-selected='true']) .dv-item-head {
+  opacity: 0.45;
+}
+.dv-item-head {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2px 8px;
+  width: 100%;
+  padding: 8px 12px;
+  border: 0;
+  background: none;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.dv-item-title {
+  font-weight: 600;
+}
+.dv-item-detail,
+.dv-item-reason {
+  grid-column: 1 / -1;
+  color: #4b5563;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.dv-item-reason {
+  color: #b91c1c;
+}
+.dv-status {
+  padding: 0 6px;
+  border-radius: 8px;
+  background: #e5e7eb;
+  white-space: nowrap;
+  align-self: start;
+}
+.dv-status[data-status='confirmed'] {
+  background: #bbf7d0;
+}
+.dv-status[data-status='rejected'] {
+  background: #fecaca;
+}
+.dv-review {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 6px;
+  padding: 0 12px 10px;
+  align-items: start;
+}
+.dv-review textarea {
+  font: inherit;
+  resize: vertical;
+}
+.dv-review [role='alert'] {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: #b91c1c;
+}
+
+/* ── 오른쪽: 문서 칸 ── */
+.dv-panes {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  min-width: 0;
+  min-height: 0;
+}
+.dv-pane {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  border-right: 1px solid #d1d5db;
+}
+.dv-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  align-items: center;
+  padding: 4px 8px;
+  border-bottom: 1px solid #d1d5db;
+  background: #f3f4f6;
+}
+.dv-title {
+  flex: 1;
+  min-width: 80px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.dv-tools {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+.dv-page-input {
+  width: 4em;
+}
+.dv-zoom {
+  min-width: 3.2em;
+  text-align: center;
+}
+/* 스크롤 상자의 높이는 여기서 정한다(칸의 남은 높이 전부). PageStack 은 이것이 정해져 있다고 본다. */
+.dv-scroller {
+  flex: 1;
+  min-height: 0;
+  background: #9ca3af;
+}
+/* 쪽의 자리와 크기는 PageStack 이 준다(쪽 사이 틈은 geometry.ts 의 PAGE_GAP). 여기서는 종이의 생김만. */
+.dv-page {
+  background: #fff;
+  box-shadow: 0 1px 4px rgb(0 0 0 / 30%);
+}
+.dv-error,
+.dv-page-error {
+  margin: 12px;
+  padding: 8px;
+  background: #fee2e2;
+}
+
+/* ── 강조 상자 ── */
+/* 판(.dv-highlights)·틀(.dv-group)·조각(.dv-highlight)의 구조와 자리는 HighlightOverlay 가 만든다. 클래스 이름은 PdfPane.tsx 가 붙인다. */
+/* 색은 종류마다 다르다. PdfPane.tsx 가 조각의 color 로 주고, 여기서는 currentColor 로 받아 쓴다. */
+/* 선은 상자의 바깥에 긋는다(outline, 1px 띄워서). 상자는 글자에 딱 붙어 있어, 안쪽에 그으면(border) 첫 글자와 끝 글자를 깎는다. */
+.dv-highlight {
+  padding: 0;
+  border: 0;
+  outline: 1px solid currentColor;
+  outline-offset: 1px;
+  background: color-mix(in srgb, currentColor 14%, transparent);
+  cursor: pointer;
+}
+/* .dv-group: 묶음의 틀. 규칙이 없다(크기도 자리도 없고, 조각들은 .dv-highlights 를 기준으로 놓인다). 조각 하나에 마우스를 올리면 :hover 가
+   이 틀에도 걸리므로, 아래의 「.dv-group:hover .dv-highlight」 꼴로 같은 강조의 다른 줄 조각까지 같이 진해진다. */
+/* 고른 항목의 상자. 어느 보기 방식에서나 같다. 굵기는 바깥으로만 낸다(안으로 굵어지면 두세 글자짜리 숫자가 안 읽힌다). */
+.dv-highlight[data-selected='true'] {
+  outline-width: 2px;
+  /* 채움은 옅게 둔다. 골라졌다는 표시는 굵은 선과 그 바깥의 번진 띠가 한다. */
+  background: color-mix(in srgb, currentColor 18%, transparent);
+  box-shadow: 0 0 0 6px color-mix(in srgb, currentColor 30%, transparent);
+}
+/* 목록에서 가리킨 항목의 상자. 고른 것보다 한 단계 약하게(번진 띠가 없다). */
+.dv-highlight[data-pointed='true']:not([data-selected='true']) {
+  outline-width: 2px;
+  background: color-mix(in srgb, currentColor 18%, transparent);
+}
+/* 키보드 초점이 간 상자(선을 outline 으로 쓰므로 브라우저의 초점 띠를 대신 그린다). */
+.dv-group:has(:focus-visible) .dv-highlight {
+  outline-width: 3px;
+}
+
+/* ── 보기 방식 (highlightMode.ts). 하나로 굳히면 안 쓰는 방식의 덩어리를 지운다 ── */
+/* fill(전체 채움): 위의 기본 모양 그대로다. 따로 적을 것이 없다. */
+/* selected(고른 것만): 그릴 것을 HighlightOverlay 가 추린다(domain 의 isDrawn). 따로 적을 것이 없다. */
+/* outline(옅게): 고르지도 가리키지도 않은 상자는 채움 없이 옅은 선만. 마우스를 올리면 채운다. */
+/* 선의 농도 72%: 더 옅으면 배율 1 에서 종류의 색(특히 초록과 회색)이 갈리지 않았다. */
+.dv-highlights[data-mode='outline']
+  .dv-highlight:not([data-selected='true'], [data-pointed='true']) {
+  outline-color: color-mix(in srgb, currentColor 72%, transparent);
+  background: transparent;
+}
+.dv-highlights[data-mode='outline']
+  .dv-group:hover
+  .dv-highlight:not([data-selected='true'], [data-pointed='true']),
+.dv-highlights[data-mode='outline']
+  .dv-group:has(:focus-visible)
+  .dv-highlight:not([data-selected='true'], [data-pointed='true']) {
+  outline-color: currentColor;
+  background: color-mix(in srgb, currentColor 18%, transparent);
+}
+/* ── 보기 방식 끝 ── */
+.dv-count {
+  /* 겹친 개수. 늘 보이면 옆 칸의 숫자를 가린다. 그래서 마우스를 올렸거나 가리켰거나 골라진 상자에만, 상자 바깥 오른쪽에 보인다(위쪽에 두면 윗줄의 숫자를 덮는다). */
+  display: none;
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  margin-left: 6px;
+  padding: 0 4px;
+  border-radius: 8px;
+  background: currentColor;
+  font:
+    10px/14px system-ui,
+    sans-serif;
+  -webkit-text-fill-color: #fff;
+}
+.dv-count::before {
+  content: '×';
+}
+.dv-group:hover .dv-count,
+.dv-highlight[data-pointed='true'] .dv-count,
+.dv-highlight[data-selected='true'] .dv-count {
+  display: block;
+}
+/* 고른 강조가 든 표·문단 전체. 누를 수 없다. */
+.dv-context {
+  border: 2px dashed #111827;
+}

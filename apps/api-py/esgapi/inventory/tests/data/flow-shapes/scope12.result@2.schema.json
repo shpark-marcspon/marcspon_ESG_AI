@@ -1,0 +1,1211 @@
+{
+  "$defs": {
+    "AggregationJson": {
+      "additionalProperties": false,
+      "properties": {
+        "by": {
+          "items": {
+            "enum": [
+              "orgUnit",
+              "period",
+              "scope",
+              "sourceType"
+            ],
+            "type": "string"
+          },
+          "title": "By",
+          "type": "array"
+        },
+        "groups": {
+          "items": {
+            "$ref": "#/$defs/GroupJson"
+          },
+          "title": "Groups",
+          "type": "array"
+        },
+        "total": {
+          "$ref": "#/$defs/TotalsJson"
+        }
+      },
+      "required": [
+        "by",
+        "groups",
+        "total"
+      ],
+      "title": "AggregationJson",
+      "type": "object"
+    },
+    "CalorificBasisMismatchFailure": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "calorific_basis_mismatch",
+          "title": "Kind",
+          "type": "string"
+        },
+        "factorId": {
+          "title": "Factorid",
+          "type": "string"
+        },
+        "required": {
+          "enum": [
+            "net",
+            "gross"
+          ],
+          "title": "Required",
+          "type": "string"
+        },
+        "actual": {
+          "enum": [
+            "net",
+            "gross"
+          ],
+          "title": "Actual",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "factorId",
+        "required",
+        "actual"
+      ],
+      "title": "CalorificBasisMismatchFailure",
+      "type": "object"
+    },
+    "CitedSource": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "cited",
+          "title": "Kind",
+          "type": "string"
+        },
+        "title": {
+          "title": "Title",
+          "type": "string"
+        },
+        "url": {
+          "title": "Url",
+          "type": "string"
+        },
+        "checkedOn": {
+          "title": "Checkedon",
+          "type": "string"
+        },
+        "locator": {
+          "title": "Locator",
+          "type": "string"
+        },
+        "note": {
+          "title": "Note",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "title",
+        "url",
+        "checkedOn"
+      ],
+      "title": "CitedSource",
+      "type": "object"
+    },
+    "DefinitionSource": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "definition",
+          "title": "Kind",
+          "type": "string"
+        },
+        "note": {
+          "title": "Note",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "note"
+      ],
+      "title": "DefinitionSource",
+      "type": "object"
+    },
+    "EnergyJson": {
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "title": "Value",
+          "type": "string"
+        },
+        "unit": {
+          "title": "Unit",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value",
+        "unit"
+      ],
+      "title": "EnergyJson",
+      "type": "object"
+    },
+    "EvidenceFactorJson": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "version": {
+          "title": "Version",
+          "type": "string"
+        },
+        "source": {
+          "discriminator": {
+            "mapping": {
+              "cited": "#/$defs/CitedSource",
+              "definition": "#/$defs/DefinitionSource",
+              "synthetic": "#/$defs/SyntheticSource"
+            },
+            "propertyName": "kind"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/CitedSource"
+            },
+            {
+              "$ref": "#/$defs/DefinitionSource"
+            },
+            {
+              "$ref": "#/$defs/SyntheticSource"
+            }
+          ],
+          "title": "Source"
+        }
+      },
+      "required": [
+        "id",
+        "version",
+        "source"
+      ],
+      "title": "EvidenceFactorJson",
+      "type": "object"
+    },
+    "EvidenceGwpSetJson": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "source": {
+          "discriminator": {
+            "mapping": {
+              "cited": "#/$defs/CitedSource",
+              "definition": "#/$defs/DefinitionSource",
+              "synthetic": "#/$defs/SyntheticSource"
+            },
+            "propertyName": "kind"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/CitedSource"
+            },
+            {
+              "$ref": "#/$defs/DefinitionSource"
+            },
+            {
+              "$ref": "#/$defs/SyntheticSource"
+            }
+          ],
+          "title": "Source"
+        }
+      },
+      "required": [
+        "id",
+        "label",
+        "source"
+      ],
+      "title": "EvidenceGwpSetJson",
+      "type": "object"
+    },
+    "EvidenceJson": {
+      "additionalProperties": false,
+      "properties": {
+        "factor": {
+          "$ref": "#/$defs/EvidenceFactorJson"
+        },
+        "gwpSet": {
+          "$ref": "#/$defs/EvidenceGwpSetJson"
+        },
+        "calorificBasis": {
+          "anyOf": [
+            {
+              "enum": [
+                "net",
+                "gross"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Calorificbasis"
+        },
+        "oxidationFactor": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Oxidationfactor"
+        },
+        "sector": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Sector"
+        },
+        "parameterTiers": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ParameterTiersJson"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "facilityUse": {
+          "anyOf": [
+            {
+              "enum": [
+                "power_generation",
+                "other"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Facilityuse"
+        },
+        "steps": {
+          "items": {
+            "$ref": "#/$defs/StepJson"
+          },
+          "title": "Steps",
+          "type": "array"
+        }
+      },
+      "required": [
+        "factor",
+        "gwpSet",
+        "calorificBasis",
+        "oxidationFactor",
+        "sector",
+        "parameterTiers",
+        "facilityUse",
+        "steps"
+      ],
+      "title": "EvidenceJson",
+      "type": "object"
+    },
+    "FactorAmbiguousFailure": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "factor_ambiguous",
+          "title": "Kind",
+          "type": "string"
+        },
+        "criteria": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Criteria",
+          "type": "object"
+        },
+        "candidateIds": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Candidateids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "kind",
+        "criteria",
+        "candidateIds"
+      ],
+      "title": "FactorAmbiguousFailure",
+      "type": "object"
+    },
+    "FactorIncompleteFailure": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "factor_incomplete",
+          "title": "Kind",
+          "type": "string"
+        },
+        "factorId": {
+          "title": "Factorid",
+          "type": "string"
+        },
+        "reason": {
+          "title": "Reason",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "factorId",
+        "reason"
+      ],
+      "title": "FactorIncompleteFailure",
+      "type": "object"
+    },
+    "FactorKindMismatchFailure": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "factor_kind_mismatch",
+          "title": "Kind",
+          "type": "string"
+        },
+        "factorId": {
+          "title": "Factorid",
+          "type": "string"
+        },
+        "expected": {
+          "enum": [
+            "combustion",
+            "purchased_energy"
+          ],
+          "title": "Expected",
+          "type": "string"
+        },
+        "actual": {
+          "enum": [
+            "combustion",
+            "purchased_energy"
+          ],
+          "title": "Actual",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "factorId",
+        "expected",
+        "actual"
+      ],
+      "title": "FactorKindMismatchFailure",
+      "type": "object"
+    },
+    "FactorNotFoundFailure": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "factor_not_found",
+          "title": "Kind",
+          "type": "string"
+        },
+        "criteria": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Criteria",
+          "type": "object"
+        }
+      },
+      "required": [
+        "kind",
+        "criteria"
+      ],
+      "title": "FactorNotFoundFailure",
+      "type": "object"
+    },
+    "GasResultJson": {
+      "additionalProperties": false,
+      "properties": {
+        "gas": {
+          "enum": [
+            "CO2",
+            "CH4",
+            "N2O",
+            "CO2e"
+          ],
+          "title": "Gas",
+          "type": "string"
+        },
+        "mass": {
+          "title": "Mass",
+          "type": "string"
+        },
+        "massUnit": {
+          "const": "t",
+          "title": "Massunit",
+          "type": "string"
+        },
+        "gwp": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "적용한 GWP. 이미 환산된 계수(CO2e)면 null",
+          "title": "Gwp"
+        },
+        "co2e": {
+          "title": "Co2E",
+          "type": "string"
+        }
+      },
+      "required": [
+        "gas",
+        "mass",
+        "massUnit",
+        "gwp",
+        "co2e"
+      ],
+      "title": "GasResultJson",
+      "type": "object"
+    },
+    "GroupJson": {
+      "additionalProperties": false,
+      "properties": {
+        "key": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "propertyNames": {
+            "enum": [
+              "orgUnit",
+              "period",
+              "scope",
+              "sourceType"
+            ]
+          },
+          "title": "Key",
+          "type": "object"
+        },
+        "co2e": {
+          "title": "Co2E",
+          "type": "string"
+        },
+        "co2eByGas": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "propertyNames": {
+            "enum": [
+              "CO2",
+              "CH4",
+              "N2O",
+              "CO2e"
+            ]
+          },
+          "title": "Co2Ebygas",
+          "type": "object"
+        },
+        "okRowCount": {
+          "title": "Okrowcount",
+          "type": "integer"
+        },
+        "failedRowIds": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Failedrowids",
+          "type": "array"
+        },
+        "complete": {
+          "title": "Complete",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "key",
+        "co2e",
+        "co2eByGas",
+        "okRowCount",
+        "failedRowIds",
+        "complete"
+      ],
+      "title": "GroupJson",
+      "type": "object"
+    },
+    "GwpSetAmbiguousFailure": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "gwp_set_ambiguous",
+          "title": "Kind",
+          "type": "string"
+        },
+        "gwpSetId": {
+          "title": "Gwpsetid",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "gwpSetId"
+      ],
+      "title": "GwpSetAmbiguousFailure",
+      "type": "object"
+    },
+    "GwpSetNotFoundFailure": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "gwp_set_not_found",
+          "title": "Kind",
+          "type": "string"
+        },
+        "gwpSetId": {
+          "title": "Gwpsetid",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "gwpSetId"
+      ],
+      "title": "GwpSetNotFoundFailure",
+      "type": "object"
+    },
+    "GwpValueMissingFailure": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "gwp_value_missing",
+          "title": "Kind",
+          "type": "string"
+        },
+        "gwpSetId": {
+          "title": "Gwpsetid",
+          "type": "string"
+        },
+        "gas": {
+          "enum": [
+            "CO2",
+            "CH4",
+            "N2O"
+          ],
+          "title": "Gas",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "gwpSetId",
+        "gas"
+      ],
+      "title": "GwpValueMissingFailure",
+      "type": "object"
+    },
+    "InvalidActivityFailure": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "invalid_activity",
+          "title": "Kind",
+          "type": "string"
+        },
+        "field": {
+          "title": "Field",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "string"
+        },
+        "reason": {
+          "title": "Reason",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "field",
+        "value",
+        "reason"
+      ],
+      "title": "InvalidActivityFailure",
+      "type": "object"
+    },
+    "InvalidReferenceValueFailure": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "invalid_reference_value",
+          "title": "Kind",
+          "type": "string"
+        },
+        "where": {
+          "title": "Where",
+          "type": "string"
+        },
+        "value": {
+          "title": "Value",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "where",
+        "value"
+      ],
+      "title": "InvalidReferenceValueFailure",
+      "type": "object"
+    },
+    "ParameterTiersJson": {
+      "additionalProperties": false,
+      "properties": {
+        "calorific": {
+          "enum": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "title": "Calorific",
+          "type": "integer"
+        },
+        "co2": {
+          "enum": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "title": "Co2",
+          "type": "integer"
+        },
+        "nonCo2": {
+          "enum": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "title": "Nonco2",
+          "type": "integer"
+        },
+        "oxidation": {
+          "anyOf": [
+            {
+              "enum": [
+                1,
+                2,
+                3,
+                4
+              ],
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Oxidation"
+        }
+      },
+      "required": [
+        "calorific",
+        "co2",
+        "nonCo2",
+        "oxidation"
+      ],
+      "title": "ParameterTiersJson",
+      "type": "object"
+    },
+    "RowFailedJson": {
+      "additionalProperties": false,
+      "properties": {
+        "rowId": {
+          "title": "Rowid",
+          "type": "string"
+        },
+        "orgUnit": {
+          "title": "Orgunit",
+          "type": "string"
+        },
+        "period": {
+          "title": "Period",
+          "type": "string"
+        },
+        "scope": {
+          "anyOf": [
+            {
+              "enum": [
+                1,
+                2
+              ],
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Scope"
+        },
+        "sourceType": {
+          "anyOf": [
+            {
+              "enum": [
+                "stationary_combustion",
+                "mobile_combustion",
+                "purchased_electricity",
+                "purchased_heat"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Sourcetype"
+        },
+        "status": {
+          "const": "failed",
+          "title": "Status",
+          "type": "string"
+        },
+        "failure": {
+          "discriminator": {
+            "mapping": {
+              "calorific_basis_mismatch": "#/$defs/CalorificBasisMismatchFailure",
+              "factor_ambiguous": "#/$defs/FactorAmbiguousFailure",
+              "factor_incomplete": "#/$defs/FactorIncompleteFailure",
+              "factor_kind_mismatch": "#/$defs/FactorKindMismatchFailure",
+              "factor_not_found": "#/$defs/FactorNotFoundFailure",
+              "gwp_set_ambiguous": "#/$defs/GwpSetAmbiguousFailure",
+              "gwp_set_not_found": "#/$defs/GwpSetNotFoundFailure",
+              "gwp_value_missing": "#/$defs/GwpValueMissingFailure",
+              "invalid_activity": "#/$defs/InvalidActivityFailure",
+              "invalid_reference_value": "#/$defs/InvalidReferenceValueFailure",
+              "unit_conversion_ambiguous": "#/$defs/UnitConversionAmbiguousFailure",
+              "unit_conversion_not_found": "#/$defs/UnitConversionNotFoundFailure"
+            },
+            "propertyName": "kind"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/InvalidActivityFailure"
+            },
+            {
+              "$ref": "#/$defs/FactorNotFoundFailure"
+            },
+            {
+              "$ref": "#/$defs/FactorAmbiguousFailure"
+            },
+            {
+              "$ref": "#/$defs/FactorKindMismatchFailure"
+            },
+            {
+              "$ref": "#/$defs/FactorIncompleteFailure"
+            },
+            {
+              "$ref": "#/$defs/InvalidReferenceValueFailure"
+            },
+            {
+              "$ref": "#/$defs/CalorificBasisMismatchFailure"
+            },
+            {
+              "$ref": "#/$defs/UnitConversionNotFoundFailure"
+            },
+            {
+              "$ref": "#/$defs/UnitConversionAmbiguousFailure"
+            },
+            {
+              "$ref": "#/$defs/GwpSetNotFoundFailure"
+            },
+            {
+              "$ref": "#/$defs/GwpSetAmbiguousFailure"
+            },
+            {
+              "$ref": "#/$defs/GwpValueMissingFailure"
+            }
+          ],
+          "title": "Failure"
+        }
+      },
+      "required": [
+        "rowId",
+        "orgUnit",
+        "period",
+        "scope",
+        "sourceType",
+        "status",
+        "failure"
+      ],
+      "title": "RowFailedJson",
+      "type": "object"
+    },
+    "RowOkJson": {
+      "additionalProperties": false,
+      "properties": {
+        "rowId": {
+          "title": "Rowid",
+          "type": "string"
+        },
+        "orgUnit": {
+          "title": "Orgunit",
+          "type": "string"
+        },
+        "period": {
+          "title": "Period",
+          "type": "string"
+        },
+        "scope": {
+          "enum": [
+            1,
+            2
+          ],
+          "title": "Scope",
+          "type": "integer"
+        },
+        "sourceType": {
+          "enum": [
+            "stationary_combustion",
+            "mobile_combustion",
+            "purchased_electricity",
+            "purchased_heat"
+          ],
+          "title": "Sourcetype",
+          "type": "string"
+        },
+        "status": {
+          "const": "ok",
+          "title": "Status",
+          "type": "string"
+        },
+        "co2e": {
+          "description": "반올림하지 않은 정확한 값 (tCO2eq)",
+          "title": "Co2E",
+          "type": "string"
+        },
+        "unit": {
+          "const": "tCO2eq",
+          "title": "Unit",
+          "type": "string"
+        },
+        "energy": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/EnergyJson"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "연소일 때만. 구매 전력·열은 null"
+        },
+        "gases": {
+          "items": {
+            "$ref": "#/$defs/GasResultJson"
+          },
+          "title": "Gases",
+          "type": "array"
+        },
+        "evidence": {
+          "$ref": "#/$defs/EvidenceJson"
+        }
+      },
+      "required": [
+        "rowId",
+        "orgUnit",
+        "period",
+        "scope",
+        "sourceType",
+        "status",
+        "co2e",
+        "unit",
+        "energy",
+        "gases",
+        "evidence"
+      ],
+      "title": "RowOkJson",
+      "type": "object"
+    },
+    "StepJson": {
+      "additionalProperties": false,
+      "description": "한 연산 단계. 손으로 따라갈 수 있게 식과 결과를 문자열로 싣는다. conversion 은 환산 단계에만 있다.",
+      "properties": {
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "formula": {
+          "title": "Formula",
+          "type": "string"
+        },
+        "result": {
+          "title": "Result",
+          "type": "string"
+        },
+        "unit": {
+          "title": "Unit",
+          "type": "string"
+        },
+        "conversion": {
+          "$ref": "#/$defs/UnitConversionJson"
+        }
+      },
+      "required": [
+        "label",
+        "formula",
+        "result",
+        "unit"
+      ],
+      "title": "StepJson",
+      "type": "object"
+    },
+    "SyntheticSource": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "synthetic",
+          "title": "Kind",
+          "type": "string"
+        },
+        "note": {
+          "title": "Note",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "note"
+      ],
+      "title": "SyntheticSource",
+      "type": "object"
+    },
+    "TotalsJson": {
+      "additionalProperties": false,
+      "properties": {
+        "co2e": {
+          "description": "성공한 행의 정확한 합 (tCO2eq). complete 가 false 면 부분합이다",
+          "title": "Co2E",
+          "type": "string"
+        },
+        "co2eByGas": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "propertyNames": {
+            "enum": [
+              "CO2",
+              "CH4",
+              "N2O",
+              "CO2e"
+            ]
+          },
+          "title": "Co2Ebygas",
+          "type": "object"
+        },
+        "okRowCount": {
+          "title": "Okrowcount",
+          "type": "integer"
+        },
+        "failedRowIds": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Failedrowids",
+          "type": "array"
+        },
+        "complete": {
+          "title": "Complete",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "co2e",
+        "co2eByGas",
+        "okRowCount",
+        "failedRowIds",
+        "complete"
+      ],
+      "title": "TotalsJson",
+      "type": "object"
+    },
+    "UnitConversionAmbiguousFailure": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "unit_conversion_ambiguous",
+          "title": "Kind",
+          "type": "string"
+        },
+        "from": {
+          "title": "From",
+          "type": "string"
+        },
+        "to": {
+          "title": "To",
+          "type": "string"
+        },
+        "factors": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Factors",
+          "type": "array"
+        }
+      },
+      "required": [
+        "kind",
+        "from",
+        "to",
+        "factors"
+      ],
+      "title": "UnitConversionAmbiguousFailure",
+      "type": "object"
+    },
+    "UnitConversionJson": {
+      "additionalProperties": false,
+      "properties": {
+        "from": {
+          "title": "From",
+          "type": "string"
+        },
+        "to": {
+          "title": "To",
+          "type": "string"
+        },
+        "factor": {
+          "title": "Factor",
+          "type": "string"
+        },
+        "source": {
+          "discriminator": {
+            "mapping": {
+              "cited": "#/$defs/CitedSource",
+              "definition": "#/$defs/DefinitionSource",
+              "synthetic": "#/$defs/SyntheticSource"
+            },
+            "propertyName": "kind"
+          },
+          "oneOf": [
+            {
+              "$ref": "#/$defs/CitedSource"
+            },
+            {
+              "$ref": "#/$defs/DefinitionSource"
+            },
+            {
+              "$ref": "#/$defs/SyntheticSource"
+            }
+          ],
+          "title": "Source"
+        }
+      },
+      "required": [
+        "from",
+        "to",
+        "factor",
+        "source"
+      ],
+      "title": "UnitConversionJson",
+      "type": "object"
+    },
+    "UnitConversionNotFoundFailure": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "const": "unit_conversion_not_found",
+          "title": "Kind",
+          "type": "string"
+        },
+        "from": {
+          "title": "From",
+          "type": "string"
+        },
+        "to": {
+          "title": "To",
+          "type": "string"
+        },
+        "context": {
+          "title": "Context",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "from",
+        "to",
+        "context"
+      ],
+      "title": "UnitConversionNotFoundFailure",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "scope12.result@2.",
+  "properties": {
+    "schemaVersion": {
+      "const": "scope12.result@2",
+      "title": "Schemaversion",
+      "type": "string"
+    },
+    "gwpSetId": {
+      "title": "Gwpsetid",
+      "type": "string"
+    },
+    "rows": {
+      "items": {
+        "discriminator": {
+          "mapping": {
+            "failed": "#/$defs/RowFailedJson",
+            "ok": "#/$defs/RowOkJson"
+          },
+          "propertyName": "status"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/$defs/RowOkJson"
+          },
+          {
+            "$ref": "#/$defs/RowFailedJson"
+          }
+        ]
+      },
+      "title": "Rows",
+      "type": "array"
+    },
+    "aggregation": {
+      "$ref": "#/$defs/AggregationJson"
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "gwpSetId",
+    "rows",
+    "aggregation"
+  ],
+  "title": "Scope12Result",
+  "type": "object"
+}

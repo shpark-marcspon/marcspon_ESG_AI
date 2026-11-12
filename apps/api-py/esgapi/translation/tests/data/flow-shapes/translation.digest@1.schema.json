@@ -1,0 +1,268 @@
+{
+  "$defs": {
+    "DigestFiles": {
+      "additionalProperties": false,
+      "description": "그 문체의 Word 세 갈래 — 실행이 실제로 지은 출력 파일 이름, 짓지 않았으면(검수 멈춤·자동수정 안 돎·Word 짓기\n실패) null. 이름은 그 실행의 출력 파일 이름 그대로다(`translation-<갈래>-<문체 소문자>.docx`).",
+      "properties": {
+        "bilingual": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Bilingual"
+        },
+        "qa": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Qa"
+        },
+        "autofix": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Autofix"
+        }
+      },
+      "required": [
+        "bilingual",
+        "qa",
+        "autofix"
+      ],
+      "title": "DigestFiles",
+      "type": "object"
+    },
+    "DigestVariant": {
+      "additionalProperties": false,
+      "description": "문체 하나의 요약.",
+      "properties": {
+        "label": {
+          "enum": [
+            "single",
+            "A",
+            "B"
+          ],
+          "title": "Label",
+          "type": "string"
+        },
+        "reviewStatus": {
+          "description": "reviewed = 모든 쪽의 검수가 돌았다(parse_failed 쪽 포함), call_failed·not_run = 쪽 차례로 처음 멈춘 쪽의 검수\nstatus.",
+          "enum": [
+            "reviewed",
+            "call_failed",
+            "not_run"
+          ],
+          "title": "Reviewstatus",
+          "type": "string"
+        },
+        "reviewStoppedAt": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "검수가 처음 멈춘 쪽 번호. reviewed 면 null.",
+          "title": "Reviewstoppedat"
+        },
+        "parseFailedPages": {
+          "description": "검수 답을 JSON 으로 못 읽은 쪽 수(결과 review.status parse_failed — 모델 이슈 0 으로 친 쪽).",
+          "minimum": 0,
+          "title": "Parsefailedpages",
+          "type": "integer"
+        },
+        "issueCount": {
+          "description": "그 문체의 검수 이슈 수(쪽마다 review.issues 길이의 합 — 심각도 글자와 무관).",
+          "minimum": 0,
+          "title": "Issuecount",
+          "type": "integer"
+        },
+        "issueCounts": {
+          "$ref": "#/$defs/SeverityCounts",
+          "description": "심각도별 이슈 수(쪽마다 review.counts 의 합 — 글자가 정확히 HIGH·MEDIUM·LOW 인 것만이라 합은 issueCount 이하)."
+        },
+        "glossaryMisses": {
+          "description": "용어집 미반영 줄 수 — 결과 glossaryCheck 가운데 번역 대상 쪽(document.pageNumbers)의 줄만.",
+          "minimum": 0,
+          "title": "Glossarymisses",
+          "type": "integer"
+        },
+        "autofixStatus": {
+          "enum": [
+            "done",
+            "stopped",
+            "not_run"
+          ],
+          "title": "Autofixstatus",
+          "type": "string"
+        },
+        "autofixChangedPages": {
+          "description": "자동수정이 글을 바꾼 쪽 수(autofix.pages 의 changed). 끝까지 안 돌았으면 0.",
+          "minimum": 0,
+          "title": "Autofixchangedpages",
+          "type": "integer"
+        },
+        "files": {
+          "$ref": "#/$defs/DigestFiles"
+        }
+      },
+      "required": [
+        "label",
+        "reviewStatus",
+        "reviewStoppedAt",
+        "parseFailedPages",
+        "issueCount",
+        "issueCounts",
+        "glossaryMisses",
+        "autofixStatus",
+        "autofixChangedPages",
+        "files"
+      ],
+      "title": "DigestVariant",
+      "type": "object"
+    },
+    "SeverityCounts": {
+      "additionalProperties": false,
+      "description": "심각도별 이슈 수(코랩 QA Word 요약표의 셈 — 글자가 정확히 HIGH·MEDIUM·LOW 인 것만).",
+      "properties": {
+        "high": {
+          "minimum": 0,
+          "title": "High",
+          "type": "integer"
+        },
+        "medium": {
+          "minimum": 0,
+          "title": "Medium",
+          "type": "integer"
+        },
+        "low": {
+          "minimum": 0,
+          "title": "Low",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "high",
+        "medium",
+        "low"
+      ],
+      "title": "SeverityCounts",
+      "type": "object"
+    },
+    "TranslationDigest": {
+      "additionalProperties": false,
+      "description": "translation.digest@1 — 영문번역 실행 하나의 요약.",
+      "properties": {
+        "schemaVersion": {
+          "const": "translation.digest@1",
+          "title": "Schemaversion",
+          "type": "string"
+        },
+        "status": {
+          "description": "결과 translation.result@1 의 status.",
+          "enum": [
+            "done",
+            "rejected"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "rejectionKind": {
+          "anyOf": [
+            {
+              "enum": [
+                "no_pages",
+                "ceo_page_limit",
+                "unsupported_input",
+                "too_large",
+                "over_budget",
+                "retry_source_not_found",
+                "retry_source_mismatch"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "rejected 면 결과 rejection.kind, 아니면 null. 거절 글은 결과 경로의 rejection.message 에 있다.",
+          "title": "Rejectionkind"
+        },
+        "outcome": {
+          "description": "rejected = 번역을 시작하지 않음, partial = 번역 못 한 쪽이 하나라도 있거나(failedPages) 어느 문체의 검수가\n멈춤(call_failed·not_run), done = 그 밖. 자동수정 멈춤·검수 parse_failed 는 partial 로 치지 않는다.",
+          "enum": [
+            "done",
+            "partial",
+            "rejected"
+          ],
+          "title": "Outcome",
+          "type": "string"
+        },
+        "pageCount": {
+          "description": "번역 대상 쪽 수(document.pageNumbers 의 서로 다른 번호).",
+          "minimum": 0,
+          "title": "Pagecount",
+          "type": "integer"
+        },
+        "failedPages": {
+          "description": "어느 문체에서든 번역이 실패한 쪽 번호(fragments status error — 오름차순, 겹침 없음).",
+          "items": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "title": "Failedpages",
+          "type": "array"
+        },
+        "variants": {
+          "description": "결과의 문체 차례 그대로. rejected 면 빈 목록.",
+          "items": {
+            "$ref": "#/$defs/DigestVariant"
+          },
+          "title": "Variants",
+          "type": "array"
+        },
+        "warningCount": {
+          "description": "결과 warnings 의 줄 수.",
+          "minimum": 0,
+          "title": "Warningcount",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "schemaVersion",
+        "status",
+        "rejectionKind",
+        "outcome",
+        "pageCount",
+        "failedPages",
+        "variants",
+        "warningCount"
+      ],
+      "title": "TranslationDigest",
+      "type": "object"
+    }
+  },
+  "$ref": "#/$defs/TranslationDigest",
+  "description": "영문번역 한 건의 요약.",
+  "title": "translation.digest@1"
+}

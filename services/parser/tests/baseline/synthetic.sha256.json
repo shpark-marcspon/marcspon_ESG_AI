@@ -1,0 +1,44 @@
+{
+ "_comment": [
+  "파서 기준선 대조(밴드 PB1, MARC-TICK-122)의 고정값. 쓰는 곳: tests/test_baseline.py, scripts/parser_baseline.py check.",
+  "기준선: esg-lab 2e2c2c4 의 py/docparse 를 --engine pdfium 으로 돌린 산출 == esg-app docparse/ 의 산출(날 바이트까지 같음, PB1 확인).",
+  "뽑은 명령(services/parser 에서): uv run --frozen python scripts/parser_baseline.py build <판>.pdf [--toc] → uv run --frozen python -m docparse parse <판>.pdf --out <폴더> --places → uv run --frozen python scripts/parser_baseline.py hash <폴더>.",
+  "정규화: source.file_name → \"<pdf>\" 하나. pdf_sha256 은 짓개가 낸 PDF 바이트의 sha256(짓개가 바뀐 것과 분해기가 바뀐 것을 가른다).",
+  "바꾸는 규칙: 분해기의 산출을 일부러 바꾸는 커밋만 같은 커밋에서 고친다. 커밋 메시지에 다른 부분 이름과 까닭을 적고 base_commit 도 고친다."
+ ],
+ "base_commit": "9d9c11049d54c6c94cfefd0ff44a25c4d5009619",
+ "variants": {
+  "synthetic": {
+   "pdf_sha256": "c28880f8ed4fc0704d5bca674092815452c03ba1685dc5d0fcd8cb312cb0d777",
+   "all": "1afa83af5c31713f08fc9bafebb3753d0d256f273f8b80011d73883556982e55",
+   "char-places": "4195a70037acf7b0656766daeaef1b6929f0748d0cbc5a95a4878c753429c84c",
+   "document": "818540d502c374b58f829bd481be4759a428ac3e3038861fa943c1b7ce39d8a6",
+   "parts": {
+    "char-places.containers": "dd899426e93426a364ace61f5d2ffbb868d4d53155d5e572ce92427b78c517bc",
+    "char-places.rest": "64aeba00fdfede1ab8a2ec3e9ac13a3ec71c1307c951730c736b9b71ef6e5da6",
+    "char-places.unlinked": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "document.blocks": "2460d732e985ad896368b36f1389643142b7ce4c679b928bb91f7f4dbb123a16",
+    "document.pages": "f4b90757fb0ac8a4f5af6e85f8cb393215b2f043c02b9a1ab11126f20a60f820",
+    "document.rest": "dec654fd21725623f29dec6de309f6cfd0127055b25ccface38dd03564191dbd",
+    "document.sections": "9c1a926ef4d8e86a900ab7f7fd5b63dfc445c228b0b5129dfb310f7bfe40f1dd",
+    "document.tables": "f4fb680a9696da3bebe31ab76d9a54949c26badd443bfd24b525624236346d07"
+   }
+  },
+  "synthetic_toc": {
+   "pdf_sha256": "3633bbb23a52d2271af23b87bd07012ea774359c814db4f7fbd3a06984dbf9d0",
+   "all": "35075d8a9d3c67033f6bd6f5aaec097f1ed1dfd086c8ee77db76f9ba82328da4",
+   "char-places": "db3ae101213c94d580b8b946a1819fa338c591a45aba793f65a09d92feab9263",
+   "document": "cf13f599739226c34f70f0adc448179bd0689654927b63134564d3c3cbea1bb0",
+   "parts": {
+    "char-places.containers": "dd899426e93426a364ace61f5d2ffbb868d4d53155d5e572ce92427b78c517bc",
+    "char-places.rest": "9b414f7e2cc94ef1d987659c49c8a00cc852c5f799ccac3b1c003f529e43bbfe",
+    "char-places.unlinked": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "document.blocks": "728ef44003793b24bd158debeffa78e8a0a19ea67084b0fc91a493dbb3b63608",
+    "document.pages": "f4b90757fb0ac8a4f5af6e85f8cb393215b2f043c02b9a1ab11126f20a60f820",
+    "document.rest": "b671aa20d055fedd1daca3d61bcc055b99dca00ce2c56ec17d492a50c8e7165b",
+    "document.sections": "622e9b3ba6e47321013f512551d783ba60f161cf30209183e4d1f3beb7410073",
+    "document.tables": "f4fb680a9696da3bebe31ab76d9a54949c26badd443bfd24b525624236346d07"
+   }
+  }
+ }
+}

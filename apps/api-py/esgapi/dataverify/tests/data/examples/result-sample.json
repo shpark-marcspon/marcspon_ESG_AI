@@ -1,0 +1,282 @@
+{
+  "schemaVersion": "dataverify.result@2",
+  "company": {
+    "name": "가상건설",
+    "sasbIndustry": "Engineering & Construction Services",
+    "materialTopics": [
+      "기후변화 대응",
+      "안전보건"
+    ],
+    "reportingYear": "2025"
+  },
+  "scope": {
+    "themes": [
+      "환경"
+    ],
+    "itemCount": 12,
+    "keyItemCount": 4,
+    "years": [
+      "2022",
+      "2023",
+      "2024"
+    ]
+  },
+  "settings": {
+    "model": "gpt-4.1",
+    "tolerance": "0.0",
+    "temperature": "0.1",
+    "maxSteps": {
+      "plan": 12,
+      "review": 6,
+      "insight": 12
+    },
+    "promptIds": {
+      "plan": "dataverify/plan@1",
+      "review": "dataverify/review@1",
+      "insight": "dataverify/insight@1"
+    }
+  },
+  "plan": {
+    "status": "done",
+    "partial": false,
+    "formulas": [
+      "총 배출량(Scope 1+2) = 직접 배출량(Scope 1) + 간접 배출량(Scope 2)",
+      "재생에너지 비율 = 재생에너지 사용량 / 총 에너지 사용량"
+    ],
+    "raw": "[\n  \"총 배출량(Scope 1+2) = 직접 배출량(Scope 1) + 간접 배출량(Scope 2)\",\n  \"재생에너지 비율 = 재생에너지 사용량 / 총 에너지 사용량\"\n]",
+    "failure": null
+  },
+  "review": {
+    "status": "done",
+    "partial": true,
+    "report": "## 1. 총 배출량 합계 검증\n\n연도 | Scope 1 | Scope 2 | 합계(입력) | 계산값 | 차이\n2023 | 1200.0 | 300.0 | 1500.0 | 1500.0 | 0.0\n2024 | 1300.0 | 310.0 | 1605.0 | 1610.0 | 5.0\n\n## 2. 재생에너지 비율\n\n계산 불가(분모 0).",
+    "checks": [
+      {
+        "seq": 1,
+        "tool": "search_items",
+        "kind": "search",
+        "filter": {
+          "대분류": "온실가스 배출량"
+        },
+        "total": 6,
+        "limit": 200,
+        "offset": 0,
+        "returned": 6
+      },
+      {
+        "seq": 2,
+        "tool": "value_of_by_name",
+        "kind": "value",
+        "item": [
+          "온실가스 배출량",
+          "직접 배출량",
+          "Scope 1",
+          "tCO2eq"
+        ],
+        "year": "2024",
+        "value": "1300.0",
+        "na": false
+      },
+      {
+        "seq": 3,
+        "tool": "value_of_by_name",
+        "kind": "value",
+        "item": [
+          "온실가스 배출량",
+          "직접 배출량",
+          "Scope 1",
+          "tCO2eq"
+        ],
+        "year": "2022",
+        "value": null,
+        "na": true
+      },
+      {
+        "seq": 4,
+        "tool": "sum_check_by_name",
+        "kind": "check",
+        "rule": "sum",
+        "items": {
+          "byName": {
+            "total": [
+              "온실가스 배출량",
+              "총 배출량",
+              "Scope 1+2",
+              "tCO2eq"
+            ],
+            "a": [
+              "온실가스 배출량",
+              "직접 배출량",
+              "Scope 1",
+              "tCO2eq"
+            ],
+            "b": [
+              "온실가스 배출량",
+              "간접 배출량",
+              "Scope 2",
+              "tCO2eq"
+            ]
+          },
+          "raw": null
+        },
+        "tolerance": "0.0",
+        "years": [
+          {
+            "year": "2023",
+            "ok": true,
+            "status": "OK",
+            "diff": "0.0",
+            "note": null,
+            "explanation": "Sum(1200.0 + 300.0) - Target(1500.0) = 0.000000 → within tolerance (0.0)."
+          },
+          {
+            "year": "2024",
+            "ok": false,
+            "status": "FAIL",
+            "diff": "5.0",
+            "note": null,
+            "explanation": "Sum(1300.0 + 310.0) - Target(1605.0) = 5.000000 → exceeds tolerance (0.0)."
+          }
+        ]
+      },
+      {
+        "seq": 5,
+        "tool": "sum_check_by_name",
+        "kind": "error",
+        "message": "runtime error in sum_check_by_name: name 'e' is not defined",
+        "args": {
+          "total": [
+            "온실가스 배출량",
+            "총 배출량",
+            "Scope 1+2",
+            "tCO2eq"
+          ],
+          "a": [
+            "온실가스 배출량",
+            "직접 배출량",
+            "Scope 1",
+            "tCO2eq"
+          ],
+          "b": [
+            "온실가스 배출량",
+            "간접 배출량",
+            "Scope 2",
+            "tCO2eq"
+          ],
+          "years": [
+            "2022",
+            "2023"
+          ],
+          "tolerance": 1.1
+        }
+      },
+      {
+        "seq": 6,
+        "tool": "sum_n_check",
+        "kind": "check",
+        "rule": "sum_n",
+        "items": {
+          "byName": null,
+          "raw": {
+            "addends": [
+              1200.0,
+              "N/A"
+            ],
+            "target": 1500.0
+          }
+        },
+        "tolerance": "0.0",
+        "years": [
+          {
+            "year": null,
+            "ok": false,
+            "status": "FAIL",
+            "diff": null,
+            "note": "non-numeric",
+            "explanation": "Input values are not numeric."
+          }
+        ]
+      },
+      {
+        "seq": 7,
+        "tool": "ratio_check_by_name",
+        "kind": "check",
+        "rule": "ratio",
+        "items": {
+          "byName": {
+            "numerator": [
+              "에너지",
+              "재생에너지",
+              "재생에너지 사용량",
+              "TJ"
+            ],
+            "denominator": [
+              "에너지",
+              "총 에너지",
+              "총 에너지 사용량",
+              "TJ"
+            ],
+            "expected": [
+              "에너지",
+              "재생에너지",
+              "재생에너지 비율",
+              "%"
+            ]
+          },
+          "raw": null
+        },
+        "tolerance": "0.0",
+        "years": [
+          {
+            "year": "2024",
+            "ok": false,
+            "status": "FAIL",
+            "diff": null,
+            "note": "division by zero",
+            "explanation": "Cannot divide by zero."
+          }
+        ]
+      },
+      {
+        "seq": 8,
+        "tool": "value_of",
+        "kind": "error",
+        "message": "unknown tool: value_of",
+        "args": {
+          "name": "총 배출량"
+        }
+      }
+    ],
+    "failure": null
+  },
+  "insight": {
+    "status": "done",
+    "partial": false,
+    "report": "| 영역(환경/사회/지배구조) | 지표(소분류) | 관찰 내용 및 스토리 | 잠재 리스크 | 해석·가설 |\n|---|---|---|---|---|\n| 환경 | Scope 1+2 | 2024년 합계가 구성 합과 5.0 다르다 | 정합성 불일치 | 보고범위가 바뀌었을 가능성(정보 부족) |\n| 환경 | Scope 1 | 2022년 값이 비어 있다 | 핵심데이터 누락 | 정보 부족 |\n\n출처: 가상 기준서 (https://example.org/standard)",
+    "rows": [
+      {
+        "area": "환경",
+        "indicator": "Scope 1+2",
+        "observation": "2024년 합계가 구성 합과 5.0 다르다",
+        "risk": "정합성 불일치",
+        "interpretation": "보고범위가 바뀌었을 가능성(정보 부족)"
+      },
+      {
+        "area": "환경",
+        "indicator": "Scope 1",
+        "observation": "2022년 값이 비어 있다",
+        "risk": "핵심데이터 누락",
+        "interpretation": "정보 부족"
+      }
+    ],
+    "rowsParsed": "parsed",
+    "sources": [
+      {
+        "title": "가상 기준서",
+        "url": "https://example.org/standard"
+      }
+    ],
+    "failure": null
+  },
+  "warnings": []
+}

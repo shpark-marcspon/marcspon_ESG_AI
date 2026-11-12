@@ -1,0 +1,257 @@
+{
+  "$defs": {
+    "Company": {
+      "additionalProperties": false,
+      "description": "회사 기본 정보(코랩 셀 22). 기본값이 없다 — 코랩의 값은 한 고객사의 글이다.",
+      "properties": {
+        "name": {
+          "description": "회사 이름(코랩 COMPANY_NAME).",
+          "title": "Name",
+          "type": "string"
+        },
+        "preferredSubject": {
+          "description": "산업·주제 글(코랩 PREFERRED_SUBJECT).",
+          "title": "Preferredsubject",
+          "type": "string"
+        },
+        "industryStandards": {
+          "description": "준수 기준 글(코랩 INDUSTRY_STANDARDS). 번역 system 글의 「Reporting frameworks:」 줄과 회사 문체 글에 든다.",
+          "title": "Industrystandards",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "preferredSubject",
+        "industryStandards"
+      ],
+      "title": "Company",
+      "type": "object"
+    },
+    "GlossaryPair": {
+      "additionalProperties": false,
+      "description": "용어집 한 짝(국문 key → 영문 value).",
+      "properties": {
+        "ko": {
+          "title": "Ko",
+          "type": "string"
+        },
+        "en": {
+          "title": "En",
+          "type": "string"
+        }
+      },
+      "required": [
+        "ko",
+        "en"
+      ],
+      "title": "GlossaryPair",
+      "type": "object"
+    },
+    "PageRange": {
+      "additionalProperties": false,
+      "description": "번역할 쪽 범위(코랩 셀 6 PAGE_START·PAGE_END). null 이면 그쪽 끝이 열린다.",
+      "properties": {
+        "start": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Start"
+        },
+        "end": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "End"
+        }
+      },
+      "required": [
+        "start",
+        "end"
+      ],
+      "title": "PageRange",
+      "type": "object"
+    },
+    "PeerGroupStyle": {
+      "additionalProperties": false,
+      "description": "peer group 문체 글(코랩 셀 27 PEER_GROUP_STYLE_PROMPT — 고객사 맞춤 글이라 입력으로 받는다).",
+      "properties": {
+        "prompt": {
+          "title": "Prompt",
+          "type": "string"
+        }
+      },
+      "required": [
+        "prompt"
+      ],
+      "title": "PeerGroupStyle",
+      "type": "object"
+    },
+    "Style": {
+      "additionalProperties": false,
+      "description": "번역 문체(코랩 셀 40).",
+      "properties": {
+        "compareAb": {
+          "description": "true = A·B 두 문체로 각각 번역(코랩 USE_AB_STYLE). 코랩 기본 false.",
+          "title": "Compareab",
+          "type": "boolean"
+        },
+        "single": {
+          "description": "compareAb 가 false 일 때 쓰는 문체(코랩 SINGLE_STYLE). 코랩 기본 B.",
+          "enum": [
+            "A",
+            "B"
+          ],
+          "title": "Single",
+          "type": "string"
+        }
+      },
+      "required": [
+        "compareAb",
+        "single"
+      ],
+      "title": "Style",
+      "type": "object"
+    },
+    "TranslationOptionGlossary": {
+      "additionalProperties": false,
+      "description": "용어집(입력 꼴 Glossary 의 칸 둘 — 각각 고를 수 있다).",
+      "properties": {
+        "base": {
+          "description": "평가 용어집(코랩 GLOSSARY). 없으면 빈 목록. 많아야 500짝.",
+          "items": {
+            "$ref": "#/$defs/GlossaryPair"
+          },
+          "maxItems": 500,
+          "title": "Base",
+          "type": "array"
+        },
+        "final": {
+          "description": "최종 용어집(코랩 FINAL_GLOSSARY). 없으면 빈 목록. 많아야 500짝.",
+          "items": {
+            "$ref": "#/$defs/GlossaryPair"
+          },
+          "maxItems": 500,
+          "title": "Final",
+          "type": "array"
+        }
+      },
+      "title": "TranslationOptionGlossary",
+      "type": "object"
+    },
+    "TranslationRetryOption": {
+      "additionalProperties": false,
+      "description": "실패 쪽만 다시(코랩 셀 50 RETRY_PAGES). 앞 실행의 번역 글(자동수정 전)에 고른 쪽만 다시 번역해 끼우고, 검수·\n자동수정은 **전 쪽** 다시 돈다. 앞 실행은 같은 회사·영문번역·끝남·결과가 거절이 아님이어야 하고(아니면 결과\nrejected `retry_source_not_found`), 원문 sha256 과 문체 묶음, AI 설정 판(실행 versions 의 판 열쇠 — 열쇠 없는 옛\n실행도 다른 판으로 본다)이 같아야 한다(아니면 `retry_source_mismatch`).",
+      "properties": {
+        "fromRunId": {
+          "description": "번역 글을 가져올 앞 실행.",
+          "minimum": 1,
+          "title": "Fromrunid",
+          "type": "integer"
+        },
+        "pages": {
+          "description": "다시 번역할 쪽 번호(1부터, 겹침 금지). 원문에 없는 쪽은 건너뛴다(경고 retry_page_missing).",
+          "items": {
+            "minimum": 1,
+            "type": "integer"
+          },
+          "maxItems": 300,
+          "minItems": 1,
+          "title": "Pages",
+          "type": "array"
+        }
+      },
+      "required": [
+        "fromRunId",
+        "pages"
+      ],
+      "title": "TranslationRetryOption",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "translation.options@1 — 영문번역 실행의 옵션.",
+  "properties": {
+    "batchId": {
+      "description": "묶음 id(소문자 uuid — 웹이 짓는다). [번역 시작] 한 번이 묶음 하나이고, 그 묶음의 파트 실행마다 같은 값이다.\n[이 파트만 다시]는 같은 옵션·같은 batchId 다. 없으면 묶음에 들지 않은 실행. 흐름의 입력에는 싣지 않는다.",
+      "pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+      "title": "Batchid",
+      "type": "string"
+    },
+    "company": {
+      "$ref": "#/$defs/Company"
+    },
+    "part": {
+      "description": "번역할 파트(코랩 셀 38 CURRENT_PART). ceo_message 면 번역 모델이 경로 standard(Sonnet)다.",
+      "enum": [
+        "ceo_message",
+        "story",
+        "general"
+      ],
+      "title": "Part",
+      "type": "string"
+    },
+    "style": {
+      "$ref": "#/$defs/Style"
+    },
+    "pages": {
+      "$ref": "#/$defs/PageRange"
+    },
+    "ceoPageLimit": {
+      "anyOf": [
+        {
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "ceo_message 파트의 쪽 조각 수 상한(코랩 셀 49 CEO_PAGE_LIMIT, 코랩 값 6). null = 제한 없음.",
+      "title": "Ceopagelimit"
+    },
+    "glossary": {
+      "$ref": "#/$defs/TranslationOptionGlossary",
+      "description": "용어집. 없으면 빈 용어집(저장소에 기본 용어집은 없다 — 코랩의 용어집은 한 고객사의 것)."
+    },
+    "peerGroupStyle": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/PeerGroupStyle"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "description": "peer group 문체 글. 없거나 null 이면 싣지 않는다."
+    },
+    "autofix": {
+      "description": "검수 이슈 기반 자동수정(코랩 셀 67). 없으면 true.",
+      "title": "Autofix",
+      "type": "boolean"
+    },
+    "retry": {
+      "$ref": "#/$defs/TranslationRetryOption",
+      "description": "실패 쪽만 다시. 없으면 처음부터 번역."
+    }
+  },
+  "required": [
+    "company",
+    "part",
+    "style",
+    "pages",
+    "ceoPageLimit"
+  ],
+  "title": "TranslationOptions",
+  "type": "object"
+}

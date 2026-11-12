@@ -1,0 +1,77 @@
+{
+  "checkedOn": "2026-10-20",
+  "synthetic": true,
+  "note": "밴드 AS2b 시험 전용(★D): 실제 경로 이름 둘(light-openai-41·standard-openai-41)을 모의 공급사(mock)의 가상 모델로 잇는다. 실행기 클라이언트(runs.context.llm_settings 의 models_file)에만 꽂는다 — 받기·sha 의 원천(RunModelSource)은 패키지 models.json 그대로. 단가·한도는 지어낸 값이다.",
+  "sources": {},
+  "tokenEstimate": {
+    "note": "dry-run 과 캐시 최소 길이 경고에만 쓰는 어림값이다. 과금 근거가 아니다. 실제 토큰 수는 공급사 응답의 usage 로만 확정된다.",
+    "latinCharsPerToken": 4,
+    "latinBasis": "anthropic_pricing FAQ: '1 token is approximately 4 characters or 0.75 words in English' (2026-10-01 확인)",
+    "cjkCharsPerToken": 1,
+    "cjkBasis": "가정. 한글·한자 1자 = 1토큰으로 둔 것으로 공식 문서 출처가 없다. 키가 생기면 토큰 카운트 API 로 대체해야 한다."
+  },
+  "models": {
+    "as2b-light": {
+      "provider": "mock",
+      "apiModelId": "as2b-light",
+      "label": "모의 가벼운 판정 모델 (synthetic)",
+      "synthetic": true,
+      "pricing": {
+        "input": 1.0,
+        "output": 2.0,
+        "cacheWrite": 1.25,
+        "cacheRead": 0.1
+      },
+      "contextWindowTokens": 100000,
+      "maxOutputTokens": 4000,
+      "minCacheTokens": 1000,
+      "pdf": {
+        "maxPagesPerRequest": 10,
+        "maxRequestMb": 1
+      },
+      "structuredOutput": true,
+      "lifecycle": {
+        "status": "synthetic",
+        "retirement": null,
+        "note": "가상 모델"
+      },
+      "sourceRefs": [],
+      "notes": []
+    },
+    "as2b-standard": {
+      "provider": "mock",
+      "apiModelId": "as2b-standard",
+      "label": "모의 표준 판정 모델 (synthetic)",
+      "synthetic": true,
+      "pricing": {
+        "input": 1.0,
+        "output": 2.0,
+        "cacheWrite": 1.25,
+        "cacheRead": 0.1
+      },
+      "contextWindowTokens": 100000,
+      "maxOutputTokens": 4000,
+      "minCacheTokens": 1000,
+      "pdf": {
+        "maxPagesPerRequest": 10,
+        "maxRequestMb": 1
+      },
+      "structuredOutput": true,
+      "lifecycle": {
+        "status": "synthetic",
+        "retirement": null,
+        "note": "가상 모델"
+      },
+      "sourceRefs": [],
+      "notes": []
+    }
+  },
+  "routes": {
+    "light-openai-41": [
+      "as2b-light"
+    ],
+    "standard-openai-41": [
+      "as2b-standard"
+    ]
+  }
+}

@@ -1,0 +1,152 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://esg-lab.local/schemas/document.schema.json",
+  "title": "문서 모델",
+  "description": "PDF 하나를 섹션·블록·표로 분해한 결과. py/docparse 가 만들고 다른 조각이 읽는다. 좌표는 PDF pt(왼쪽 위 원점), 쪽 번호는 1부터.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "source", "parser", "pages", "sections", "blocks", "tables"],
+  "properties": {
+    "schema_version": {"const": "0.1"},
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["file_name", "sha256", "page_count"],
+      "properties": {
+        "file_name": {"type": "string"},
+        "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "page_count": {"type": "integer", "minimum": 1, "description": "PDF 전체 쪽수 (일부 쪽만 분해했어도 전체)"}
+      }
+    },
+    "parser": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "version", "table_strategy", "llm_used", "ocr_used"],
+      "properties": {
+        "name": {"const": "docparse"},
+        "version": {"type": "string"},
+        "table_strategy": {"enum": ["auto", "lines", "text"]},
+        "llm_used": {"const": false},
+        "ocr_used": {"const": false}
+      }
+    },
+    "pages": {
+      "type": "array",
+      "description": "분해한 쪽만 들어 있다",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["page", "width", "height", "text_layer", "char_count", "image_coverage", "columns", "notes"],
+        "properties": {
+          "page": {"type": "integer", "minimum": 1},
+          "width": {"type": "number"},
+          "height": {"type": "number"},
+          "text_layer": {"enum": ["present", "none"], "description": "none = 텍스트 계층 없음(스캔본 등). OCR 을 하지 않으므로 이 쪽의 블록·표는 비어 있다"},
+          "char_count": {"type": "integer", "minimum": 0},
+          "image_coverage": {"type": "number", "minimum": 0, "maximum": 1},
+          "columns": {"type": "integer", "minimum": 0, "description": "읽는 순서에서 추정한 단 수 (블록이 없으면 0)"},
+          "notes": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    },
+    "sections": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "title", "level", "page_start", "page_end", "basis"],
+        "properties": {
+          "id": {"type": "string"},
+          "title": {"type": ["string", "null"]},
+          "level": {"type": "integer", "minimum": 1},
+          "page_start": {"type": "integer", "minimum": 1},
+          "page_end": {"type": "integer", "minimum": 1},
+          "basis": {"enum": ["pdf_outline", "page_top_largest_font", "no_title_found"], "description": "섹션 경계를 추정한 근거"}
+        }
+      }
+    },
+    "blocks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "kind", "page", "bbox", "order", "section_id"],
+        "properties": {
+          "id": {"type": "string"},
+          "kind": {"enum": ["paragraph", "table", "heading"]},
+          "page": {"type": "integer", "minimum": 1},
+          "bbox": {"$ref": "#/$defs/bbox"},
+          "order": {"type": "integer", "minimum": 1, "description": "쪽 안에서 읽는 순서 (1부터)"},
+          "section_id": {"type": ["string", "null"]},
+          "text": {"type": "string"},
+          "font_size": {"type": "number"},
+          "table_id": {"type": "string"}
+        },
+        "allOf": [
+          {"if": {"properties": {"kind": {"const": "table"}}}, "then": {"required": ["table_id"]}, "else": {"required": ["text"]}}
+        ]
+      }
+    },
+    "tables": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/table"}
+    }
+  },
+  "$defs": {
+    "bbox": {
+      "type": "array",
+      "items": {"type": "number"},
+      "minItems": 4,
+      "maxItems": 4,
+      "description": "[x0, y0, x1, y1] pt"
+    },
+    "table": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "page", "bbox", "n_rows", "n_cols", "cells", "header", "method", "status", "notes", "footnote_marks"],
+      "properties": {
+        "id": {"type": "string"},
+        "page": {"type": "integer", "minimum": 1},
+        "bbox": {"$ref": "#/$defs/bbox"},
+        "n_rows": {"type": "integer", "minimum": 0},
+        "n_cols": {"type": "integer", "minimum": 0},
+        "cells": {
+          "type": "array",
+          "description": "행 목록. 빈 칸은 빈 문자열. 병합 셀의 값은 병합 범위의 첫 행·첫 열에만 있다. 글자는 텍스트 계층 그대로다.",
+          "items": {"type": "array", "items": {"type": "string"}}
+        },
+        "header": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["rows", "cols", "basis"],
+          "description": "머리글 행·열 추정 (확정이 아니다)",
+          "properties": {
+            "rows": {"type": "array", "items": {"type": "integer", "minimum": 0}},
+            "cols": {"type": "array", "items": {"type": "integer", "minimum": 0}},
+            "basis": {"enum": ["rows_before_first_numeric_row", "no_numeric_row", "empty"]}
+          }
+        },
+        "method": {"enum": ["lines", "text", "none"], "description": "lines = 괘선 기반, text = 글자 정렬 기반, none = 격자를 세우지 못함"},
+        "status": {"enum": ["ok", "low_confidence", "failed"], "description": "failed 인 표는 cells 가 비어 있다. 빈 표와 추출 실패를 구분한다."},
+        "notes": {"type": "array", "items": {"type": "string"}},
+        "footnote_marks": {
+          "type": "array",
+          "description": "숫자 셀 뒤에 붙어 있던 각주 위첨자. 값이 오염되지 않게 cells 에서 떼어 여기에 둔다.",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["row", "col", "mark"],
+            "properties": {
+              "row": {"type": "integer", "minimum": 0},
+              "col": {"type": "integer", "minimum": 0},
+              "mark": {"type": "string"}
+            }
+          }
+        }
+      },
+      "allOf": [
+        {"if": {"properties": {"status": {"const": "failed"}}}, "then": {"properties": {"cells": {"maxItems": 0}, "method": {"const": "none"}}}, "else": {"properties": {"cells": {"minItems": 2}, "method": {"enum": ["lines", "text"]}}}}
+      ]
+    }
+  }
+}

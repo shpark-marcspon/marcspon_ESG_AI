@@ -1,0 +1,58 @@
+{
+  "$comment": "synthetic + 계수가 없는 연료",
+  "gwpSetId": "synthetic-gwp",
+  "activities": [
+    {
+      "id": "r1",
+      "orgUnit": "synthetic-plant-1",
+      "period": "2025-01",
+      "sourceType": "mobile_combustion",
+      "fuel": "synthetic-fuel-a",
+      "amount": "800",
+      "unit": "L"
+    },
+    {
+      "id": "r2",
+      "orgUnit": "synthetic-plant-1",
+      "period": "2025-01",
+      "sourceType": "stationary_combustion",
+      "fuel": "synthetic-fuel-a",
+      "amount": "1.2",
+      "unit": "kL"
+    },
+    {
+      "id": "r3",
+      "orgUnit": "synthetic-plant-1",
+      "period": "2025-02",
+      "sourceType": "stationary_combustion",
+      "fuel": "synthetic-fuel-b",
+      "amount": "3.456",
+      "unit": "t"
+    },
+    {
+      "id": "r4",
+      "orgUnit": "synthetic-plant-2",
+      "period": "2025-01",
+      "sourceType": "purchased_electricity",
+      "amount": "250000",
+      "unit": "kWh"
+    },
+    {
+      "id": "r5",
+      "orgUnit": "synthetic-plant-2",
+      "period": "2025-02",
+      "sourceType": "purchased_heat",
+      "amount": "15.5",
+      "unit": "GJ"
+    },
+    {
+      "id": "r6",
+      "orgUnit": "synthetic-plant-2",
+      "period": "2025-02",
+      "sourceType": "stationary_combustion",
+      "fuel": "no-such-fuel",
+      "amount": "10",
+      "unit": "L"
+    }
+  ]
+}

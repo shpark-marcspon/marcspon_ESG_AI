@@ -1,0 +1,147 @@
+{
+  "schemaVersion": "greenwash.compare@1",
+  "base": {
+    "documentId": 11,
+    "runId": 91,
+    "versionLabel": "v1",
+    "unconfirmed": false
+  },
+  "target": {
+    "documentId": 12,
+    "runId": 101,
+    "versionLabel": "v2",
+    "unconfirmed": true
+  },
+  "pairs": [
+    {
+      "outcome": "remaining",
+      "base": {
+        "itemIndex": 0,
+        "sentence": "가상전자는 2030년까지 모든 사업장에서 탄소중립을 반드시 달성하겠습니다.",
+        "level": "High",
+        "parts": [
+          "CEO 메시지"
+        ],
+        "page": 2
+      },
+      "target": {
+        "itemIndex": 0,
+        "sentence": "가상전자는 2030년까지 모든 사업장에서 탄소중립을 반드시 달성하겠습니다.",
+        "level": "High",
+        "parts": [
+          "CEO 메시지"
+        ],
+        "page": 2
+      }
+    },
+    {
+      "outcome": "level_changed",
+      "base": {
+        "itemIndex": 1,
+        "sentence": "우리는 지구를 생각하는 가장 친환경적인 기업입니다.",
+        "level": "High",
+        "parts": [
+          "CEO 메시지"
+        ],
+        "page": 2
+      },
+      "target": {
+        "itemIndex": 1,
+        "sentence": "우리는 지구를 생각하는 가장 친환경적인 기업입니다.",
+        "level": "Mid",
+        "parts": [
+          "CEO 메시지"
+        ],
+        "page": 2
+      }
+    },
+    {
+      "outcome": "resolved_deleted",
+      "base": {
+        "itemIndex": 2,
+        "sentence": "가상전자는 모든 제품을 100% 재활용 소재로 만듭니다.",
+        "level": "Mid",
+        "parts": [
+          "회사소개"
+        ],
+        "page": 3
+      },
+      "target": null
+    },
+    {
+      "outcome": "resolved_not_flagged",
+      "base": {
+        "itemIndex": 3,
+        "sentence": "가상전자의 물류 차량은 모두 친환경 차량입니다.",
+        "level": "Mid",
+        "parts": [
+          "회사소개"
+        ],
+        "page": 3
+      },
+      "target": null
+    },
+    {
+      "outcome": "resolved_undetermined",
+      "base": {
+        "itemIndex": 4,
+        "sentence": "가상전자는 업계 최초로 탄소 배출을 완전히 없앴습니다.",
+        "level": "High",
+        "parts": [
+          "기후/환경 토픽"
+        ],
+        "page": 5
+      },
+      "target": null
+    },
+    {
+      "outcome": "out_of_scope",
+      "base": {
+        "itemIndex": 5,
+        "sentence": "가상전자는 지속가능한 미래를 위해 끊임없이 노력하겠습니다.",
+        "level": "Low",
+        "parts": [
+          "기후/환경 토픽"
+        ],
+        "page": 7
+      },
+      "target": null
+    },
+    {
+      "outcome": "out_of_scope",
+      "base": null,
+      "target": {
+        "itemIndex": 2,
+        "sentence": "가상전자의 신규 공장은 재생에너지로 운영되는 친환경 공장입니다.",
+        "level": "Mid",
+        "parts": [
+          "회사소개",
+          "기후/환경 토픽"
+        ],
+        "page": 4
+      }
+    },
+    {
+      "outcome": "new",
+      "base": null,
+      "target": {
+        "itemIndex": 3,
+        "sentence": "가상전자는 앞으로도 깨끗한 물을 지키기 위해 최선을 다하겠습니다.",
+        "level": "Low",
+        "parts": [
+          "기후/환경 토픽"
+        ],
+        "page": 5
+      }
+    }
+  ],
+  "counts": {
+    "resolved_deleted": 1,
+    "resolved_not_flagged": 1,
+    "resolved_undetermined": 1,
+    "remaining": 1,
+    "level_changed": 1,
+    "new": 1,
+    "out_of_scope": 2
+  }
+}

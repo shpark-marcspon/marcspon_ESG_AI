@@ -1,0 +1,369 @@
+{
+  "schema_version": "0.1",
+  "source": {
+    "file_name": "synthetic-sample.pdf",
+    "sha256": "4af601d5862d847bb4066c2fd98f40bcff02b703d3952b766dece84d9904a8d6",
+    "page_count": 4
+  },
+  "config": {
+    "checker": {
+      "max_candidates_per_page": 3,
+      "max_chars_page_text": 2500,
+      "evidence_k": 2,
+      "max_chars_per_chunk": 450,
+      "use_evidence_failopen": false,
+      "max_chars_evidence_total": 1600,
+      "report_levels": [
+        "High",
+        "Mid",
+        "Low"
+      ],
+      "debug": true,
+      "debug_pages": 2,
+      "batch_eval": false,
+      "prompt_version": "2026-01-15-v1"
+    },
+    "chunking": {
+      "chunk_size": 800,
+      "chunk_overlap": 150,
+      "separators": [
+        "\n\n",
+        "\n",
+        " "
+      ],
+      "normalize": true,
+      "embedding_batch_size": 50
+    },
+    "chat": {
+      "temperature": 0.0,
+      "max_tokens": 1300
+    }
+  },
+  "models": {
+    "chat": "gpt-4.1-mini",
+    "embedding": "text-embedding-3-small"
+  },
+  "prompt_version": "2026-01-15-v1",
+  "provider": "mock",
+  "synthetic": true,
+  "parts": [
+    {
+      "name": "CEO 메시지",
+      "pages": [
+        1
+      ]
+    },
+    {
+      "name": "회사소개",
+      "pages": [
+        2
+      ]
+    },
+    {
+      "name": "기후/환경 토픽",
+      "pages": [
+        3,
+        4
+      ]
+    }
+  ],
+  "pages": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "items": [
+    {
+      "page": 1,
+      "parts": [
+        "CEO 메시지"
+      ],
+      "sentence": "가상상사는 2030년까지 온실가스 배출량을 2020년 대비 40% 줄이는 것을 목표로 합니다.",
+      "level": "High",
+      "risk_tags": [
+        "절대적 표현",
+        "근거 부족"
+      ],
+      "confirmed_in_evidence": [
+        "목표 연도가 적혀 있음(p.1)"
+      ],
+      "missing_fields": [
+        "범위/경계",
+        "산정/방법"
+      ],
+      "reason_bullets": [
+        "기준연도와 범위가 확인되지 않음",
+        "정량 수치가 없음"
+      ],
+      "fix_paragraph": "이 문장은 감축 목표의 기준연도와 목표연도를 2020년과 2030년처럼 연도로 밝혀야 합니다. 적용 범위를 Scope 1과 Scope 2로 나누어 적고 포함하지 않는 사업장을 함께 적어야 합니다. 감축량은 tCO2eq 단위의 수치와 산정 방법을 같이 제시해야 합니다. 제3자 검증을 받았는지와 검증 기관을 밝히는 것이 바람직합니다.",
+      "evidence_pages": [
+        1,
+        4
+      ],
+      "evidence_internal": "컨텍스트에 수치가 없습니다(p.1).",
+      "span": null
+    },
+    {
+      "page": 1,
+      "parts": [
+        "CEO 메시지"
+      ],
+      "sentence": "모든 사업장에서 재생에너지 사용을 확대해 나가겠습니다.",
+      "level": "Low",
+      "risk_tags": [
+        "선언적 문장"
+      ],
+      "confirmed_in_evidence": [],
+      "missing_fields": [],
+      "reason_bullets": [
+        "선언적 표현이 성과와 떨어져 있음"
+      ],
+      "fix_paragraph": "의지를 밝힌 글만으로는 읽는 사람이 실제 성과를 가늠하기 어렵습니다. 수치와 기한이 있는 목표를 글의 앞에 두는 편이 좋겠습니다.",
+      "evidence_pages": [
+        1,
+        4
+      ],
+      "evidence_internal": "",
+      "span": null
+    },
+    {
+      "page": 2,
+      "parts": [
+        "회사소개"
+      ],
+      "sentence": "가상상사는 100% 무공해 공정을 갖춘 탄소중립 기업입니다.",
+      "level": "Mid",
+      "risk_tags": [
+        "범위 불명확"
+      ],
+      "confirmed_in_evidence": [],
+      "missing_fields": [
+        "정의/기준"
+      ],
+      "reason_bullets": [
+        "근거 컨텍스트 대비 표현의 범위·기준·방법 또는 수치 정보가 충분히 확인되지 않음."
+      ],
+      "fix_paragraph": "이 문장은 감축 목표의 기준연도와 목표연도를 2020년과 2030년처럼 연도로 밝혀야 합니다. 적용 범위를 Scope 1과 Scope 2로 나누어 적고 포함하지 않는 사업장을 함께 적어야 합니다. 감축량은 tCO2eq 단위의 수치와 산정 방법을 같이 제시해야 합니다. 제3자 검증을 받았는지와 검증 기관을 밝히는 것이 바람직합니다.",
+      "evidence_pages": [
+        2,
+        3
+      ],
+      "evidence_internal": "",
+      "span": null
+    },
+    {
+      "page": 3,
+      "parts": [
+        "기후/환경 토픽"
+      ],
+      "sentence": "에너지 효율을 높여 온실가스 감축에 기여하고자 합니다.",
+      "level": "Low",
+      "risk_tags": [
+        "선언적 문장"
+      ],
+      "confirmed_in_evidence": [],
+      "missing_fields": [],
+      "reason_bullets": [
+        "선언적 표현이 성과와 떨어져 있음"
+      ],
+      "fix_paragraph": "의지를 밝힌 글만으로는 읽는 사람이 실제 성과를 가늠하기 어렵습니다. 수치와 기한이 있는 목표를 글의 앞에 두는 편이 좋겠습니다.",
+      "evidence_pages": [
+        4
+      ],
+      "evidence_internal": "",
+      "span": null
+    },
+    {
+      "page": 4,
+      "parts": [
+        "기후/환경 토픽"
+      ],
+      "sentence": "환경 성과 가상상사는 2010년에 사업장 3곳의 에너지 사용량을 조사했습니다.",
+      "level": "High",
+      "risk_tags": [
+        "절대적 표현",
+        "근거 부족"
+      ],
+      "confirmed_in_evidence": [
+        "목표 연도가 적혀 있음(p.1)"
+      ],
+      "missing_fields": [
+        "범위/경계",
+        "산정/방법"
+      ],
+      "reason_bullets": [
+        "기준연도와 범위가 확인되지 않음",
+        "정량 수치가 없음"
+      ],
+      "fix_paragraph": "이 문장은 감축 목표의 기준연도와 목표연도를 2020년과 2030년처럼 연도로 밝혀야 합니다. 적용 범위를 Scope 1과 Scope 2로 나누어 적고 포함하지 않는 사업장을 함께 적어야 합니다. 감축량은 tCO2eq 단위의 수치와 산정 방법을 같이 제시해야 합니다. 제3자 검증을 받았는지와 검증 기관을 밝히는 것이 바람직합니다.",
+      "evidence_pages": [
+        4
+      ],
+      "evidence_internal": "컨텍스트에 수치가 없습니다(p.1).",
+      "span": null
+    },
+    {
+      "page": 4,
+      "parts": [
+        "기후/환경 토픽"
+      ],
+      "sentence": "온실가스 감축 설비에 대한 투자를 확대해 나가겠습니다.",
+      "level": "Low",
+      "risk_tags": [
+        "선언적 문장"
+      ],
+      "confirmed_in_evidence": [],
+      "missing_fields": [],
+      "reason_bullets": [
+        "선언적 표현이 성과와 떨어져 있음"
+      ],
+      "fix_paragraph": "의지를 밝힌 글만으로는 읽는 사람이 실제 성과를 가늠하기 어렵습니다. 수치와 기한이 있는 목표를 글의 앞에 두는 편이 좋겠습니다.",
+      "evidence_pages": [
+        4
+      ],
+      "evidence_internal": "",
+      "span": null
+    }
+  ],
+  "candidate_stats": {
+    "raw": 11,
+    "hard_dropped": 0,
+    "non_env_dropped": 0,
+    "promo_dropped": 0,
+    "table_dropped": 1,
+    "kept": 7,
+    "failed_pages": []
+  },
+  "word_counts": {
+    "total": [
+      {
+        "term": "저탄소",
+        "count": 20
+      },
+      {
+        "term": "친환경",
+        "count": 2
+      },
+      {
+        "term": "탄소중립",
+        "count": 2
+      },
+      {
+        "term": "지속가능",
+        "count": 1
+      },
+      {
+        "term": "eco프리",
+        "count": 1
+      },
+      {
+        "term": "무공해",
+        "count": 1
+      },
+      {
+        "term": "그린",
+        "count": 1
+      },
+      {
+        "term": "zero",
+        "count": 1
+      },
+      {
+        "term": "청정에너지",
+        "count": 1
+      }
+    ],
+    "pages": [
+      {
+        "page": 1,
+        "counts": [
+          {
+            "term": "친환경",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "page": 2,
+        "counts": [
+          {
+            "term": "탄소중립",
+            "count": 1
+          },
+          {
+            "term": "지속가능",
+            "count": 1
+          },
+          {
+            "term": "eco프리",
+            "count": 1
+          },
+          {
+            "term": "무공해",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "page": 3,
+        "counts": [
+          {
+            "term": "친환경",
+            "count": 1
+          },
+          {
+            "term": "탄소중립",
+            "count": 1
+          },
+          {
+            "term": "그린",
+            "count": 1
+          },
+          {
+            "term": "zero",
+            "count": 1
+          },
+          {
+            "term": "청정에너지",
+            "count": 1
+          }
+        ]
+      },
+      {
+        "page": 4,
+        "counts": [
+          {
+            "term": "저탄소",
+            "count": 20
+          }
+        ]
+      }
+    ]
+  },
+  "calls": {
+    "chat": {
+      "detect": 4,
+      "eval": 4,
+      "low_only": 3,
+      "repair": 1
+    },
+    "embedding_document_requests": 1,
+    "embedding_query_requests": 7
+  },
+  "messages": [
+    "90714ef7fd6c7cc20f2e82276b075ff776727617e2226bbd4b7a18eb64f833d1",
+    "a7d545d4d712017154a3bb7f8b0435191153196d547b2e3f59cb57eb5a5f8fad",
+    "02d708bd1f698a85d276cc0fd58416d0edc76e2f0458356ba465984e5694bde0",
+    "2bc875ab55c05b1b45ea077eece1055db6247595e34a962a6bef5d187eab169f",
+    "dda349ec782345989453d47afea657d447c0f7dcaed36e270788ce7d1ff343d5",
+    "3a5283be8d3ea119f9546f92d9ec451727b2b3e5ea1edfa3b9fbefebdb8119f4",
+    "f8484254a8c04335a7f75ea8585892528f83cbed85261f295f4324f07ce72ae6",
+    "4a02906ed35c361241e9eb751a9e24d8db6b594daa8baafab34fbd164acc429a",
+    "1cb2b51411792ae7046cd474e289c6cdb2d63affa88fcf8aa7ccd9c39574b4ac",
+    "c778de44f5fa6f8e812b509a8e8b7425dc485240dd18bcf75b1f4cb97e270c63",
+    "7baabf3e6d7354733965a8f73a700aebb8cec6e8faad63b6733de432e432b789",
+    "bb70d89d1bc6af7584c5e9d14dc16c6889a1ab1c7dc9e60bc6afca2fea286b11"
+  ],
+  "_made_by": "esg-lab 2a237d229210cbbc67fdc17f32db1472491f93bc (driver make_golden.py) · cd <esg-lab>/py && PYTHONPATH=. uv run --frozen --group greenwash python <G1a.out>/gw1-driver/make_golden.py mock-text <출력>"
+}

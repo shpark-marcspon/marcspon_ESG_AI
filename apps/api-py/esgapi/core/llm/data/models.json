@@ -1,0 +1,366 @@
+{
+  "checkedOn": "2026-10-01",
+  "note": "단가는 USD / 100만 토큰(MTok). 수치는 sources 의 공식 문서를 직접 열어 확인한 값이다. 확인일은 머리 checkedOn(2026-10-01) 이고, 그 뒤 더하거나 고친 항목은 그 항목의 notes 에 확인일을 적는다(gpt-4.1-mini 2026-10-16). 확인하지 못한 값은 null 로 두고 notes 에 「못 확인」으로 적는다. 테스트용 가상 모델은 models.synthetic.json 에 따로 둔다.",
+  "sources": {
+    "anthropic_pricing": "https://platform.claude.com/docs/en/about-claude/pricing",
+    "anthropic_models": "https://platform.claude.com/docs/en/about-claude/models/overview",
+    "anthropic_sonnet46": "https://platform.claude.com/docs/en/models/sonnet-4-6/overview",
+    "anthropic_deprecations": "https://platform.claude.com/docs/en/about-claude/model-deprecations",
+    "anthropic_caching": "https://platform.claude.com/docs/en/build-with-claude/prompt-caching",
+    "anthropic_pdf": "https://platform.claude.com/docs/en/build-with-claude/pdf-support",
+    "anthropic_structured": "https://platform.claude.com/docs/en/build-with-claude/structured-outputs",
+    "openai_pricing": "https://developers.openai.com/api/docs/pricing",
+    "openai_model_luna": "https://developers.openai.com/api/docs/models/gpt-6-luna",
+    "openai_model_sol": "https://developers.openai.com/api/docs/models/gpt-6.1-sol",
+    "openai_caching": "https://developers.openai.com/api/docs/guides/prompt-caching",
+    "openai_structured": "https://developers.openai.com/api/docs/guides/structured-outputs",
+    "openai_files": "https://developers.openai.com/api/docs/guides/file-inputs",
+    "openai_embeddings_guide": "https://developers.openai.com/api/docs/guides/embeddings",
+    "openai_model_embedding_3_small": "https://developers.openai.com/api/docs/models/text-embedding-3-small",
+    "openai_embeddings_reference": "https://developers.openai.com/api/reference/resources/embeddings/methods/create",
+    "gemini_pricing": "https://ai.google.dev/gemini-api/docs/pricing",
+    "gemini_models": "https://ai.google.dev/gemini-api/docs/models",
+    "gemini_model_31_flash_lite": "https://ai.google.dev/gemini-api/docs/models/gemini-3.1-flash-lite",
+    "gemini_model_35_flash_lite": "https://ai.google.dev/gemini-api/docs/models/gemini-3.5-flash-lite",
+    "gemini_model_25_flash_lite": "https://ai.google.dev/gemini-api/docs/models/gemini-2.5-flash-lite",
+    "gemini_deprecations": "https://ai.google.dev/gemini-api/docs/deprecations",
+    "gemini_caching": "https://ai.google.dev/gemini-api/docs/generate-content/caching",
+    "gemini_structured": "https://ai.google.dev/gemini-api/docs/generate-content/structured-output",
+    "gemini_thinking": "https://ai.google.dev/gemini-api/docs/thinking",
+    "gemini_pdf": "https://ai.google.dev/gemini-api/docs/document-processing",
+    "openai_model_gpt41mini": "https://developers.openai.com/api/docs/models/gpt-4.1-mini",
+    "openai_model_gpt41": "https://developers.openai.com/api/docs/models/gpt-4.1",
+    "openai_model_gpt4o": "https://developers.openai.com/api/docs/models/gpt-4o"
+  },
+  "tokenEstimate": {
+    "note": "dry-run 과 캐시 최소 길이 경고에만 쓰는 어림값이다. 과금 근거가 아니다. 실제 토큰 수는 공급사 응답의 usage 로만 확정된다.",
+    "latinCharsPerToken": 4,
+    "latinBasis": "anthropic_pricing FAQ: '1 token is approximately 4 characters or 0.75 words in English' (2026-10-01 확인)",
+    "cjkCharsPerToken": 1,
+    "cjkBasis": "가정. 한글·한자 1자 = 1토큰으로 둔 것으로 공식 문서 출처가 없다. 키가 생기면 토큰 카운트 API 로 대체해야 한다."
+  },
+  "models": {
+    "claude-haiku-4-5": {
+      "provider": "anthropic",
+      "apiModelId": "claude-haiku-4-5-20251001",
+      "label": "Claude Haiku 4.5",
+      "pricing": {
+        "input": 1.0,
+        "output": 5.0,
+        "cacheWrite": 1.25,
+        "cacheWrite1h": 2.0,
+        "cacheRead": 0.1
+      },
+      "contextWindowTokens": 200000,
+      "maxOutputTokens": 64000,
+      "minCacheTokens": 4096,
+      "pdf": { "maxPagesPerRequest": 100, "maxRequestMb": 32 },
+      "structuredOutput": true,
+      "lifecycle": {
+        "status": "Active",
+        "retirement": "Not sooner than October 15, 2026",
+        "note": "2026-10-01 기준 Deprecated 표시와 퇴역 공지가 없다. 공지는 퇴역 최소 60일 전에 나온다."
+      },
+      "sourceRefs": ["anthropic_pricing", "anthropic_models", "anthropic_deprecations", "anthropic_caching", "anthropic_pdf", "anthropic_structured"],
+      "notes": [
+        "API ID 는 날짜가 붙은 스냅숏(claude-haiku-4-5-20251001), 별칭은 claude-haiku-4-5 (anthropic_models).",
+        "2026-10-02 재확인: anthropic_pricing 의 Claude Haiku 4.5 줄 '$1 / MTok | $1.25 / MTok | $2 / MTok | $0.10 / MTok | $5 / MTok' (입력, 5분 캐시 쓰기, 1시간 캐시 쓰기, 캐시 읽기, 출력), anthropic_deprecations 의 'claude-haiku-4-5-20251001 | Active | N/A | Not sooner than October 15, 2026'. 값은 2026-10-01 과 같다.",
+        "PDF 쪽 수 한도는 '600 (100 when the request's context window is under 1M tokens)' 이고 이 모델의 컨텍스트는 200K 라 100쪽이다 (anthropic_pdf)."
+      ]
+    },
+    "claude-sonnet-4-6": {
+      "provider": "anthropic",
+      "apiModelId": "claude-sonnet-4-6",
+      "label": "Claude Sonnet 4.6",
+      "pricing": {
+        "input": 3.0,
+        "output": 15.0,
+        "cacheWrite": 3.75,
+        "cacheWrite1h": 6.0,
+        "cacheRead": 0.3
+      },
+      "contextWindowTokens": 1000000,
+      "maxOutputTokens": 128000,
+      "minCacheTokens": 1024,
+      "pdf": { "maxPagesPerRequest": 600, "maxRequestMb": 32 },
+      "structuredOutput": true,
+      "lifecycle": {
+        "status": "Active (legacy)",
+        "retirement": "Not sooner than February 17, 2027",
+        "note": "모델 페이지가 Legacy 로 표시하고 Claude Sonnet 5.5 로의 이전을 권한다. 2026-10-01 기준 Deprecated 표시와 퇴역 공지는 없다."
+      },
+      "sourceRefs": ["anthropic_pricing", "anthropic_sonnet46", "anthropic_deprecations", "anthropic_caching", "anthropic_pdf", "anthropic_structured"],
+      "notes": []
+    },
+    "gemini-3.1-flash-lite": {
+      "provider": "gemini",
+      "apiModelId": "gemini-3.1-flash-lite",
+      "label": "Gemini 3.1 Flash-Lite",
+      "pricing": {
+        "input": 0.25,
+        "output": 1.5,
+        "cacheWrite": 0.25,
+        "cacheRead": 0.025
+      },
+      "contextWindowTokens": 1048576,
+      "maxInputTokens": 1048576,
+      "maxOutputTokens": 65536,
+      "minCacheTokens": 2048,
+      "pdf": { "maxPagesPerRequest": 1000, "maxRequestMb": 50 },
+      "structuredOutput": true,
+      "lifecycle": {
+        "status": "Stable",
+        "retirement": "May 7, 2027 (가장 이른 shutdown 날짜)",
+        "note": "2026-10-02 확인. gemini_deprecations 의 표: gemini-3.1-flash-lite | Release May 7, 2026 | Shutdown May 7, 2027 | 권장 대체 gemini-3.5-flash-lite. 같은 페이지의 단서: 'The shutdown dates listed in the table indicate the earliest possible dates on which a model might be retired'."
+      },
+      "sourceRefs": ["gemini_pricing", "gemini_models", "gemini_model_31_flash_lite", "gemini_model_25_flash_lite", "gemini_deprecations", "gemini_caching", "gemini_structured", "gemini_thinking", "gemini_pdf"],
+      "notes": [
+        "2026-10-02 확인. Paid Tier Standard 단가 (gemini_pricing): 입력 '$0.25 (text / image / video) $0.50 (audio)', 출력 '$1.50' (줄 이름이 'Output price (including thinking tokens)'), 캐시 '$0.025 (text / image / video)' + 저장 '$1.00 / 1,000,000 tokens per hour'. 글자 입력 단가만 넣었다. Batch·Flex·Priority 단가는 넣지 않았다.",
+        "가격 문서에서 가장 싼 글자 생성 모델은 이 모델이 아니라 gemini-2.5-flash-lite (0.10/0.40) 다. 그 모델은 2026-10-02 실제 호출에서 404 'This model models/gemini-2.5-flash-lite is no longer available to new users' 로 거부됐고, 모델 페이지(gemini_model_25_flash_lite)도 'we are limiting access to the 2.5 models to users who have actively used them in the past' 라고 적는다. 그래서 호출되는 것 중 가장 싼 이 모델을 넣었다.",
+        "같은 페이지의 Standard 유료 단가 (입력/출력 USD/MTok, 2026-10-02): gemini-2.5-flash-lite 0.10/0.40, gemini-3.1-flash-lite 0.25/1.50, gemini-3.5-flash-lite 0.30/2.50, gemini-2.5-flash 0.30/2.50, gemini-3-flash-preview 0.50/3.00, gemini-3.6·3.7·3.8-flash 0.75/3.75 (2026-12-31 까지, 그 뒤 1.50/7.50), gemini-3.5-flash 1.50/9.00. Pro 계열과 Live·TTS·이미지 모델은 적지 않았다.",
+        "가격 문서는 무료 등급의 캐시를 'Not available' 로 적지만 2026-10-02 무료 등급 키의 실제 호출에서 cachedContentTokenCount 4076 이 왔다. 환산 비용에는 캐시 읽기 단가로 들어간다.",
+        "cacheWrite 는 단가표에 없는 항목이다. 자동 캐시(implicit caching)에는 쓰기 과금이 따로 없어 입력 단가와 같은 값을 넣었고, 어댑터는 캐시 쓰기 토큰을 항상 0 으로 센다. 명시 캐시(explicit caching)의 저장 단가(시간당)는 이 계층이 쓰지 않아 넣지 않았다.",
+        "minCacheTokens 2048 은 가정이다 (못 확인). gemini_caching 의 자동 캐시 최소 길이 표에는 3.5~3.8 Flash 와 3.1 Pro Preview 4,096, 2.5 Flash·Pro 2,048 만 있고 Flash-Lite 줄이 없다. 사전 경고에만 쓰고 과금에는 쓰지 않는다.",
+        "입력 한도 1,048,576, 출력 한도 65,536 토큰 (gemini_model_31_flash_lite 의 Token limits). 구조화 출력 'Supported', 캐싱 'Supported', Thinking 'Supported'.",
+        "생각(thinking)의 기본값은 gemini_thinking 의 표에 이 모델 줄이 없어 문서로는 못 확인했다. 어댑터는 thinking 설정을 보내지 않는다(공급사 기본값).",
+        "PDF 는 'up to 50MB or 1000 pages' (gemini_pdf).",
+        "유료 등급의 입력·출력은 제품 개선에 쓰이지 않는다고 적혀 있다 (gemini_pricing 의 'Used to improve our products': Free Tier Yes, Paid Tier No). 요청 단위의 저장·학습 거부 옵션은 generateContent 에 없다. 쓰는 키가 어느 등급인지는 API 로 확인하지 못했다."
+      ]
+    },
+    "gemini-3.5-flash-lite": {
+      "provider": "gemini",
+      "apiModelId": "gemini-3.5-flash-lite",
+      "label": "Gemini 3.5 Flash-Lite",
+      "pricing": {
+        "input": 0.3,
+        "output": 2.5,
+        "cacheWrite": 0.3,
+        "cacheRead": 0.03
+      },
+      "contextWindowTokens": 1048576,
+      "maxInputTokens": 1048576,
+      "maxOutputTokens": 65536,
+      "minCacheTokens": 4096,
+      "pdf": { "maxPagesPerRequest": 1000, "maxRequestMb": 50 },
+      "structuredOutput": true,
+      "lifecycle": {
+        "status": "Stable",
+        "retirement": null,
+        "note": "2026-10-02 확인. gemini_deprecations 의 표: gemini-3.5-flash-lite | Release July 21, 2026 | Shutdown 'No shutdown date announced'. 모델 페이지의 Latest update 는 July 2026."
+      },
+      "sourceRefs": ["gemini_pricing", "gemini_models", "gemini_model_35_flash_lite", "gemini_deprecations", "gemini_caching", "gemini_structured", "gemini_thinking", "gemini_pdf"],
+      "notes": [
+        "2026-10-02 확인. Paid Tier Standard 단가 (gemini_pricing): 입력 '$0.30 (text / image / video / audio)', 출력 '$2.50' (줄 이름이 'Output price (including thinking tokens)'), 캐시 '$0.03' + 저장 '$1.00 / 1,000,000 tokens per hour'. Batch·Flex (0.15/1.25)·Priority (0.54/4.50) 단가는 넣지 않았다.",
+        "생각(thinking) 기본값은 'On (minimal)' 이다 (gemini_thinking 의 모델별 기본값 표, 2026-10-02). 생각 토큰은 출력 단가로 과금된다 (gemini_pricing 의 출력 줄 이름, gemini_thinking: 'When thinking is turned on, response pricing is the sum of output tokens and thinking tokens'). 어댑터는 thinking 설정을 보내지 않는다(공급사 기본값). 생각 토큰은 호출 기록의 outputTokens 에 합쳐지고 thinkingTokens 에 따로도 남는다.",
+        "입력 한도 1,048,576, 출력 한도 65,536 토큰 (gemini_model_35_flash_lite 의 Token limits). 구조화 출력·캐싱·Thinking 'Supported'.",
+        "cacheWrite 는 단가표에 없는 항목이다. 자동 캐시(implicit caching)에는 쓰기 과금이 따로 없어 입력 단가와 같은 값을 넣었고, 어댑터는 캐시 쓰기 토큰을 항상 0 으로 센다.",
+        "minCacheTokens 4096 은 가정이다 (못 확인). gemini_caching 의 자동 캐시 최소 길이 표에는 3.5~3.8 Flash 와 3.1 Pro Preview 4,096, 2.5 Flash·Pro 2,048 만 있고 Flash-Lite 줄이 없다. 같은 세대(3.5 Flash)의 값을 넣었다. 사전 경고에만 쓰고 과금에는 쓰지 않는다.",
+        "PDF 는 'up to 50MB or 1000 pages' (gemini_pdf, 2026-10-02 밴드 K 확인값. 이번에 다시 열지 않았다).",
+        "gemini-2.5-flash-lite (가격 문서상 최저가 0.10/0.40, 캐시 0.01, 생각 기본값 'Off') 는 2026-10-02 키 두 개(무료 등급 키, 그 뒤 바꾼 키)로 각각 한 번 불러 둘 다 404 'This model models/gemini-2.5-flash-lite is no longer available to new users. Please update your code to use models/gemini-3.5-flash-lite' 였다. 그래서 모델과 경로를 설정에 넣지 않았다.",
+        "2026-10-02 실제 호출에서 본 것 (usage 를 받은 408건: probe, Scope 3, 번역): thoughtsTokenCount 필드가 한 번도 오지 않았다. 문서의 기본값은 'On (minimal)' 이지만 이 호출들에서 생각 토큰으로 과금된 것은 0 이다. 자동 캐시는 probe 의 같은 요청 둘째 호출에서 promptTokenCount 7127 중 cachedContentTokenCount 4075 가 왔고(무료 등급 키), Scope 3·번역 호출에서는 0 이었다.",
+        "무료 등급 한도는 분당 15건이었다 (2026-10-02 실제 429: metric generate_content_free_tier_requests, limit 15, quotaId GenerateRequestsPerMinutePerProjectPerModel-FreeTier)."
+      ]
+    },
+    "gpt-6-luna": {
+      "provider": "openai",
+      "apiModelId": "gpt-6-luna",
+      "label": "OpenAI GPT-6 Luna",
+      "pricing": {
+        "input": 0.1,
+        "output": 0.5,
+        "cacheWrite": 0.125,
+        "cacheRead": 0.01,
+        "longContext": {
+          "aboveInputTokens": 272000,
+          "input": 0.2,
+          "output": 0.75,
+          "cacheWrite": 0.25,
+          "cacheRead": 0.02
+        }
+      },
+      "contextWindowTokens": 1050000,
+      "maxInputTokens": 922000,
+      "maxOutputTokens": 128000,
+      "reasoningOutputReserveTokens": 2000,
+      "minCacheTokens": 1024,
+      "pdf": { "maxPagesPerRequest": null, "maxRequestMb": 50 },
+      "structuredOutput": true,
+      "lifecycle": {
+        "status": "모델 페이지에 퇴역 정보 없음",
+        "retirement": null,
+        "note": "openai_model_luna 에 deprecation 언급이 없다. OpenAI 의 퇴역 목록 페이지는 열어 보지 않았다(못 확인)."
+      },
+      "sourceRefs": ["openai_pricing", "openai_model_luna", "openai_caching", "openai_structured", "openai_files"],
+      "notes": [
+        "Standard tier 단가. 'Short context: ≤272K input tokens. Long context: >272K input tokens.' (openai_pricing)",
+        "PDF 쪽 수 한도는 openai_files 에 명시가 없어 null(못 확인). 파일당·요청 합계 50MB 만 명시돼 있다.",
+        "캐시 최소 길이 '1,024 tokens for GPT-5.6 and later', 캐시 쓰기 '1.25× the uncached input-token rate', 보존 30분 (openai_caching).",
+        "reasoningOutputReserveTokens 2000 은 공식 문서의 값이 아니라 이 저장소의 실측 호출 기록에서 정한 여유분이다 (2026-10-02 집계, MARC-TICK-16. 기록은 2026-10-01~02 의 MARC-TICK-9·10 실행, git 밖 out/measure-openai·out/measure-retrieval). 이 모델은 추론 토큰이 max_output_tokens 를 같이 쓴다 (2026-10-01 실제 호출로 확인). scope3 분류 616줄 중 7줄이 상한 400 에서, 추천 583줄 중 1줄이 상한 800 에서 잘렸다. 기록에 추론 토큰이 따로 남아 있지 않아 보이는 글자 수로 어림했다: 추론 몫의 어림 최대는 성공한 호출에서 분류 280·추천 666 토큰이고, 잘린 호출은 필요량을 모른다(분류 400 이상 4줄). 어림 최대 666 의 3배, 잘린 호출의 하한 800 의 2.5배로 잡았다. 이 값으로 잘림이 없어지는지는 실측하지 않았다."
+      ]
+    },
+    "gpt-6.1-sol": {
+      "provider": "openai",
+      "apiModelId": "gpt-6.1-sol",
+      "label": "OpenAI GPT-6.1 Sol",
+      "pricing": {
+        "input": 2.0,
+        "output": 10.0,
+        "cacheWrite": 2.5,
+        "cacheRead": 0.1,
+        "longContext": {
+          "aboveInputTokens": 272000,
+          "input": 4.0,
+          "output": 15.0,
+          "cacheWrite": 5.0,
+          "cacheRead": 0.2
+        }
+      },
+      "contextWindowTokens": 1050000,
+      "maxInputTokens": 922000,
+      "maxOutputTokens": 128000,
+      "minCacheTokens": 1024,
+      "pdf": { "maxPagesPerRequest": null, "maxRequestMb": 50 },
+      "structuredOutput": true,
+      "lifecycle": {
+        "status": "모델 페이지에 퇴역 정보 없음",
+        "retirement": null,
+        "note": "openai_model_sol 에 deprecation 언급이 없다. OpenAI 의 퇴역 목록 페이지는 열어 보지 않았다(못 확인)."
+      },
+      "sourceRefs": ["openai_pricing", "openai_model_sol", "openai_caching", "openai_structured", "openai_files"],
+      "notes": [
+        "Standard tier 단가. 'Short context: ≤272K input tokens. Long context: >272K input tokens.' (openai_pricing)",
+        "PDF 쪽 수 한도는 openai_files 에 명시가 없어 null(못 확인)."
+      ]
+    },
+    "gpt-4.1-mini": {
+      "provider": "openai",
+      "apiModelId": "gpt-4.1-mini",
+      "label": "OpenAI GPT-4.1 Mini",
+      "pricing": {
+        "input": 0.4,
+        "output": 1.6,
+        "cacheWrite": 0.4,
+        "cacheRead": 0.1
+      },
+      "contextWindowTokens": 1047576,
+      "maxOutputTokens": 32768,
+      "minCacheTokens": 1024,
+      "pdf": { "maxPagesPerRequest": null, "maxRequestMb": 50 },
+      "structuredOutput": true,
+      "lifecycle": {
+        "status": "모델 페이지에 Deprecated 표시",
+        "retirement": null,
+        "note": "2026-10-16 확인. openai_model_gpt41mini 의 머리 배지 'GPT-4.1 Mini Deprecated' 와 스냅숏 목록 'gpt-4.1-mini-2025-04-14 Deprecated' (HTML 판. 같은 페이지의 .md 판에는 이 표시가 없다). 퇴역 날짜는 모델 페이지에 없고, OpenAI 의 퇴역 목록 페이지는 열어 보지 않았다(못 확인)."
+      },
+      "sourceRefs": ["openai_pricing", "openai_model_gpt41mini", "openai_caching", "openai_files"],
+      "notes": [
+        "2026-10-16 확인. Standard tier 단가 '| gpt-4.1-mini | $0.40 | $0.10 | - | $1.60 | - | - | - | - |' (열: Short context input, cached input, cache writes, output, Long context input, cached input, cache writes, output). 장문 구간 칸이 전부 '-' 라 longContext 를 두지 않는다 (openai_pricing).",
+        "2026-10-16 확인. 모델 페이지의 Text tokens 'Input $0.4 / Cached input $0.1 / Output $1.6' (1M tokens) 가 단가표와 같다 (openai_model_gpt41mini).",
+        "2026-10-16 확인. cacheWrite 0.4 는 입력 단가와 같은 값이다. 비교표 'Other earlier models' 열 'Cache write charge | No additional cache-write charge', 본문 'Cache-write pricing is not an additive fee: input tokens use the uncached-input, cached-input, or cache-write rate.' 1.25× 는 'For GPT-5.6 and later' 에만 걸린다 (openai_caching).",
+        "2026-10-16 확인. minCacheTokens 1024 는 가정이다 (못 확인). openai_caching 은 earlier models 를 'Minimum cacheable prefix | Varies by request settings' 로만 적는다('The minimum cacheable prompt length is 1,024 tokens for GPT-5.6 and later and varies by request settings for earlier models.'). GPT-5.6 이상의 1,024 를 하한 어림으로 빌렸다. 사전 경고에만 쓰고 과금에는 쓰지 않는다 (openai_caching).",
+        "2026-10-16 확인. '1,047,576 context window', '32,768 max output tokens'. 입력 한도(maxInputTokens)는 페이지에 없어 두지 않는다 (openai_model_gpt41mini).",
+        "2026-10-16 확인. 추론 모델이 아니다: 'low latency without a reasoning step'. 그래서 reasoningOutputReserveTokens 를 두지 않는다. 'Structured outputs Supported' (openai_model_gpt41mini).",
+        "2026-10-16 확인. PDF 는 'each file must be under 50 MB. The combined limit across all files in the request is 50 MB.' 쪽 수 한도는 명시가 없어 null(못 확인). 지원 모델은 'requires models with vision capabilities, such as gpt-4o and later models' 로만 적혀 gpt-4.1-mini 이름은 없다. 모델 페이지의 입력 모달리티는 'text, image' (openai_files, openai_model_gpt41mini)."
+      ]
+    },
+    "gpt-4.1": {
+      "provider": "openai",
+      "apiModelId": "gpt-4.1",
+      "label": "OpenAI GPT-4.1",
+      "pricing": {
+        "input": 2.0,
+        "output": 8.0,
+        "cacheWrite": 2.0,
+        "cacheRead": 0.5
+      },
+      "hostedToolPricing": { "webSearchPerCall": 0.01 },
+      "contextWindowTokens": 1047576,
+      "maxOutputTokens": 32768,
+      "minCacheTokens": 1024,
+      "pdf": { "maxPagesPerRequest": null, "maxRequestMb": 50 },
+      "structuredOutput": true,
+      "lifecycle": {
+        "status": "Deprecated (퇴역 예정)",
+        "retirement": "January 14, 2027",
+        "note": "2026-10-19 확인. https://developers.openai.com/api/docs/deprecations 의 '2026-10-14: GPT-4 series model deprecations' — 'On October 14, 2026, we notified developers using certain GPT-4 series models of their deprecation and removal from the API on January 14, 2027.' 표 '| January 14, 2027 | GPT-4.1 (`gpt-4.1-2025-04-14`) | `gpt-6-luna` |' (권장 대체 gpt-6-luna). 사업 종료(2027-02-02) 전 퇴역이다 — 1차는 받은 코랩대로 이 모델을 쓰고 퇴역 전에 바꾼다(MARC-ENT-305, 교체 밴드 MARC-ISSUE-188). 모델 페이지(.md 판)에는 Deprecated 표시가 없다."
+      },
+      "sourceRefs": ["openai_pricing", "openai_model_gpt41", "openai_caching", "openai_files"],
+      "notes": [
+        "2026-10-19 확인. Standard tier 단가 '| gpt-4.1 | $2.00 | $0.50 | - | $8.00 | - | - | - | - |' (열: Short context input, cached input, cache writes, output, Long context input, cached input, cache writes, output). 장문 구간 칸이 전부 '-' 라 longContext 를 두지 않는다 (openai_pricing).",
+        "2026-10-19 확인. 모델 페이지의 Text tokens 'Input $2 / Cached input $0.5 / Output $8' (1M tokens) 가 단가표와 같다 (openai_model_gpt41).",
+        "2026-10-19 확인. hostedToolPricing.webSearchPerCall 0.01 은 Tools 표 '| Web search | Web search (all models) | $10.00 / 1k calls + Search content tokens billed at model rates. |' 의 $10.00 / 1k calls 다. 요청의 도구 type 은 'web_search' 이고 preview 줄('| Web search | Web search preview (non-reasoning models) | $25.00 / 1k calls + Search content tokens are free. |')이 아니다(도구 이름으로 가른 것 — 추정). 검색 내용 토큰은 'Search content tokens billed at model rates' 이고 'For gpt-4o-mini and gpt-4.1-mini with the non-preview web search tool, search content tokens are billed as a fixed block of 8,000 input tokens per call.' — gpt-4.1 에는 따로 붙은 조건이 없다. 건당 요금이 web_search_call 항목마다인지 그 안의 action 마다인지는 원문에 없다(못 확인 — 호출 층은 web_search_call 항목 수로 센다) (openai_pricing).",
+        "2026-10-19 확인. cacheWrite 2.0 은 입력 단가와 같은 값이다. 비교표 'Other earlier models' 열 'Cache write charge | No additional cache-write charge', 본문 'Cache-write pricing is not an additive fee: input tokens use the uncached-input, cached-input, or cache-write rate.' (openai_caching).",
+        "2026-10-19 확인. minCacheTokens 1024 는 가정이다 (못 확인). openai_caching 은 'The minimum cacheable prompt length is 1,024 tokens for GPT-5.6 and later and varies by request settings for earlier models.' 로만 적는다. gpt-4.1-mini 와 같게 하한 어림으로 빌렸다. 사전 경고에만 쓰고 과금에는 쓰지 않는다 (openai_caching).",
+        "2026-10-19 확인. '1,047,576 context window', '32,768 max output tokens'. 입력 한도(maxInputTokens)는 페이지에 없어 두지 않는다 (openai_model_gpt41).",
+        "2026-10-19 확인. 추론 모델이 아니다: 'Smartest non-reasoning model', 'low latency without a reasoning step'. 그래서 reasoningOutputReserveTokens 를 두지 않는다. Supported features 'structured_outputs', 'function_calling', 'web_search', Responses API 'Supported tools' 에 'function_calling', 'web_search' (openai_model_gpt41).",
+        "2026-10-19 확인. PDF 는 'each file must be under 50 MB. The combined limit across all files in the request is 50 MB.' 쪽 수 한도는 명시가 없어 null(못 확인). 지원 모델은 'requires models with vision capabilities, such as `gpt-4o` and later models' 로만 적혀 gpt-4.1 이름은 없다. 모델 페이지의 입력 모달리티는 'text, image' (openai_files, openai_model_gpt41)."
+      ]
+    },
+    "gpt-4o": {
+      "provider": "openai",
+      "apiModelId": "gpt-4o",
+      "label": "OpenAI GPT-4o",
+      "pricing": {
+        "input": 2.5,
+        "output": 10.0,
+        "cacheWrite": 2.5,
+        "cacheRead": 1.25
+      },
+      "hostedToolPricing": { "webSearchPerCall": 0.01 },
+      "contextWindowTokens": 128000,
+      "maxOutputTokens": 16384,
+      "minCacheTokens": 1024,
+      "pdf": { "maxPagesPerRequest": null, "maxRequestMb": 50 },
+      "structuredOutput": true,
+      "lifecycle": {
+        "status": "Deprecated (퇴역 예정)",
+        "retirement": "January 14, 2027",
+        "note": "2026-10-23 확인. https://developers.openai.com/api/docs/deprecations 의 '2026-10-14: GPT-4 series model deprecations' — 'On October 14, 2026, we notified developers using certain GPT-4 series models of their deprecation and removal from the API on January 14, 2027.' 표 '| January 14, 2027 | GPT-4o (`gpt-4o-2024-08-06`, `gpt-4o-2024-11-20`) | `gpt-6-luna` |' (권장 대체 gpt-6-luna). 사업 종료(2027-02-02) 전 퇴역이다 — 1차는 받은 코랩대로 이 모델을 쓰고(MARC-ENT-425) 퇴역 전에 바꾼다(MARC-ISSUE-188). 같은 페이지의 '2026-04-22' 항목에 `gpt-4o-2024-05-13` 은 October 23, 2026 퇴역(대체 `gpt-5.6-sol`)으로 있다 — 모델 페이지의 기본 스냅숏은 'gpt-4o-2024-08-06'(default) 이라 별칭 gpt-4o 는 그쪽을 가리킨다(추정). 모델 페이지에는 Deprecated 표시가 없다."
+      },
+      "sourceRefs": ["openai_pricing", "openai_model_gpt4o", "openai_caching", "openai_files"],
+      "notes": [
+        "2026-10-23 확인. Standard 단가표 '| gpt-4o | $2.50 | $10.00 | $1.25 |' (열: Model, Input, Output, Cached input — 이날 표에는 cache writes·장문 구간 열이 없다). 장문 구간이 없어 longContext 를 두지 않는다 (openai_pricing).",
+        "2026-10-23 확인. 모델 페이지의 Text tokens 'Input $2.5 / Cached input $1.25 / Output $10' (1M tokens) 가 단가표와 같다 (openai_model_gpt4o).",
+        "2026-10-23 확인. hostedToolPricing.webSearchPerCall 0.01 은 Tools 표 '| Web search | Web search (all models) | $10.00 / 1k calls + Search content tokens billed at model rates. |' 의 $10.00 / 1k calls 다. 요청의 도구 type 은 'web_search' 이고 preview 줄('Web search preview (non-reasoning models) | $25.00 / 1k calls + Search content tokens are free.')이 아니다(도구 이름으로 가른 것 — 추정, gpt-4.1 과 같은 근거). 검색 내용 토큰은 'Search content tokens billed at model rates' 이고 고정 8,000 토큰 블록은 'For gpt-4o-mini and gpt-4.1-mini with the non-preview web search tool' 에만 붙는다 — gpt-4o 에는 따로 붙은 조건이 없다. 건당 요금이 web_search_call 항목마다인지 그 안의 action 마다인지는 원문에 없다(못 확인 — 호출 층은 web_search_call 항목 수로 센다) (openai_pricing).",
+        "2026-10-23 확인. cacheWrite 2.5 는 입력 단가와 같은 값이다(gpt-4.1 줄과 같은 근거). 비교표 'Other earlier models' 열 'Cache write charge | No additional cache-write charge', 본문 'Cache-write pricing is not an additive fee: input tokens use the uncached-input, cached-input, or cache-write rate.' (openai_caching).",
+        "2026-10-23 확인. minCacheTokens 1024 는 가정이다 (못 확인). openai_caching 은 'The minimum cacheable prompt length is 1,024 tokens for GPT-5.6 and later and varies by request settings for earlier models.' 로만 적고 gpt-4o 이름은 없다. gpt-4.1 과 같게 하한 어림으로 빌렸다. 사전 경고에만 쓰고 과금에는 쓰지 않는다 (openai_caching).",
+        "2026-10-23 확인. '128,000 context window', '16,384 max output tokens'. 입력 한도(maxInputTokens)는 페이지에 없어 두지 않는다 (openai_model_gpt4o).",
+        "2026-10-23 확인. 추론 모델이 아니다(추정): 모델 페이지는 'Fast, intelligent, flexible GPT model', 'our most capable model outside of our o-series models' 라 적고 reasoning 이라는 낱말이 없다. 그래서 reasoningOutputReserveTokens 를 두지 않는다. Responses API 'Tools supported by this model' 에 'function_calling', 'web_search' (openai_model_gpt4o).",
+        "2026-10-23 확인. PDF 는 'each file must be under 50 MB. The combined limit across all files in the request is 50 MB.' 쪽 수 한도는 명시가 없어 null(못 확인). 지원 모델은 'requires models with vision capabilities, such as `gpt-4o` and later models' (openai_files)."
+      ]
+    }
+  },
+  "routes": {
+    "light": ["claude-haiku-4-5", "gpt-6-luna"],
+    "light-openai": ["gpt-6-luna"],
+    "light-anthropic": ["claude-haiku-4-5"],
+    "light-gemini": ["gemini-3.1-flash-lite"],
+    "light-gemini-35": ["gemini-3.5-flash-lite"],
+    "standard": ["claude-sonnet-4-6", "gpt-6.1-sol"],
+    "light-openai-41": ["gpt-4.1-mini"],
+    "standard-openai-41": ["gpt-4.1"],
+    "standard-openai-4o": ["gpt-4o"]
+  },
+  "embeddingModels": {
+    "text-embedding-3-small": {
+      "provider": "openai",
+      "apiModelId": "text-embedding-3-small",
+      "label": "OpenAI text-embedding-3-small",
+      "pricing": { "input": 0.02 },
+      "dimensions": 1536,
+      "maxInputTokens": 8192,
+      "maxInputsPerRequest": 2048,
+      "maxTokensPerRequest": 300000,
+      "multilingual": null,
+      "sourceRefs": ["openai_pricing", "openai_embeddings_guide", "openai_model_embedding_3_small", "openai_embeddings_reference"],
+      "notes": [
+        "2026-10-02 확인. openai_pricing 의 임베딩 모델은 text-embedding-3-small 0.02, text-embedding-3-large 0.13, text-embedding-ada-002 0.10 USD/MTok 셋이고 이 모델이 가장 싸다. Batch 단가는 그 페이지에 없다.",
+        "기본 차원 1536, 입력 한도 8192 토큰 (openai_embeddings_guide: 'By default, the length of the embedding vector is 1536 for text-embedding-3-small').",
+        "한 요청의 입력 배열은 2048개 이하, 모든 입력의 토큰 합은 300,000 이하 (openai_embeddings_reference: 'any array must be 2048 dimensions or less', 'a maximum of 300,000 tokens summed across all inputs in a single request').",
+        "다국어(한국어) 지원 여부는 위 세 문서에 명시가 없다 (못 확인). multilingual 을 null 로 둔다.",
+        "퇴역 정보는 모델 페이지에 없다. OpenAI 의 퇴역 목록 페이지는 열어 보지 않았다 (못 확인)."
+      ]
+    }
+  },
+  "embeddingRoutes": { "light-openai": "text-embedding-3-small" }
+}

@@ -1,0 +1,18 @@
+{
+  "schemaVersion": "drafting.bullets@3",
+  "basis": {"artifactId": 41, "parser": {"name": "docparse", "version": "0.1.0", "layout": 2}, "epoch": 1, "pagesSha256": "3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f3f"},
+  "base": null,
+  "projectId": 7,
+  "outlineId": 12,
+  "outlineSha256": "0d6e6b1b0f3f5f2a8a4c1f7f3b3e9e8d6c5b4a39281706f5e4d3c2b1a0918273",
+  "status": {"status": "rejected", "code": "over_budget", "stage": "before_draft", "message": "초안 단계의 비용 위끝이 실행 상한을 넘는다."},
+  "document": {"documentId": 31, "fileName": "가상산업-2025-지속가능경영보고서.pdf", "pageCount": 5, "textPages": 4, "pages": [{"page": 1, "width": 595.0, "height": 842.0}, {"page": 2, "width": 595.0, "height": 842.0}, {"page": 3, "width": 595.0, "height": 842.0}, {"page": 4, "width": 595.0, "height": 842.0}, {"page": 5, "width": 595.0, "height": 842.0}]},
+  "leaves": [
+    {"key": "env-climate-ghg", "titlePath": ["환경", "기후변화 대응", "온실가스 배출 관리"], "pages": [2, 3], "reusedFrom": null, "outcome": {"status": "not_run", "reason": "비용 상한을 넘어 초안을 짓지 않았다."}},
+    {"key": "env-climate-energy", "titlePath": ["환경", "기후변화 대응", "에너지 사용"], "pages": [3], "reusedFrom": null, "outcome": {"status": "not_run", "reason": "비용 상한을 넘어 초안을 짓지 않았다."}},
+    {"key": "soc-safety", "titlePath": ["사회", "안전보건"], "pages": [], "reusedFrom": null, "outcome": {"status": "not_run", "reason": "비용 상한을 넘어 초안을 짓지 않았다."}}
+  ],
+  "mapping": {"batches": 1, "failedBatches": []},
+  "settings": {"routes": {"map": "light-openai-41", "draft": "light-openai-41"}, "promptIds": {"map": "drafting/map@1", "draft": "drafting/draft@2"}},
+  "warnings": []
+}

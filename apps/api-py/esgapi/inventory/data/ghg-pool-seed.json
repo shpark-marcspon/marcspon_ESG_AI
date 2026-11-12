@@ -1,0 +1,1982 @@
+{
+ "$comment": "온실가스 풀 씨앗(밴드 K1b-2a ④ — manage.py seed_ghg_pool). 값 칸이 없다: 계수·순발열량은 reference 낱줄(gases·ncv 의 id)의 value_raw, GWP 는 inventory/data/gwp-sets.json 에서 명령이 읽는다(운영 규칙 4). 낱줄 id 는 reference 조립기(assemble_combustion_factor·assemble_purchased_electricity_factor)를 적재본에 돌려 뽑았다 — engine_1 이 셈하는 것과 같은 낱줄. 나무(결정 MARC-ENT-676 — MARC-ENT-479 (가) 「연료 이름 = 자산/시설 이름」을 갈음): Scope 1 > 고정연소 > <연료 = 배출활동, 이름은 별표 12 순발열량 표 글자 그대로> > <설비 종류 잎 = 공통 시설 코드 이름 — 호기·대수는 사업장 세부시설명 몫, 고정연소 설비만>, Scope 2 > 간접배출 > 외부에서 공급된 전기 사용 > <설비 잎>. retired 는 옛 씨앗(연료 = 잎 코드)의 노드 열쇠 — retire_ghg_seed 만 읽고 seed_ghg_pool 은 읽지 않는다(그 열쇠를 새 씨앗에 다시 쓰지 않는다 — R9). 기준연도는 baseYearBasis 의 글자에서. 산화계수는 싣지 않는다(S12a 셈이 정함). 조립기가 실패해 넣지 않은 연료 7 — 원유·코크스(CO2 국가 고유 낱줄 없음), 부생연료유1호·2호·도시가스(LPG)(별표 10 이름 대응 없음), 전기(발전기준)·전기(소비기준)(연소 아님 — 구매 전력 잎).",
+ "sources": [
+  "gir-2024",
+  "gir-2025",
+  "kr-ets-byl06",
+  "kr-ets-byl10",
+  "kr-ets-byl12"
+ ],
+ "tree": [
+  {
+   "key": "scope1",
+   "name": "Scope 1",
+   "children": [
+    {
+     "key": "stationary",
+     "name": "고정연소",
+     "children": [
+      {
+       "key": "petroleum_coke",
+       "name": "석유코크스",
+       "facilities": [
+        {
+         "code": "소성로",
+         "unit": {
+          "kind": "mass",
+          "unit": "kg"
+         },
+         "factors": [
+          {
+           "key": "manufacturing_construction",
+           "name": "석유코크스 · 제조업ㆍ건설업",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "manufacturing_construction",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r11:CO2",
+            "CH4": "kr-ets-byl10:p1t0r19:CH4:2",
+            "N2O": "kr-ets-byl10:p1t0r19:N2O:5"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r16:net"
+          },
+          {
+           "key": "energy_industries",
+           "name": "석유코크스 · 에너지산업",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "energy_industries",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r11:CO2",
+            "CH4": "kr-ets-byl10:p1t0r19:CH4:1",
+            "N2O": "kr-ets-byl10:p1t0r19:N2O:5"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r16:net"
+          },
+          {
+           "key": "commercial_public",
+           "name": "석유코크스 · 상업ㆍ공공",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "commercial_public",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r11:CO2",
+            "CH4": "kr-ets-byl10:p1t0r19:CH4:3",
+            "N2O": "kr-ets-byl10:p1t0r19:N2O:6"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r16:net"
+          },
+          {
+           "key": "residential_other",
+           "name": "석유코크스 · 가정ㆍ기타",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "residential_other",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r11:CO2",
+            "CH4": "kr-ets-byl10:p1t0r19:CH4:4",
+            "N2O": "kr-ets-byl10:p1t0r19:N2O:6"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r16:net"
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "key": "domestic_anthracite",
+       "name": "국내무연탄",
+       "facilities": [
+        {
+         "code": "보일러",
+         "unit": {
+          "kind": "mass",
+          "unit": "kg"
+         },
+         "factors": [
+          {
+           "key": "manufacturing_construction",
+           "name": "국내무연탄 · 제조업ㆍ건설업",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "manufacturing_construction",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r20:CO2",
+            "CH4": "kr-ets-byl10:p2t0r2:CH4:2",
+            "N2O": "kr-ets-byl10:p2t0r2:N2O:5"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r22:net"
+          },
+          {
+           "key": "energy_industries",
+           "name": "국내무연탄 · 에너지산업",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "energy_industries",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r20:CO2",
+            "CH4": "kr-ets-byl10:p2t0r2:CH4:1",
+            "N2O": "kr-ets-byl10:p2t0r2:N2O:5"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r22:net"
+          },
+          {
+           "key": "commercial_public",
+           "name": "국내무연탄 · 상업ㆍ공공",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "commercial_public",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r20:CO2",
+            "CH4": "kr-ets-byl10:p2t0r2:CH4:3",
+            "N2O": "kr-ets-byl10:p2t0r2:N2O:6"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r22:net"
+          },
+          {
+           "key": "residential_other",
+           "name": "국내무연탄 · 가정ㆍ기타",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "residential_other",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r20:CO2",
+            "CH4": "kr-ets-byl10:p2t0r2:CH4:4",
+            "N2O": "kr-ets-byl10:p2t0r2:N2O:6"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r22:net"
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "key": "imported_anthracite_fuel",
+       "name": "연료용 수입무연탄",
+       "facilities": [
+        {
+         "code": "보일러",
+         "unit": {
+          "kind": "mass",
+          "unit": "kg"
+         },
+         "factors": [
+          {
+           "key": "manufacturing_construction",
+           "name": "연료용 수입무연탄 · 제조업ㆍ건설업",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "manufacturing_construction",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r21:CO2",
+            "CH4": "kr-ets-byl10:p2t0r2:CH4:2",
+            "N2O": "kr-ets-byl10:p2t0r2:N2O:5"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r23:net"
+          },
+          {
+           "key": "energy_industries",
+           "name": "연료용 수입무연탄 · 에너지산업",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "energy_industries",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r21:CO2",
+            "CH4": "kr-ets-byl10:p2t0r2:CH4:1",
+            "N2O": "kr-ets-byl10:p2t0r2:N2O:5"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r23:net"
+          },
+          {
+           "key": "commercial_public",
+           "name": "연료용 수입무연탄 · 상업ㆍ공공",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "commercial_public",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r21:CO2",
+            "CH4": "kr-ets-byl10:p2t0r2:CH4:3",
+            "N2O": "kr-ets-byl10:p2t0r2:N2O:6"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r23:net"
+          },
+          {
+           "key": "residential_other",
+           "name": "연료용 수입무연탄 · 가정ㆍ기타",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "residential_other",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r21:CO2",
+            "CH4": "kr-ets-byl10:p2t0r2:CH4:4",
+            "N2O": "kr-ets-byl10:p2t0r2:N2O:6"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r23:net"
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "key": "imported_anthracite_feedstock",
+       "name": "원료용 수입무연탄",
+       "facilities": [
+        {
+         "code": "소성로",
+         "unit": {
+          "kind": "mass",
+          "unit": "kg"
+         },
+         "factors": [
+          {
+           "key": "manufacturing_construction",
+           "name": "원료용 수입무연탄 · 제조업ㆍ건설업",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "manufacturing_construction",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r22:CO2",
+            "CH4": "kr-ets-byl10:p2t0r2:CH4:2",
+            "N2O": "kr-ets-byl10:p2t0r2:N2O:5"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r24:net"
+          },
+          {
+           "key": "energy_industries",
+           "name": "원료용 수입무연탄 · 에너지산업",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "energy_industries",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r22:CO2",
+            "CH4": "kr-ets-byl10:p2t0r2:CH4:1",
+            "N2O": "kr-ets-byl10:p2t0r2:N2O:5"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r24:net"
+          },
+          {
+           "key": "commercial_public",
+           "name": "원료용 수입무연탄 · 상업ㆍ공공",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "commercial_public",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r22:CO2",
+            "CH4": "kr-ets-byl10:p2t0r2:CH4:3",
+            "N2O": "kr-ets-byl10:p2t0r2:N2O:6"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r24:net"
+          },
+          {
+           "key": "residential_other",
+           "name": "원료용 수입무연탄 · 가정ㆍ기타",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "residential_other",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r22:CO2",
+            "CH4": "kr-ets-byl10:p2t0r2:CH4:4",
+            "N2O": "kr-ets-byl10:p2t0r2:N2O:6"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r24:net"
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "key": "bituminous_fuel",
+       "name": "연료용 유연탄(역청탄)",
+       "facilities": [
+        {
+         "code": "보일러",
+         "unit": {
+          "kind": "mass",
+          "unit": "kg"
+         },
+         "factors": [
+          {
+           "key": "manufacturing_construction",
+           "name": "연료용 유연탄(역청탄) · 제조업ㆍ건설업",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "manufacturing_construction",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r23:CO2",
+            "CH4": "kr-ets-byl10:p2t0r4:CH4:2",
+            "N2O": "kr-ets-byl10:p2t0r4:N2O:5"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r25:net"
+          },
+          {
+           "key": "energy_industries",
+           "name": "연료용 유연탄(역청탄) · 에너지산업",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "energy_industries",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r23:CO2",
+            "CH4": "kr-ets-byl10:p2t0r4:CH4:1",
+            "N2O": "kr-ets-byl10:p2t0r4:N2O:5"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r25:net"
+          },
+          {
+           "key": "commercial_public",
+           "name": "연료용 유연탄(역청탄) · 상업ㆍ공공",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "commercial_public",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r23:CO2",
+            "CH4": "kr-ets-byl10:p2t0r4:CH4:3",
+            "N2O": "kr-ets-byl10:p2t0r4:N2O:6"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r25:net"
+          },
+          {
+           "key": "residential_other",
+           "name": "연료용 유연탄(역청탄) · 가정ㆍ기타",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "residential_other",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r23:CO2",
+            "CH4": "kr-ets-byl10:p2t0r4:CH4:4",
+            "N2O": "kr-ets-byl10:p2t0r4:N2O:6"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r25:net"
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "key": "bituminous_feedstock",
+       "name": "원료용 유연탄(역청탄)",
+       "facilities": [
+        {
+         "code": "소성로",
+         "unit": {
+          "kind": "mass",
+          "unit": "kg"
+         },
+         "factors": [
+          {
+           "key": "manufacturing_construction",
+           "name": "원료용 유연탄(역청탄) · 제조업ㆍ건설업",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "manufacturing_construction",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r24:CO2",
+            "CH4": "kr-ets-byl10:p2t0r3:CH4:2",
+            "N2O": "kr-ets-byl10:p2t0r3:N2O:5"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r26:net"
+          },
+          {
+           "key": "energy_industries",
+           "name": "원료용 유연탄(역청탄) · 에너지산업",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "energy_industries",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r24:CO2",
+            "CH4": "kr-ets-byl10:p2t0r3:CH4:1",
+            "N2O": "kr-ets-byl10:p2t0r3:N2O:5"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r26:net"
+          },
+          {
+           "key": "commercial_public",
+           "name": "원료용 유연탄(역청탄) · 상업ㆍ공공",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "commercial_public",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r24:CO2",
+            "CH4": "kr-ets-byl10:p2t0r3:CH4:3",
+            "N2O": "kr-ets-byl10:p2t0r3:N2O:6"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r26:net"
+          },
+          {
+           "key": "residential_other",
+           "name": "원료용 유연탄(역청탄) · 가정ㆍ기타",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "residential_other",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r24:CO2",
+            "CH4": "kr-ets-byl10:p2t0r3:CH4:4",
+            "N2O": "kr-ets-byl10:p2t0r3:N2O:6"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r26:net"
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "key": "sub_bituminous",
+       "name": "아역청탄",
+       "facilities": [
+        {
+         "code": "보일러",
+         "unit": {
+          "kind": "mass",
+          "unit": "kg"
+         },
+         "factors": [
+          {
+           "key": "manufacturing_construction",
+           "name": "아역청탄 · 제조업ㆍ건설업",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "manufacturing_construction",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p4r1:CO2",
+            "CH4": "kr-ets-byl10:p2t0r5:CH4:2",
+            "N2O": "kr-ets-byl10:p2t0r5:N2O:5"
+           },
+           "ncv": "kr-ets-byl12:hv:p2r3:net"
+          },
+          {
+           "key": "energy_industries",
+           "name": "아역청탄 · 에너지산업",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "energy_industries",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p4r1:CO2",
+            "CH4": "kr-ets-byl10:p2t0r5:CH4:1",
+            "N2O": "kr-ets-byl10:p2t0r5:N2O:5"
+           },
+           "ncv": "kr-ets-byl12:hv:p2r3:net"
+          },
+          {
+           "key": "commercial_public",
+           "name": "아역청탄 · 상업ㆍ공공",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "commercial_public",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p4r1:CO2",
+            "CH4": "kr-ets-byl10:p2t0r5:CH4:3",
+            "N2O": "kr-ets-byl10:p2t0r5:N2O:6"
+           },
+           "ncv": "kr-ets-byl12:hv:p2r3:net"
+          },
+          {
+           "key": "residential_other",
+           "name": "아역청탄 · 가정ㆍ기타",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "residential_other",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p4r1:CO2",
+            "CH4": "kr-ets-byl10:p2t0r5:CH4:4",
+            "N2O": "kr-ets-byl10:p2t0r5:N2O:6"
+           },
+           "ncv": "kr-ets-byl12:hv:p2r3:net"
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "key": "gasoline",
+       "name": "휘발유",
+       "facilities": [
+        {
+         "code": "비상발전기",
+         "unit": {
+          "kind": "volume",
+          "unit": "L"
+         },
+         "factors": [
+          {
+           "key": "manufacturing_construction",
+           "name": "휘발유 · 제조업ㆍ건설업",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "manufacturing_construction",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r1:CO2",
+            "CH4": "kr-ets-byl10:p1t0r6:CH4:2",
+            "N2O": "kr-ets-byl10:p1t0r6:N2O:5"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r3:net"
+          },
+          {
+           "key": "energy_industries",
+           "name": "휘발유 · 에너지산업",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "energy_industries",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r1:CO2",
+            "CH4": "kr-ets-byl10:p1t0r6:CH4:1",
+            "N2O": "kr-ets-byl10:p1t0r6:N2O:5"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r3:net"
+          },
+          {
+           "key": "commercial_public",
+           "name": "휘발유 · 상업ㆍ공공",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "commercial_public",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r1:CO2",
+            "CH4": "kr-ets-byl10:p1t0r6:CH4:3",
+            "N2O": "kr-ets-byl10:p1t0r6:N2O:6"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r3:net"
+          },
+          {
+           "key": "residential_other",
+           "name": "휘발유 · 가정ㆍ기타",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "residential_other",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r1:CO2",
+            "CH4": "kr-ets-byl10:p1t0r6:CH4:4",
+            "N2O": "kr-ets-byl10:p1t0r6:N2O:6"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r3:net"
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "key": "kerosene",
+       "name": "등유",
+       "facilities": [
+        {
+         "code": "보일러",
+         "unit": {
+          "kind": "volume",
+          "unit": "L"
+         },
+         "factors": [
+          {
+           "key": "manufacturing_construction",
+           "name": "등유 · 제조업ㆍ건설업",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "manufacturing_construction",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r2:CO2",
+            "CH4": "kr-ets-byl10:p1t0r10:CH4:2",
+            "N2O": "kr-ets-byl10:p1t0r10:N2O:5"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r4:net"
+          },
+          {
+           "key": "energy_industries",
+           "name": "등유 · 에너지산업",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "energy_industries",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r2:CO2",
+            "CH4": "kr-ets-byl10:p1t0r10:CH4:1",
+            "N2O": "kr-ets-byl10:p1t0r10:N2O:5"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r4:net"
+          },
+          {
+           "key": "commercial_public",
+           "name": "등유 · 상업ㆍ공공",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "commercial_public",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r2:CO2",
+            "CH4": "kr-ets-byl10:p1t0r10:CH4:3",
+            "N2O": "kr-ets-byl10:p1t0r10:N2O:6"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r4:net"
+          },
+          {
+           "key": "residential_other",
+           "name": "등유 · 가정ㆍ기타",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "residential_other",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r2:CO2",
+            "CH4": "kr-ets-byl10:p1t0r10:CH4:4",
+            "N2O": "kr-ets-byl10:p1t0r10:N2O:6"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r4:net"
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "key": "diesel",
+       "name": "경유",
+       "facilities": [
+        {
+         "code": "비상발전기",
+         "unit": {
+          "kind": "volume",
+          "unit": "L"
+         },
+         "factors": [
+          {
+           "key": "manufacturing_construction",
+           "name": "경유 · 제조업ㆍ건설업",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "manufacturing_construction",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r3:CO2",
+            "CH4": "kr-ets-byl10:p1t0r12:CH4:2",
+            "N2O": "kr-ets-byl10:p1t0r12:N2O:5"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r5:net"
+          },
+          {
+           "key": "energy_industries",
+           "name": "경유 · 에너지산업",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "energy_industries",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r3:CO2",
+            "CH4": "kr-ets-byl10:p1t0r12:CH4:1",
+            "N2O": "kr-ets-byl10:p1t0r12:N2O:5"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r5:net"
+          },
+          {
+           "key": "commercial_public",
+           "name": "경유 · 상업ㆍ공공",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "commercial_public",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r3:CO2",
+            "CH4": "kr-ets-byl10:p1t0r12:CH4:3",
+            "N2O": "kr-ets-byl10:p1t0r12:N2O:6"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r5:net"
+          },
+          {
+           "key": "residential_other",
+           "name": "경유 · 가정ㆍ기타",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "residential_other",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r3:CO2",
+            "CH4": "kr-ets-byl10:p1t0r12:CH4:4",
+            "N2O": "kr-ets-byl10:p1t0r12:N2O:6"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r5:net"
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "key": "bunker_a",
+       "name": "B-A유",
+       "facilities": [
+        {
+         "code": "보일러",
+         "unit": {
+          "kind": "volume",
+          "unit": "L"
+         },
+         "factors": [
+          {
+           "key": "manufacturing_construction",
+           "name": "B-A유 · 제조업ㆍ건설업",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "manufacturing_construction",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r4:CO2",
+            "CH4": "kr-ets-byl10:p3t1r2:CH4:2",
+            "N2O": "kr-ets-byl10:p3t1r2:N2O:5"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r6:net"
+          },
+          {
+           "key": "energy_industries",
+           "name": "B-A유 · 에너지산업",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "energy_industries",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r4:CO2",
+            "CH4": "kr-ets-byl10:p3t1r2:CH4:1",
+            "N2O": "kr-ets-byl10:p3t1r2:N2O:5"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r6:net"
+          },
+          {
+           "key": "commercial_public",
+           "name": "B-A유 · 상업ㆍ공공",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "commercial_public",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r4:CO2",
+            "CH4": "kr-ets-byl10:p3t1r2:CH4:3",
+            "N2O": "kr-ets-byl10:p3t1r2:N2O:6"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r6:net"
+          },
+          {
+           "key": "residential_other",
+           "name": "B-A유 · 가정ㆍ기타",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "residential_other",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r4:CO2",
+            "CH4": "kr-ets-byl10:p3t1r2:CH4:4",
+            "N2O": "kr-ets-byl10:p3t1r2:N2O:6"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r6:net"
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "key": "bunker_b",
+       "name": "B-B유",
+       "facilities": [
+        {
+         "code": "보일러",
+         "unit": {
+          "kind": "volume",
+          "unit": "L"
+         },
+         "factors": [
+          {
+           "key": "manufacturing_construction",
+           "name": "B-B유 · 제조업ㆍ건설업",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "manufacturing_construction",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r5:CO2",
+            "CH4": "kr-ets-byl10:p3t1r3:CH4:2",
+            "N2O": "kr-ets-byl10:p3t1r3:N2O:5"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r7:net"
+          },
+          {
+           "key": "energy_industries",
+           "name": "B-B유 · 에너지산업",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "energy_industries",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r5:CO2",
+            "CH4": "kr-ets-byl10:p3t1r3:CH4:1",
+            "N2O": "kr-ets-byl10:p3t1r3:N2O:5"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r7:net"
+          },
+          {
+           "key": "commercial_public",
+           "name": "B-B유 · 상업ㆍ공공",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "commercial_public",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r5:CO2",
+            "CH4": "kr-ets-byl10:p3t1r3:CH4:3",
+            "N2O": "kr-ets-byl10:p3t1r3:N2O:6"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r7:net"
+          },
+          {
+           "key": "residential_other",
+           "name": "B-B유 · 가정ㆍ기타",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "residential_other",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r5:CO2",
+            "CH4": "kr-ets-byl10:p3t1r3:CH4:4",
+            "N2O": "kr-ets-byl10:p3t1r3:N2O:6"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r7:net"
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "key": "bunker_c",
+       "name": "B-C유",
+       "facilities": [
+        {
+         "code": "보일러",
+         "unit": {
+          "kind": "volume",
+          "unit": "L"
+         },
+         "factors": [
+          {
+           "key": "manufacturing_construction",
+           "name": "B-C유 · 제조업ㆍ건설업",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "manufacturing_construction",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r6:CO2",
+            "CH4": "kr-ets-byl10:p1t0r13:CH4:2",
+            "N2O": "kr-ets-byl10:p1t0r13:N2O:5"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r8:net"
+          },
+          {
+           "key": "energy_industries",
+           "name": "B-C유 · 에너지산업",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "energy_industries",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r6:CO2",
+            "CH4": "kr-ets-byl10:p1t0r13:CH4:1",
+            "N2O": "kr-ets-byl10:p1t0r13:N2O:5"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r8:net"
+          },
+          {
+           "key": "commercial_public",
+           "name": "B-C유 · 상업ㆍ공공",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "commercial_public",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r6:CO2",
+            "CH4": "kr-ets-byl10:p1t0r13:CH4:3",
+            "N2O": "kr-ets-byl10:p1t0r13:N2O:6"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r8:net"
+          },
+          {
+           "key": "residential_other",
+           "name": "B-C유 · 가정ㆍ기타",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "residential_other",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r6:CO2",
+            "CH4": "kr-ets-byl10:p1t0r13:CH4:4",
+            "N2O": "kr-ets-byl10:p1t0r13:N2O:6"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r8:net"
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "key": "naphtha",
+       "name": "나프타",
+       "facilities": [
+        {
+         "code": "가열로",
+         "unit": {
+          "kind": "volume",
+          "unit": "L"
+         },
+         "factors": [
+          {
+           "key": "manufacturing_construction",
+           "name": "나프타 · 제조업ㆍ건설업",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "manufacturing_construction",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r7:CO2",
+            "CH4": "kr-ets-byl10:p1t0r16:CH4:2",
+            "N2O": "kr-ets-byl10:p1t0r16:N2O:5"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r11:net"
+          },
+          {
+           "key": "energy_industries",
+           "name": "나프타 · 에너지산업",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "energy_industries",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r7:CO2",
+            "CH4": "kr-ets-byl10:p1t0r16:CH4:1",
+            "N2O": "kr-ets-byl10:p1t0r16:N2O:5"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r11:net"
+          },
+          {
+           "key": "commercial_public",
+           "name": "나프타 · 상업ㆍ공공",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "commercial_public",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r7:CO2",
+            "CH4": "kr-ets-byl10:p1t0r16:CH4:3",
+            "N2O": "kr-ets-byl10:p1t0r16:N2O:6"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r11:net"
+          },
+          {
+           "key": "residential_other",
+           "name": "나프타 · 가정ㆍ기타",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "residential_other",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r7:CO2",
+            "CH4": "kr-ets-byl10:p1t0r16:CH4:4",
+            "N2O": "kr-ets-byl10:p1t0r16:N2O:6"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r11:net"
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "key": "solvent",
+       "name": "용제",
+       "facilities": [
+        {
+         "code": "건조로",
+         "unit": {
+          "kind": "volume",
+          "unit": "L"
+         },
+         "factors": [
+          {
+           "key": "manufacturing_construction",
+           "name": "용제 · 제조업ㆍ건설업",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "manufacturing_construction",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r8:CO2",
+            "CH4": "kr-ets-byl10:p1t0r23:CH4:2",
+            "N2O": "kr-ets-byl10:p1t0r23:N2O:5"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r12:net"
+          },
+          {
+           "key": "energy_industries",
+           "name": "용제 · 에너지산업",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "energy_industries",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r8:CO2",
+            "CH4": "kr-ets-byl10:p1t0r23:CH4:1",
+            "N2O": "kr-ets-byl10:p1t0r23:N2O:5"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r12:net"
+          },
+          {
+           "key": "commercial_public",
+           "name": "용제 · 상업ㆍ공공",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "commercial_public",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r8:CO2",
+            "CH4": "kr-ets-byl10:p1t0r23:CH4:3",
+            "N2O": "kr-ets-byl10:p1t0r23:N2O:6"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r12:net"
+          },
+          {
+           "key": "residential_other",
+           "name": "용제 · 가정ㆍ기타",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "residential_other",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r8:CO2",
+            "CH4": "kr-ets-byl10:p1t0r23:CH4:4",
+            "N2O": "kr-ets-byl10:p1t0r23:N2O:6"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r12:net"
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "key": "jet_fuel",
+       "name": "항공유",
+       "facilities": [
+        {
+         "code": "가열로",
+         "unit": {
+          "kind": "volume",
+          "unit": "L"
+         },
+         "factors": [
+          {
+           "key": "manufacturing_construction",
+           "name": "항공유 · 제조업ㆍ건설업",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "manufacturing_construction",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r9:CO2",
+            "CH4": "kr-ets-byl10:p1t0r9:CH4:2",
+            "N2O": "kr-ets-byl10:p1t0r9:N2O:5"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r13:net"
+          },
+          {
+           "key": "energy_industries",
+           "name": "항공유 · 에너지산업",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "energy_industries",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r9:CO2",
+            "CH4": "kr-ets-byl10:p1t0r9:CH4:1",
+            "N2O": "kr-ets-byl10:p1t0r9:N2O:5"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r13:net"
+          },
+          {
+           "key": "commercial_public",
+           "name": "항공유 · 상업ㆍ공공",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "commercial_public",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r9:CO2",
+            "CH4": "kr-ets-byl10:p1t0r9:CH4:3",
+            "N2O": "kr-ets-byl10:p1t0r9:N2O:6"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r13:net"
+          },
+          {
+           "key": "residential_other",
+           "name": "항공유 · 가정ㆍ기타",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "residential_other",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r9:CO2",
+            "CH4": "kr-ets-byl10:p1t0r9:CH4:4",
+            "N2O": "kr-ets-byl10:p1t0r9:N2O:6"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r13:net"
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "key": "asphalt",
+       "name": "아스팔트",
+       "facilities": [
+        {
+         "code": "가열로",
+         "unit": {
+          "kind": "mass",
+          "unit": "kg"
+         },
+         "factors": [
+          {
+           "key": "manufacturing_construction",
+           "name": "아스팔트 · 제조업ㆍ건설업",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "manufacturing_construction",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r10:CO2",
+            "CH4": "kr-ets-byl10:p1t0r17:CH4:2",
+            "N2O": "kr-ets-byl10:p1t0r17:N2O:5"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r14:net"
+          },
+          {
+           "key": "energy_industries",
+           "name": "아스팔트 · 에너지산업",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "energy_industries",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r10:CO2",
+            "CH4": "kr-ets-byl10:p1t0r17:CH4:1",
+            "N2O": "kr-ets-byl10:p1t0r17:N2O:5"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r14:net"
+          },
+          {
+           "key": "commercial_public",
+           "name": "아스팔트 · 상업ㆍ공공",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "commercial_public",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r10:CO2",
+            "CH4": "kr-ets-byl10:p1t0r17:CH4:3",
+            "N2O": "kr-ets-byl10:p1t0r17:N2O:6"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r14:net"
+          },
+          {
+           "key": "residential_other",
+           "name": "아스팔트 · 가정ㆍ기타",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "residential_other",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r10:CO2",
+            "CH4": "kr-ets-byl10:p1t0r17:CH4:4",
+            "N2O": "kr-ets-byl10:p1t0r17:N2O:6"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r14:net"
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "key": "lubricant",
+       "name": "윤활유",
+       "facilities": [
+        {
+         "code": "보일러",
+         "unit": {
+          "kind": "volume",
+          "unit": "L"
+         },
+         "factors": [
+          {
+           "key": "manufacturing_construction",
+           "name": "윤활유 · 제조업ㆍ건설업",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "manufacturing_construction",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r12:CO2",
+            "CH4": "kr-ets-byl10:p1t0r18:CH4:2",
+            "N2O": "kr-ets-byl10:p1t0r18:N2O:5"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r15:net"
+          },
+          {
+           "key": "energy_industries",
+           "name": "윤활유 · 에너지산업",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "energy_industries",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r12:CO2",
+            "CH4": "kr-ets-byl10:p1t0r18:CH4:1",
+            "N2O": "kr-ets-byl10:p1t0r18:N2O:5"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r15:net"
+          },
+          {
+           "key": "commercial_public",
+           "name": "윤활유 · 상업ㆍ공공",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "commercial_public",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r12:CO2",
+            "CH4": "kr-ets-byl10:p1t0r18:CH4:3",
+            "N2O": "kr-ets-byl10:p1t0r18:N2O:6"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r15:net"
+          },
+          {
+           "key": "residential_other",
+           "name": "윤활유 · 가정ㆍ기타",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "residential_other",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r12:CO2",
+            "CH4": "kr-ets-byl10:p1t0r18:CH4:4",
+            "N2O": "kr-ets-byl10:p1t0r18:N2O:6"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r15:net"
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "key": "propane",
+       "name": "프로판(LPG1호)",
+       "facilities": [
+        {
+         "code": "건조로",
+         "unit": {
+          "kind": "mass",
+          "unit": "kg"
+         },
+         "factors": [
+          {
+           "key": "manufacturing_construction",
+           "name": "프로판(LPG1호) · 제조업ㆍ건설업",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "manufacturing_construction",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r15:CO2",
+            "CH4": "kr-ets-byl10:p1t0r14:CH4:2",
+            "N2O": "kr-ets-byl10:p1t0r14:N2O:5"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r9:net"
+          },
+          {
+           "key": "energy_industries",
+           "name": "프로판(LPG1호) · 에너지산업",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "energy_industries",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r15:CO2",
+            "CH4": "kr-ets-byl10:p1t0r14:CH4:1",
+            "N2O": "kr-ets-byl10:p1t0r14:N2O:5"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r9:net"
+          },
+          {
+           "key": "commercial_public",
+           "name": "프로판(LPG1호) · 상업ㆍ공공",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "commercial_public",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r15:CO2",
+            "CH4": "kr-ets-byl10:p1t0r14:CH4:3",
+            "N2O": "kr-ets-byl10:p1t0r14:N2O:6"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r9:net"
+          },
+          {
+           "key": "residential_other",
+           "name": "프로판(LPG1호) · 가정ㆍ기타",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "residential_other",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r15:CO2",
+            "CH4": "kr-ets-byl10:p1t0r14:CH4:4",
+            "N2O": "kr-ets-byl10:p1t0r14:N2O:6"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r9:net"
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "key": "butane",
+       "name": "부탄(LPG3호)",
+       "facilities": [
+        {
+         "code": "보일러",
+         "unit": {
+          "kind": "mass",
+          "unit": "kg"
+         },
+         "factors": [
+          {
+           "key": "manufacturing_construction",
+           "name": "부탄(LPG3호) · 제조업ㆍ건설업",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "manufacturing_construction",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r16:CO2",
+            "CH4": "kr-ets-byl10:p1t0r14:CH4:2",
+            "N2O": "kr-ets-byl10:p1t0r14:N2O:5"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r10:net"
+          },
+          {
+           "key": "energy_industries",
+           "name": "부탄(LPG3호) · 에너지산업",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "energy_industries",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r16:CO2",
+            "CH4": "kr-ets-byl10:p1t0r14:CH4:1",
+            "N2O": "kr-ets-byl10:p1t0r14:N2O:5"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r10:net"
+          },
+          {
+           "key": "commercial_public",
+           "name": "부탄(LPG3호) · 상업ㆍ공공",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "commercial_public",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r16:CO2",
+            "CH4": "kr-ets-byl10:p1t0r14:CH4:3",
+            "N2O": "kr-ets-byl10:p1t0r14:N2O:6"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r10:net"
+          },
+          {
+           "key": "residential_other",
+           "name": "부탄(LPG3호) · 가정ㆍ기타",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "residential_other",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r16:CO2",
+            "CH4": "kr-ets-byl10:p1t0r14:CH4:4",
+            "N2O": "kr-ets-byl10:p1t0r14:N2O:6"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r10:net"
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "key": "natural_gas",
+       "name": "천연가스(LNG)",
+       "facilities": [
+        {
+         "code": "보일러",
+         "unit": {
+          "kind": "mass",
+          "unit": "kg"
+         },
+         "factors": [
+          {
+           "key": "manufacturing_construction",
+           "name": "천연가스(LNG) · 제조업ㆍ건설업",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "manufacturing_construction",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r17:CO2",
+            "CH4": "kr-ets-byl10:p2t0r18:CH4:2",
+            "N2O": "kr-ets-byl10:p2t0r18:N2O:5"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r19:net"
+          },
+          {
+           "key": "energy_industries",
+           "name": "천연가스(LNG) · 에너지산업",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "energy_industries",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r17:CO2",
+            "CH4": "kr-ets-byl10:p2t0r18:CH4:1",
+            "N2O": "kr-ets-byl10:p2t0r18:N2O:5"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r19:net"
+          },
+          {
+           "key": "commercial_public",
+           "name": "천연가스(LNG) · 상업ㆍ공공",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "commercial_public",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r17:CO2",
+            "CH4": "kr-ets-byl10:p2t0r18:CH4:3",
+            "N2O": "kr-ets-byl10:p2t0r18:N2O:6"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r19:net"
+          },
+          {
+           "key": "residential_other",
+           "name": "천연가스(LNG) · 가정ㆍ기타",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "residential_other",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r17:CO2",
+            "CH4": "kr-ets-byl10:p2t0r18:CH4:4",
+            "N2O": "kr-ets-byl10:p2t0r18:N2O:6"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r19:net"
+          }
+         ]
+        }
+       ]
+      },
+      {
+       "key": "city_gas_lng",
+       "name": "도시가스(LNG)",
+       "facilities": [
+        {
+         "code": "보일러",
+         "unit": {
+          "kind": "volume",
+          "unit": "Nm3"
+         },
+         "factors": [
+          {
+           "key": "manufacturing_construction",
+           "name": "도시가스(LNG) · 제조업ㆍ건설업",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "manufacturing_construction",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r18:CO2",
+            "CH4": "kr-ets-byl10:p2t0r18:CH4:2",
+            "N2O": "kr-ets-byl10:p2t0r18:N2O:5"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r20:net"
+          },
+          {
+           "key": "energy_industries",
+           "name": "도시가스(LNG) · 에너지산업",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "energy_industries",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r18:CO2",
+            "CH4": "kr-ets-byl10:p2t0r18:CH4:1",
+            "N2O": "kr-ets-byl10:p2t0r18:N2O:5"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r20:net"
+          },
+          {
+           "key": "commercial_public",
+           "name": "도시가스(LNG) · 상업ㆍ공공",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "commercial_public",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r18:CO2",
+            "CH4": "kr-ets-byl10:p2t0r18:CH4:3",
+            "N2O": "kr-ets-byl10:p2t0r18:N2O:6"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r20:net"
+          },
+          {
+           "key": "residential_other",
+           "name": "도시가스(LNG) · 가정ㆍ기타",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 10·12",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "residential_other",
+           "gases": {
+            "CO2": "kr-ets-byl12:ef:p3r18:CO2",
+            "CH4": "kr-ets-byl10:p2t0r18:CH4:4",
+            "N2O": "kr-ets-byl10:p2t0r18:N2O:6"
+           },
+           "ncv": "kr-ets-byl12:hv:p1r20:net"
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "key": "scope2",
+   "name": "Scope 2",
+   "children": [
+    {
+     "key": "indirect",
+     "name": "간접배출",
+     "children": [
+      {
+       "key": "electricity",
+       "name": "외부에서 공급된 전기 사용",
+       "facilities": [
+        {
+         "code": "수전설비",
+         "unit": {
+          "kind": "electricity",
+          "unit": "MWh"
+         },
+         "factors": [
+          {
+           "key": "gir-2025:ipcc_2006:2023:consumption",
+           "name": "구매 전력 · GIR 2025 · ’06 IPCC · 2023년 · 소비단",
+           "source": "온실가스종합정보센터 2025 공고 전력배출계수(’06 IPCC)",
+           "baseYear": 2023,
+           "baseYearBasis": "낱줄 year",
+           "gases": {
+            "CO2": "gir-2025:main:r7",
+            "CH4": "gir-2025:main:r8",
+            "N2O": "gir-2025:main:r9"
+           },
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "other"
+          },
+          {
+           "key": "t69",
+           "name": "구매 전력 · 지침 별표 6 <표-69>",
+           "source": "환경부고시 제2025-64호 (2025-04-11 시행) 별표 6 <표-69>",
+           "baseYear": 2025,
+           "baseYearBasis": "고시 판 글자 「제2025-64호」(낱줄에 year 없음)",
+           "gases": {
+            "CO2": "kr-ets-byl06:elec:t69:CO2",
+            "CH4": "kr-ets-byl06:elec:t69:CH4",
+            "N2O": "kr-ets-byl06:elec:t69:N2O"
+           },
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "other"
+          },
+          {
+           "key": "gir-2025:ipcc_2006:2023:generation",
+           "name": "구매 전력 · GIR 2025 · ’06 IPCC · 2023년 · 발전단",
+           "source": "온실가스종합정보센터 2025 공고 전력배출계수(’06 IPCC)",
+           "baseYear": 2023,
+           "baseYearBasis": "낱줄 year",
+           "gases": {
+            "CO2": "gir-2025:main:r3",
+            "CH4": "gir-2025:main:r4",
+            "N2O": "gir-2025:main:r5"
+           },
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "other"
+          },
+          {
+           "key": "gir-2025:ipcc_2006:2021-2023:generation",
+           "name": "구매 전력 · GIR 2025 · ’06 IPCC · 2021~2023년 평균 · 발전단",
+           "source": "온실가스종합정보센터 2025 공고 전력배출계수(’06 IPCC)",
+           "baseYear": 2023,
+           "baseYearBasis": "기간 글자의 끝 해(낱줄에 year 없음)",
+           "gases": {
+            "CO2": "gir-2025:main:r11",
+            "CH4": "gir-2025:main:r12",
+            "N2O": "gir-2025:main:r13"
+           },
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "other"
+          },
+          {
+           "key": "gir-2025:ipcc_2006:2021-2023:consumption",
+           "name": "구매 전력 · GIR 2025 · ’06 IPCC · 2021~2023년 평균 · 소비단",
+           "source": "온실가스종합정보센터 2025 공고 전력배출계수(’06 IPCC)",
+           "baseYear": 2023,
+           "baseYearBasis": "기간 글자의 끝 해(낱줄에 year 없음)",
+           "gases": {
+            "CO2": "gir-2025:main:r15",
+            "CH4": "gir-2025:main:r16",
+            "N2O": "gir-2025:main:r17"
+           },
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "other"
+          },
+          {
+           "key": "gir-2025:ipcc_1996_legacy:2023:generation",
+           "name": "구매 전력 · GIR 2025 · ’96 IPCC(기존 산정기준) · 2023년 · 발전단",
+           "source": "온실가스종합정보센터 2025 공고 전력배출계수(’96 IPCC(기존 산정기준))",
+           "baseYear": 2023,
+           "baseYearBasis": "낱줄 year",
+           "gases": {
+            "CO2": "gir-2025:alt:r2c3",
+            "CH4": "gir-2025:alt:r2c4",
+            "N2O": "gir-2025:alt:r2c5"
+           },
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "other"
+          },
+          {
+           "key": "gir-2025:ipcc_1996_legacy:2023:consumption",
+           "name": "구매 전력 · GIR 2025 · ’96 IPCC(기존 산정기준) · 2023년 · 소비단",
+           "source": "온실가스종합정보센터 2025 공고 전력배출계수(’96 IPCC(기존 산정기준))",
+           "baseYear": 2023,
+           "baseYearBasis": "낱줄 year",
+           "gases": {
+            "CO2": "gir-2025:alt:r3c3",
+            "CH4": "gir-2025:alt:r3c4",
+            "N2O": "gir-2025:alt:r3c5"
+           },
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "other"
+          },
+          {
+           "key": "gir-2025:ipcc_1996_legacy:2021-2023:generation",
+           "name": "구매 전력 · GIR 2025 · ’96 IPCC(기존 산정기준) · 2021~2023년 평균 · 발전단",
+           "source": "온실가스종합정보센터 2025 공고 전력배출계수(’96 IPCC(기존 산정기준))",
+           "baseYear": 2023,
+           "baseYearBasis": "기간 글자의 끝 해(낱줄에 year 없음)",
+           "gases": {
+            "CO2": "gir-2025:alt:r4c3",
+            "CH4": "gir-2025:alt:r4c4",
+            "N2O": "gir-2025:alt:r4c5"
+           },
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "other"
+          },
+          {
+           "key": "gir-2025:ipcc_1996_legacy:2021-2023:consumption",
+           "name": "구매 전력 · GIR 2025 · ’96 IPCC(기존 산정기준) · 2021~2023년 평균 · 소비단",
+           "source": "온실가스종합정보센터 2025 공고 전력배출계수(’96 IPCC(기존 산정기준))",
+           "baseYear": 2023,
+           "baseYearBasis": "기간 글자의 끝 해(낱줄에 year 없음)",
+           "gases": {
+            "CO2": "gir-2025:alt:r5c3",
+            "CH4": "gir-2025:alt:r5c4",
+            "N2O": "gir-2025:alt:r5c5"
+           },
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "other"
+          },
+          {
+           "key": "gir-2024:ipcc_2006:not-stated:generation",
+           "name": "구매 전력 · GIR 2024 · ’06 IPCC · 기간 표시 없음 · 발전단",
+           "source": "온실가스종합정보센터 2024 공고 전력배출계수(’06 IPCC)",
+           "baseYear": 2024,
+           "baseYearBasis": "공고 판 글자 2024(낱줄에 year 없음)",
+           "gases": {
+            "CO2": "gir-2024:main:r3",
+            "CH4": "gir-2024:main:r4",
+            "N2O": "gir-2024:main:r5"
+           },
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "other"
+          },
+          {
+           "key": "gir-2024:ipcc_2006:not-stated:consumption",
+           "name": "구매 전력 · GIR 2024 · ’06 IPCC · 기간 표시 없음 · 소비단",
+           "source": "온실가스종합정보센터 2024 공고 전력배출계수(’06 IPCC)",
+           "baseYear": 2024,
+           "baseYearBasis": "공고 판 글자 2024(낱줄에 year 없음)",
+           "gases": {
+            "CO2": "gir-2024:main:r7",
+            "CH4": "gir-2024:main:r8",
+            "N2O": "gir-2024:main:r9"
+           },
+           "tier": 2,
+           "countryCode": "KR",
+           "industryCode": "other"
+          }
+         ]
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "retired": [
+  "scope1/stationary/solid",
+  "scope1/stationary/solid/석유코크스",
+  "scope1/stationary/solid/국내무연탄",
+  "scope1/stationary/solid/연료용 수입무연탄",
+  "scope1/stationary/solid/원료용 수입무연탄",
+  "scope1/stationary/solid/연료용 유연탄(역청탄)",
+  "scope1/stationary/solid/원료용 유연탄(역청탄)",
+  "scope1/stationary/solid/아역청탄",
+  "scope1/stationary/liquid",
+  "scope1/stationary/liquid/휘발유",
+  "scope1/stationary/liquid/등유",
+  "scope1/stationary/liquid/경유",
+  "scope1/stationary/liquid/B-A유",
+  "scope1/stationary/liquid/B-B유",
+  "scope1/stationary/liquid/B-C유",
+  "scope1/stationary/liquid/나프타",
+  "scope1/stationary/liquid/용제",
+  "scope1/stationary/liquid/항공유",
+  "scope1/stationary/liquid/아스팔트",
+  "scope1/stationary/liquid/윤활유",
+  "scope1/stationary/gaseous",
+  "scope1/stationary/gaseous/프로판(LPG1호)",
+  "scope1/stationary/gaseous/부탄(LPG3호)",
+  "scope1/stationary/gaseous/천연가스(LNG)",
+  "scope1/stationary/gaseous/도시가스(LNG)",
+  "scope2/indirect/electricity/구매 전력"
+ ]
+}

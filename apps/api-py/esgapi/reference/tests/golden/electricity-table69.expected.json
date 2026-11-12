@@ -1,0 +1,105 @@
+{
+  "ok": true,
+  "value": {
+    "factor": {
+      "kind": "purchased_energy",
+      "id": "electricity:kr-ets-byl06:표-69:2014-2016평균:per_gas",
+      "version": "환경부고시 제2025-64호 (2025-04-11 시행)",
+      "source": {
+        "kind": "cited",
+        "title": "온실가스 배출권거래제의 배출량 보고 및 인증에 관한 지침 [별표 6] 배출활동별 온실가스 배출량 등의 세부산정방법 및 기준 (환경부고시 제2025-64호 (2025-04-11 시행)): CO2 0.4567 tCO2/MWh ← kr-ets-byl06:elec:t69:CO2, CH4 0.0036 kgCH4/MWh ← kr-ets-byl06:elec:t69:CH4, N2O 0.0085 kgN2O/MWh ← kr-ets-byl06:elec:t69:N2O",
+        "url": "https://www.law.go.kr/LSW/admRulLsInfoP.do?admRulSeq=2100000257748",
+        "checkedOn": "2026-10-02",
+        "locator": "kr-ets-byl06 PDF 274쪽 「39. 외부에서 공급된 전기 사용」 5. 매개변수별 관리기준 ② 배출계수 <표-69> CO2 열 | kr-ets-byl06 PDF 274쪽 「39. 외부에서 공급된 전기 사용」 5. 매개변수별 관리기준 ② 배출계수 <표-69> CH4 열 | kr-ets-byl06 PDF 274쪽 「39. 외부에서 공급된 전기 사용」 5. 매개변수별 관리기준 ② 배출계수 <표-69> N2O 열",
+        "note": "계수 조합기가 계수 표의 낱줄에서 조립했다. 지침 별표 6 <표-69> 를 쓴 것은 조립 조건(입력)이다. 같은 문장의 단서(센터가 확인해 지침에 수록한 값)로 GIR 공표 값이 이를 대신하는지는 판단하지 않았다."
+      },
+      "energyType": "electricity",
+      "variant": "kr-ets-byl06:표-69:2014-2016평균:per_gas",
+      "perUnit": "MWh",
+      "emissionFactors": [
+        {
+          "gas": "CO2",
+          "value": "0.4567",
+          "massUnit": "t"
+        },
+        {
+          "gas": "CH4",
+          "value": "0.0036",
+          "massUnit": "kg"
+        },
+        {
+          "gas": "N2O",
+          "value": "0.0085",
+          "massUnit": "kg"
+        }
+      ]
+    },
+    "evidence": {
+      "request": {
+        "energyType": "electricity",
+        "source": "guideline_table69",
+        "gasForm": "per_gas"
+      },
+      "co2eGwp": null,
+      "sourceChoice": {
+        "value": "guideline_table69",
+        "basis": "input",
+        "note": "지침 별표 6 <표-69> 를 쓴 것은 조립 조건(입력)이다. 같은 문장의 단서(센터가 확인해 지침에 수록한 값)로 GIR 공표 값이 이를 대신하는지는 판단하지 않았다."
+      },
+      "rule": "별표 6 「39. 외부에서 공급된 전기 사용」 5. 매개변수별 관리기준 ② 배출계수 Tier 2: 전력배출계수는 <표-69> 의 3개년도('14∼'16년) 평균값을 적용한다. 향후 한국전력거래소에서 제공하는 전력배출계수를 온실가스종합정보센터에서 확인하여 지침에 수록된 경우 그 값을 적용한다.",
+      "parameters": [
+        {
+          "gas": "CO2",
+          "recordId": "kr-ets-byl06:elec:t69:CO2",
+          "sourceId": "kr-ets-byl06",
+          "sourceName": "온실가스 배출권거래제의 배출량 보고 및 인증에 관한 지침 [별표 6] 배출활동별 온실가스 배출량 등의 세부산정방법 및 기준",
+          "sourceVersion": "환경부고시 제2025-64호 (2025-04-11 시행)",
+          "url": "https://www.law.go.kr/LSW/admRulLsInfoP.do?admRulSeq=2100000257748",
+          "retrieved": "2026-10-02",
+          "fileSha256": "8f265fd4677028b27cc6fe85f5994fce0e5155dc33320f08305db4f0c000f24b",
+          "locator": "PDF 274쪽 「39. 외부에서 공급된 전기 사용」 5. 매개변수별 관리기준 ② 배출계수 <표-69> CO2 열",
+          "valueRaw": "0.4567",
+          "value": "0.4567",
+          "unit": "tCO2/MWh",
+          "conditions": {
+            "기간": "3개년 평균('14∼'16)"
+          }
+        },
+        {
+          "gas": "CH4",
+          "recordId": "kr-ets-byl06:elec:t69:CH4",
+          "sourceId": "kr-ets-byl06",
+          "sourceName": "온실가스 배출권거래제의 배출량 보고 및 인증에 관한 지침 [별표 6] 배출활동별 온실가스 배출량 등의 세부산정방법 및 기준",
+          "sourceVersion": "환경부고시 제2025-64호 (2025-04-11 시행)",
+          "url": "https://www.law.go.kr/LSW/admRulLsInfoP.do?admRulSeq=2100000257748",
+          "retrieved": "2026-10-02",
+          "fileSha256": "8f265fd4677028b27cc6fe85f5994fce0e5155dc33320f08305db4f0c000f24b",
+          "locator": "PDF 274쪽 「39. 외부에서 공급된 전기 사용」 5. 매개변수별 관리기준 ② 배출계수 <표-69> CH4 열",
+          "valueRaw": "0.0036",
+          "value": "0.0036",
+          "unit": "kgCH4/MWh",
+          "conditions": {
+            "기간": "3개년 평균('14∼'16)"
+          }
+        },
+        {
+          "gas": "N2O",
+          "recordId": "kr-ets-byl06:elec:t69:N2O",
+          "sourceId": "kr-ets-byl06",
+          "sourceName": "온실가스 배출권거래제의 배출량 보고 및 인증에 관한 지침 [별표 6] 배출활동별 온실가스 배출량 등의 세부산정방법 및 기준",
+          "sourceVersion": "환경부고시 제2025-64호 (2025-04-11 시행)",
+          "url": "https://www.law.go.kr/LSW/admRulLsInfoP.do?admRulSeq=2100000257748",
+          "retrieved": "2026-10-02",
+          "fileSha256": "8f265fd4677028b27cc6fe85f5994fce0e5155dc33320f08305db4f0c000f24b",
+          "locator": "PDF 274쪽 「39. 외부에서 공급된 전기 사용」 5. 매개변수별 관리기준 ② 배출계수 <표-69> N2O 열",
+          "valueRaw": "0.0085",
+          "value": "0.0085",
+          "unit": "kgN2O/MWh",
+          "conditions": {
+            "기간": "3개년 평균('14∼'16)"
+          }
+        }
+      ]
+    }
+  }
+}

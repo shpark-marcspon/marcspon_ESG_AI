@@ -1,0 +1,54 @@
+{
+  "$comment": "synthetic. 묶음의 순서를 재는 조직 이름",
+  "gwpSetId": "synthetic-gwp",
+  "activities": [
+    {
+      "id": "o0",
+      "orgUnit": "￥-site",
+      "period": "2025-01",
+      "sourceType": "purchased_heat",
+      "amount": "1",
+      "unit": "GJ"
+    },
+    {
+      "id": "o1",
+      "orgUnit": "😀-site",
+      "period": "2025-01",
+      "sourceType": "purchased_heat",
+      "amount": "2",
+      "unit": "GJ"
+    },
+    {
+      "id": "o2",
+      "orgUnit": "가-site",
+      "period": "2025-01",
+      "sourceType": "purchased_heat",
+      "amount": "3",
+      "unit": "GJ"
+    },
+    {
+      "id": "o3",
+      "orgUnit": "a\"site",
+      "period": "2025-01",
+      "sourceType": "purchased_heat",
+      "amount": "4",
+      "unit": "GJ"
+    },
+    {
+      "id": "o4",
+      "orgUnit": "Z-site",
+      "period": "2025-01",
+      "sourceType": "purchased_heat",
+      "amount": "5",
+      "unit": "GJ"
+    },
+    {
+      "id": "o5",
+      "orgUnit": "a-site",
+      "period": "2025-01",
+      "sourceType": "purchased_heat",
+      "amount": "6",
+      "unit": "GJ"
+    }
+  ]
+}

@@ -1,0 +1,200 @@
+{
+  "$defs": {
+    "DraftingAiSettingAppliedDefault": {
+      "additionalProperties": false,
+      "description": "적용 판 없음 = 기본 판.",
+      "properties": {
+        "kind": {
+          "const": "default",
+          "title": "Kind",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "title": "DraftingAiSettingAppliedDefault",
+      "type": "object"
+    },
+    "DraftingAiSettingAppliedSaved": {
+      "additionalProperties": false,
+      "description": "저장된 판 하나가 적용됨.",
+      "properties": {
+        "kind": {
+          "const": "saved",
+          "title": "Kind",
+          "type": "string"
+        },
+        "id": {
+          "description": "적용된 판의 id.",
+          "title": "Id",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "kind",
+        "id"
+      ],
+      "title": "DraftingAiSettingAppliedSaved",
+      "type": "object"
+    },
+    "DraftingAiSettingAuthor": {
+      "additionalProperties": false,
+      "description": "판을 저장한 운영 관리자.",
+      "properties": {
+        "id": {
+          "description": "사용자 id.",
+          "title": "Id",
+          "type": "integer"
+        },
+        "name": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "지금 이름. 못 풀면 null.",
+          "title": "Name"
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ],
+      "title": "DraftingAiSettingAuthor",
+      "type": "object"
+    },
+    "DraftingAiSettingDefaultRef": {
+      "additionalProperties": false,
+      "description": "기본 판의 번호 자리 글과 이름.",
+      "properties": {
+        "name": {
+          "description": "DEFAULT_NAME.",
+          "title": "Name",
+          "type": "string"
+        },
+        "title": {
+          "description": "DEFAULT_TITLE.",
+          "title": "Title",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "title"
+      ],
+      "title": "DraftingAiSettingDefaultRef",
+      "type": "object"
+    },
+    "DraftingAiSettingSummary": {
+      "additionalProperties": false,
+      "description": "저장된 판 하나의 요약(목록의 줄).",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "integer"
+        },
+        "name": {
+          "description": "판 번호(v1, v2, …).",
+          "title": "Name",
+          "type": "string"
+        },
+        "title": {
+          "description": "판 이름(1~40자).",
+          "title": "Title",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "applied",
+            "past",
+            "testing"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "createdAt": {
+          "description": "저장한 때(+09:00 ISO 8601).",
+          "title": "Createdat",
+          "type": "string"
+        },
+        "createdBy": {
+          "$ref": "#/$defs/DraftingAiSettingAuthor"
+        },
+        "memo": {
+          "description": "메모(0~200자).",
+          "title": "Memo",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "title",
+        "status",
+        "createdAt",
+        "createdBy",
+        "memo"
+      ],
+      "title": "DraftingAiSettingSummary",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "description": "drafting.ai-settings@1 — 한 회사의 판 목록과 지금 적용 판. schemaVersion 이 첫 키다.",
+  "properties": {
+    "schemaVersion": {
+      "const": "drafting.ai-settings@1",
+      "title": "Schemaversion",
+      "type": "string"
+    },
+    "companyId": {
+      "description": "대상 고객사의 id.",
+      "title": "Companyid",
+      "type": "integer"
+    },
+    "applied": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/DraftingAiSettingAppliedDefault"
+        },
+        {
+          "$ref": "#/$defs/DraftingAiSettingAppliedSaved"
+        }
+      ],
+      "description": "지금 적용 판. 저장된 판이 적용돼 있지 않으면 기본 판.",
+      "title": "Applied"
+    },
+    "default": {
+      "$ref": "#/$defs/DraftingAiSettingDefaultRef",
+      "description": "기본 판(코드에 고정)."
+    },
+    "items": {
+      "description": "저장된 판(새 것 먼저 — id 내림). limit·offset 의 한 쪽.",
+      "items": {
+        "$ref": "#/$defs/DraftingAiSettingSummary"
+      },
+      "title": "Items",
+      "type": "array"
+    },
+    "total": {
+      "description": "저장된 판의 전체 수.",
+      "minimum": 0,
+      "title": "Total",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "companyId",
+    "applied",
+    "default",
+    "items",
+    "total"
+  ],
+  "title": "DraftingAiSettingList",
+  "type": "object"
+}

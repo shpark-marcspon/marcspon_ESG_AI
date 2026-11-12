@@ -1,0 +1,28 @@
+{
+  "additionalProperties": false,
+  "description": "materiality.ai-setting-default@1 — 기본 판(엔진 코드 글·모델 칸 기본값). schemaVersion 이 첫 키다.",
+  "properties": {
+    "schemaVersion": {
+      "const": "materiality.ai-setting-default@1",
+      "title": "Schemaversion",
+      "type": "string"
+    },
+    "name": {
+      "description": "DEFAULT_NAME.",
+      "title": "Name",
+      "type": "string"
+    },
+    "title": {
+      "description": "DEFAULT_TITLE.",
+      "title": "Title",
+      "type": "string"
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "name",
+    "title"
+  ],
+  "title": "MaterialityAiSettingDefault",
+  "type": "object"
+}

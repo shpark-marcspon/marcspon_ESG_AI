@@ -1,0 +1,35 @@
+{
+  "schemaVersion": "greenwash.review@3",
+  "runId": 101,
+  "state": "confirmed",
+  "confirmedAt": "2026-10-20T15:30:00+09:00",
+  "confirmedBy": {
+    "id": 7,
+    "name": "검토자 가"
+  },
+  "marks": [
+    {
+      "itemIndex": 0,
+      "decision": "adopted",
+      "excludeReason": null
+    },
+    {
+      "itemIndex": 1,
+      "decision": "adopted",
+      "excludeReason": null
+    },
+    {
+      "itemIndex": 2,
+      "decision": "adopted",
+      "excludeReason": null
+    },
+    {
+      "itemIndex": 3,
+      "decision": "adopted",
+      "excludeReason": null
+    }
+  ],
+  "edits": [],
+  "evidence": [],
+  "rejudges": []
+}

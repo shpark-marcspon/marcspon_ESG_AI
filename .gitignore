@@ -1,0 +1,43 @@
+# 의존성과 빌드 산출물
+node_modules/
+dist/
+*.tsbuildinfo
+
+# 로컬 설정. 비밀이 들 수 있어 저장소에 넣지 않는다 (.env.example 만 넣는다)
+.env
+.env.*
+!.env.example
+
+# 파이썬
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+
+# 편집기·OS
+.DS_Store
+.idea/
+.vscode/
+sample.pdf
+
+# apps/web: 만들어지는 것(예시 PDF, pdf.js 부속 파일), 실제 자료를 두는 폴더, 브라우저 테스트 산출물
+apps/web/public/sample/*.pdf
+apps/web/public/pdfjs/
+apps/web/.local-data/
+apps/web/test-results/
+apps/web/playwright-report/
+
+# infra/terraform: 받아 온 공급자 플러그인, 상태 파일(만든 자원의 기록. 비밀이 들 수 있다), 내 값이 든 변수 파일, 도구 캐시
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+*.tfvars.json
+!*.tfvars.example
+crash.log
+# 저장한 계획 파일(terraform plan -out=tfplan). 자원의 속성이 통째로 들어 있다
+tfplan
+*.tfplan
+.tools/
+# 작업 기록 도구(maricom)의 프로젝트 설정. 로컬에만 두고 git 에 넣지 않는다
+.maricomrc.json

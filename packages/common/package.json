@@ -1,0 +1,18 @@
+{
+  "name": "@marcspon/common",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    "./generated/icons/MyIcons": "./src/generated/icons/MyIcons.ts",
+    "./generated/icons/icon-base": "./src/generated/icons/icon-base.tsx"
+  },
+  "peerDependencies": {
+    "react": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.3",
+    "react": "^18.3.1"
+  }
+}
