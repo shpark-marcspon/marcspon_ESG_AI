@@ -79,6 +79,8 @@ uv sync                                        # Python 3.13 을 uv 가 알아�
 - Python 3.13 을 따로 설치하지 않는다. `pyproject.toml` 의 `requires-python = ">=3.13,<3.14"` 를 보고 uv 가 받는다.
 - **`.env` 의 LLM 키는 비워 둔다.** `LLM_RUN_MODE` 가 비면 모의 공급사만 쓰고, 키가 있어도 실제로 호출하지 않는다. `live` 로 바꾸면 실제 비용이 나간다. 켜는 조건은 `development.md` 의 「실 공급사 전환 점검표」를 따른다.
 - 훅 설정(`core.hooksPath`)은 clone 마다 한 번 해야 한다. 저장소에 들어 있지 않다.
+- 훅 파일에 실행 권한이 있어야 git 이 부른다. 처음 올린 저장소는 `.sh` 파일 전부가 실행 권한 없이(`100644`) 들어 있어서, 훅을 연결해도 `hint: The 'scripts/git-hooks/pre-commit' hook was ignored because it's not set as executable.` 라는 안내만 나오고 돌지 않았다. `pre-commit` 과 이 글에 나오는 실행 스크립트(`scripts/verify.sh`, `scripts/with-build-lock.sh`, `apps/api-py/scripts/test-*.sh`)에는 권한을 주어 두었다. 이 안내가 다시 보이면 `git pull` 로 최신을 받았는지 본다.
+- `scripts/git-hooks/post-commit` 은 일부러 실행 권한을 주지 않았다. 공급사 내부 도구(maricom)로 커밋 트레일러를 보내는 훅이라 이 저장소를 고치는 데 필요하지 않다. 권한이 없으면 git 이 무시한다.
 
 ## 4. 기준선 확인
 
